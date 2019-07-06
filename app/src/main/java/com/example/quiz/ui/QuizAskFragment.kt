@@ -1,25 +1,27 @@
 package com.example.quiz.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.R
-import com.example.quiz.database.Quiz
+import com.example.quiz.model.Quiz
 import com.example.quiz.databinding.FragmentQuizAskBinding
-import com.example.quiz.model.QuizAskViewModel
+import com.example.quiz.viewmodel.QuizAskViewModel
 
 class QuizAskFragment : Fragment() {
     private val TAG : String = "QuizAskFragment"
     private lateinit var binding: FragmentQuizAskBinding
     private lateinit var model : QuizAskViewModel
     private lateinit var quizBank : List<Quiz>
+
+    companion object{
+        fun newInstance() = QuizAskFragment()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_quiz_ask, container, false)

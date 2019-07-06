@@ -1,4 +1,4 @@
-package com.example.quiz.database
+package com.example.quiz.model
 
 data class Quiz(
     var question : Int,
