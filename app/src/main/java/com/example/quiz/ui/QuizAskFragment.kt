@@ -1,30 +1,31 @@
 package com.example.quiz.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.R
 import com.example.quiz.database.Quiz
 import com.example.quiz.databinding.FragmentQuizAskBinding
+import com.example.quiz.model.QuizAskViewModel
 
 class QuizAskFragment : Fragment() {
+    private val TAG : String = "QuizAskFragment"
     private lateinit var binding: FragmentQuizAskBinding
-    private var currentIndex : Int = 0
-    private val quizBank = listOf<Quiz>(
-        Quiz(R.string.question_africa, false),
-        Quiz(R.string.question_australia, true),
-        Quiz(R.string.question_oceans, true),
-        Quiz(R.string.question_mideast, false),
-        Quiz(R.string.question_americas, true),
-        Quiz(R.string.question_asia, true)
-    )
+    private lateinit var model : QuizAskViewModel
+    private lateinit var quizBank : List<Quiz>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_quiz_ask, container, false)
+        model = ViewModelProviders.of(this).get(QuizAskViewModel::class.java)
+        quizBank = model.quizBank
+        updateQuestion()
         return binding.root
     }
 
@@ -32,18 +33,18 @@ class QuizAskFragment : Fragment() {
         binding.trueButton.setOnClickListener { checkAnswer(true) }
         binding.falseButton.setOnClickListener { checkAnswer(false) }
         binding.nextButton.setOnClickListener{
-            currentIndex = (currentIndex + 1) % quizBank.size
+            model.currentIndex = (model.currentIndex + 1) % quizBank.size
             updateQuestion()
         }
 
         binding.backButton.setOnClickListener {
-            currentIndex = (currentIndex - 1) % quizBank.size
+            model.currentIndex = (model.currentIndex - 1) % quizBank.size
             updateQuestion()
         }
     }
 
     private fun checkAnswer(userPressed: Boolean){
-        if (userPressed == quizBank[currentIndex].answer){
+        if (userPressed == quizBank[model.currentIndex].answer){
             toast(R.string.correct_toast)
         } else {
             toast(R.string.incorrect_toast)
@@ -55,6 +56,6 @@ class QuizAskFragment : Fragment() {
     }
 
     private fun updateQuestion(){
-        binding.questTextView.text = getString(quizBank[currentIndex].question)
+        binding.questTextView.text = getString(quizBank[model.currentIndex].question)
     }
 }
