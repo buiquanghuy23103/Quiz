@@ -14,13 +14,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
 
             app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph" />
+            app:navGraph="@navigation/nav_graph" >
+        <action android:id="@+id/action_nav_host_fragment_to_quizListFragment" app:destination="@id/quizListFragment"/>
+    </fragment>
 
     <fragment android:id="@+id/quizAskFragment" android:name="com.example.quiz.ui.QuizAskFragment"
-              android:label="QuizAskFragment">
-        <action android:id="@+id/action_quizAskFragment_to_quizAnswerFragment"
-                app:destination="@id/quizAnswerFragment"/>
+              android:label="QuizAskFragment"/>
+    <fragment android:id="@+id/quizListFragment" android:name="com.example.quiz.ui.QuizListFragment"
+              android:label="QuizListFragment">
+        <action android:id="@+id/action_quizListFragment_to_quizAskFragment" app:destination="@id/quizAskFragment"/>
     </fragment>
-    <fragment android:id="@+id/quizAnswerFragment" android:name="com.example.quiz.ui.QuizListFragment"
-              android:label="quiz_answer_fragment" tools:layout="@layout/quiz_list_fragment"/>
 </navigation>
