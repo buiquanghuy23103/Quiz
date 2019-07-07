@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph" app:startDestination="@id/quizAskFragment">
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/quizAddFragment">
 
     <fragment
             android:id="@+id/nav_host_fragment"
@@ -14,14 +15,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
 
             app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph" >
-        <action android:id="@+id/action_nav_host_fragment_to_quizListFragment" app:destination="@id/quizListFragment"/>
-    </fragment>
+            app:navGraph="@navigation/nav_graph" />
+    <fragment android:id="@+id/quizAddFragment" android:name="com.example.quiz.ui.QuizAddFragment"
+              android:label="quiz_add_fragment" tools:layout="@layout/quiz_add_fragment"/>
 
-    <fragment android:id="@+id/quizAskFragment" android:name="com.example.quiz.ui.QuizAskFragment"
-              android:label="QuizAskFragment"/>
-    <fragment android:id="@+id/quizListFragment" android:name="com.example.quiz.ui.QuizListFragment"
-              android:label="QuizListFragment">
-        <action android:id="@+id/action_quizListFragment_to_quizAskFragment" app:destination="@id/quizAskFragment"/>
-    </fragment>
 </navigation>
