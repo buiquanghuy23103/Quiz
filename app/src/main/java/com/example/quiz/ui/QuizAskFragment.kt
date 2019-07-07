@@ -16,7 +16,7 @@ import com.example.quiz.viewmodel.QuizAskViewModel
 class QuizAskFragment : Fragment() {
     private val TAG : String = "QuizAskFragment"
     private lateinit var binding: FragmentQuizAskBinding
-    private lateinit var model : QuizAskViewModel
+    private lateinit var viewModel : QuizAskViewModel
     private lateinit var quizBank : List<Quiz>
 
     companion object{
@@ -25,8 +25,8 @@ class QuizAskFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_quiz_ask, container, false)
-        model = ViewModelProviders.of(this).get(QuizAskViewModel::class.java)
-        quizBank = model.quizBank
+        viewModel = ViewModelProviders.of(this).get(QuizAskViewModel::class.java)
+        quizBank = viewModel.quizBank
         updateQuestion()
         return binding.root
     }
@@ -35,18 +35,18 @@ class QuizAskFragment : Fragment() {
         binding.trueButton.setOnClickListener { checkAnswer(true) }
         binding.falseButton.setOnClickListener { checkAnswer(false) }
         binding.nextButton.setOnClickListener{
-            model.currentIndex = (model.currentIndex + 1) % quizBank.size
+            viewModel.currentIndex = (viewModel.currentIndex + 1) % quizBank.size
             updateQuestion()
         }
 
         binding.backButton.setOnClickListener {
-            model.currentIndex = (model.currentIndex - 1) % quizBank.size
+            viewModel.currentIndex = (viewModel.currentIndex - 1) % quizBank.size
             updateQuestion()
         }
     }
 
     private fun checkAnswer(userPressed: Boolean){
-        if (userPressed == quizBank[model.currentIndex].answer){
+        if (userPressed == quizBank[viewModel.currentIndex].answer){
             toast(R.string.correct_toast)
         } else {
             toast(R.string.incorrect_toast)
@@ -58,6 +58,6 @@ class QuizAskFragment : Fragment() {
     }
 
     private fun updateQuestion(){
-        binding.questTextView.text = getString(quizBank[model.currentIndex].question)
+        binding.questTextView.text = getString(quizBank[viewModel.currentIndex].question)
     }
 }
