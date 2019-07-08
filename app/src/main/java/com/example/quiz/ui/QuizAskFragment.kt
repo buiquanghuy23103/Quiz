@@ -24,7 +24,7 @@ class QuizAskFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_quiz_ask, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.quiz_ask_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(QuizAskViewModel::class.java)
         quizBank = viewModel.quizBank
         updateQuestion()

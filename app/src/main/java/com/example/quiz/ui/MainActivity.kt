@@ -4,6 +4,6 @@ import androidx.fragment.app.Fragment
 
 class MainActivity : BaseActivity() {
     override fun fragment(): Fragment {
-        return QuizAddFragment.newInstance()
+        return QuizListFragment.newInstance()
     }
 }

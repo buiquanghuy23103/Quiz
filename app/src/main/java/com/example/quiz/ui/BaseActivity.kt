@@ -12,10 +12,10 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_container)
 
-        var fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        var fragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
         if (fragment == null){
             fragment = fragment()
-            supportFragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit()
+            supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, fragment).commit()
         }
     }
 }

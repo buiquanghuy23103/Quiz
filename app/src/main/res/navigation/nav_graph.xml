@@ -2,21 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
-            app:startDestination="@id/quizAddFragment">
-
-    <fragment
-            android:id="@+id/nav_host_fragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_graph" />
+            app:startDestination="@id/quizListFragment">
     <fragment android:id="@+id/quizAddFragment" android:name="com.example.quiz.ui.QuizAddFragment"
               android:label="quiz_add_fragment" tools:layout="@layout/quiz_add_fragment"/>
-
+    <fragment android:id="@+id/quizListFragment" android:name="com.example.quiz.ui.QuizListFragment"
+              android:label="quiz_list_fragment" tools:layout="@layout/quiz_list_fragment">
+        <action android:id="@+id/action_quizListFragment_to_quizAddFragment" app:destination="@id/quizAddFragment"/>
+        <action android:id="@+id/action_quizListFragment_to_quizAskFragment" app:destination="@id/quizAskFragment"/>
+    </fragment>
+    <fragment android:id="@+id/quizAskFragment" android:name="com.example.quiz.ui.QuizAskFragment"
+              android:label="quiz_add_fragment" tools:layout="@layout/quiz_ask_fragment"/>
 </navigation>
