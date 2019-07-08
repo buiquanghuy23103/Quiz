@@ -2,8 +2,10 @@ package com.example.quiz.ui
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizItemBinding
@@ -23,7 +25,7 @@ class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
 
     override fun getItemCount(): Int {
         Log.i(TAG, "Size of the list: " + quizBank.size)
-        return if(quizBank==null) 0 else quizBank.size
+        return quizBank.size
     }
 
     override fun onBindViewHolder(holder: QuizItemHolder, position: Int) {
@@ -46,6 +48,9 @@ class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
         fun bind(quiz: Quiz){
             Log.i(TAG, "current quiz is: " + quiz.question)
             viewBinding.quiz = quiz
+            viewBinding.root.setOnClickListener{view: View ->
+                view.findNavController().navigate(R.id.action_quizListFragment_to_quizAskFragment)
+            }
             viewBinding.executePendingBindings()
         }
     }

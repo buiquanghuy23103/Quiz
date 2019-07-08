@@ -9,13 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.R
+import com.example.quiz.databinding.QuizAskFragmentBinding
 import com.example.quiz.model.Quiz
-import com.example.quiz.databinding.FragmentQuizAskBinding
 import com.example.quiz.viewmodel.QuizAskViewModel
 
 class QuizAskFragment : Fragment() {
     private val TAG : String = "QuizAskFragment"
-    private lateinit var binding: FragmentQuizAskBinding
+    private lateinit var binding: QuizAskFragmentBinding
     private lateinit var viewModel : QuizAskViewModel
     private lateinit var quizBank : List<Quiz>
 
