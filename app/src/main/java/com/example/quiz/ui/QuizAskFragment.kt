@@ -8,13 +8,16 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizAskFragmentBinding
 import com.example.quiz.model.Quiz
 import com.example.quiz.viewmodel.QuizAskViewModel
+import kotlin.math.abs
 
 class QuizAskFragment : Fragment() {
     private val TAG : String = "QuizAskFragment"
+    private val args: QuizAskFragmentArgs by navArgs()
     private lateinit var binding: QuizAskFragmentBinding
     private lateinit var viewModel : QuizAskViewModel
     private lateinit var quizBank : List<Quiz>
@@ -40,7 +43,7 @@ class QuizAskFragment : Fragment() {
         }
 
         binding.backButton.setOnClickListener {
-            viewModel.currentIndex = (viewModel.currentIndex - 1) % quizBank.size
+            viewModel.currentIndex = abs(viewModel.currentIndex - 1) % quizBank.size
             updateQuestion()
         }
     }
@@ -58,6 +61,11 @@ class QuizAskFragment : Fragment() {
     }
 
     private fun updateQuestion(){
-        binding.questTextView.text = getString(quizBank[viewModel.currentIndex].question)
+        val appointedQuestion = args.quizId
+        if (appointedQuestion >= 0){
+            binding.questTextView.text = getString(appointedQuestion)
+        } else {
+            binding.questTextView.text = getString(quizBank[viewModel.currentIndex].question)
+        }
     }
 }

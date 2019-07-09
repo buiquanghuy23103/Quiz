@@ -11,5 +11,7 @@
         <action android:id="@+id/action_quizListFragment_to_quizAskFragment" app:destination="@id/quizAskFragment"/>
     </fragment>
     <fragment android:id="@+id/quizAskFragment" android:name="com.example.quiz.ui.QuizAskFragment"
-              android:label="quiz_add_fragment" tools:layout="@layout/quiz_ask_fragment"/>
+              android:label="quiz_add_fragment" tools:layout="@layout/quiz_ask_fragment">
+        <argument android:name="quizId" app:argType="integer" android:defaultValue="-1"/>
+    </fragment>
 </navigation>
