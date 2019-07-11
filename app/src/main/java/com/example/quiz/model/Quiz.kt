@@ -1,13 +1,19 @@
 package com.example.quiz.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
-import com.example.quiz.database.DbScheme
+import androidx.room.PrimaryKey
+import com.example.quiz.database.DbScheme.QuizTable
 import kotlin.random.Random
 
-@Entity(tableName = DbScheme.QuizTable.TABLE_NAME)
+@Entity(tableName = QuizTable.TABLE_NAME)
 data class Quiz(
+    @ColumnInfo(name = QuizTable.Cols.QUESTION)
     var question : Int,
+    @ColumnInfo(name = QuizTable.Cols.ANSWER)
     var answer : Boolean
 ) {
+    @PrimaryKey
+    @ColumnInfo(name = QuizTable.Cols.ID)
    val id = Random.nextInt()
 }
