@@ -1,4 +1,4 @@
-package com.example.quiz.ui
+package com.example.quiz.viewmodel
 
 import androidx.lifecycle.ViewModel;
 

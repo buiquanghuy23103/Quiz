@@ -24,7 +24,6 @@ class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
     }
 
     override fun getItemCount(): Int {
-        Log.i(TAG, "Size of the list: " + quizBank.size)
         return quizBank.size
     }
 
@@ -49,7 +48,8 @@ class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
             Log.i(TAG, "current quiz is: " + quiz.question)
             viewBinding.quiz = quiz
             viewBinding.root.setOnClickListener{view: View ->
-                val action = QuizListFragmentDirections.actionQuizListFragmentToQuizAskFragment(quiz.question)
+                val action = QuizListFragmentDirections.actionQuizListFragmentToQuizAskFragment(quiz.id)
+                Log.i(TAG, "quizId = " + quiz.id)
                 view.findNavController().navigate(action)
             }
             viewBinding.executePendingBindings()

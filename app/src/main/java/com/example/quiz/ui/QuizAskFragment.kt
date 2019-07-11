@@ -1,6 +1,7 @@
 package com.example.quiz.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,13 @@ class QuizAskFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_ask_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(QuizAskViewModel::class.java)
         quizBank = viewModel.quizBank
+        for (i in 0..(quizBank.size-1)){
+            if (quizBank[i].id == args.quizId){
+                viewModel.currentIndex = i
+                Log.i(TAG, "index = " + i)
+                break
+            }
+        }
         updateQuestion()
         return binding.root
     }
@@ -61,11 +69,6 @@ class QuizAskFragment : Fragment() {
     }
 
     private fun updateQuestion(){
-        val appointedQuestion = args.quizId
-        if (appointedQuestion >= 0){
-            binding.questTextView.text = getString(appointedQuestion)
-        } else {
-            binding.questTextView.text = getString(quizBank[viewModel.currentIndex].question)
-        }
+        binding.questTextView.text = getString(quizBank[viewModel.currentIndex].question)
     }
 }
