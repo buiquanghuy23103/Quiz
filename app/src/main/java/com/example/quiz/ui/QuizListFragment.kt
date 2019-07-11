@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.quiz.R
@@ -30,8 +31,13 @@ class QuizListFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
 
         var adapter = QuizListAdapter()
-        adapter.quizBank = viewModel.quizBank
         recyclerView.adapter = adapter
+
+        viewModel.quizBank.observe(this, Observer {
+            it?.let {
+                adapter.quizBank = it
+            }
+        })
 
         return view
     }
