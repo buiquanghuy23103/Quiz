@@ -11,9 +11,12 @@ data class Quiz(
     @ColumnInfo(name = QuizTable.Cols.QUESTION)
     var question : Int,
     @ColumnInfo(name = QuizTable.Cols.ANSWER)
-    var answer : Boolean
-) {
+    var answer : Boolean,
     @PrimaryKey
     @ColumnInfo(name = QuizTable.Cols.ID)
-   val id = Random.nextInt()
+    var id: Int = 0
+) {
+    init {
+        id = Random.nextInt()
+    }
 }
