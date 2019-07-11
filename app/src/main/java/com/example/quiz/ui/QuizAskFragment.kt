@@ -69,6 +69,6 @@ class QuizAskFragment : Fragment() {
     }
 
     private fun updateQuestion(){
-        binding.questTextView.text = getString(quizBank[viewModel.currentIndex].question)
+        binding.questTextView.text = quizBank[viewModel.currentIndex].question
     }
 }

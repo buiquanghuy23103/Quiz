@@ -9,7 +9,7 @@ import kotlin.random.Random
 @Entity(tableName = QuizTable.TABLE_NAME)
 data class Quiz(
     @ColumnInfo(name = QuizTable.Cols.QUESTION)
-    var question : Int,
+    var question : String,
     @ColumnInfo(name = QuizTable.Cols.ANSWER)
     var answer : Boolean,
     @PrimaryKey
