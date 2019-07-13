@@ -17,19 +17,23 @@ class QuizAskViewModel(private val app: Application, private var index: Int) : A
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private var quizBank = DataGenerator.quizzes.also { Log.i(TAG, "quizBank is initialized") }
+    private lateinit var quizBank: List<Quiz>
     private var _quiz = MutableLiveData<Quiz>()
     val quiz: LiveData<Quiz>
         get() = _quiz
 
     init {
         uiScope.launch {
-            val backgroundJob = CoroutineScope(Dispatchers.IO).launch {
-                quizBank = DataRepository(app).getAllQuizzesSync()
-            }
-            backgroundJob.join()
+            val backgroundJob = fetchQuizzesJob()
+            backgroundJob.join() // wait until background job is done
             Log.i(TAG, "Background done")
             updateQuiz()
+        }
+    }
+
+    private fun fetchQuizzesJob(): Job {
+        return CoroutineScope(Dispatchers.IO).launch {
+            quizBank = DataRepository(app).getAllQuizzesSync()
         }
     }
 
