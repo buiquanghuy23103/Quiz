@@ -28,7 +28,7 @@ class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
     }
 
     override fun onBindViewHolder(holder: QuizItemHolder, position: Int) {
-        holder.bind(quizBank[position])
+        holder.bind(quizBank[position], position)
     }
 
     class QuizItemHolder private constructor(binding: QuizItemBinding) : RecyclerView.ViewHolder(binding.root){
@@ -44,11 +44,11 @@ class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
             }
         }
 
-        fun bind(quiz: Quiz){
+        fun bind(quiz: Quiz, index: Int){
             Log.i(TAG, "current quiz is: " + quiz.question)
             viewBinding.quiz = quiz
             viewBinding.root.setOnClickListener{view: View ->
-                val action = QuizListFragmentDirections.actionQuizListFragmentToQuizAskFragment(quiz.id)
+                val action = QuizListFragmentDirections.actionQuizListFragmentToQuizAskFragment(index)
                 Log.i(TAG, "quizId = " + quiz.id)
                 view.findNavController().navigate(action)
             }
