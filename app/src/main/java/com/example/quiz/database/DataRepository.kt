@@ -11,4 +11,8 @@ class DataRepository(val application: Application) {
     fun getAllQuizzes(): LiveData<List<Quiz>>{
         return quizDao.getAllQuizzes()
     }
+
+    fun getAllQuizzesSync(): List<Quiz>{
+        return quizDao.getAllQuizzesSync()
+    }
 }
