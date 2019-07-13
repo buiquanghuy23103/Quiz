@@ -12,10 +12,13 @@ class QuizAskViewModel(private val app: Application, private var index: Int) : A
     private val TAG = "QuizAskViewModel"
 
     private val quizBank = DataGenerator.quizzes
-
     private var _quiz = MutableLiveData<Quiz>()
     val quiz: LiveData<Quiz>
         get() = _quiz
+
+    init {
+        updateQuiz()
+    }
 
     private fun updateQuiz(){
         _quiz.value = quizBank[index]
