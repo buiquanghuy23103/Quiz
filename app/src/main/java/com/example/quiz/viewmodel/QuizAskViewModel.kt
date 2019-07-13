@@ -31,8 +31,6 @@ class QuizAskViewModel(private val app: Application, private var index: Int) : A
             Log.i(TAG, "Background done")
             updateQuiz()
         }
-
-
     }
 
     private fun updateQuiz(){
@@ -48,5 +46,10 @@ class QuizAskViewModel(private val app: Application, private var index: Int) : A
     fun moveForward(){
         index = (index + 1) % quizBank.size
         updateQuiz()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 }
