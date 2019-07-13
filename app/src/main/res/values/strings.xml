@@ -10,6 +10,8 @@
     <string name="question_title">Question text</string>
     <string name="answer_title">Answer</string>
 
+    <string name="menu_item_edit">Edit</string>
+
     <string name="question_australia">Canberra is the capital of Australia.</string>
     <string name="question_oceans">The Pacific Ocean is larger than the Atlantic Ocean.</string>
     <string name="question_mideast">The Suez Canal connects the Red Sea and the Indian Ocean.</string>
