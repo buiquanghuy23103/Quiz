@@ -1,9 +1,7 @@
 package com.example.quiz.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -22,23 +20,21 @@ class QuizAskFragment : Fragment() {
     private val args: QuizAskFragmentArgs by navArgs()
     private lateinit var binding: QuizAskFragmentBinding
     private lateinit var viewModel : QuizAskViewModel
-    private lateinit var quizBank : List<Quiz>
 
-    companion object{
-        fun newInstance() = QuizAskFragment()
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        requireNotNull(inflater).inflate(R.menu.quiz_ask_fragment, menu)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_ask_fragment, container, false)
 
         val app = requireNotNull(this.activity).application
         val factory = QuizAskViewModelFactory(app, args.quizId)
         viewModel = ViewModelProviders.of(this, factory).get(QuizAskViewModel::class.java)
-
         viewModel.quiz.observe(this, Observer { quiz ->
-            quiz?.let {
-                updateUI(quiz)
-            }
+            quiz?.let { updateUI(quiz) }
         })
 
         return binding.root
@@ -51,13 +47,8 @@ class QuizAskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.trueButton.setOnClickListener { checkAnswer(true) }
         binding.falseButton.setOnClickListener { checkAnswer(false) }
-        binding.nextButton.setOnClickListener{
-            viewModel.moveForward()
-        }
-
-        binding.backButton.setOnClickListener {
-            viewModel.moveBack()
-        }
+        binding.nextButton.setOnClickListener{ viewModel.moveForward() }
+        binding.backButton.setOnClickListener { viewModel.moveBack() }
     }
 
     private fun checkAnswer(userPressed: Boolean){

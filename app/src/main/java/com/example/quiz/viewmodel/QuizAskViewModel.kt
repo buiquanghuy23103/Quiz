@@ -24,17 +24,15 @@ class QuizAskViewModel(private val app: Application, private var index: Int) : A
 
     init {
         uiScope.launch {
-            val backgroundJob = fetchQuizzesJob()
+            val backgroundJob = CoroutineScope(Dispatchers.IO).launch { initQuizzes() }
             backgroundJob.join() // wait until background job is done
             Log.i(TAG, "Background done")
             updateQuiz()
         }
     }
 
-    private fun fetchQuizzesJob(): Job {
-        return CoroutineScope(Dispatchers.IO).launch {
-            quizBank = DataRepository(app).getAllQuizzesSync()
-        }
+    private fun initQuizzes() {
+        quizBank = DataRepository(app).getAllQuizzesSync()
     }
 
     private fun updateQuiz(){
