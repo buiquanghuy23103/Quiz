@@ -17,6 +17,8 @@ class QuizAskViewModel(private val app: Application, private var index: Int) : A
     private val viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    // TODO: Use RxJava for Room
+    // TODO: Retrieve List<quiz.id> instead of List<Quiz>, then retrieve quiz using id
     private lateinit var quizBank: List<Quiz>
     private var _quiz = MutableLiveData<Quiz>()
     val quiz: LiveData<Quiz>

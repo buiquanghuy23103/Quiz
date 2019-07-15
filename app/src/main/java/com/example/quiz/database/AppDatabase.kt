@@ -18,11 +18,7 @@ abstract class AppDatabase: RoomDatabase() {
 
         fun getInstance(context: Context): AppDatabase{
             synchronized(this){
-                var instance = INSTANCE
-                if (instance == null){
-                    instance = buildDatabase(context)
-                }
-                return instance
+                return INSTANCE?.let { INSTANCE } ?: buildDatabase(context)
             }
         }
 
