@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import com.example.quiz.model.Quiz
 
-class DataRepository(val application: Application) {
+class DataRepository(application: Application) {
     private val database = AppDatabase.getInstance(application.applicationContext)
     private val quizDao = database.quizDao
 
@@ -12,7 +12,11 @@ class DataRepository(val application: Application) {
         return quizDao.getAllQuizzes()
     }
 
-    fun getAllQuizzesSync(): List<Quiz>{
-        return quizDao.getAllQuizzesSync()
+    fun getAllQuizIds(): List<Int>{
+        return quizDao.getAllQuizIds()
+    }
+
+    fun getQuiz(id: Int): Quiz{
+        return quizDao.getQuiz(id)
     }
 }

@@ -15,9 +15,9 @@ interface QuizDao {
     @Query("SELECT * FROM " + QuizTable.TABLE_NAME)
     fun getAllQuizzes(): LiveData<List<Quiz>>
 
-    @Query("SELECT * FROM " + QuizTable.TABLE_NAME)
-    fun getAllQuizzesSync(): List<Quiz>
+    @Query("SELECT " + QuizTable.Cols.ID + " FROM " + QuizTable.TABLE_NAME)
+    fun getAllQuizIds(): List<Int>
 
     @Query("SELECT * FROM " + QuizTable.TABLE_NAME + " WHERE " + QuizTable.Cols.ID + " = :id")
-    fun getQuiz(id: Int): LiveData<Quiz>
+    fun getQuiz(id: Int): Quiz
 }

@@ -5,55 +5,48 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.quiz.database.DataGenerator
 import com.example.quiz.database.DataRepository
 import com.example.quiz.model.Quiz
 import kotlinx.coroutines.*
 import kotlin.math.abs
 
-class QuizAskViewModel(private val app: Application, private var index: Int) : AndroidViewModel(app) {
+class QuizAskViewModel(app: Application, private var index: Int) : AndroidViewModel(app) {
     private val TAG = "QuizAskViewModel"
+    private val repository = DataRepository(app)
 
-    private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val backgroundJob = Job()
+    private val ioScope = CoroutineScope(Dispatchers.IO + backgroundJob)
 
     // TODO: Use RxJava for Room
-    // TODO: Retrieve List<quiz.id> instead of List<Quiz>, then retrieve quiz using id
-    private lateinit var quizBank: List<Quiz>
+
+    private lateinit var quizIdList: List<Int>
     private var _quiz = MutableLiveData<Quiz>()
     val quiz: LiveData<Quiz>
         get() = _quiz
 
     init {
-        uiScope.launch {
-            val backgroundJob = CoroutineScope(Dispatchers.IO).launch { initQuizzes() }
-            backgroundJob.join() // wait until background job is done
-            Log.i(TAG, "Background done")
+        ioScope.launch {
+            quizIdList = repository.getAllQuizIds()
             updateQuiz()
         }
     }
 
-    private fun initQuizzes() {
-        quizBank = DataRepository(app).getAllQuizzesSync()
-    }
-
     private fun updateQuiz(){
-        _quiz.value = quizBank[index]
-        Log.i(TAG, "currentIndex = " + index)
+        _quiz.postValue(repository.getQuiz(quizIdList[index]))
     }
 
     fun moveBack(){
-        index = abs(index - 1) % quizBank.size
-        updateQuiz()
+        index = abs(index - 1) % quizIdList.size
+        ioScope.launch { updateQuiz() }
     }
 
     fun moveForward(){
-        index = (index + 1) % quizBank.size
-        updateQuiz()
+        index = (index + 1) % quizIdList.size
+        ioScope.launch { updateQuiz() }
     }
 
     override fun onCleared() {
         super.onCleared()
-        viewModelJob.cancel()
+        backgroundJob.cancel()
     }
 }
