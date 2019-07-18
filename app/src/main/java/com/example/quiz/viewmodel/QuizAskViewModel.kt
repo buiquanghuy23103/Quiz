@@ -17,8 +17,6 @@ class QuizAskViewModel(app: Application, private var index: Int) : AndroidViewMo
     private val backgroundJob = Job()
     private val ioScope = CoroutineScope(Dispatchers.IO + backgroundJob)
 
-    // TODO: Use RxJava for Room
-
     private lateinit var quizIdList: List<Int>
     private var _quiz = MutableLiveData<Quiz>()
     val quiz: LiveData<Quiz>
