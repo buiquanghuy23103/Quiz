@@ -7,12 +7,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizAskFragmentBinding
 import com.example.quiz.model.Quiz
 import com.example.quiz.viewmodel.QuizAskViewModel
 import com.example.quiz.viewmodel.QuizAskViewModelFactory
+import kotlinx.android.synthetic.main.quiz_ask_fragment.*
 import kotlin.math.abs
 
 class QuizAskFragment : Fragment() {
@@ -37,6 +39,7 @@ class QuizAskFragment : Fragment() {
             quiz?.let { updateUI(quiz) }
         })
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -61,5 +64,18 @@ class QuizAskFragment : Fragment() {
 
     private fun toast(messageId : Int){
         Toast.makeText(activity, messageId, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.itemId){
+            R.id.menu_item_quiz_ask_edit -> startQuizEditFragment(item)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun startQuizEditFragment(item: MenuItem?){
+        val newQuiz = Quiz()
+        val action = QuizListFragmentDirections.actionQuizListFragmentToQuizEditFragment(newQuiz.id)
+        item!!.actionView.findNavController().navigate(action)
     }
 }
