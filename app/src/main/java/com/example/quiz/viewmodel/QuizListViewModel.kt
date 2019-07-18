@@ -7,8 +7,21 @@ import com.example.quiz.R
 import com.example.quiz.database.DataGenerator
 import com.example.quiz.database.DataRepository
 import com.example.quiz.model.Quiz
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class QuizListViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = DataRepository(application)
     val quizBank = repository.getAllQuizzes()
+
+    private val ioScope = CoroutineScope(Dispatchers.IO)
+
+    fun saveQuiz(quiz: Quiz){
+        CoroutineScope(Dispatchers.Main).launch {
+            val backgroundJob = ioScope.launch { repository.saveQuiz(quiz) }
+            backgroundJob.join()
+        }
+    }
 }

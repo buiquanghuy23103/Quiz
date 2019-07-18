@@ -11,12 +11,18 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.quiz.R
+import com.example.quiz.database.DataRepository
 import com.example.quiz.databinding.QuizItemBinding
 import com.example.quiz.model.Quiz
 import com.example.quiz.viewmodel.QuizListViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class QuizListFragment : Fragment() {
     private val TAG = "QuizListFragment"
+    private lateinit var viewModel: QuizListViewModel
 
     companion object {
         fun newInstance() = QuizListFragment()
@@ -27,7 +33,7 @@ class QuizListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.quiz_list_fragment, container, false)
-        val viewModel = ViewModelProviders.of(this).get(QuizListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(QuizListViewModel::class.java)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
 
         var adapter = QuizListAdapter()
@@ -56,7 +62,8 @@ class QuizListFragment : Fragment() {
     }
 
     private fun startQuizEditFragment(){
-        val newQuiz = Quiz()
+        val newQuiz = Quiz("New question")
+        viewModel.saveQuiz(newQuiz)
         val action = QuizListFragmentDirections.actionQuizListFragmentToQuizEditFragment(newQuiz.id)
         this.view!!.findNavController().navigate(action)
     }
