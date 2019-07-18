@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.QuizEditFragment">
-
-    <TextView
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="quiz" type="com.example.quiz.model.Quiz"/>
+    </data>
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/question_title"/>
-    <EditText
-            android:id="@+id/question_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/answer_title"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".ui.QuizEditFragment">
 
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/question_title"/>
+        <EditText
+                android:id="@+id/question_edit_text"
+                android:text="@={quiz.question}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/answer_title"/>
+        <CheckBox
+                android:id="@+id/answer_check_box"
+                android:checked="@={quiz.answer}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-</LinearLayout>
+    </LinearLayout>
+</layout>
