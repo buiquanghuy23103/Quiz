@@ -35,6 +35,6 @@ class QuizEditFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.quiz = Quiz("New question")
+        binding.quiz = viewModel.quiz
     }
 }

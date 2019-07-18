@@ -19,9 +19,6 @@ class QuizListViewModel(application: Application) : AndroidViewModel(application
     private val ioScope = CoroutineScope(Dispatchers.IO)
 
     fun saveQuiz(quiz: Quiz){
-        CoroutineScope(Dispatchers.Main).launch {
-            val backgroundJob = ioScope.launch { repository.saveQuiz(quiz) }
-            backgroundJob.join()
-        }
+        ioScope.launch { repository.saveQuiz(quiz) }
     }
 }
