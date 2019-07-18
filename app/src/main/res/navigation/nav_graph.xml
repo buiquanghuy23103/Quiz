@@ -3,15 +3,18 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
             app:startDestination="@id/quizListFragment">
-    <fragment android:id="@+id/quizAddFragment" android:name="com.example.quiz.ui.QuizEditFragment"
-              android:label="quiz_add_fragment" tools:layout="@layout/quiz_edit_fragment"/>
     <fragment android:id="@+id/quizListFragment" android:name="com.example.quiz.ui.QuizListFragment"
               android:label="quiz_list_fragment" tools:layout="@layout/quiz_list_fragment">
-        <action android:id="@+id/action_quizListFragment_to_quizAddFragment" app:destination="@id/quizAddFragment"/>
         <action android:id="@+id/action_quizListFragment_to_quizAskFragment" app:destination="@id/quizAskFragment"/>
+        <action android:id="@+id/action_quizListFragment_to_quizEditFragment" app:destination="@id/quizEditFragment"/>
     </fragment>
     <fragment android:id="@+id/quizAskFragment" android:name="com.example.quiz.ui.QuizAskFragment"
               android:label="quiz_add_fragment" tools:layout="@layout/quiz_ask_fragment">
         <argument android:name="quizId" app:argType="integer" android:defaultValue="-1"/>
+        <action android:id="@+id/action_quizAskFragment_to_quizEditFragment" app:destination="@id/quizEditFragment"/>
+    </fragment>
+    <fragment android:id="@+id/quizEditFragment" android:name="com.example.quiz.ui.QuizEditFragment"
+              android:label="quiz_edit_fragment" tools:layout="@layout/quiz_edit_fragment">
+        <argument android:name="quizId" app:argType="integer" android:defaultValue="0"/>
     </fragment>
 </navigation>
