@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 
 import com.example.quiz.R
 import com.example.quiz.viewmodel.QuizAskPagerViewModel
 import kotlinx.android.synthetic.main.quiz_ask_pager_fragment.*
 
-class QuizAskPager : Fragment() {
+class QuizAskPagerFragment : Fragment() {
+    private val args: QuizAskPagerFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,7 +23,7 @@ class QuizAskPager : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        view_pager.adapter = QuizAskPagerAdapter(childFragmentManager)
+        view_pager.adapter = QuizAskPagerAdapter(childFragmentManager, args.index)
     }
 
 }

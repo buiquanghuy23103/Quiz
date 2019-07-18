@@ -43,7 +43,7 @@ class QuizAskFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_ask_fragment, container, false)
 
         val app = requireNotNull(this.activity).application
-        val factory = QuizAskViewModelFactory(app, args.quizId)
+        val factory = QuizAskViewModelFactory(app, args.index)
         viewModel = ViewModelProviders.of(this, factory).get(QuizAskViewModel::class.java)
         viewModel.quiz.observe(this, Observer { quiz ->
             quiz?.let { updateUI(quiz) }

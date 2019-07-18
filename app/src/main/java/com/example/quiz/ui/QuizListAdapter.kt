@@ -21,7 +21,7 @@ class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = QuizItemHolder.from(parent)
 
-    override fun getItemCount() = quizBank?.size?.let { it } ?: 0
+    override fun getItemCount() = quizBank.size
 
     override fun onBindViewHolder(holder: QuizItemHolder, position: Int) {
         holder.bind(quizBank[position], position)
