@@ -19,9 +19,19 @@ import kotlin.math.abs
 
 class QuizAskFragment : Fragment() {
     private val TAG : String = "QuizAskFragment"
+
     private val args: QuizAskFragmentArgs by navArgs()
     private lateinit var binding: QuizAskFragmentBinding
     private lateinit var viewModel : QuizAskViewModel
+
+    companion object{
+        private const val ARG_INDEX = "index"
+        fun getInstance(index: Int): QuizAskFragment{
+            return QuizAskFragment().apply {
+                arguments = Bundle().apply { putInt(ARG_INDEX, index + 1) }
+            }
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
