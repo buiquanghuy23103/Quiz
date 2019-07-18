@@ -2,6 +2,7 @@ package com.example.quiz.ui
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.example.quiz.viewmodel.QuizEditViewModelFactory
 import kotlinx.android.synthetic.main.quiz_ask_fragment.*
 
 class QuizEditFragment : Fragment() {
+    private val TAG = "QuizEditFragment"
     private lateinit var viewModel: QuizEditViewModel
     private lateinit var binding: QuizEditFragmentBinding
     private val args: QuizEditFragmentArgs by navArgs()
@@ -36,5 +38,10 @@ class QuizEditFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.quiz = viewModel.quiz
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.saveQuiz().also { Log.i(TAG, "save quiz") }
     }
 }

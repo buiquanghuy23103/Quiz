@@ -25,6 +25,10 @@ class QuizEditViewModel(app: Application, private val id: Int) : AndroidViewMode
         }
     }
 
+    fun saveQuiz(){
+        ioScope.launch { repository.saveQuiz(quiz) }
+    }
+
     override fun onCleared() {
         super.onCleared()
         backgroundJob.cancel()
