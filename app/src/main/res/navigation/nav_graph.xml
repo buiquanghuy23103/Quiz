@@ -3,8 +3,8 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
             app:startDestination="@id/quizListFragment">
-    <fragment android:id="@+id/quizAddFragment" android:name="com.example.quiz.ui.QuizAddFragment"
-              android:label="quiz_add_fragment" tools:layout="@layout/quiz_add_fragment"/>
+    <fragment android:id="@+id/quizAddFragment" android:name="com.example.quiz.ui.QuizEditFragment"
+              android:label="quiz_add_fragment" tools:layout="@layout/quiz_edit_fragment"/>
     <fragment android:id="@+id/quizListFragment" android:name="com.example.quiz.ui.QuizListFragment"
               android:label="quiz_list_fragment" tools:layout="@layout/quiz_list_fragment">
         <action android:id="@+id/action_quizListFragment_to_quizAddFragment" app:destination="@id/quizAddFragment"/>

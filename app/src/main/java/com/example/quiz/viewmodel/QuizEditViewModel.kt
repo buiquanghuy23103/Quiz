@@ -2,6 +2,6 @@ package com.example.quiz.viewmodel
 
 import androidx.lifecycle.ViewModel;
 
-class QuizAddViewModel : ViewModel() {
+class QuizEditViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }
