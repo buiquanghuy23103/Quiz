@@ -16,6 +16,7 @@ import com.example.quiz.model.Quiz
 import com.example.quiz.viewmodel.QuizListViewModel
 
 class QuizListFragment : Fragment() {
+    private val TAG = "QuizListFragment"
 
     companion object {
         fun newInstance() = QuizListFragment()
@@ -49,14 +50,14 @@ class QuizListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.itemId){
-            R.id.menu_item_quiz_list_add -> startQuizEditFragment(item)
+            R.id.menu_item_quiz_list_add -> startQuizEditFragment()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun startQuizEditFragment(item: MenuItem?){
+    private fun startQuizEditFragment(){
         val newQuiz = Quiz()
         val action = QuizListFragmentDirections.actionQuizListFragmentToQuizEditFragment(newQuiz.id)
-        item!!.actionView.findNavController().navigate(action)
+        this.view!!.findNavController().navigate(action)
     }
 }
