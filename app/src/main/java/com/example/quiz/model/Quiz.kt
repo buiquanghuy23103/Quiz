@@ -9,14 +9,10 @@ import kotlin.random.Random
 @Entity(tableName = QuizTable.TABLE_NAME)
 data class Quiz(
     @ColumnInfo(name = QuizTable.Cols.QUESTION)
-    var question : String,
+    var question : String = "",
     @ColumnInfo(name = QuizTable.Cols.ANSWER)
-    var answer : Boolean,
+    var answer : Boolean = true,
     @PrimaryKey
     @ColumnInfo(name = QuizTable.Cols.ID)
-    var id: Int = 0
-) {
-    init {
-        id = Random.nextInt()
-    }
-}
+    var id: Int = Random.nextInt()
+)
