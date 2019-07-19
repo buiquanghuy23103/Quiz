@@ -1,6 +1,7 @@
 package com.example.quiz.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -28,7 +29,7 @@ class QuizAskFragment : Fragment() {
         private const val ARG_INDEX = "index"
         fun getInstance(index: Int): QuizAskFragment{
             return QuizAskFragment().apply {
-                arguments = Bundle().apply { putInt(ARG_INDEX, index + 1) }
+                arguments = Bundle().apply { putInt(ARG_INDEX, index) }
             }
         }
     }
@@ -43,18 +44,17 @@ class QuizAskFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_ask_fragment, container, false)
 
         val app = requireNotNull(this.activity).application
-        val factory = QuizAskViewModelFactory(app, args.index)
+        val index = requireNotNull(arguments).takeIf { it.containsKey(ARG_INDEX) }
+            ?.let { it.getInt(ARG_INDEX) }
+            ?: Log.e(TAG, "Argument not found")
+        val factory = QuizAskViewModelFactory(app, index)
         viewModel = ViewModelProviders.of(this, factory).get(QuizAskViewModel::class.java)
         viewModel.quiz.observe(this, Observer { quiz ->
-            quiz?.let { updateUI(quiz) }
+            quiz?.let { binding.quiz = quiz }
         })
 
         setHasOptionsMenu(true)
         return binding.root
-    }
-
-    private fun updateUI(quiz: Quiz){
-        binding.quiz = quiz
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
