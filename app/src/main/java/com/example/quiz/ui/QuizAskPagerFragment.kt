@@ -24,6 +24,7 @@ class QuizAskPagerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view_pager.adapter = QuizAskPagerAdapter(childFragmentManager, args.index)
+        tab_layout.setupWithViewPager(view_pager)
     }
 
 }
