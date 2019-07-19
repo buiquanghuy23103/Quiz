@@ -1,4 +1,4 @@
-package com.example.quiz.ui
+package com.example.quiz.quizlist
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizListFragmentBinding
 import com.example.quiz.model.Quiz
-import com.example.quiz.viewmodel.QuizListViewModel
+import com.example.quiz.ui.QuizListFragmentDirections
 
 class QuizListFragment : Fragment() {
     private lateinit var viewModel: QuizListViewModel
@@ -54,7 +54,8 @@ class QuizListFragment : Fragment() {
     }
 
     private fun startQuizEditFragmentById(quizId: Int) {
-        val action = QuizListFragmentDirections.actionQuizListFragmentToQuizEditFragment(quizId)
-        requireNotNull(this.view).findNavController().navigate(action)
+        val action =
+            QuizListFragmentDirections.actionQuizListFragmentToQuizEditFragment(quizId)
+        this.view!!.findNavController().navigate(action)
     }
 }

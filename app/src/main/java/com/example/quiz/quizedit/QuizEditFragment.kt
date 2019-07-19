@@ -1,22 +1,17 @@
-package com.example.quiz.ui
+package com.example.quiz.quizedit
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizEditFragmentBinding
-import com.example.quiz.model.Quiz
-import com.example.quiz.viewmodel.QuizEditViewModel
-import com.example.quiz.viewmodel.QuizEditViewModelFactory
-import kotlinx.android.synthetic.main.quiz_ask_fragment.*
+import com.example.quiz.ui.QuizEditFragmentArgs
 
 class QuizEditFragment : Fragment() {
     private lateinit var viewModel: QuizEditViewModel

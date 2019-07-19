@@ -1,10 +1,9 @@
-package com.example.quiz.ui
+package com.example.quiz.quizask
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.example.quiz.database.DataGenerator
-import timber.log.Timber
+import com.example.quiz.quizask.QuizAskFragment
 
 class QuizAskPagerAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm) {
     var listSize: Int = 0

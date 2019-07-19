@@ -1,4 +1,4 @@
-package com.example.quiz.ui
+package com.example.quiz.quizask
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -10,9 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 
 import com.example.quiz.R
-import com.example.quiz.viewmodel.QuizAskPagerViewModel
+import com.example.quiz.ui.QuizAskPagerFragmentArgs
 import kotlinx.android.synthetic.main.quiz_ask_pager_fragment.*
-import timber.log.Timber
 
 class QuizAskPagerFragment : Fragment() {
     private val args: QuizAskPagerFragmentArgs by navArgs()

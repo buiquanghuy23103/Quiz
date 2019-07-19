@@ -1,4 +1,4 @@
-package com.example.quiz.viewmodel
+package com.example.quiz.quizask
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -15,18 +15,20 @@ class QuizAskViewModel(app: Application, private var index: Int) : AndroidViewMo
     private val ioScope = CoroutineScope(Dispatchers.IO + backgroundJob)
 
     private lateinit var quizIdList: List<Int>
+    var currentQuizId = 0
     private var _quiz = MutableLiveData<Quiz>()
     val quiz: LiveData<Quiz>
         get() = _quiz
 
     init {
         ioScope.launch {
-            quizIdList = repository.getAllQuizIds()
-            saveQuiz()
+            initQuiz()
+            currentQuizId = quizIdList[index]
         }
     }
 
-    private fun saveQuiz(){
+    private fun initQuiz() {
+        quizIdList = repository.getAllQuizIds()
         _quiz.postValue(repository.getQuizById(quizIdList[index]))
     }
 

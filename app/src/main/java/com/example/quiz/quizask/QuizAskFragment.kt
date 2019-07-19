@@ -1,23 +1,15 @@
-package com.example.quiz.ui
+package com.example.quiz.quizask
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizAskFragmentBinding
-import com.example.quiz.model.Quiz
-import com.example.quiz.viewmodel.QuizAskViewModel
-import com.example.quiz.viewmodel.QuizAskViewModelFactory
-import kotlinx.android.synthetic.main.quiz_ask_fragment.*
-import timber.log.Timber
-import kotlin.math.abs
+import com.example.quiz.ui.QuizAskFragmentDirections
 
 class QuizAskFragment : Fragment() {
     private lateinit var binding: QuizAskFragmentBinding
@@ -25,7 +17,7 @@ class QuizAskFragment : Fragment() {
 
     companion object{
         private const val ARG_INDEX = "index"
-        fun getInstance(index: Int): QuizAskFragment{
+        fun getInstance(index: Int): QuizAskFragment {
             return QuizAskFragment().apply {
                 arguments = Bundle().apply { putInt(ARG_INDEX, index) }
             }
@@ -62,14 +54,14 @@ class QuizAskFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.itemId){
-            R.id.menu_item_quiz_ask_edit -> startQuizEditFragment()
+            R.id.menu_item_quiz_ask_edit -> startEditingCurrentQuiz()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun startQuizEditFragment(){
-        val newQuiz = Quiz()
-        val action = QuizListFragmentDirections.actionQuizListFragmentToQuizEditFragment(newQuiz.id)
+    private fun startEditingCurrentQuiz(){
+        val action =
+            QuizAskFragmentDirections.actionQuizAskFragmentToQuizEditFragment(viewModel.currentQuizId)
         this.view!!.findNavController().navigate(action)
     }
 }

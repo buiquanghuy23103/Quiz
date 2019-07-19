@@ -1,4 +1,4 @@
-package com.example.quiz.viewmodel
+package com.example.quiz.quizlist
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

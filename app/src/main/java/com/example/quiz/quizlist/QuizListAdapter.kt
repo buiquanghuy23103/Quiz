@@ -1,4 +1,4 @@
-package com.example.quiz.ui
+package com.example.quiz.quizlist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizItemBinding
 import com.example.quiz.model.Quiz
+import com.example.quiz.ui.QuizListFragmentDirections
 
 class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
     var quizList = listOf<Quiz>()
@@ -17,7 +18,8 @@ class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = QuizItemHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        QuizItemHolder.from(parent)
 
     override fun getItemCount() = quizList.size
 
@@ -35,7 +37,7 @@ class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
         var index = 0
 
         companion object{
-            fun from(parent: ViewGroup): QuizItemHolder{
+            fun from(parent: ViewGroup): QuizItemHolder {
                 val inflater = LayoutInflater.from(parent.context)
                 val binding = DataBindingUtil
                     .inflate<QuizItemBinding>(inflater, R.layout.quiz_item, parent, false)
@@ -46,7 +48,10 @@ class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
         fun bind(){
             viewBinding.quiz = quiz
             viewBinding.root.setOnClickListener{view: View ->
-                val action = QuizListFragmentDirections.actionQuizListFragmentToQuizAskPagerFragment(index)
+                val action =
+                    QuizListFragmentDirections.actionQuizListFragmentToQuizAskPagerFragment(
+                        index
+                    )
                 view.findNavController().navigate(action)
             }
             viewBinding.executePendingBindings()
