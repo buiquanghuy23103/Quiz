@@ -5,7 +5,7 @@ import com.example.quiz.model.Quiz
 
 class DataGenerator {
     companion object{
-        val quizzes = listOf(
+        val sampleQuizList = listOf(
             Quiz("Canberra is the capital of Australia.", false),
             Quiz("The Pacific Ocean is larger than the Atlantic Ocean.", true),
             Quiz("The Suez Canal connects the Red Sea and the Indian Ocean.", true),

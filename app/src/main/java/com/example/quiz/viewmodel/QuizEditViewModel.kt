@@ -1,15 +1,12 @@
 package com.example.quiz.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel;
 import com.example.quiz.database.DataRepository
 import com.example.quiz.model.Quiz
 import kotlinx.coroutines.*
 
 class QuizEditViewModel(app: Application, private val id: Int) : AndroidViewModel(app) {
-    private val TAG = "QuizEditViewModel"
     private val repository = DataRepository(app)
     lateinit var quiz: Quiz
 
@@ -19,14 +16,14 @@ class QuizEditViewModel(app: Application, private val id: Int) : AndroidViewMode
     init {
         runBlocking {
             val backgroundJob = ioScope.launch {
-                quiz = repository.getQuiz(id)
+                quiz = repository.getQuizById(id)
             }
             backgroundJob.join()
         }
     }
 
     fun saveQuiz(){
-        ioScope.launch { repository.saveQuiz(quiz) }
+        ioScope.launch { repository.save(quiz) }
     }
 
     override fun onCleared() {

@@ -16,12 +16,10 @@ import com.example.quiz.model.Quiz
 import com.example.quiz.viewmodel.QuizAskViewModel
 import com.example.quiz.viewmodel.QuizAskViewModelFactory
 import kotlinx.android.synthetic.main.quiz_ask_fragment.*
+import timber.log.Timber
 import kotlin.math.abs
 
 class QuizAskFragment : Fragment() {
-    private val TAG : String = "QuizAskFragment"
-
-    private val args: QuizAskFragmentArgs by navArgs()
     private lateinit var binding: QuizAskFragmentBinding
     private lateinit var viewModel : QuizAskViewModel
 
@@ -40,15 +38,10 @@ class QuizAskFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_ask_fragment, container, false)
 
-        val app = requireNotNull(this.activity).application
-        val index = requireNotNull(arguments).takeIf { it.containsKey(ARG_INDEX) }
-            ?.let { it.getInt(ARG_INDEX) }
-            ?: Log.e(TAG, "Argument not found")
-        val factory = QuizAskViewModelFactory(app, index)
-        viewModel = ViewModelProviders.of(this, factory).get(QuizAskViewModel::class.java)
+        initViewModel()
+
         viewModel.quiz.observe(this, Observer { quiz ->
             quiz?.let { binding.quiz = quiz }
         })
@@ -57,23 +50,14 @@ class QuizAskFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.trueButton.setOnClickListener { checkAnswer(true) }
-        binding.falseButton.setOnClickListener { checkAnswer(false) }
-        binding.nextButton.setOnClickListener{ viewModel.moveForward() }
-        binding.backButton.setOnClickListener { viewModel.moveBack() }
-    }
+    private fun initViewModel() {
+        val app = requireNotNull(this.activity).application
 
-    private fun checkAnswer(userPressed: Boolean){
-        if (userPressed == true){
-            toast(R.string.correct_toast)
-        } else {
-            toast(R.string.incorrect_toast)
-        }
-    }
+        val arg = requireNotNull(arguments).takeIf { it.containsKey(ARG_INDEX) }
+        val index = arg?.let { it?.getInt(ARG_INDEX) } ?: 0
 
-    private fun toast(messageId : Int){
-        Toast.makeText(activity, messageId, Toast.LENGTH_SHORT).show()
+        val factory = QuizAskViewModelFactory(app, index)
+        viewModel = ViewModelProviders.of(this, factory).get(QuizAskViewModel::class.java)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

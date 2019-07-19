@@ -2,47 +2,38 @@ package com.example.quiz.ui
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.RecyclerView
 
 import com.example.quiz.R
-import com.example.quiz.database.DataRepository
-import com.example.quiz.databinding.QuizItemBinding
+import com.example.quiz.databinding.QuizListFragmentBinding
 import com.example.quiz.model.Quiz
 import com.example.quiz.viewmodel.QuizListViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.android.synthetic.main.quiz_list_fragment.*
 
 class QuizListFragment : Fragment() {
-    private val TAG = "QuizListFragment"
     private lateinit var viewModel: QuizListViewModel
+    private lateinit var binding: QuizListFragmentBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.quiz_list_fragment, container, false)
-        viewModel = ViewModelProviders.of(this).get(QuizListViewModel::class.java)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.quiz_list_fragment, container, false)
+        setHasOptionsMenu(true)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         var adapter = QuizListAdapter()
-        recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
 
+        viewModel = ViewModelProviders.of(this).get(QuizListViewModel::class.java)
         viewModel.quizBank.observe(this, Observer {
             it?.let {
-                adapter.quizBank = it
+                adapter.quizList = it
             }
         })
-
-        setHasOptionsMenu(true)
-        return view
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -59,7 +50,7 @@ class QuizListFragment : Fragment() {
 
     private fun startQuizEditFragment(){
         val newQuiz = Quiz("New question")
-        viewModel.saveQuiz(newQuiz)
+        viewModel.save(newQuiz)
         val action = QuizListFragmentDirections.actionQuizListFragmentToQuizEditFragment(newQuiz.id)
         this.view!!.findNavController().navigate(action)
     }

@@ -16,13 +16,13 @@ abstract class AppDatabase: RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        fun getInstance(context: Context): AppDatabase{
+        fun from(context: Context): AppDatabase{
             synchronized(this){
-                return INSTANCE?.let { INSTANCE } ?: buildDatabase(context)
+                return INSTANCE?.let { INSTANCE } ?: getDatabaseSingletonFrom(context)
             }
         }
 
-        private fun buildDatabase(context: Context): AppDatabase{
+        private fun getDatabaseSingletonFrom(context: Context): AppDatabase{
             val callback = DataCallback(context)
             return Room.databaseBuilder(
                 context,
@@ -38,9 +38,9 @@ abstract class AppDatabase: RoomDatabase() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
                 Executors.newSingleThreadExecutor().execute {
-                    val appDatabase = AppDatabase.getInstance(context)
+                    val appDatabase = from(context)
                     appDatabase.runInTransaction {
-                        appDatabase.quizDao.insertAllQuizzes(DataGenerator.quizzes)
+                        appDatabase.quizDao.insertAll(DataGenerator.sampleQuizList)
                     }
                 }
             }

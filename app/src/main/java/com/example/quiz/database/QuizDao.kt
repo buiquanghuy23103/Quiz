@@ -11,16 +11,16 @@ import com.example.quiz.model.Quiz
 @Dao
 interface QuizDao {
     @Insert
-    fun insertAllQuizzes(quizzes: List<Quiz>)
+    fun insertAll(quizzes: List<Quiz>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveQuiz(quiz: Quiz)
+    fun save(quiz: Quiz)
 
     @Query("SELECT * FROM " + QuizTable.TABLE_NAME)
     fun getAllQuizzes(): LiveData<List<Quiz>>
 
     @Query("SELECT " + QuizTable.Cols.ID + " FROM " + QuizTable.TABLE_NAME)
-    fun getAllQuizIds(): List<Int>
+    fun getAllIds(): List<Int>
 
     @Query("SELECT * FROM " + QuizTable.TABLE_NAME + " WHERE " + QuizTable.Cols.ID + " = :id")
     fun getQuiz(id: Int): Quiz

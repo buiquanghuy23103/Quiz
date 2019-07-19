@@ -19,22 +19,20 @@ import com.example.quiz.viewmodel.QuizEditViewModelFactory
 import kotlinx.android.synthetic.main.quiz_ask_fragment.*
 
 class QuizEditFragment : Fragment() {
-    private val TAG = "QuizEditFragment"
     private lateinit var viewModel: QuizEditViewModel
     private lateinit var binding: QuizEditFragmentBinding
     private val args: QuizEditFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_edit_fragment, container, false)
+        initViewModel()
+        return binding.root
+    }
 
+    private fun initViewModel() {
         val app = requireNotNull(this.activity).application
         val factory = QuizEditViewModelFactory(app, args.quizId)
         viewModel = ViewModelProviders.of(this, factory).get(QuizEditViewModel::class.java)
-
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,6 +41,6 @@ class QuizEditFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        viewModel.saveQuiz().also { Log.i(TAG, "save quiz") }
+        viewModel.saveQuiz()
     }
 }
