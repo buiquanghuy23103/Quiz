@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizItemBinding
 import com.example.quiz.model.Quiz
-import com.example.quiz.ui.QuizListFragmentDirections
 
 class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
     var quizList = listOf<Quiz>()

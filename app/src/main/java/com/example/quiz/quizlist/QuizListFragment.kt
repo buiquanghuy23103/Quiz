@@ -11,7 +11,6 @@ import androidx.navigation.findNavController
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizListFragmentBinding
 import com.example.quiz.model.Quiz
-import com.example.quiz.ui.QuizListFragmentDirections
 
 class QuizListFragment : Fragment() {
     private lateinit var viewModel: QuizListViewModel

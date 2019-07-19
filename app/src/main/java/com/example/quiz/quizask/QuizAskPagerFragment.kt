@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 
 import com.example.quiz.R
-import com.example.quiz.ui.QuizAskPagerFragmentArgs
 import kotlinx.android.synthetic.main.quiz_ask_pager_fragment.*
 
 class QuizAskPagerFragment : Fragment() {
@@ -32,8 +31,5 @@ class QuizAskPagerFragment : Fragment() {
             adapter.listSize = it.size
             view_pager.currentItem = args.index
         })
-
-
     }
-
 }

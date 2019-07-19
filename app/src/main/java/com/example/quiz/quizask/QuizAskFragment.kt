@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizAskFragmentBinding
-import com.example.quiz.ui.QuizAskFragmentDirections
 
 class QuizAskFragment : Fragment() {
     private lateinit var binding: QuizAskFragmentBinding
@@ -46,7 +45,7 @@ class QuizAskFragment : Fragment() {
         val app = requireNotNull(this.activity).application
 
         val arg = requireNotNull(arguments).takeIf { it.containsKey(ARG_INDEX) }
-        val index = arg?.let { it?.getInt(ARG_INDEX) } ?: 0
+        val index = arg?.let { it.getInt(ARG_INDEX) } ?: 0
 
         val factory = QuizAskViewModelFactory(app, index)
         viewModel = ViewModelProviders.of(this, factory).get(QuizAskViewModel::class.java)

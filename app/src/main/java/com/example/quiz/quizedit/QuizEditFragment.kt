@@ -11,7 +11,6 @@ import androidx.navigation.fragment.navArgs
 
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizEditFragmentBinding
-import com.example.quiz.ui.QuizEditFragmentArgs
 
 class QuizEditFragment : Fragment() {
     private lateinit var viewModel: QuizEditViewModel
