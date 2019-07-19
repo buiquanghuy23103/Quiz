@@ -12,7 +12,6 @@ import com.example.quiz.R
 import com.example.quiz.databinding.QuizListFragmentBinding
 import com.example.quiz.model.Quiz
 import com.example.quiz.viewmodel.QuizListViewModel
-import kotlinx.android.synthetic.main.quiz_list_fragment.*
 
 class QuizListFragment : Fragment() {
     private lateinit var viewModel: QuizListViewModel
@@ -43,15 +42,19 @@ class QuizListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.itemId){
-            R.id.menu_item_quiz_list_add -> startQuizEditFragment()
+            R.id.menu_item_quiz_list_add -> startEditingNewQuiz()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun startQuizEditFragment(){
+    private fun startEditingNewQuiz(){
         val newQuiz = Quiz("New question")
         viewModel.save(newQuiz)
-        val action = QuizListFragmentDirections.actionQuizListFragmentToQuizEditFragment(newQuiz.id)
-        this.view!!.findNavController().navigate(action)
+        startQuizEditFragmentById(newQuiz.id)
+    }
+
+    private fun startQuizEditFragmentById(quizId: Int) {
+        val action = QuizListFragmentDirections.actionQuizListFragmentToQuizEditFragment(quizId)
+        requireNotNull(this.view).findNavController().navigate(action)
     }
 }
