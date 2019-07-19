@@ -24,10 +24,6 @@ class QuizListFragment : Fragment() {
     private val TAG = "QuizListFragment"
     private lateinit var viewModel: QuizListViewModel
 
-    companion object {
-        fun newInstance() = QuizListFragment()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

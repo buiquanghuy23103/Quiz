@@ -43,8 +43,7 @@ class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
         fun bind(quiz: Quiz, index: Int){
             viewBinding.quiz = quiz
             viewBinding.root.setOnClickListener{view: View ->
-                val action = QuizListFragmentDirections.actionQuizListFragmentToQuizAskFragment(index)
-                Log.i(TAG, "index = " + index)
+                val action = QuizListFragmentDirections.actionQuizListFragmentToQuizAskPagerFragment(index)
                 view.findNavController().navigate(action)
             }
             viewBinding.executePendingBindings()
