@@ -24,30 +24,28 @@ class QuizListAdapter : ListAdapter<Quiz, QuizListAdapter.QuizItemHolder>(QuizLi
         holder.bind()
     }
 
-    class QuizItemHolder private constructor(binding: QuizItemBinding) : RecyclerView.ViewHolder(binding.root){
-        private val viewBinding = binding
+    class QuizItemHolder private constructor(private val binding: QuizItemBinding) : RecyclerView.ViewHolder(binding.root){
         var quiz = Quiz("Error in QuizItemHolder")
         var index = 0
 
         companion object{
             fun from(parent: ViewGroup): QuizItemHolder {
                 val inflater = LayoutInflater.from(parent.context)
-                val binding = DataBindingUtil
-                    .inflate<QuizItemBinding>(inflater, R.layout.quiz_item, parent, false)
+                val binding = QuizItemBinding.inflate(inflater, parent, false)
                 return QuizItemHolder(binding)
             }
         }
 
         fun bind(){
-            viewBinding.quiz = quiz
-            viewBinding.root.setOnClickListener{view: View ->
+            binding.quiz = quiz
+            binding.root.setOnClickListener{view: View ->
                 val action =
                     QuizListFragmentDirections.actionQuizListFragmentToQuizAskPagerFragment(
                         index
                     )
                 view.findNavController().navigate(action)
             }
-            viewBinding.executePendingBindings()
+            binding.executePendingBindings()
         }
     }
 }
