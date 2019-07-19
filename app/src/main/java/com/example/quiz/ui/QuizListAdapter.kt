@@ -12,7 +12,6 @@ import com.example.quiz.databinding.QuizItemBinding
 import com.example.quiz.model.Quiz
 
 class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
-    private val TAG = "QuizListAdapter"
     var quizBank = listOf<Quiz>()
         set(value) {
             field = value

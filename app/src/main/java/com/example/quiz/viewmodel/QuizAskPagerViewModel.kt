@@ -3,7 +3,9 @@ package com.example.quiz.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel;
+import com.example.quiz.database.DataRepository
 
 class QuizAskPagerViewModel(app: Application) : AndroidViewModel(app) {
-    // TODO: Implement the ViewModel
+    private val repository = DataRepository(app)
+    val quizList = repository.getAllQuizzes()
 }
