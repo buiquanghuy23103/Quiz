@@ -62,4 +62,7 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room_version"
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
