@@ -29,7 +29,7 @@ class QuizListFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(QuizListViewModel::class.java)
         viewModel.quizBank.observe(this, Observer {
             it?.let {
-                adapter.quizList = it
+                adapter.submitList(it)
             }
         })
     }

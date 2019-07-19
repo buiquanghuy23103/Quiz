@@ -5,26 +5,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizItemBinding
 import com.example.quiz.model.Quiz
 
-class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizItemHolder>(){
-    var quizList = listOf<Quiz>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class QuizListAdapter : ListAdapter<Quiz, QuizListAdapter.QuizItemHolder>(QuizListDiffCallBack()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         QuizItemHolder.from(parent)
 
-    override fun getItemCount() = quizList.size
-
     override fun onBindViewHolder(holder: QuizItemHolder, position: Int) {
         holder.apply {
-            quiz = quizList[position]
+            quiz = getItem(position)
             index = position
         }
         holder.bind()
