@@ -32,4 +32,11 @@ class QuizAskPagerFragment : Fragment() {
             view_pager.currentItem = args.index
         })
     }
+
+    companion object{
+        fun startEditingQuizWithId(id: Int){
+            val action = QuizAskPagerFragmentDirections.actionQuizAskPagerFragmentToQuizEditFragment(id)
+
+        }
+    }
 }

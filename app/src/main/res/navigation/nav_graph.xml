@@ -11,11 +11,6 @@
                 app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/nav_default_pop_enter_anim"
                 app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
-    <fragment android:id="@+id/quizAskFragment" android:name="com.example.quiz.quizask.QuizAskFragment"
-              android:label="quiz_add_fragment" tools:layout="@layout/quiz_ask_fragment">
-        <argument android:name="index" app:argType="integer" android:defaultValue="0"/>
-        <action android:id="@+id/action_quizAskFragment_to_quizEditFragment" app:destination="@id/quizEditFragment"/>
-    </fragment>
     <fragment android:id="@+id/quizEditFragment" android:name="com.example.quiz.quizedit.QuizEditFragment"
               android:label="quiz_edit_fragment" tools:layout="@layout/quiz_edit_fragment">
         <argument android:name="quizId" app:argType="integer" android:defaultValue="0"/>
@@ -23,5 +18,7 @@
     <fragment android:id="@+id/quizAskPagerFragment" android:name="com.example.quiz.quizask.QuizAskPagerFragment"
               android:label="QuizAskPagerFragment" tools:layout="@layout/quiz_ask_pager_fragment">
         <argument android:name="index" app:argType="integer" android:defaultValue="0"/>
+        <action android:id="@+id/action_quizAskPagerFragment_to_quizEditFragment"
+                app:destination="@id/quizEditFragment"/>
     </fragment>
 </navigation>
