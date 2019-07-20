@@ -1,16 +1,16 @@
 package com.example.quiz.database
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.quiz.model.Quiz
-import java.util.concurrent.Executors
 
 @Database(entities = [Quiz::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
     abstract val quizDao: QuizDao
+    var isSampleDataInserted = MutableLiveData<Boolean>()
 
     companion object{
         @Volatile
@@ -18,32 +18,31 @@ abstract class AppDatabase: RoomDatabase() {
 
         fun from(context: Context): AppDatabase{
             synchronized(this){
-                return INSTANCE?.let { INSTANCE } ?: getDatabaseSingletonFrom(context)
+                val appContext = context.applicationContext
+                var instance = INSTANCE
+                if (instance == null){
+                    instance = buildDatabaseFrom(appContext)
+                    INSTANCE = instance
+                    // double-take
+                    if (appContext.getDatabasePath(DbScheme.DATABASE_NAME).exists()){
+                        INSTANCE!!.isSampleDataInserted.postValue(true)
+                    }
+                }
+                return instance
             }
         }
 
-        private fun getDatabaseSingletonFrom(context: Context): AppDatabase{
-            val callback = DataCallback(context)
+        private fun buildDatabaseFrom(appContext: Context): AppDatabase{
             return Room.databaseBuilder(
-                context,
+                appContext,
                 AppDatabase::class.java,
                 DbScheme.DATABASE_NAME
             )
-                .addCallback(callback)
+                .addCallback(SampleDataGenerator(appContext))
                 .fallbackToDestructiveMigration()
                 .build()
         }
 
-        class DataCallback(val context: Context): Callback(){
-            override fun onCreate(db: SupportSQLiteDatabase) {
-                super.onCreate(db)
-                Executors.newSingleThreadExecutor().execute {
-                    val appDatabase = from(context)
-                    appDatabase.runInTransaction {
-                        appDatabase.quizDao.insertAll(DataGenerator.sampleQuizList)
-                    }
-                }
-            }
-        }
+
     }
 }
