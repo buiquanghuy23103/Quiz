@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import com.example.quiz.model.Quiz
 
 class DataRepository(application: Application) {
-    private val database = AppDatabase.from(application.applicationContext)
+    private val database = AppDatabase.getInstance(application.applicationContext)
     private val quizDao = database.quizDao
 
     fun save(quiz: Quiz){

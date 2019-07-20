@@ -12,7 +12,7 @@ class SampleDataGenerator(val appContext: Context): RoomDatabase.Callback(){
     override fun onCreate(db: SupportSQLiteDatabase) {
         super.onCreate(db)
         CoroutineScope(Dispatchers.IO).launch {
-            appDatabase = AppDatabase.from(appContext)
+            appDatabase = AppDatabase.getInstance(appContext)
             insertSampleData()
             appDatabase.isSampleDataInserted.postValue(true)
         }
