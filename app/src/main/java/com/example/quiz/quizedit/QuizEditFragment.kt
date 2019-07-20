@@ -13,21 +13,20 @@ import com.example.quiz.R
 import com.example.quiz.databinding.QuizEditFragmentBinding
 
 class QuizEditFragment : Fragment() {
-    private lateinit var viewModel: QuizEditViewModel
     private lateinit var binding: QuizEditFragmentBinding
     private val args: QuizEditFragmentArgs by navArgs()
 
+    private val viewModel: QuizEditViewModel by lazy {
+        val app = requireNotNull(this.activity).application
+        val factory = QuizEditViewModelFactory(app, args.quizId)
+        ViewModelProviders.of(this, factory).get(QuizEditViewModel::class.java)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_edit_fragment, container, false)
-        initViewModel()
         return binding.root
     }
 
-    private fun initViewModel() {
-        val app = requireNotNull(this.activity).application
-        val factory = QuizEditViewModelFactory(app, args.quizId)
-        viewModel = ViewModelProviders.of(this, factory).get(QuizEditViewModel::class.java)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.quiz = viewModel.quiz

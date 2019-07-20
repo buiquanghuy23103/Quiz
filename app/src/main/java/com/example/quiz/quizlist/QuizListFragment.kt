@@ -13,8 +13,11 @@ import com.example.quiz.databinding.QuizListFragmentBinding
 import com.example.quiz.model.Quiz
 
 class QuizListFragment : Fragment() {
-    private lateinit var viewModel: QuizListViewModel
     private lateinit var binding: QuizListFragmentBinding
+
+    private val viewModel: QuizListViewModel by lazy {
+        ViewModelProviders.of(this).get(QuizListViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_list_fragment, container, false)
@@ -26,7 +29,6 @@ class QuizListFragment : Fragment() {
         var adapter = QuizListAdapter()
         binding.recyclerView.adapter = adapter
 
-        viewModel = ViewModelProviders.of(this).get(QuizListViewModel::class.java)
         viewModel.quizBank.observe(this, Observer {
             it?.let {
                 adapter.submitList(it)

@@ -15,6 +15,10 @@ import kotlinx.android.synthetic.main.quiz_ask_pager_fragment.*
 class QuizAskPagerFragment : Fragment() {
     private val args: QuizAskPagerFragmentArgs by navArgs()
 
+    private val viewModel: QuizAskPagerViewModel by lazy {
+        ViewModelProviders.of(this).get(QuizAskPagerViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,17 +30,9 @@ class QuizAskPagerFragment : Fragment() {
         var adapter = QuizAskPagerAdapter(childFragmentManager)
         view_pager.adapter = adapter
 
-        val viewModel = ViewModelProviders.of(this).get(QuizAskPagerViewModel::class.java)
         viewModel.quizList.observe(this, Observer {
             adapter.listSize = it.size
             view_pager.currentItem = args.index
         })
-    }
-
-    companion object{
-        fun startEditingQuizWithId(id: Int){
-            val action = QuizAskPagerFragmentDirections.actionQuizAskPagerFragmentToQuizEditFragment(id)
-
-        }
     }
 }

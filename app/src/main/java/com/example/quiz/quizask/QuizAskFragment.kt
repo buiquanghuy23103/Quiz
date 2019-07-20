@@ -11,7 +11,16 @@ import com.example.quiz.databinding.QuizAskFragmentBinding
 
 class QuizAskFragment : Fragment() {
     private lateinit var binding: QuizAskFragmentBinding
-    private lateinit var viewModel : QuizAskViewModel
+
+    private val viewModel: QuizAskViewModel by lazy {
+        val app = requireNotNull(this.activity).application
+
+        val arg = requireNotNull(arguments).takeIf { it.containsKey(ARG_INDEX) }
+        val index = arg?.let { it.getInt(ARG_INDEX) } ?: 0
+
+        val factory = QuizAskViewModelFactory(app, index)
+        ViewModelProviders.of(this, factory).get(QuizAskViewModel::class.java)
+    }
 
     companion object{
         private const val ARG_INDEX = "index"
@@ -25,8 +34,6 @@ class QuizAskFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_ask_fragment, container, false)
 
-        initViewModel()
-
         viewModel.quiz.observe(this, Observer { quiz ->
             quiz?.let { binding.quiz = quiz }
         })
@@ -35,12 +42,6 @@ class QuizAskFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        val app = requireNotNull(this.activity).application
 
-        val arg = requireNotNull(arguments).takeIf { it.containsKey(ARG_INDEX) }
-        val index = arg?.let { it.getInt(ARG_INDEX) } ?: 0
-
-        val factory = QuizAskViewModelFactory(app, index)
-        viewModel = ViewModelProviders.of(this, factory).get(QuizAskViewModel::class.java)
     }
 }
