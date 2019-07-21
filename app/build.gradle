@@ -45,8 +45,9 @@ dependencies {
 
 
     // ViewModel and LiveData
-    def lifecycle_version = "2.0.0"
+    def lifecycle_version = "2.1.0-beta01"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
     // Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'

@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.quiz.database.DataRepository
 import com.example.quiz.model.Quiz
 import kotlinx.coroutines.*
@@ -21,15 +22,15 @@ class QuizAskViewModel(app: Application, private var index: Int) : AndroidViewMo
         get() = _quiz
 
     init {
-        ioScope.launch {
-            initQuiz()
-            currentQuizId = quizIdList[index]
-        }
+        initProp()
     }
 
-    private fun initQuiz() {
-        quizIdList = repository.getAllQuizIds()
-        _quiz.postValue(repository.getQuizById(quizIdList[index]))
+    private fun initProp() {
+        ioScope.launch {
+            quizIdList = repository.getAllQuizIds()
+            _quiz.postValue(repository.getQuizById(quizIdList[index]))
+            currentQuizId = quizIdList[index]
+        }
     }
 
     override fun onCleared() {

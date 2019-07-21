@@ -37,8 +37,8 @@ class QuizListFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.quiz_list_fragment, menu)
+        super.onCreateOptionsMenu(menu!!, inflater!!)
+        inflater.inflate(R.menu.quiz_list_fragment, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
