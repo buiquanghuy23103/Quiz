@@ -3,12 +3,11 @@ package com.example.quiz.quizedit
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.quiz.BaseViewModel
 import com.example.quiz.database.DataRepository
 import kotlinx.coroutines.*
 
-class QuizEditViewModel(app: Application, private val id: Int) : AndroidViewModel(app) {
-    private val repository = DataRepository(app)
-
+class QuizEditViewModel(app: Application, private val id: Int) : BaseViewModel(app) {
     private val backgroundJob = Job()
     private val ioScope = CoroutineScope(Dispatchers.IO + backgroundJob)
 

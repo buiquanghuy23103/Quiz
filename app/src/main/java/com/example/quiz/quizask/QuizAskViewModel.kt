@@ -5,13 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.quiz.BaseViewModel
 import com.example.quiz.database.DataRepository
 import com.example.quiz.model.Quiz
 import kotlinx.coroutines.*
 
-class QuizAskViewModel(app: Application, private var index: Int) : AndroidViewModel(app) {
-    private val repository = DataRepository(app)
-
+class QuizAskViewModel(app: Application, private var index: Int) : BaseViewModel(app) {
     private val backgroundJob = Job()
     private val ioScope = CoroutineScope(Dispatchers.IO + backgroundJob)
 
