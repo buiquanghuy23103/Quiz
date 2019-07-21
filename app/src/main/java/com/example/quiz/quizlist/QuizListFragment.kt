@@ -7,16 +7,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import com.example.quiz.BaseFragment
 
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizListFragmentBinding
 import com.example.quiz.model.Quiz
 
-class QuizListFragment : Fragment() {
+class QuizListFragment : BaseFragment<QuizListViewModel>() {
     private lateinit var binding: QuizListFragmentBinding
 
-    private val viewModel: QuizListViewModel by lazy {
-        ViewModelProviders.of(this).get(QuizListViewModel::class.java)
+    override fun initViewModel(): QuizListViewModel {
+        return ViewModelProviders.of(this).get(QuizListViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {

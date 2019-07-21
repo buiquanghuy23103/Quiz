@@ -8,15 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.example.quiz.BaseFragment
 
 import com.example.quiz.R
 import kotlinx.android.synthetic.main.quiz_ask_pager_fragment.*
 
-class QuizAskPagerFragment : Fragment() {
+class QuizAskPagerFragment : BaseFragment<QuizAskPagerViewModel>() {
     private val args: QuizAskPagerFragmentArgs by navArgs()
 
-    private val viewModel: QuizAskPagerViewModel by lazy {
-        ViewModelProviders.of(this).get(QuizAskPagerViewModel::class.java)
+    override fun initViewModel(): QuizAskPagerViewModel {
+        return ViewModelProviders.of(this).get(QuizAskPagerViewModel::class.java)
     }
 
     override fun onCreateView(

@@ -8,17 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.navArgs
+import com.example.quiz.BaseFragment
 
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizEditFragmentBinding
 
-class QuizEditFragment : Fragment() {
+class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
     private lateinit var binding: QuizEditFragmentBinding
     private val args: QuizEditFragmentArgs by navArgs()
 
-    private val viewModel: QuizEditViewModel by lazy {
+    override fun initViewModel(): QuizEditViewModel {
         val factory = QuizEditViewModelFactory(args.quizId)
-        ViewModelProviders.of(this, factory).get(QuizEditViewModel::class.java)
+        return ViewModelProviders.of(this, factory).get(QuizEditViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
