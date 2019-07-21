@@ -6,6 +6,6 @@ import androidx.lifecycle.ViewModel;
 import com.example.quiz.BaseViewModel
 import com.example.quiz.database.DataRepository
 
-class QuizAskPagerViewModel(app: Application) : BaseViewModel(app) {
+class QuizAskPagerViewModel: BaseViewModel() {
     val quizList = repository.getAllQuizzes()
 }

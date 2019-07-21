@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class QuizListViewModel(application: Application) : BaseViewModel(application) {
+class QuizListViewModel : BaseViewModel() {
     val quizBank = repository.getAllQuizzes()
     private val ioScope = CoroutineScope(Dispatchers.IO)
 

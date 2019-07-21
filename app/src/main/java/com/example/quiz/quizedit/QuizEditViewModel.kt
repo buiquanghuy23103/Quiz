@@ -7,7 +7,7 @@ import com.example.quiz.BaseViewModel
 import com.example.quiz.database.DataRepository
 import kotlinx.coroutines.*
 
-class QuizEditViewModel(app: Application, private val id: Int) : BaseViewModel(app) {
+class QuizEditViewModel(private val id: Int) : BaseViewModel() {
     private val backgroundJob = Job()
     private val ioScope = CoroutineScope(Dispatchers.IO + backgroundJob)
 

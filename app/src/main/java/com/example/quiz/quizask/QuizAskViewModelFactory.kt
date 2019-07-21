@@ -9,7 +9,7 @@ class QuizAskViewModelFactory(private val app: Application, private val index: I
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(QuizAskViewModel::class.java)){
-            return QuizAskViewModel(app, index) as T
+            return QuizAskViewModel(index) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
