@@ -17,8 +17,7 @@ class QuizEditFragment : Fragment() {
     private val args: QuizEditFragmentArgs by navArgs()
 
     private val viewModel: QuizEditViewModel by lazy {
-        val app = requireNotNull(this.activity).application
-        val factory = QuizEditViewModelFactory(app, args.quizId)
+        val factory = QuizEditViewModelFactory(args.quizId)
         ViewModelProviders.of(this, factory).get(QuizEditViewModel::class.java)
     }
 

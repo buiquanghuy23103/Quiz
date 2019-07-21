@@ -13,12 +13,10 @@ class QuizAskFragment : Fragment() {
     private lateinit var binding: QuizAskFragmentBinding
 
     private val viewModel: QuizAskViewModel by lazy {
-        val app = requireNotNull(this.activity).application
-
         val arg = requireNotNull(arguments).takeIf { it.containsKey(ARG_INDEX) }
         val index = arg?.let { it.getInt(ARG_INDEX) } ?: 0
 
-        val factory = QuizAskViewModelFactory(app, index)
+        val factory = QuizAskViewModelFactory(index)
         ViewModelProviders.of(this, factory).get(QuizAskViewModel::class.java)
     }
 
