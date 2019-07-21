@@ -2,6 +2,7 @@ package com.example.quiz.database
 
 import android.content.Context
 import androidx.room.RoomDatabase
+import androidx.room.withTransaction
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,8 +19,8 @@ class SampleDataGenerator(val appContext: Context): RoomDatabase.Callback(){
         }
     }
 
-    private fun insertSampleData() {
-        appDatabase.runInTransaction {
+    private suspend fun insertSampleData() {
+        appDatabase.withTransaction {
             appDatabase.quizDao.insertAll(DataGenerator.sampleQuizList)
         }
     }
