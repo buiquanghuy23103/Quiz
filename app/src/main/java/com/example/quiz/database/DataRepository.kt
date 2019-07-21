@@ -3,9 +3,10 @@ package com.example.quiz.database
 import android.app.Application
 import androidx.lifecycle.LiveData
 import com.example.quiz.model.Quiz
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DataRepository(application: Application) {
-    private val database = AppDatabase.getInstance(application.applicationContext)
+class DataRepository @Inject constructor(database: AppDatabase) {
     private val quizDao = database.quizDao
 
     fun save(quiz: Quiz){

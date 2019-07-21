@@ -9,11 +9,9 @@ import javax.inject.Singleton
 
 @Module
 class AppModule {
-    @Singleton
     @Provides
-    fun provideContext(): Context = MainApplication.INSTANCE.applicationContext
-
-    @Provides
-    fun provideAppDatabase(appContext: Context): AppDatabase
-            = AppDatabase.getInstance(appContext)
+    fun provideAppDatabase(): AppDatabase{
+        val appContext = MainApplication.INSTANCE.applicationContext
+        return AppDatabase.getInstance(appContext)
+    }
 }
