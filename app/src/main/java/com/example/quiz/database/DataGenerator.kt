@@ -3,6 +3,7 @@ package com.example.quiz.database
 import com.example.quiz.R
 import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
+import java.util.ArrayList
 
 class DataGenerator {
     companion object{
@@ -15,5 +16,18 @@ class DataGenerator {
             Quiz("Lake Baikal is the world\\'s oldest and deepest freshwater lake.", true)
         )
 
+        val sampleAnswerList = generateAnswerList()
+
+        private fun generateAnswerList(): List<Answer>{
+            var list = ArrayList<Answer>()
+            sampleQuizList.forEach {
+                for (i in 1..4){
+                    val answer = Answer(it.id, "Answer " + i, i%2 == 0)
+                    list.add(answer)
+                }
+            }
+
+            return list
+        }
     }
 }
