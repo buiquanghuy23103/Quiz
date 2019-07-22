@@ -1,5 +1,6 @@
 package com.example.quiz.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -12,5 +13,5 @@ interface AnswerDao {
     fun insertAll(answerList: List<Answer>)
 
     @Query("SELECT * FROM " + AnswerTable.TABLE_NAME + " WHERE " + AnswerTable.Cols.QUIZ_ID + " = :quizId")
-    fun getAnswersByQuizId(quizId: Int): List<Answer>
+    fun getAnswersByQuizId(quizId: Int): LiveData<List<Answer>>
 }

@@ -23,5 +23,5 @@ interface QuizDao {
     fun getAllIds(): List<Int>
 
     @Query("SELECT * FROM " + QuizTable.TABLE_NAME + " WHERE " + QuizTable.Cols.ID + " = :id")
-    fun getQuiz(id: Int): Quiz
+    fun getQuiz(id: Int): LiveData<Quiz>
 }

@@ -23,11 +23,11 @@ class DataRepository @Inject constructor(database: AppDatabase) {
         return quizDao.getAllIds()
     }
 
-    fun getQuizById(id: Int): Quiz{
+    fun getQuizById(id: Int): LiveData<Quiz>{
         return quizDao.getQuiz(id)
     }
 
-    fun getAnswersByQuizId(id: Int): List<Answer>{
+    fun getAnswersByQuizId(id: Int): LiveData<List<Answer>>{
         return answerDao.getAnswersByQuizId(id)
     }
 }

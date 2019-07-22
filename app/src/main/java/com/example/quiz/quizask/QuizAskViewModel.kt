@@ -15,25 +15,15 @@ class QuizAskViewModel(private var index: Int) : BaseViewModel() {
     private lateinit var quizIdList: List<Int>
     var currentQuizId = 0
 
-    private var _quiz = MutableLiveData<Quiz>()
-    private var _answerList = MutableLiveData<List<Answer>>()
-
     val quiz: LiveData<Quiz>
-        get() = _quiz
     val answerList: LiveData<List<Answer>>
-        get() = _answerList
 
     init {
-        initProp()
-    }
-
-    private fun initProp() {
         ioScope.launch {
             quizIdList = repository.getAllQuizIds()
             currentQuizId = quizIdList[index]
-
-            _quiz.postValue(repository.getQuizById(currentQuizId))
-            _answerList.postValue(repository.getAnswersByQuizId(currentQuizId))
         }
+        quiz = repository.getQuizById(currentQuizId)
+        answerList = repository.getAnswersByQuizId(currentQuizId)
     }
 }
