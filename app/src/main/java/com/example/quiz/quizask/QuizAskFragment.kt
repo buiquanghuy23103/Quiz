@@ -3,7 +3,6 @@ package com.example.quiz.quizask
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.BaseFragment
@@ -16,9 +15,9 @@ class QuizAskFragment : BaseFragment<QuizAskViewModel>() {
 
     companion object{
         private const val ARG_INDEX = "index"
-        fun getInstance(index: Int): QuizAskFragment {
+        fun getInstance(quizId: Int): QuizAskFragment {
             return QuizAskFragment().apply {
-                arguments = Bundle().apply { putInt(ARG_INDEX, index) }
+                arguments = Bundle().apply { putInt(ARG_INDEX, quizId) }
             }
         }
     }

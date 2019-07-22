@@ -11,19 +11,12 @@ import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
 import kotlinx.coroutines.*
 
-class QuizAskViewModel(private var index: Int) : BaseViewModel() {
-    private lateinit var quizIdList: List<Int>
-    var currentQuizId = 0
-
+class QuizAskViewModel(private var id: Int) : BaseViewModel() {
     val quiz: LiveData<Quiz>
     val answerList: LiveData<List<Answer>>
 
     init {
-        ioScope.launch {
-            quizIdList = repository.getAllQuizIds()
-            currentQuizId = quizIdList[index]
-        }
-        quiz = repository.getQuizById(currentQuizId)
-        answerList = repository.getAnswersByQuizId(currentQuizId)
+        quiz = repository.getQuizById(id)
+        answerList = repository.getAnswersByQuizId(id)
     }
 }

@@ -27,11 +27,9 @@ class QuizAskPagerFragment : BaseFragment<QuizAskPagerViewModel>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var adapter = QuizAskPagerAdapter(childFragmentManager)
-        view_pager.adapter = adapter
-
         viewModel.quizList.observe(this, Observer {
-            adapter.listSize = it.size
+            var adapter = QuizAskPagerAdapter(childFragmentManager, it)
+            view_pager.adapter = adapter
             view_pager.currentItem = args.index
         })
     }
