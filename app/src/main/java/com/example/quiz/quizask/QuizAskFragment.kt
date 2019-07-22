@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.BaseFragment
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizAskFragmentBinding
+import kotlinx.android.synthetic.main.quiz_ask_fragment.*
 
 class QuizAskFragment : BaseFragment<QuizAskViewModel>() {
     private lateinit var binding: QuizAskFragmentBinding
@@ -34,11 +35,16 @@ class QuizAskFragment : BaseFragment<QuizAskViewModel>() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_ask_fragment, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.quiz.observe(this, Observer { quiz ->
             quiz?.let { binding.quiz = quiz }
         })
 
-        return binding.root
+        viewModel.answerList.observe(this, Observer {
+            answer_recycler_view.adapter = AnswerAdapter(it)
+        })
     }
 }

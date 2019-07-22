@@ -10,7 +10,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.quiz.BaseFragment
 
 import com.example.quiz.R
-import com.example.quiz.quizask.QuizAskPagerFragmentArgs
 import kotlinx.android.synthetic.main.quiz_ask_pager_fragment.*
 
 class QuizAskPagerFragment : BaseFragment<QuizAskPagerViewModel>() {
