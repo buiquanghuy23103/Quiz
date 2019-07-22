@@ -1,5 +1,7 @@
 package com.example.quiz
 
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
@@ -18,4 +20,10 @@ import org.junit.Rule
 class ExampleInstrumentedTest {
     @get:Rule
     val activityRule = ActivityTestRule(MainActivity::class.java)
+
+    @Test
+    fun clickAddQuizMenuItem_startQuizEditFragment(){
+        onView(withId(R.id.recycler_view))
+            .perform()
+    }
 }
