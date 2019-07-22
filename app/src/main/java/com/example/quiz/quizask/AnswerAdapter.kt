@@ -1,5 +1,6 @@
 package com.example.quiz.quizask
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,11 @@ class AnswerAdapter(private val answerList: List<Answer>) : RecyclerView.Adapter
 
         fun bind(answer: Answer){
             binding.answer = answer
+            binding.answerButton.setOnClickListener {
+                val color = if (answer.isTrue) Color.GREEN else Color.RED
+                it.setBackgroundColor(color)
+            }
         }
+
     }
 }
