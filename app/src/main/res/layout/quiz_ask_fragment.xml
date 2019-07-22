@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:padding="8dp"
+>
     <data>
         <variable name="quiz" type="com.example.quiz.model.Quiz"/>
     </data>
@@ -15,6 +17,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{quiz.question}"
+                tools:text="Question text"
         />
 
         <LinearLayout
@@ -23,51 +26,12 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
-            <ImageButton
-                    android:id="@+id/true_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_true"
-            />
-
-            <ImageButton
-                    android:id="@+id/false_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_false"
-
-            />
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/answer_recycler_view"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
-
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-            <ImageButton
-                    android:id="@+id/back_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_back"
-                    android:contentDescription="@string/back_button"
-            />
-
-            <Button
-                    android:id="@+id/cheat_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cheat_button"
-            />
-
-            <ImageButton
-                    android:id="@+id/next_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_next"
-                    android:contentDescription="@string/next_button"/>
-
-        </LinearLayout>
-
     </LinearLayout>
 </layout>
