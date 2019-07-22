@@ -1,6 +1,7 @@
 package com.example.quiz.database
 
 import com.example.quiz.R
+import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
 
 class DataGenerator {
@@ -13,5 +14,6 @@ class DataGenerator {
             Quiz("The Amazon River is the longest river in the Americas.", true),
             Quiz("Lake Baikal is the world\\'s oldest and deepest freshwater lake.", true)
         )
+
     }
 }
