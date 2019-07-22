@@ -1,11 +1,9 @@
 package com.example.quiz.database
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class DataRepository @Inject constructor(database: AppDatabase) {
     private val quizDao = database.quizDao
@@ -19,8 +17,8 @@ class DataRepository @Inject constructor(database: AppDatabase) {
         return quizDao.getAllQuizzes()
     }
 
-    fun getAllQuizIds(): List<Int>{
-        return quizDao.getAllIds()
+    fun getAllQuizIds(): LiveData<List<Int>>{
+        return quizDao.getIdList()
     }
 
     fun getQuizById(id: Int): LiveData<Quiz>{
