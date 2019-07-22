@@ -1,4 +1,4 @@
-package com.example.quiz.quizask
+package com.example.quiz.quizaskpager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

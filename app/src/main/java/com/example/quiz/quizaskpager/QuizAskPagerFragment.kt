@@ -1,8 +1,7 @@
-package com.example.quiz.quizask
+package com.example.quiz.quizaskpager
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.quiz.BaseFragment
 
 import com.example.quiz.R
+import com.example.quiz.quizask.QuizAskPagerFragmentArgs
 import kotlinx.android.synthetic.main.quiz_ask_pager_fragment.*
 
 class QuizAskPagerFragment : BaseFragment<QuizAskPagerViewModel>() {

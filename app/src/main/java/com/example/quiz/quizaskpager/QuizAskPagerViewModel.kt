@@ -1,4 +1,4 @@
-package com.example.quiz.quizask
+package com.example.quiz.quizaskpager
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
