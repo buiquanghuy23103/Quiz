@@ -7,5 +7,5 @@ import com.example.quiz.BaseViewModel
 import com.example.quiz.database.DataRepository
 
 class QuizAskPagerViewModel: BaseViewModel() {
-    val quizList = repository.getAllQuizzes()
+    val quizIdList = repository.getQuizIdList()
 }

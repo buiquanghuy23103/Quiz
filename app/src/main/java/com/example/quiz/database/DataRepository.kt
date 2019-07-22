@@ -17,7 +17,7 @@ class DataRepository @Inject constructor(database: AppDatabase) {
         return quizDao.getAllQuizzes()
     }
 
-    fun getAllQuizIds(): LiveData<List<Int>>{
+    fun getQuizIdList(): LiveData<List<Int>>{
         return quizDao.getIdList()
     }
 
