@@ -18,4 +18,19 @@ class DbScheme {
             }
         }
     }
+
+    class AnswerTable{
+        companion object{
+            const val TABLE_NAME = "answerTable"
+        }
+
+        class Cols{
+            companion object{
+                const val ID = "id"
+                const val QUIZ_ID = "quiz_id"
+                const val TEXT = "text"
+                const val IS_TRUE = "is_true"
+            }
+        }
+    }
 }
