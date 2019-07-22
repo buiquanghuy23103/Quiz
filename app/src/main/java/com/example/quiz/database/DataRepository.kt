@@ -2,12 +2,14 @@ package com.example.quiz.database
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
 import javax.inject.Inject
 import javax.inject.Singleton
 
 class DataRepository @Inject constructor(database: AppDatabase) {
     private val quizDao = database.quizDao
+    private val answerDao = database.answerDao
 
     fun save(quiz: Quiz){
         return quizDao.save(quiz)
@@ -23,5 +25,9 @@ class DataRepository @Inject constructor(database: AppDatabase) {
 
     fun getQuizById(id: Int): Quiz{
         return quizDao.getQuiz(id)
+    }
+
+    fun getAnswersByQuizId(id: Int): List<Answer>{
+        return answerDao.getAnswersByQuizId(id)
     }
 }
