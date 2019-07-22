@@ -11,9 +11,6 @@ import com.example.quiz.model.Quiz
 import kotlinx.coroutines.*
 
 class QuizAskViewModel(private var index: Int) : BaseViewModel() {
-    private val backgroundJob = Job()
-    private val ioScope = CoroutineScope(Dispatchers.IO + backgroundJob)
-
     private lateinit var quizIdList: List<Int>
     var currentQuizId = 0
     private var _quiz = MutableLiveData<Quiz>()
@@ -30,10 +27,5 @@ class QuizAskViewModel(private var index: Int) : BaseViewModel() {
             _quiz.postValue(repository.getQuizById(quizIdList[index]))
             currentQuizId = quizIdList[index]
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        backgroundJob.cancel()
     }
 }

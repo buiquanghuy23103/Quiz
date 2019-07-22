@@ -8,9 +8,6 @@ import com.example.quiz.database.DataRepository
 import kotlinx.coroutines.*
 
 class QuizEditViewModel(private val id: Int) : BaseViewModel() {
-    private val backgroundJob = Job()
-    private val ioScope = CoroutineScope(Dispatchers.IO + backgroundJob)
-
     init {
         viewModelScope.launch {
             fetchQuizFromBackground().start()
@@ -28,8 +25,4 @@ class QuizEditViewModel(private val id: Int) : BaseViewModel() {
         ioScope.launch { repository.save(quiz) }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        backgroundJob.cancel()
-    }
 }

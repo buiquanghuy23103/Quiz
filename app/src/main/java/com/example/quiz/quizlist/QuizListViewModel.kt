@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 
 class QuizListViewModel : BaseViewModel() {
     val quizBank = repository.getAllQuizzes()
-    private val ioScope = CoroutineScope(Dispatchers.IO)
 
     fun save(quiz: Quiz){
         ioScope.launch { repository.save(quiz) }
