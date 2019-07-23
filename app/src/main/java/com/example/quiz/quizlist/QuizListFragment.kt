@@ -4,13 +4,13 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.quiz.BaseFragment
 
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizListFragmentBinding
+import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
 
 class QuizListFragment : BaseFragment<QuizListViewModel>() {
@@ -50,9 +50,23 @@ class QuizListFragment : BaseFragment<QuizListViewModel>() {
     }
 
     private fun startEditingNewQuiz(){
-        val newQuiz = Quiz("New question")
-        viewModel.save(newQuiz)
+        val newQuiz = createAndSaveNewQuiz()
+        createAndSaveNewAnswerList(newQuiz)
         startQuizEditFragmentById(newQuiz.id)
+    }
+
+    private fun createAndSaveNewAnswerList(newQuiz: Quiz) {
+        val newAnswerList = listOf(
+            Answer(newQuiz.id, "", true),
+            Answer(newQuiz.id, "", false)
+        )
+        viewModel.saveAnswerList(newAnswerList)
+    }
+
+    private fun createAndSaveNewQuiz(): Quiz {
+        val newQuiz = Quiz("New question")
+        viewModel.saveQuiz(newQuiz)
+        return newQuiz
     }
 
     private fun startQuizEditFragmentById(quizId: Int) {
