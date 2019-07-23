@@ -21,8 +21,8 @@ class SampleDataGenerator(val appContext: Context): RoomDatabase.Callback(){
 
     private suspend fun insertSampleData() {
         appDatabase.withTransaction {
-            appDatabase.quizDao.insertAll(DataGenerator.sampleQuizList)
-            appDatabase.answerDao.insertAll(DataGenerator.sampleAnswerList)
+            appDatabase.quizDao.saveMany(DataGenerator.sampleQuizList)
+            appDatabase.answerDao.save(DataGenerator.sampleAnswerList)
         }
     }
 }

@@ -10,8 +10,8 @@ import com.example.quiz.model.Quiz
 
 @Dao
 interface QuizDao {
-    @Insert
-    fun insertAll(quizzes: List<Quiz>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveMany(quizzes: List<Quiz>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(quiz: Quiz)

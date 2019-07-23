@@ -9,8 +9,8 @@ class DataRepository @Inject constructor(database: AppDatabase) {
     private val quizDao = database.quizDao
     private val answerDao = database.answerDao
 
-    fun save(quiz: Quiz){
-        return quizDao.save(quiz)
+    fun saveQuiz(quiz: Quiz){
+        quizDao.save(quiz)
     }
 
     fun getAllQuizzes(): LiveData<List<Quiz>>{
