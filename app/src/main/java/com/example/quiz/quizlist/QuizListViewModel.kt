@@ -6,13 +6,20 @@ import com.example.quiz.model.Quiz
 import kotlinx.coroutines.launch
 
 class QuizListViewModel : BaseViewModel() {
-    val quizBank = repository.getAllQuizzes()
+    val quizList = repository.getAllQuizzes()
 
-    fun saveQuiz(quiz: Quiz){
-        ioScope.launch { repository.saveQuiz(quiz) }
+    private val newQuiz = Quiz("New question")
+    val newQuizId = newQuiz.id
+    private val newAnswerList = listOf(
+        Answer(newQuizId, "Answer 1", true),
+        Answer(newQuizId, "Answer 2", false)
+    )
+
+    fun createAndSaveNewQuiz(){
+        ioScope.launch { repository.saveQuiz(newQuiz) }
     }
 
-    fun saveAnswerList(answerList: List<Answer>){
-        ioScope.launch { repository.saveAnswerList(answerList) }
+    fun createAndSaveNewAnswerList(){
+        ioScope.launch { repository.saveAnswerList(newAnswerList) }
     }
 }

@@ -10,8 +10,6 @@ import com.example.quiz.BaseFragment
 
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizListFragmentBinding
-import com.example.quiz.model.Answer
-import com.example.quiz.model.Quiz
 
 class QuizListFragment : BaseFragment<QuizListViewModel>() {
     private lateinit var binding: QuizListFragmentBinding
@@ -30,7 +28,7 @@ class QuizListFragment : BaseFragment<QuizListViewModel>() {
         var adapter = QuizListAdapter()
         binding.recyclerView.adapter = adapter
 
-        viewModel.quizBank.observe(this, Observer {
+        viewModel.quizList.observe(this, Observer {
             it?.let {
                 adapter.submitList(it)
             }
@@ -50,23 +48,9 @@ class QuizListFragment : BaseFragment<QuizListViewModel>() {
     }
 
     private fun startEditingNewQuiz(){
-        val newQuiz = createAndSaveNewQuiz()
-        createAndSaveNewAnswerList(newQuiz)
-        startQuizEditFragmentById(newQuiz.id)
-    }
-
-    private fun createAndSaveNewAnswerList(newQuiz: Quiz) {
-        val newAnswerList = listOf(
-            Answer(newQuiz.id, "", true),
-            Answer(newQuiz.id, "", false)
-        )
-        viewModel.saveAnswerList(newAnswerList)
-    }
-
-    private fun createAndSaveNewQuiz(): Quiz {
-        val newQuiz = Quiz("New question")
-        viewModel.saveQuiz(newQuiz)
-        return newQuiz
+        viewModel.createAndSaveNewQuiz()
+        viewModel.createAndSaveNewAnswerList()
+        startQuizEditFragmentById(viewModel.newQuizId)
     }
 
     private fun startQuizEditFragmentById(quizId: Int) {
