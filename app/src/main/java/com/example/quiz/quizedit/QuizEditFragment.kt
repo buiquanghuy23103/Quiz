@@ -13,6 +13,7 @@ import com.example.quiz.BaseFragment
 
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizEditFragmentBinding
+import kotlinx.android.synthetic.main.quiz_edit_fragment.*
 
 class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
     private lateinit var binding: QuizEditFragmentBinding
@@ -33,6 +34,10 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
         viewModel.quiz.observe(this, Observer {
             binding.quiz = it
             viewModel.quizSync = it
+        })
+
+        viewModel.answerList.observe(this, Observer {
+            answer_edit_recycler_view.adapter = AnswerEditAdapter(it)
         })
     }
 

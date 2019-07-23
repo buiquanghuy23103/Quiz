@@ -9,16 +9,12 @@ import com.example.quiz.database.DataRepository
 import com.example.quiz.model.Quiz
 import kotlinx.coroutines.*
 
-class QuizEditViewModel(private val id: Int) : BaseViewModel() {
-    val quiz: LiveData<Quiz>
+class QuizEditViewModel(id: Int) : BaseViewModel() {
+    val quiz = repository.getQuizById(id)
+    val answerList = repository.getAnswersByQuizId(id)
     var quizSync = Quiz("No change")
-
-    init {
-        quiz = repository.getQuizById(id)
-    }
 
     fun saveQuiz(){
         ioScope.launch { repository.save(quizSync) }
     }
-
 }
