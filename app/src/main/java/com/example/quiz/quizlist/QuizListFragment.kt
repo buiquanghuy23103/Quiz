@@ -37,7 +37,7 @@ class QuizListFragment : BaseFragment<QuizListViewModel>() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu!!, inflater!!)
-        inflater.inflate(R.menu.quiz_list_fragment, menu)
+        inflater.inflate(R.menu.quiz_list_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

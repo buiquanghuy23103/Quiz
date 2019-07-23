@@ -26,6 +26,7 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_edit_fragment, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
