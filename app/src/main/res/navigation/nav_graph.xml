@@ -18,7 +18,5 @@
     <fragment android:id="@+id/quizAskPagerFragment" android:name="com.example.quiz.quizviewpager.QuizViewPagerFragment"
               android:label="QuizAskPagerFragment" tools:layout="@layout/quiz_view_pager_fragment">
         <argument android:name="index" app:argType="integer" android:defaultValue="0"/>
-        <action android:id="@+id/action_quizAskPagerFragment_to_quizEditFragment"
-                app:destination="@id/quizEditFragment"/>
     </fragment>
 </navigation>
