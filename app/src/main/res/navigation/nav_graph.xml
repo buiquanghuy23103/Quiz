@@ -15,8 +15,8 @@
               android:label="quiz_edit_fragment" tools:layout="@layout/quiz_edit_fragment">
         <argument android:name="quizId" app:argType="integer" android:defaultValue="0"/>
     </fragment>
-    <fragment android:id="@+id/quizAskPagerFragment" android:name="com.example.quiz.quizaskpager.QuizAskPagerFragment"
-              android:label="QuizAskPagerFragment" tools:layout="@layout/quiz_ask_pager_fragment">
+    <fragment android:id="@+id/quizAskPagerFragment" android:name="com.example.quiz.quizviewpager.QuizViewPagerFragment"
+              android:label="QuizAskPagerFragment" tools:layout="@layout/quiz_view_pager_fragment">
         <argument android:name="index" app:argType="integer" android:defaultValue="0"/>
         <action android:id="@+id/action_quizAskPagerFragment_to_quizEditFragment"
                 app:destination="@id/quizEditFragment"/>

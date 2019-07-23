@@ -1,4 +1,4 @@
-package com.example.quiz.quizaskpager
+package com.example.quiz.quizviewpager
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -10,25 +10,25 @@ import androidx.navigation.fragment.navArgs
 import com.example.quiz.BaseFragment
 
 import com.example.quiz.R
-import kotlinx.android.synthetic.main.quiz_ask_pager_fragment.*
+import kotlinx.android.synthetic.main.quiz_view_pager_fragment.*
 
-class QuizAskPagerFragment : BaseFragment<QuizAskPagerViewModel>() {
-    private val args: QuizAskPagerFragmentArgs by navArgs()
+class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel>() {
+    private val args: QuizViewPagerFragmentArgs by navArgs()
 
-    override fun initViewModel(): QuizAskPagerViewModel {
-        return ViewModelProviders.of(this).get(QuizAskPagerViewModel::class.java)
+    override fun initViewModel(): QuizViewPagerViewModel {
+        return ViewModelProviders.of(this).get(QuizViewPagerViewModel::class.java)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.quiz_ask_pager_fragment, container, false)
+        return inflater.inflate(R.layout.quiz_view_pager_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.quizIdList.observe(this, Observer {
-            var adapter = QuizAskPagerAdapter(childFragmentManager, it)
+            var adapter = QuizViewPagerAdapter(childFragmentManager, it)
             view_pager.adapter = adapter
             view_pager.currentItem = args.index
         })

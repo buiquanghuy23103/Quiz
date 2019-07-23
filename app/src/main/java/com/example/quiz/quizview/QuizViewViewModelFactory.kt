@@ -1,15 +1,14 @@
-package com.example.quiz.quizask
+package com.example.quiz.quizview
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.lang.IllegalArgumentException
 
-class QuizAskViewModelFactory(private val index: Int): ViewModelProvider.Factory {
+class QuizViewViewModelFactory(private val index: Int): ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(QuizAskViewModel::class.java)){
-            return QuizAskViewModel(index) as T
+        if (modelClass.isAssignableFrom(QuizViewViewModel::class.java)){
+            return QuizViewViewModel(index) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
