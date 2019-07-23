@@ -13,6 +13,10 @@ class DataRepository @Inject constructor(database: AppDatabase) {
         quizDao.save(quiz)
     }
 
+    fun saveAnswerList(answerList: List<Answer>){
+        answerDao.save(answerList)
+    }
+
     fun getAllQuizzes(): LiveData<List<Quiz>>{
         return quizDao.getAllQuizzes()
     }

@@ -38,11 +38,13 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
 
         viewModel.answerList.observe(this, Observer {
             answer_edit_recycler_view.adapter = AnswerEditAdapter(it)
+            viewModel.answerListSync = it
         })
     }
 
     override fun onPause() {
         super.onPause()
         viewModel.saveQuiz()
+        viewModel.saveAnswerList()
     }
 }
