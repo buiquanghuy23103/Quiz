@@ -37,8 +37,11 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
             viewModel.quizSync = it
         })
 
+        val answerEditAdapter = AnswerEditAdapter()
+
         viewModel.answerList.observe(this, Observer {
-            answer_edit_recycler_view.adapter = AnswerEditAdapter(it)
+            answer_edit_recycler_view.adapter = answerEditAdapter
+            answerEditAdapter.answerList = it
             viewModel.answerListSync = it
         })
     }

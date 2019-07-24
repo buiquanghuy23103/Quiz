@@ -42,8 +42,11 @@ class QuizViewFragment : BaseFragment<QuizViewViewModel>() {
             quiz?.let { binding.quiz = quiz }
         })
 
+        val answerAdapter = AnswerViewAdapter()
+
         viewModel.answerList.observe(this, Observer {
-            answer_view_recycler_view.adapter = AnswerViewAdapter(it)
+            answer_view_recycler_view.adapter = answerAdapter
+            answerAdapter.answerList = it
         })
     }
 }

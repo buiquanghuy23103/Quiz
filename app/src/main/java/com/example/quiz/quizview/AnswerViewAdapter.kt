@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.quiz.databinding.AnswerViewItemBinding
 import com.example.quiz.model.Answer
 
-class AnswerViewAdapter(private val answerList: List<Answer>) : RecyclerView.Adapter<AnswerViewItem>(){
+class AnswerViewAdapter : RecyclerView.Adapter<AnswerViewItem>(){
+    lateinit var answerList: List<Answer>
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnswerViewItem {
         return AnswerViewItem.from(parent)
     }

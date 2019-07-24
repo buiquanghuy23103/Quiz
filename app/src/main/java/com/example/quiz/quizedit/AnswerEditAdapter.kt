@@ -7,7 +7,9 @@ import com.example.quiz.databinding.AnswerEditItemBinding
 import com.example.quiz.model.Answer
 import com.example.quiz.quizview.AnswerViewItem
 
-class AnswerEditAdapter(private val answerList: List<Answer>) : RecyclerView.Adapter<AnswerEditAdapter.AnswerEditItem>(){
+class AnswerEditAdapter : RecyclerView.Adapter<AnswerEditAdapter.AnswerEditItem>(){
+    lateinit var answerList: List<Answer>
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnswerEditItem {
         return AnswerEditItem.from(parent)
     }
