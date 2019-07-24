@@ -32,4 +32,8 @@ class DataRepository @Inject constructor(database: AppDatabase) {
     fun getAnswersByQuizId(id: Int): LiveData<List<Answer>>{
         return answerDao.getAnswersByQuizId(id)
     }
+
+    fun deleteQuiz(quiz: Quiz){
+        quizDao.deleteQuiz(quiz)
+    }
 }

@@ -22,4 +22,8 @@ class QuizListViewModel : BaseViewModel() {
     fun createAndSaveNewAnswerList(){
         ioScope.launch { repository.saveAnswerList(newAnswerList) }
     }
+
+    fun deleteQuiz(quiz: Quiz){
+        ioScope.launch { repository.deleteQuiz(quiz) }
+    }
 }

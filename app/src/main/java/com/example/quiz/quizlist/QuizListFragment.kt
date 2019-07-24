@@ -10,6 +10,7 @@ import com.example.quiz.BaseFragment
 
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizListFragmentBinding
+import com.example.quiz.model.Quiz
 
 class QuizListFragment : BaseFragment<QuizListViewModel>(), QuizListAdapter.OnItemClickListener {
     private lateinit var binding: QuizListFragmentBinding
@@ -40,6 +41,10 @@ class QuizListFragment : BaseFragment<QuizListViewModel>(), QuizListAdapter.OnIt
         val navDirections = QuizListFragmentDirections
             .actionQuizListFragmentToQuizAskPagerFragment(position)
         this.view!!.findNavController().navigate(navDirections)
+    }
+
+    override fun onDeleteClick(quiz: Quiz) {
+        viewModel.deleteQuiz(quiz)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

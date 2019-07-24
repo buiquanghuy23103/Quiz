@@ -20,13 +20,14 @@ class QuizListAdapter
     override fun onBindViewHolder(holder: QuizItemHolder, position: Int) {
         holder.apply {
             quiz = getItem(position)
-            this.clickListener = itemClickListener
+            clickListener = itemClickListener
         }
         holder.bind()
     }
 
     interface OnItemClickListener{
         fun onItemViewClick(position: Int)
+        fun onDeleteClick(quiz: Quiz)
     }
 
     class QuizItemHolder private constructor(private val binding: QuizItemBinding) : RecyclerView.ViewHolder(binding.root){
@@ -48,6 +49,10 @@ class QuizListAdapter
                 // It should be a fragment's job => delegate the behavior of item-click to
                 // QuizListFragment using OnItemClickListener interface
                 clickListener.onItemViewClick(adapterPosition)
+            }
+
+            binding.quizItemDeleteButton.setOnClickListener {
+                clickListener.onDeleteClick(quiz)
             }
             binding.executePendingBindings()
         }
