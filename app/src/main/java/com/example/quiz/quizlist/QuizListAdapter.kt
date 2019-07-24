@@ -19,14 +19,12 @@ class QuizListAdapter : ListAdapter<Quiz, QuizListAdapter.QuizItemHolder>(QuizLi
     override fun onBindViewHolder(holder: QuizItemHolder, position: Int) {
         holder.apply {
             quiz = getItem(position)
-            index = position
         }
         holder.bind()
     }
 
     class QuizItemHolder private constructor(private val binding: QuizItemBinding) : RecyclerView.ViewHolder(binding.root){
         var quiz = Quiz("Error in QuizItemHolder")
-        var index = 0
 
         companion object{
             fun from(parent: ViewGroup): QuizItemHolder {
@@ -39,10 +37,8 @@ class QuizListAdapter : ListAdapter<Quiz, QuizListAdapter.QuizItemHolder>(QuizLi
         fun bind(){
             binding.quiz = quiz
             binding.root.setOnClickListener{view: View ->
-                val action =
-                    QuizListFragmentDirections.actionQuizListFragmentToQuizAskPagerFragment(
-                        index
-                    )
+                val action = QuizListFragmentDirections
+                        .actionQuizListFragmentToQuizAskPagerFragment(adapterPosition)
                 view.findNavController().navigate(action)
             }
             binding.executePendingBindings()
