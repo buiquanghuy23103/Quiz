@@ -14,19 +14,19 @@ class QuizViewFragment : BaseFragment<QuizViewViewModel>() {
     private lateinit var binding: QuizViewFragmentBinding
 
     companion object{
-        private const val ARG_INDEX = "index"
+        private const val ARG_QUIZ_ID = "index"
         fun getInstance(quizId: Int): QuizViewFragment {
             return QuizViewFragment().apply {
-                arguments = Bundle().apply { putInt(ARG_INDEX, quizId) }
+                arguments = Bundle().apply { putInt(ARG_QUIZ_ID, quizId) }
             }
         }
     }
 
     override fun initViewModel(): QuizViewViewModel {
-        val arg = requireNotNull(arguments).takeIf { it.containsKey(ARG_INDEX) }
-        val index = arg?.let { it.getInt(ARG_INDEX) } ?: 0
+        val arg = requireNotNull(arguments).takeIf { it.containsKey(ARG_QUIZ_ID) }
+        val quizId = arg?.let { it.getInt(ARG_QUIZ_ID) } ?: 0
 
-        val factory = QuizViewViewModelFactory(index)
+        val factory = QuizViewViewModelFactory(quizId)
         return ViewModelProviders.of(this, factory).get(QuizViewViewModel::class.java)
     }
 
