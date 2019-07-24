@@ -3,6 +3,7 @@
     <data>
         <variable name="quiz" type="com.example.quiz.model.Quiz"/>
     </data>
+
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
