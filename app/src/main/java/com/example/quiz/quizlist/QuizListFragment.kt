@@ -11,7 +11,7 @@ import com.example.quiz.BaseFragment
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizListFragmentBinding
 
-class QuizListFragment : BaseFragment<QuizListViewModel>() {
+class QuizListFragment : BaseFragment<QuizListViewModel>(), QuizListAdapter.OnItemClickListener {
     private lateinit var binding: QuizListFragmentBinding
 
     override fun initViewModel(): QuizListViewModel {
@@ -31,8 +31,15 @@ class QuizListFragment : BaseFragment<QuizListViewModel>() {
         viewModel.quizList.observe(this, Observer {
             it?.let {
                 adapter.submitList(it)
+                adapter.itemClickListener = this
             }
         })
+    }
+
+    override fun onItemViewClick(position: Int) {
+        val navDirections = QuizListFragmentDirections
+            .actionQuizListFragmentToQuizAskPagerFragment(position)
+        this.view!!.findNavController().navigate(navDirections)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

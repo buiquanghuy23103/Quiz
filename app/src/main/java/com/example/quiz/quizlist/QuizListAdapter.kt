@@ -3,15 +3,16 @@ package com.example.quiz.quizlist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.quiz.R
 import com.example.quiz.databinding.QuizItemBinding
 import com.example.quiz.model.Quiz
 
-class QuizListAdapter : ListAdapter<Quiz, QuizListAdapter.QuizItemHolder>(QuizListDiffCallBack()){
+class QuizListAdapter
+    : ListAdapter<Quiz, QuizListAdapter.QuizItemHolder>(QuizListDiffCallBack()){
+
+    lateinit var itemClickListener: OnItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         QuizItemHolder.from(parent)
@@ -19,12 +20,18 @@ class QuizListAdapter : ListAdapter<Quiz, QuizListAdapter.QuizItemHolder>(QuizLi
     override fun onBindViewHolder(holder: QuizItemHolder, position: Int) {
         holder.apply {
             quiz = getItem(position)
+            this.clickListener = itemClickListener
         }
         holder.bind()
     }
 
+    interface OnItemClickListener{
+        fun onItemViewClick(position: Int)
+    }
+
     class QuizItemHolder private constructor(private val binding: QuizItemBinding) : RecyclerView.ViewHolder(binding.root){
         var quiz = Quiz("Error in QuizItemHolder")
+        lateinit var clickListener: OnItemClickListener
 
         companion object{
             fun from(parent: ViewGroup): QuizItemHolder {
@@ -36,10 +43,11 @@ class QuizListAdapter : ListAdapter<Quiz, QuizListAdapter.QuizItemHolder>(QuizLi
 
         fun bind(){
             binding.quiz = quiz
-            binding.root.setOnClickListener{view: View ->
-                val action = QuizListFragmentDirections
-                        .actionQuizListFragmentToQuizAskPagerFragment(adapterPosition)
-                view.findNavController().navigate(action)
+            binding.root.setOnClickListener{
+                // ViewHolder should not be responsible for navigating to another fragment
+                // It should be a fragment's job => delegate the behavior of item-click to
+                // QuizListFragment using OnItemClickListener interface
+                clickListener.onItemViewClick(adapterPosition)
             }
             binding.executePendingBindings()
         }
