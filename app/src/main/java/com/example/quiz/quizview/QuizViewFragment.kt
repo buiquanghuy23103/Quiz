@@ -23,13 +23,16 @@ class QuizViewFragment : BaseFragment<QuizViewViewModel>() {
     }
 
     override fun initViewModel(): QuizViewViewModel {
-        val arg = requireNotNull(arguments).takeIf { it.containsKey(ARG_QUIZ_ID) }
-        val quizId = arg?.let { it.getInt(ARG_QUIZ_ID) } ?: 0
-
+        val quizId = getQuizId()
         val factory = QuizViewViewModelFactory(quizId)
         return ViewModelProviders.of(this, factory).get(QuizViewViewModel::class.java)
     }
 
+    private fun getQuizId(): Int {
+        val arg = requireNotNull(arguments).takeIf { it.containsKey(ARG_QUIZ_ID) }
+        val quizId = arg?.let { it.getInt(ARG_QUIZ_ID) } ?: 0
+        return quizId
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
