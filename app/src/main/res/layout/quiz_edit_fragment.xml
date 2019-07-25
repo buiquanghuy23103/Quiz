@@ -4,35 +4,51 @@
     <data>
         <variable name="quiz" type="com.example.quiz.model.Quiz"/>
     </data>
-    <LinearLayout
+
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             tools:context=".quizedit.QuizEditFragment">
 
-        <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="?android:textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/question_title"/>
-        <EditText
+
+            <EditText
                 android:id="@+id/question_edit_text"
                 android:text="@={quiz.question}"
+                android:autofillHints="@string/question_title"
+                android:inputType="text"
+                android:labelFor="@android:id/edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-        <TextView
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/answer_title"/>
-        <androidx.recyclerview.widget.RecyclerView
+
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/answer_edit_recycler_view"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-        <Button android:id="@+id/quiz_edit_add_answer_button"
+
+            <Button
+                android:id="@+id/quiz_edit_add_answer_button"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="@string/quiz_edit_add_answer"
                 />
+        </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 </layout>
