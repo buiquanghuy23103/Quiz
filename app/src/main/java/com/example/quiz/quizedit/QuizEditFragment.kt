@@ -43,13 +43,13 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
         viewModel.answerList.observe(this, Observer {
             answer_edit_recycler_view.adapter = answerEditAdapter
             answerEditAdapter.answerList = it
-            viewModel.answerListSync = it
             answerEditAdapter.itemClickListener = object : AnswerEditItem.OnListItemClickListener{
                 override fun onDeleteClick(answer: Answer) {
                     (it as ArrayList<Answer>).remove(answer)
                     answerEditAdapter.notifyDataSetChanged()
                 }
             }
+            viewModel.answerListSync = it
         })
     }
 

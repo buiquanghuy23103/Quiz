@@ -7,7 +7,11 @@ import com.example.quiz.model.Answer
 abstract class BaseAnswerAdapter<T: BaseAnswerItem>
     : RecyclerView.Adapter<T>()
 {
-    lateinit var answerList: List<Answer>
+    var answerList = listOf<Answer>()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     abstract fun getViewHolder(parent: ViewGroup) : T
 
