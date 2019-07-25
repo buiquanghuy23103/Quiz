@@ -50,6 +50,7 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
         viewModel.answerList.observe(this, Observer {
             setupAdapter(it)
             setupItemClickListener(it)
+            setupAddAnswerButton(it)
             viewModel.answerListSync = it
         })
     }
@@ -65,6 +66,14 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
                 (it as ArrayList<Answer>).remove(answer)
                 answerEditAdapter.notifyDataSetChanged()
             }
+        }
+    }
+
+    private fun setupAddAnswerButton(answerList: List<Answer>){
+        val newAnswer = Answer(viewModel.quizId, "New answer", true)
+        binding.quizEditAddAnswerButton.setOnClickListener {
+            (answerList as ArrayList<Answer>).add(newAnswer)
+            answerEditAdapter.notifyDataSetChanged()
         }
     }
 

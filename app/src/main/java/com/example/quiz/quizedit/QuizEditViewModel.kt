@@ -5,9 +5,9 @@ import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
 import kotlinx.coroutines.*
 
-class QuizEditViewModel(id: Int) : BaseViewModel() {
-    val quiz = repository.getQuizById(id)
-    val answerList = repository.getAnswersByQuizId(id)
+class QuizEditViewModel(val quizId: Int) : BaseViewModel() {
+    val quiz = repository.getQuizById(quizId)
+    val answerList = repository.getAnswersByQuizId(quizId)
     var quizSync = Quiz("No change")
     var answerListSync = listOf(
         Answer(1234, "sample answer", false)
