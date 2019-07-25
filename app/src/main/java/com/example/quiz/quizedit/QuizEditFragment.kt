@@ -13,6 +13,7 @@ import com.example.quiz.BaseFragment
 
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizEditFragmentBinding
+import com.example.quiz.model.Answer
 import kotlinx.android.synthetic.main.quiz_edit_fragment.*
 
 class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
@@ -43,6 +44,12 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
             answer_edit_recycler_view.adapter = answerEditAdapter
             answerEditAdapter.answerList = it
             viewModel.answerListSync = it
+            answerEditAdapter.itemClickListener = object : AnswerEditItem.OnListItemClickListener{
+                override fun onDeleteClick(answer: Answer) {
+                    (it as ArrayList<Answer>).remove(answer)
+                    answerEditAdapter.notifyDataSetChanged()
+                }
+            }
         })
     }
 
