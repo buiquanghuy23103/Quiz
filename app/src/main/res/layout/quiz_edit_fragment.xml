@@ -28,6 +28,11 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+        <Button android:id="@+id/quiz_edit_add_answer_button"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/quiz_edit_add_answer"
+                />
 
     </LinearLayout>
 </layout>
