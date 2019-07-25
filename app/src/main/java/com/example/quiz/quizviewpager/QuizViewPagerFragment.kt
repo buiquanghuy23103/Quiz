@@ -16,7 +16,7 @@ import timber.log.Timber
 
 class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel>() {
     private val args: QuizViewPagerFragmentArgs by navArgs()
-    lateinit var adapter: QuizViewPagerAdapter
+    lateinit var adapter : QuizViewPagerAdapter
 
     override fun initViewModel(): QuizViewPagerViewModel {
         return ViewModelProviders.of(this).get(QuizViewPagerViewModel::class.java)
@@ -26,23 +26,34 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel>() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         return inflater.inflate(R.layout.quiz_view_pager_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.quizIdList.observe(this, Observer {
-            adapter = QuizViewPagerAdapter(childFragmentManager, it)
-            view_pager.adapter = adapter
-            view_pager.currentItem = args.index
+            updateUI(it)
         })
+    }
 
+    private fun updateUI(quizIdList: List<Int>) {
+        setupAdapter(quizIdList)
+        view_pager.currentItem = args.index
+        setupEditButton(quizIdList)
+    }
 
-
+    private fun setupEditButton(quizIdList: List<Int>) {
         quiz_view_pager_fab.setOnClickListener {
-            val id = adapter.currentQuizId.also { Timber.i("id = " + it) }
+            val id = quizIdList[view_pager.currentItem]
             val directions = QuizViewPagerFragmentDirections
                 .actionQuizAskPagerFragmentToQuizEditFragment(id)
             this.findNavController().navigate(directions)
         }
+    }
+
+    private fun setupAdapter(quizIdList: List<Int>) {
+        adapter = QuizViewPagerAdapter(childFragmentManager, quizIdList)
+        view_pager.adapter = adapter
     }
 }

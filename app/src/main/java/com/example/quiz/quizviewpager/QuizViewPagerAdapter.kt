@@ -4,15 +4,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.quiz.quizview.QuizViewFragment
+import timber.log.Timber
 
 class QuizViewPagerAdapter(fm: FragmentManager, private val quizIdList: List<Int>)
     : FragmentStatePagerAdapter(fm) {
 
-    var currentQuizId = 0
-
     override fun getItem(position: Int): Fragment{
-        currentQuizId = quizIdList[position]
-        return QuizViewFragment.getInstance(currentQuizId)
+        val id = quizIdList[position]
+        return QuizViewFragment.getInstance(id)
     }
 
     override fun getCount(): Int = quizIdList.size

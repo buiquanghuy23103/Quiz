@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.quiz_view_fragment.*
 
 class QuizViewFragment : BaseFragment<QuizViewViewModel>() {
     private lateinit var binding: QuizViewFragmentBinding
+    val answerAdapter = AnswerViewAdapter()
 
     companion object{
         private const val ARG_QUIZ_ID = "index"
@@ -41,15 +42,20 @@ class QuizViewFragment : BaseFragment<QuizViewViewModel>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.quiz.observe(this, Observer { quiz ->
-            quiz?.let { binding.quiz = quiz }
-        })
+        setupQuizView()
+        setupAnswerView()
+    }
 
-        val answerAdapter = AnswerViewAdapter()
-
+    private fun setupAnswerView() {
         viewModel.answerList.observe(this, Observer {
             answer_view_recycler_view.adapter = answerAdapter
             answerAdapter.answerList = it
+        })
+    }
+
+    private fun setupQuizView() {
+        viewModel.quiz.observe(this, Observer { quiz ->
+            quiz?.let { binding.quiz = quiz }
         })
     }
 }

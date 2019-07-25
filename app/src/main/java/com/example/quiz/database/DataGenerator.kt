@@ -13,7 +13,7 @@ class DataGenerator {
             Quiz("The Suez Canal connects the Red Sea and the Indian Ocean.", true),
             Quiz("The source of the Nile River is in Egypt.", false),
             Quiz("The Amazon River is the longest river in the Americas.", true),
-            Quiz("Lake Baikal is the world\\'s oldest and deepest freshwater lake.", true)
+            Quiz("Lake Baikal is the world\'s oldest and deepest freshwater lake.", true)
         )
 
         val sampleAnswerList = generateAnswerList()

@@ -15,10 +15,12 @@ import com.example.quiz.R
 import com.example.quiz.databinding.QuizEditFragmentBinding
 import com.example.quiz.model.Answer
 import kotlinx.android.synthetic.main.quiz_edit_fragment.*
+import timber.log.Timber
 
 class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
     private lateinit var binding: QuizEditFragmentBinding
     private val args: QuizEditFragmentArgs by navArgs()
+    val answerEditAdapter = AnswerEditAdapter()
 
     override fun initViewModel(): QuizEditViewModel {
         val factory = QuizEditViewModelFactory(args.quizId)
@@ -33,24 +35,37 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupQuizView()
+        setupAnswerView()
+    }
+
+    private fun setupQuizView() {
         viewModel.quiz.observe(this, Observer {
             binding.quiz = it
             viewModel.quizSync = it
         })
+    }
 
-        val answerEditAdapter = AnswerEditAdapter()
-
+    private fun setupAnswerView() {
         viewModel.answerList.observe(this, Observer {
-            answer_edit_recycler_view.adapter = answerEditAdapter
-            answerEditAdapter.answerList = it
-            answerEditAdapter.itemClickListener = object : AnswerEditItem.OnListItemClickListener{
-                override fun onDeleteClick(answer: Answer) {
-                    (it as ArrayList<Answer>).remove(answer)
-                    answerEditAdapter.notifyDataSetChanged()
-                }
-            }
+            setupAdapter(it)
+            setupItemClickListener(it)
             viewModel.answerListSync = it
         })
+    }
+
+    private fun setupAdapter(it: List<Answer>) {
+        binding.answerEditRecyclerView.adapter = answerEditAdapter
+        answerEditAdapter.answerList = it
+    }
+
+    private fun setupItemClickListener(it: List<Answer>?) {
+        answerEditAdapter.itemClickListener = object : AnswerEditItem.OnListItemClickListener {
+            override fun onDeleteClick(answer: Answer) {
+                (it as ArrayList<Answer>).remove(answer)
+                answerEditAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
     override fun onPause() {
