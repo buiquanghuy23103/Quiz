@@ -25,7 +25,7 @@ class AnswerEditItem(private val binding: AnswerEditItemBinding) : BaseAnswerIte
 
     override fun bind(answer: Answer){
         binding.answer = answer
-        binding.imageButton.setOnClickListener {
+        binding.deleteButton.setOnClickListener {
             clickListener.onDeleteClick(answer)
         }
     }
