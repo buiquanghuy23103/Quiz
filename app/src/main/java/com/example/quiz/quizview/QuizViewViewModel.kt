@@ -1,9 +1,6 @@
 package com.example.quiz.quizview
 
-import androidx.lifecycle.LiveData
-import com.example.quiz.BaseViewModel
-import com.example.quiz.model.Answer
-import com.example.quiz.model.Quiz
+import com.example.quiz.framework.BaseViewModel
 
 class QuizViewViewModel(id: Int) : BaseViewModel() {
     val quiz = repository.getQuizById(id)

@@ -1,11 +1,9 @@
-package com.example.quiz.dagger
+package com.example.quiz.injection
 
-import android.content.Context
 import com.example.quiz.MainApplication
-import com.example.quiz.database.AppDatabase
+import com.example.quiz.data.local.AppDatabase
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class AppModule {

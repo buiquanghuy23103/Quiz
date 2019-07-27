@@ -1,6 +1,6 @@
 package com.example.quiz.quizlist
 
-import com.example.quiz.BaseViewModel
+import com.example.quiz.framework.BaseViewModel
 import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
 import kotlinx.coroutines.launch

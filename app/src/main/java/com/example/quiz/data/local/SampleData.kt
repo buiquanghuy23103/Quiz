@@ -1,11 +1,10 @@
-package com.example.quiz.database
+package com.example.quiz.data.local
 
-import com.example.quiz.R
 import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
-import java.util.ArrayList
+import java.util.*
 
-class DataGenerator {
+class SampleData {
     companion object{
         val sampleQuizList = listOf(
             Quiz("Canberra is the capital of Australia.", false),

@@ -1,13 +1,15 @@
 package com.example.quiz.quizview
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.quiz.BaseFragment
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizViewFragmentBinding
+import com.example.quiz.framework.BaseFragment
 import kotlinx.android.synthetic.main.quiz_view_fragment.*
 
 class QuizViewFragment : BaseFragment<QuizViewViewModel>() {

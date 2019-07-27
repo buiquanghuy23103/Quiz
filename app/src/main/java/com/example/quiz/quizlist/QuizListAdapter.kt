@@ -1,9 +1,7 @@
 package com.example.quiz.quizlist
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quiz.databinding.QuizItemBinding

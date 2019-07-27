@@ -3,7 +3,7 @@ package com.example.quiz.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.quiz.database.DbScheme.QuizTable
+import com.example.quiz.data.local.DbScheme.QuizTable
 import kotlin.random.Random
 
 @Entity(tableName = QuizTable.TABLE_NAME)

@@ -1,4 +1,4 @@
-package com.example.quiz.database
+package com.example.quiz.data.local
 
 import android.content.Context
 import androidx.room.RoomDatabase
@@ -8,7 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SampleDataGenerator(val appContext: Context): RoomDatabase.Callback(){
+class DataPrepopulation(val appContext: Context) : RoomDatabase.Callback() {
     private lateinit var appDatabase: AppDatabase
     override fun onCreate(db: SupportSQLiteDatabase) {
         super.onCreate(db)
@@ -21,8 +21,8 @@ class SampleDataGenerator(val appContext: Context): RoomDatabase.Callback(){
 
     private suspend fun insertSampleData() {
         appDatabase.withTransaction {
-            appDatabase.quizDao.saveMany(DataGenerator.sampleQuizList)
-            appDatabase.answerDao.save(DataGenerator.sampleAnswerList)
+            appDatabase.quizDao.saveMany(SampleData.sampleQuizList)
+            appDatabase.answerDao.save(SampleData.sampleAnswerList)
         }
     }
 }

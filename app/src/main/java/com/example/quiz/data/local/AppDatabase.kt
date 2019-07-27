@@ -1,4 +1,4 @@
-package com.example.quiz.database
+package com.example.quiz.data.local
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
@@ -6,6 +6,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.quiz.SingletonHolder
+import com.example.quiz.data.local.dao.AnswerDao
+import com.example.quiz.data.local.dao.QuizDao
 import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
 
@@ -21,7 +23,7 @@ abstract class AppDatabase: RoomDatabase() {
             AppDatabase::class.java,
             DbScheme.DATABASE_NAME
         )
-            .addCallback(SampleDataGenerator(it))
+            .addCallback(DataPrepopulation(it))
             .fallbackToDestructiveMigration()
             .build()
     })

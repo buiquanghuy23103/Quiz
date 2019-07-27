@@ -1,4 +1,4 @@
-package com.example.quiz.database
+package com.example.quiz.data.local
 
 class DbScheme {
     companion object{

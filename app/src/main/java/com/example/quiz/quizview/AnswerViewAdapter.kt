@@ -1,12 +1,7 @@
 package com.example.quiz.quizview
 
-import android.graphics.Color
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.example.quiz.BaseAnswerAdapter
-import com.example.quiz.databinding.AnswerViewItemBinding
-import com.example.quiz.model.Answer
+import com.example.quiz.framework.BaseAnswerAdapter
 
 class AnswerViewAdapter : BaseAnswerAdapter<AnswerViewItem>(){
 

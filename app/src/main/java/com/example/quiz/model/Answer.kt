@@ -1,8 +1,8 @@
 package com.example.quiz.model
 
 import androidx.room.*
-import com.example.quiz.database.DbScheme.AnswerTable
-import com.example.quiz.database.DbScheme.QuizTable
+import com.example.quiz.data.local.DbScheme.AnswerTable
+import com.example.quiz.data.local.DbScheme.QuizTable
 import kotlin.random.Random
 
 @Entity(tableName = AnswerTable.TABLE_NAME,

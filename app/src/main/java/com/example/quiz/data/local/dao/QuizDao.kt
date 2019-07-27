@@ -1,8 +1,8 @@
-package com.example.quiz.database
+package com.example.quiz.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.quiz.database.DbScheme.QuizTable
+import com.example.quiz.data.local.DbScheme.QuizTable
 import com.example.quiz.model.Quiz
 
 @Dao

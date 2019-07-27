@@ -1,11 +1,12 @@
-package com.example.quiz.database
+package com.example.quiz.data
 
 import androidx.lifecycle.LiveData
+import com.example.quiz.data.local.AppDatabase
 import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
 import javax.inject.Inject
 
-class DataRepository @Inject constructor(database: AppDatabase) {
+class Repository @Inject constructor(database: AppDatabase) {
     private val quizDao = database.quizDao
     private val answerDao = database.answerDao
 

@@ -8,9 +8,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
-import com.example.quiz.BaseFragment
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizEditFragmentBinding
+import com.example.quiz.framework.BaseFragment
 import com.example.quiz.model.Answer
 
 class QuizEditFragment : BaseFragment<QuizEditViewModel>() {

@@ -1,4 +1,4 @@
-package com.example.quiz
+package com.example.quiz.framework
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView

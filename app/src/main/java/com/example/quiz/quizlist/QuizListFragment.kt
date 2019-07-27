@@ -1,15 +1,14 @@
 package com.example.quiz.quizlist
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import com.example.quiz.BaseFragment
-
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizListFragmentBinding
+import com.example.quiz.framework.BaseFragment
 import com.example.quiz.model.Quiz
 
 class QuizListFragment : BaseFragment<QuizListViewModel>(), QuizListAdapter.OnItemClickListener {

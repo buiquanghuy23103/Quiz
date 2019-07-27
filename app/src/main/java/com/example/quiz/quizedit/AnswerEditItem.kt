@@ -2,9 +2,8 @@ package com.example.quiz.quizedit
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.example.quiz.BaseAnswerItem
 import com.example.quiz.databinding.AnswerEditItemBinding
+import com.example.quiz.framework.BaseAnswerItem
 import com.example.quiz.model.Answer
 
 class AnswerEditItem(private val binding: AnswerEditItemBinding) : BaseAnswerItem(binding){

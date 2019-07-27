@@ -1,4 +1,4 @@
-package com.example.quiz
+package com.example.quiz.framework
 
 import androidx.fragment.app.Fragment
 

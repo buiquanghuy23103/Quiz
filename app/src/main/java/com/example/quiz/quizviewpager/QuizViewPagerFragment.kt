@@ -1,18 +1,16 @@
 package com.example.quiz.quizviewpager
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.quiz.BaseFragment
-
 import com.example.quiz.R
+import com.example.quiz.framework.BaseFragment
 import kotlinx.android.synthetic.main.quiz_view_pager_fragment.*
-import timber.log.Timber
 
 class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel>() {
     private val args: QuizViewPagerFragmentArgs by navArgs()
