@@ -17,7 +17,7 @@
                 android:layout_margin="16dp">
             <TextView
                     android:id="@+id/item_question"
-                    android:text="@{quiz.question}"
+                android:text="@{quiz.text}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"

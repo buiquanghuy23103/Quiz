@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 class QuizListViewModel : BaseViewModel() {
     val quizList = repository.getAllQuizzes()
 
-    private val newQuiz = Quiz("New question")
+    private val newQuiz = Quiz("New text")
     val newQuizId = newQuiz.id
     private val newAnswerList = listOf(
         Answer(newQuizId, "Answer 1", true),

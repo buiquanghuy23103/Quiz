@@ -24,7 +24,7 @@
 
             <EditText
                 android:id="@+id/question_edit_text"
-                android:text="@={quiz.question}"
+                android:text="@={quiz.text}"
                 android:autofillHints="@string/question_title"
                 android:inputType="text"
                 android:labelFor="@android:id/edit"
