@@ -8,10 +8,12 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizListFragmentBinding
+import com.example.quiz.framework.BaseData
 import com.example.quiz.framework.BaseFragment
+import com.example.quiz.framework.BaseListItem
 import com.example.quiz.model.Quiz
 
-class QuizListFragment : BaseFragment<QuizListViewModel>(), QuizListAdapter.OnItemClickListener {
+class QuizListFragment : BaseFragment<QuizListViewModel>() {
     private lateinit var binding: QuizListFragmentBinding
 
     override fun initViewModel(): QuizListViewModel {
@@ -25,25 +27,30 @@ class QuizListFragment : BaseFragment<QuizListViewModel>(), QuizListAdapter.OnIt
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var adapter = QuizListAdapter()
+        val adapter = QuizListAdapter()
         binding.recyclerView.adapter = adapter
 
         viewModel.quizList.observe(this, Observer {
             it?.let {
                 adapter.submitList(it)
-                adapter.itemClickListener = this
             }
         })
+
+        adapter.itemClickListener = object : BaseListItem.ClickListener {
+            override fun onViewClick(position: Int) {
+                startQuizViewPagerFragment(position)
+            }
+
+            override fun onDeleteButtonClick(data: BaseData) {
+                viewModel.deleteQuiz(data as Quiz)
+            }
+        }
     }
 
-    override fun onItemViewClick(position: Int) {
+    fun startQuizViewPagerFragment(position: Int) {
         val navDirections = QuizListFragmentDirections
             .actionQuizListFragmentToQuizAskPagerFragment(position)
         this.view!!.findNavController().navigate(navDirections)
-    }
-
-    override fun onDeleteClick(quiz: Quiz) {
-        viewModel.deleteQuiz(quiz)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
