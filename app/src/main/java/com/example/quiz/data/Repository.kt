@@ -1,6 +1,5 @@
 package com.example.quiz.data
 
-import androidx.lifecycle.LiveData
 import com.example.quiz.data.local.AppDatabase
 import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
@@ -22,15 +21,15 @@ class Repository @Inject constructor(database: AppDatabase) {
         return quizDao.getAll()
     }
 
-    fun getQuizIdList(): LiveData<List<Int>>{
+    fun getQuizIdList(): List<Int> {
         return quizDao.getIdList()
     }
 
-    fun getQuizById(id: Int): LiveData<Quiz>{
-        return quizDao.getQuiz(id)
+    fun getQuizById(id: Int): Quiz {
+        return quizDao.getById(id)
     }
 
-    fun getAnswersByQuizId(id: Int): LiveData<List<Answer>>{
+    fun getAnswersByQuizId(id: Int): List<Answer> {
         return answerDao.getAnswersByQuizId(id)
     }
 

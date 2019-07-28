@@ -8,7 +8,7 @@ import com.example.quiz.model.Quiz
 import kotlinx.coroutines.launch
 
 class QuizListViewModel : BaseViewModel() {
-    val _quizList = MutableLiveData<List<Quiz>>()
+    private val _quizList = MutableLiveData<List<Quiz>>()
     val quizList: LiveData<List<Quiz>>
         get() = _quizList
 
