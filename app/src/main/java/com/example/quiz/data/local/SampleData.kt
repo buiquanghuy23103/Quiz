@@ -6,12 +6,12 @@ import java.util.*
 
 object SampleData {
     val sampleQuizList = listOf(
-        Quiz("Canberra is the capital of Australia.", false),
-        Quiz("The Pacific Ocean is larger than the Atlantic Ocean.", true),
-        Quiz("The Suez Canal connects the Red Sea and the Indian Ocean.", true),
-        Quiz("The source of the Nile River is in Egypt.", false),
-        Quiz("The Amazon River is the longest river in the Americas.", true),
-        Quiz("Lake Baikal is the world\'s oldest and deepest freshwater lake.", true)
+        Quiz("Canberra is the capital of Australia."),
+        Quiz("The Pacific Ocean is larger than the Atlantic Ocean."),
+        Quiz("The Suez Canal connects the Red Sea and the Indian Ocean."),
+        Quiz("The source of the Nile River is in Egypt."),
+        Quiz("The Amazon River is the longest river in the Americas."),
+        Quiz("Lake Baikal is the world\'s oldest and deepest freshwater lake.")
     )
 
     val sampleAnswerList = generateAnswerList()

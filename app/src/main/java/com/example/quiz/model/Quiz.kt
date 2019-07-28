@@ -11,9 +11,6 @@ data class Quiz(
     @ColumnInfo(name = QuizTable.Cols.QUESTION)
     var question : String = "",
 
-    @ColumnInfo(name = QuizTable.Cols.ANSWER)
-    var answer : Boolean = true,
-
     @PrimaryKey
     @ColumnInfo(name = QuizTable.Cols.ID)
     var id: Int = Random.nextInt()
