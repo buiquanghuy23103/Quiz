@@ -4,14 +4,15 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.quiz.data.local.DbScheme.QuizTable
+import com.example.quiz.framework.BaseData
 import kotlin.random.Random
 
 @Entity(tableName = QuizTable.TABLE_NAME)
 data class Quiz(
     @ColumnInfo(name = QuizTable.Cols.QUESTION)
-    var text: String = "",
+    override var text: String = "",
 
     @PrimaryKey
     @ColumnInfo(name = QuizTable.Cols.ID)
-    var id: Int = Random.nextInt()
-)
+    override var id: Int = Random.nextInt()
+) : BaseData
