@@ -16,6 +16,6 @@ abstract class BaseAnswerAdapter<T: BaseAnswerItem>
 
     override fun onBindViewHolder(holder: T, position: Int) {
         val answer = getItem(position)
-        holder.bind(answer)
+        holder.bind(answer as Answer)
     }
 }
