@@ -9,12 +9,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizViewFragmentBinding
+import com.example.quiz.framework.BaseAnswerItem
 import com.example.quiz.framework.BaseFragment
+import com.example.quiz.model.Answer
 import kotlinx.android.synthetic.main.quiz_view_fragment.*
 
 class QuizViewFragment : BaseFragment<QuizViewViewModel>() {
     private lateinit var binding: QuizViewFragmentBinding
-    val answerAdapter = AnswerViewAdapter()
+    private val answerAdapter = AnswerViewAdapter()
 
     companion object{
         private const val ARG_QUIZ_ID = "index"
@@ -53,6 +55,10 @@ class QuizViewFragment : BaseFragment<QuizViewViewModel>() {
         viewModel.answerList.observe(this, Observer { answerList ->
             answerAdapter.submitList(answerList)
         })
+        answerAdapter.itemClickListener = object : BaseAnswerItem.ClickListener {
+            override fun onViewClick(position: Int) {}
+            override fun onDeleteButtonClick(answer: Answer) {}
+        }
     }
 
     private fun setupQuizView() {

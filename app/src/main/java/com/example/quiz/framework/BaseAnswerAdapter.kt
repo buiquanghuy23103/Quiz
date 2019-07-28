@@ -7,7 +7,7 @@ import com.example.quiz.model.Answer
 abstract class BaseAnswerAdapter<T: BaseAnswerItem>
     : ListAdapter<Answer, T>(AnswerListDiffCallback())
 {
-
+    lateinit var itemClickListener: BaseAnswerItem.ClickListener
     abstract fun getViewHolder(parent: ViewGroup) : T
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): T {
@@ -15,7 +15,7 @@ abstract class BaseAnswerAdapter<T: BaseAnswerItem>
     }
 
     override fun onBindViewHolder(holder: T, position: Int) {
-        val answer = getItem(position)
-        holder.bind(answer as Answer)
+        holder.bind(getItem(position))
+        holder.clickListener = itemClickListener
     }
 }

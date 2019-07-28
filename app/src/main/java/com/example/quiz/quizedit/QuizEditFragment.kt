@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizEditFragmentBinding
+import com.example.quiz.framework.BaseAnswerItem
 import com.example.quiz.framework.BaseFragment
 import com.example.quiz.model.Answer
 
@@ -57,8 +58,10 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
     }
 
     private fun setupItemClickListener(it: List<Answer>?) {
-        answerEditAdapter.itemClickListener = object : AnswerEditItem.OnListItemClickListener {
-            override fun onDeleteClick(answer: Answer) {
+        answerEditAdapter.itemClickListener = object : BaseAnswerItem.ClickListener {
+            override fun onViewClick(position: Int) {}
+
+            override fun onDeleteButtonClick(answer: Answer) {
                 (it as ArrayList<Answer>).remove(answer)
                 answerEditAdapter.notifyDataSetChanged()
             }

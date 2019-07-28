@@ -7,7 +7,6 @@ import com.example.quiz.framework.BaseAnswerItem
 import com.example.quiz.model.Answer
 
 class AnswerEditItem(private val binding: AnswerEditItemBinding) : BaseAnswerItem(binding){
-    lateinit var clickListener: OnListItemClickListener
 
     companion object{
         fun from(parent: ViewGroup): AnswerEditItem{
@@ -17,15 +16,10 @@ class AnswerEditItem(private val binding: AnswerEditItemBinding) : BaseAnswerIte
         }
     }
 
-
-    interface OnListItemClickListener{
-        fun onDeleteClick(answer: Answer)
-    }
-
     override fun bind(answer: Answer){
         binding.answer = answer
         binding.deleteButton.setOnClickListener {
-            clickListener.onDeleteClick(answer)
+            clickListener.onDeleteButtonClick(answer)
         }
     }
 }
