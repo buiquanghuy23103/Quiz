@@ -1,12 +1,20 @@
 package com.example.quiz.quizlist
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.quiz.framework.BaseViewModel
 import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
 import kotlinx.coroutines.launch
 
 class QuizListViewModel : BaseViewModel() {
-    val quizList = repository.getAllQuizzes()
+    val _quizList = MutableLiveData<List<Quiz>>()
+    val quizList: LiveData<List<Quiz>>
+        get() = _quizList
+
+    init {
+        ioScope.launch { _quizList.postValue(repository.getAllQuizzes()) }
+    }
 
     private val newQuiz = Quiz("New text")
     val newQuizId = newQuiz.id

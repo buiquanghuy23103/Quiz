@@ -18,8 +18,8 @@ class Repository @Inject constructor(database: AppDatabase) {
         answerDao.save(answerList)
     }
 
-    fun getAllQuizzes(): LiveData<List<Quiz>>{
-        return quizDao.getAllQuizzes()
+    fun getAllQuizzes(): List<Quiz> {
+        return quizDao.getAll()
     }
 
     fun getQuizIdList(): LiveData<List<Int>>{

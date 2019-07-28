@@ -14,7 +14,7 @@ interface QuizDao {
     fun save(quiz: Quiz)
 
     @Query("SELECT * FROM " + QuizTable.TABLE_NAME)
-    fun getAllQuizzes(): LiveData<List<Quiz>>
+    fun getAll(): List<Quiz>
 
     @Query("SELECT " + QuizTable.Cols.ID + " FROM " + QuizTable.TABLE_NAME)
     fun getIdList(): LiveData<List<Int>>
