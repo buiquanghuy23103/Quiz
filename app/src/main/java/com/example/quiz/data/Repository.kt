@@ -14,7 +14,7 @@ class Repository @Inject constructor(database: AppDatabase) {
     }
 
     fun saveAnswerList(answerList: List<Answer>){
-        answerDao.save(answerList)
+        answerDao.saveList(answerList)
     }
 
     fun getAllQuizzes(): List<Quiz> {
@@ -34,6 +34,6 @@ class Repository @Inject constructor(database: AppDatabase) {
     }
 
     fun deleteQuiz(quiz: Quiz){
-        quizDao.deleteQuiz(quiz)
+        quizDao.delete(quiz)
     }
 }

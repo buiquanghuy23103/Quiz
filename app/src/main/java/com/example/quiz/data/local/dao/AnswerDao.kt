@@ -10,8 +10,8 @@ import com.example.quiz.model.Answer
 @Dao
 interface AnswerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(answerList: List<Answer>)
+    suspend fun saveList(answerList: List<Answer>)
 
     @Query("SELECT * FROM " + AnswerTable.TABLE_NAME + " WHERE " + AnswerTable.Cols.QUIZ_ID + " = :quizId")
-    fun getAnswersByQuizId(quizId: Int): List<Answer>
+    suspend fun getAnswersByQuizId(quizId: Int): List<Answer>
 }
