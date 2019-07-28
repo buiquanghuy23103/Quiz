@@ -1,36 +1,26 @@
 package com.example.quiz.data.local
 
-class DbScheme {
-    companion object{
-        const val DATABASE_NAME = "quizBase.db"
-    }
+object DbScheme {
+    const val DATABASE_NAME = "quizDatabase.db"
 
-    class QuizTable{
-        companion object{
-            const val TABLE_NAME = "quizTable"
-        }
+    object QuizTable {
+        const val TABLE_NAME = "quizTable"
 
-        class Cols{
-            companion object{
-                const val ID = "id"
-                const val QUESTION = "question"
-                const val ANSWER = "answer"
-            }
+        object Cols {
+            const val ID = "id"
+            const val QUESTION = "question"
+            const val ANSWER = "answer"
         }
     }
 
-    class AnswerTable{
-        companion object{
-            const val TABLE_NAME = "answerTable"
-        }
+    object AnswerTable {
+        const val TABLE_NAME = "answerTable"
 
-        class Cols{
-            companion object{
-                const val ID = "id"
-                const val QUIZ_ID = "quiz_id"
-                const val TEXT = "text"
-                const val IS_TRUE = "is_true"
-            }
+        object Cols {
+            const val ID = "id"
+            const val QUIZ_ID = "quiz_id"
+            const val TEXT = "text"
+            const val IS_TRUE = "is_true"
         }
     }
 }
