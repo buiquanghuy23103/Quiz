@@ -1,17 +1,12 @@
 package com.example.quiz.framework
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import com.example.quiz.model.Answer
 
 abstract class BaseAnswerAdapter<T: BaseAnswerItem>
-    : RecyclerView.Adapter<T>()
+    : ListAdapter<Answer, T>(AnswerListDiffCallback())
 {
-    var answerList = listOf<Answer>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
 
     abstract fun getViewHolder(parent: ViewGroup) : T
 
@@ -19,10 +14,8 @@ abstract class BaseAnswerAdapter<T: BaseAnswerItem>
         return getViewHolder(parent)
     }
 
-    override fun getItemCount(): Int = answerList.size
-
     override fun onBindViewHolder(holder: T, position: Int) {
-        val answer = answerList[position]
+        val answer = getItem(position)
         holder.bind(answer)
     }
 }

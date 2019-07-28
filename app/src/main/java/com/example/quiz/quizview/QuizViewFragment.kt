@@ -49,9 +49,9 @@ class QuizViewFragment : BaseFragment<QuizViewViewModel>() {
     }
 
     private fun setupAnswerView() {
-        viewModel.answerList.observe(this, Observer {
-            answer_view_recycler_view.adapter = answerAdapter
-            answerAdapter.answerList = it
+        answer_view_recycler_view.adapter = answerAdapter
+        viewModel.answerList.observe(this, Observer { answerList ->
+            answerAdapter.submitList(answerList)
         })
     }
 

@@ -43,17 +43,17 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
     }
 
     private fun setupAnswerView() {
-        viewModel.answerList.observe(this, Observer {
-            setupAdapter(it)
-            setupItemClickListener(it)
-            setupAddAnswerButton(it)
-            viewModel.finalAnswerListForSaving = it
+        viewModel.answerList.observe(this, Observer { answerList ->
+            setupAdapter(answerList)
+            setupItemClickListener(answerList)
+            setupAddAnswerButton(answerList)
+            viewModel.finalAnswerListForSaving = answerList
         })
     }
 
-    private fun setupAdapter(it: List<Answer>) {
+    private fun setupAdapter(answerList: List<Answer>) {
         binding.answerEditRecyclerView.adapter = answerEditAdapter
-        answerEditAdapter.answerList = it
+        answerEditAdapter.submitList(answerList)
     }
 
     private fun setupItemClickListener(it: List<Answer>?) {
