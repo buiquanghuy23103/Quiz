@@ -1,12 +1,10 @@
 package com.example.quiz.quizedit
 
-import android.view.ViewGroup
-import com.example.quiz.framework.BaseAnswerAdapter
+import android.view.LayoutInflater
+import com.example.quiz.framework.BaseListAdapter
 
-class AnswerEditAdapter : BaseAnswerAdapter<AnswerEditItem>(){
+class AnswerEditAdapter : BaseListAdapter<AnswerEditItem>() {
 
-    override fun getViewHolder(parent: ViewGroup): AnswerEditItem {
-        return AnswerEditItem.from(parent)
-    }
-
+    override fun getViewHolder(inflater: LayoutInflater) =
+        AnswerEditItem.from(inflater)
 }

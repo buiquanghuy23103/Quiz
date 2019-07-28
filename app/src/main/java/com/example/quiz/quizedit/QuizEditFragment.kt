@@ -10,14 +10,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizEditFragmentBinding
-import com.example.quiz.framework.BaseAnswerItem
+import com.example.quiz.framework.BaseData
 import com.example.quiz.framework.BaseFragment
+import com.example.quiz.framework.BaseListItem
 import com.example.quiz.model.Answer
 
 class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
     private lateinit var binding: QuizEditFragmentBinding
     private val args: QuizEditFragmentArgs by navArgs()
-    val answerEditAdapter = AnswerEditAdapter()
+    private val answerEditAdapter = AnswerEditAdapter()
 
     override fun initViewModel(): QuizEditViewModel {
         val factory = QuizEditViewModelFactory(args.quizId)
@@ -58,11 +59,11 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
     }
 
     private fun setupItemClickListener(it: List<Answer>?) {
-        answerEditAdapter.itemClickListener = object : BaseAnswerItem.ClickListener {
+        answerEditAdapter.itemClickListener = object : BaseListItem.ClickListener {
             override fun onViewClick(position: Int) {}
 
-            override fun onDeleteButtonClick(answer: Answer) {
-                (it as ArrayList<Answer>).remove(answer)
+            override fun onDeleteButtonClick(data: BaseData) {
+                (it as ArrayList<Answer>).remove(data as Answer)
                 answerEditAdapter.notifyDataSetChanged()
             }
         }
