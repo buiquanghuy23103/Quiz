@@ -9,9 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizViewFragmentBinding
-import com.example.quiz.framework.BaseAnswerItem
+import com.example.quiz.framework.BaseData
 import com.example.quiz.framework.BaseFragment
-import com.example.quiz.model.Answer
+import com.example.quiz.framework.BaseListItem
 import kotlinx.android.synthetic.main.quiz_view_fragment.*
 
 class QuizViewFragment : BaseFragment<QuizViewViewModel>() {
@@ -55,9 +55,9 @@ class QuizViewFragment : BaseFragment<QuizViewViewModel>() {
         viewModel.answerList.observe(this, Observer { answerList ->
             answerAdapter.submitList(answerList)
         })
-        answerAdapter.itemClickListener = object : BaseAnswerItem.ClickListener {
+        answerAdapter.itemClickListener = object : BaseListItem.ClickListener {
             override fun onViewClick(position: Int) {}
-            override fun onDeleteButtonClick(answer: Answer) {}
+            override fun onDeleteButtonClick(data: BaseData) {}
         }
     }
 

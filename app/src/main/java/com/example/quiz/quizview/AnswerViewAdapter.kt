@@ -1,11 +1,11 @@
 package com.example.quiz.quizview
 
-import android.view.ViewGroup
-import com.example.quiz.framework.BaseAnswerAdapter
+import android.view.LayoutInflater
+import com.example.quiz.framework.BaseListAdapter
 
-class AnswerViewAdapter : BaseAnswerAdapter<AnswerViewItem>(){
+class AnswerViewAdapter : BaseListAdapter<AnswerViewItem>() {
 
-    override fun getViewHolder(parent: ViewGroup): AnswerViewItem {
-        return AnswerViewItem.from(parent)
+    override fun getViewHolder(inflater: LayoutInflater): AnswerViewItem {
+        return AnswerViewItem.from(inflater)
     }
 }
