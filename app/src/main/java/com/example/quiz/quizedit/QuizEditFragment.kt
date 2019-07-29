@@ -44,9 +44,9 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
     private fun setupAnswerView() {
         viewModel.answerList.observe(this, Observer { answerList ->
             setupAdapter(answerList)
+            viewModel.finalAnswerListForSaving = answerList
             setupItemClickListener(answerList)
             setupAddAnswerButton(answerList)
-            viewModel.finalAnswerListForSaving = answerList
         })
     }
 
@@ -60,8 +60,7 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
             override fun onViewClick(position: Int) {}
 
             override fun onDeleteButtonClick(data: BaseData) {
-                (it as ArrayList<Answer>).remove(data as Answer)
-                answerEditAdapter.notifyDataSetChanged()
+                viewModel.deleteAnswer(data as Answer)
             }
         }
     }

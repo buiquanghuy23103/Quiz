@@ -25,7 +25,10 @@ class QuizEditViewModel(val quizId: Int) : BaseViewModel() {
         }
     }
 
-
+    fun deleteAnswer(answer: Answer) {
+        (finalAnswerListForSaving as ArrayList<Answer>).remove(answer)
+        _answerList.value = finalAnswerListForSaving
+    }
 
     fun saveQuiz(){
         ioScope.launch { quizDao.save(finalQuizForSaving) }
