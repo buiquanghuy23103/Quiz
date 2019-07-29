@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizEditFragmentBinding
@@ -20,10 +19,8 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
     private val args: QuizEditFragmentArgs by navArgs()
     private val answerEditAdapter = AnswerEditAdapter()
 
-    override fun initViewModel(): QuizEditViewModel {
-        val factory = QuizEditViewModelFactory(args.quizId)
-        return ViewModelProviders.of(this, factory).get(QuizEditViewModel::class.java)
-    }
+    override fun initViewModel() =
+        getViewModel { QuizEditViewModel(args.quizId) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_edit_fragment, container, false)

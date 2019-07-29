@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
@@ -16,9 +15,8 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel>() {
     private val args: QuizViewPagerFragmentArgs by navArgs()
     lateinit var adapter : QuizViewPagerAdapter
 
-    override fun initViewModel(): QuizViewPagerViewModel {
-        return ViewModelProviders.of(this).get(QuizViewPagerViewModel::class.java)
-    }
+    override fun initViewModel() =
+        getViewModel { QuizViewPagerViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

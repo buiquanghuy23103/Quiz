@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizListFragmentBinding
@@ -16,9 +15,8 @@ import com.example.quiz.model.Quiz
 class QuizListFragment : BaseFragment<QuizListViewModel>() {
     private lateinit var binding: QuizListFragmentBinding
 
-    override fun initViewModel(): QuizListViewModel {
-        return ViewModelProviders.of(this).get(QuizListViewModel::class.java)
-    }
+    override fun initViewModel() =
+        getViewModel { QuizListViewModel() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_list_fragment, container, false)

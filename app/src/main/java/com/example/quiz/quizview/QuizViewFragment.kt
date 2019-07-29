@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizViewFragmentBinding
 import com.example.quiz.framework.BaseData
@@ -27,16 +26,12 @@ class QuizViewFragment : BaseFragment<QuizViewViewModel>() {
         }
     }
 
-    override fun initViewModel(): QuizViewViewModel {
-        val quizId = getQuizId()
-        val factory = QuizViewViewModelFactory(quizId)
-        return ViewModelProviders.of(this, factory).get(QuizViewViewModel::class.java)
-    }
+    override fun initViewModel() =
+        getViewModel { QuizViewViewModel(getQuizId()) }
 
     private fun getQuizId(): Int {
         val arg = requireNotNull(arguments).takeIf { it.containsKey(ARG_QUIZ_ID) }
-        val quizId = arg?.let { it.getInt(ARG_QUIZ_ID) } ?: 0
-        return quizId
+        return arg?.let { it.getInt(ARG_QUIZ_ID) } ?: 0
     }
 
 
