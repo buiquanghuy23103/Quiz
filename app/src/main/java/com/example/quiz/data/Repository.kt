@@ -9,31 +9,31 @@ class Repository @Inject constructor(database: AppDatabase) {
     private val quizDao = database.quizDao
     private val answerDao = database.answerDao
 
-    fun saveQuiz(quiz: Quiz){
+    suspend fun saveQuiz(quiz: Quiz) {
         quizDao.save(quiz)
     }
 
-    fun saveAnswerList(answerList: List<Answer>){
+    suspend fun saveAnswerList(answerList: List<Answer>) {
         answerDao.saveList(answerList)
     }
 
-    fun getAllQuizzes(): List<Quiz> {
+    suspend fun getAllQuizzes(): List<Quiz> {
         return quizDao.getAll()
     }
 
-    fun getQuizIdList(): List<Int> {
+    suspend fun getQuizIdList(): List<Int> {
         return quizDao.getIdList()
     }
 
-    fun getQuizById(id: Int): Quiz {
+    suspend fun getQuizById(id: Int): Quiz {
         return quizDao.getById(id)
     }
 
-    fun getAnswersByQuizId(id: Int): List<Answer> {
+    suspend fun getAnswersByQuizId(id: Int): List<Answer> {
         return answerDao.getAnswersByQuizId(id)
     }
 
-    fun deleteQuiz(quiz: Quiz){
+    suspend fun deleteQuiz(quiz: Quiz) {
         quizDao.delete(quiz)
     }
 }
