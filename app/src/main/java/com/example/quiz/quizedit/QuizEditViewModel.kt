@@ -30,6 +30,12 @@ class QuizEditViewModel(val quizId: Int) : BaseViewModel() {
         _answerList.value = finalAnswerListForSaving
     }
 
+    fun addAnswer() {
+        val newAnswer = Answer(quizId, "New answer", true)
+        (finalAnswerListForSaving as ArrayList<Answer>).add(newAnswer)
+        _answerList.value = finalAnswerListForSaving
+    }
+
     fun saveQuiz(){
         ioScope.launch { quizDao.save(finalQuizForSaving) }
     }

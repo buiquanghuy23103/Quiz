@@ -46,7 +46,7 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
             setupAdapter(answerList)
             viewModel.finalAnswerListForSaving = answerList
             setupItemClickListener(answerList)
-            setupAddAnswerButton(answerList)
+            setupAddAnswerButton()
         })
     }
 
@@ -65,11 +65,9 @@ class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
         }
     }
 
-    private fun setupAddAnswerButton(answerList: List<Answer>){
-        val newAnswer = Answer(viewModel.quizId, "New answer", true)
+    private fun setupAddAnswerButton() {
         binding.quizEditAddAnswerButton.setOnClickListener {
-            (answerList as ArrayList<Answer>).add(newAnswer)
-            answerEditAdapter.notifyDataSetChanged()
+            viewModel.addAnswer()
         }
     }
 
