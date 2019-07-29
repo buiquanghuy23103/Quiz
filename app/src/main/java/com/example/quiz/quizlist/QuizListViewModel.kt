@@ -13,7 +13,7 @@ class QuizListViewModel : BaseViewModel() {
         get() = _quizList
 
     init {
-        ioScope.launch { _quizList.postValue(quizDao.getAll()) }
+        ioScope.launch { loadQuizList() }
     }
 
     private val newQuiz = Quiz("New text")
@@ -32,6 +32,13 @@ class QuizListViewModel : BaseViewModel() {
     }
 
     fun deleteQuiz(quiz: Quiz){
-        ioScope.launch { quizDao.delete(quiz) }
+        ioScope.launch {
+            quizDao.delete(quiz)
+            loadQuizList()
+        }
+    }
+
+    private suspend fun loadQuizList() {
+        _quizList.postValue(quizDao.getAll())
     }
 }
