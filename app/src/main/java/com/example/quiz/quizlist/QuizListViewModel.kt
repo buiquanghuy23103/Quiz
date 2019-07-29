@@ -13,7 +13,7 @@ class QuizListViewModel : BaseViewModel() {
         get() = _quizList
 
     init {
-        ioScope.launch { _quizList.postValue(repository.getAllQuizzes()) }
+        ioScope.launch { _quizList.postValue(quizDao.getAll()) }
     }
 
     private val newQuiz = Quiz("New text")
@@ -24,14 +24,14 @@ class QuizListViewModel : BaseViewModel() {
     )
 
     fun createAndSaveNewQuiz(){
-        ioScope.launch { repository.saveQuiz(newQuiz) }
+        ioScope.launch { quizDao.save(newQuiz) }
     }
 
     fun createAndSaveNewAnswerList(){
-        ioScope.launch { repository.saveAnswerList(newAnswerList) }
+        ioScope.launch { answerDao.saveList(newAnswerList) }
     }
 
     fun deleteQuiz(quiz: Quiz){
-        ioScope.launch { repository.deleteQuiz(quiz) }
+        ioScope.launch { quizDao.delete(quiz) }
     }
 }

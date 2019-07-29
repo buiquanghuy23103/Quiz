@@ -20,18 +20,18 @@ class QuizEditViewModel(val quizId: Int) : BaseViewModel() {
 
     init {
         ioScope.launch {
-            _quiz.postValue(repository.getQuizById(quizId))
-            _answerList.postValue(repository.getAnswersByQuizId(quizId))
+            _quiz.postValue(quizDao.getById(quizId))
+            _answerList.postValue(answerDao.getAnswersByQuizId(quizId))
         }
     }
 
 
 
     fun saveQuiz(){
-        ioScope.launch { repository.saveQuiz(finalQuizForSaving) }
+        ioScope.launch { quizDao.save(finalQuizForSaving) }
     }
 
     fun saveAnswerList(){
-        ioScope.launch { repository.saveAnswerList(finalAnswerListForSaving) }
+        ioScope.launch { answerDao.saveList(finalAnswerListForSaving) }
     }
 }

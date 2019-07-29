@@ -11,6 +11,6 @@ class QuizViewPagerViewModel: BaseViewModel() {
         get() = _quizIdList
 
     init {
-        ioScope.launch { _quizIdList.postValue(repository.getQuizIdList()) }
+        ioScope.launch { _quizIdList.postValue(quizDao.getIdList()) }
     }
 }

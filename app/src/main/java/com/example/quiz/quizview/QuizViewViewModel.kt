@@ -17,8 +17,8 @@ class QuizViewViewModel(quizId: Int) : BaseViewModel() {
 
     init {
         ioScope.launch {
-            _quiz.postValue(repository.getQuizById(quizId))
-            _answerList.postValue(repository.getAnswersByQuizId(quizId))
+            _quiz.postValue(quizDao.getById(quizId))
+            _answerList.postValue(answerDao.getAnswersByQuizId(quizId))
         }
     }
 }
