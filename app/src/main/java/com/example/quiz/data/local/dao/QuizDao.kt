@@ -7,20 +7,20 @@ import com.example.quiz.model.Quiz
 @Dao
 interface QuizDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveList(quizList: List<Quiz>)
+    fun saveList(quizList: List<Quiz>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun save(quiz: Quiz)
+    fun save(quiz: Quiz)
 
     @Query("SELECT * FROM " + QuizTable.TABLE_NAME)
-    suspend fun getAll(): List<Quiz>
+    fun getAll(): List<Quiz>
 
     @Query("SELECT " + QuizTable.Cols.ID + " FROM " + QuizTable.TABLE_NAME)
-    suspend fun getIdList(): List<Int>
+    fun getIdList(): List<Int>
 
     @Query("SELECT * FROM " + QuizTable.TABLE_NAME + " WHERE " + QuizTable.Cols.ID + " = :id")
-    suspend fun getById(id: Int): Quiz
+    fun getById(id: Int): Quiz
 
     @Delete
-    suspend fun delete(quiz: Quiz)
+    fun delete(quiz: Quiz)
 }
