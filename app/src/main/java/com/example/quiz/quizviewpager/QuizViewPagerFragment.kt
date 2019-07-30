@@ -1,35 +1,27 @@
 package com.example.quiz.quizviewpager
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
+import com.example.quiz.databinding.QuizViewPagerFragmentBinding
 import com.example.quiz.framework.BaseFragment
 import kotlinx.android.synthetic.main.quiz_view_pager_fragment.*
 
-class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel>() {
+class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPagerFragmentBinding>() {
     private val args: QuizViewPagerFragmentArgs by navArgs()
     lateinit var adapter : QuizViewPagerAdapter
 
     override fun initViewModel() =
         getViewModel { QuizViewPagerViewModel() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-
-        return inflater.inflate(R.layout.quiz_view_pager_fragment, container, false)
-    }
+    override fun getLayoutId() = R.layout.quiz_view_pager_fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.quizIdList.observe(this, Observer {
-            updateUI(it)
+        viewModel.quizIdList.observe(this, Observer { quizList ->
+            updateUI(quizList)
         })
     }
 

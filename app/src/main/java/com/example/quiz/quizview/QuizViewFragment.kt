@@ -1,10 +1,7 @@
 package com.example.quiz.quizview
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizViewFragmentBinding
@@ -13,8 +10,7 @@ import com.example.quiz.framework.BaseFragment
 import com.example.quiz.framework.BaseListItem
 import kotlinx.android.synthetic.main.quiz_view_fragment.*
 
-class QuizViewFragment : BaseFragment<QuizViewViewModel>() {
-    private lateinit var binding: QuizViewFragmentBinding
+class QuizViewFragment : BaseFragment<QuizViewViewModel, QuizViewFragmentBinding>() {
     private val answerAdapter = AnswerViewAdapter()
 
     companion object{
@@ -29,15 +25,11 @@ class QuizViewFragment : BaseFragment<QuizViewViewModel>() {
     override fun initViewModel() =
         getViewModel { QuizViewViewModel(getQuizId()) }
 
+    override fun getLayoutId() = R.layout.quiz_view_fragment
+
     private fun getQuizId(): Int {
         val arg = requireNotNull(arguments).takeIf { it.containsKey(ARG_QUIZ_ID) }
         return arg?.let { it.getInt(ARG_QUIZ_ID) } ?: 0
-    }
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.quiz_view_fragment, container, false)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

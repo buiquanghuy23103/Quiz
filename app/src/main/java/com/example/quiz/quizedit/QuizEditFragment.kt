@@ -14,13 +14,14 @@ import com.example.quiz.framework.BaseFragment
 import com.example.quiz.framework.BaseListItem
 import com.example.quiz.model.Answer
 
-class QuizEditFragment : BaseFragment<QuizEditViewModel>() {
-    private lateinit var binding: QuizEditFragmentBinding
+class QuizEditFragment : BaseFragment<QuizEditViewModel, QuizEditFragmentBinding>() {
     private val args: QuizEditFragmentArgs by navArgs()
     private val answerEditAdapter = AnswerEditAdapter()
 
     override fun initViewModel() =
         getViewModel { QuizEditViewModel(args.quizId) }
+
+    override fun getLayoutId() = R.layout.quiz_edit_fragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.quiz_edit_fragment, container, false)

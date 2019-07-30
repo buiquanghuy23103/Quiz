@@ -1,8 +1,10 @@
 package com.example.quiz.quizlist
 
 import android.os.Bundle
-import android.view.*
-import androidx.databinding.DataBindingUtil
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.quiz.R
@@ -12,17 +14,12 @@ import com.example.quiz.framework.BaseFragment
 import com.example.quiz.framework.BaseListItem
 import com.example.quiz.model.Quiz
 
-class QuizListFragment : BaseFragment<QuizListViewModel>() {
-    private lateinit var binding: QuizListFragmentBinding
+class QuizListFragment : BaseFragment<QuizListViewModel, QuizListFragmentBinding>() {
 
     override fun initViewModel() =
         getViewModel { QuizListViewModel() }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.quiz_list_fragment, container, false)
-        setHasOptionsMenu(true)
-        return binding.root
-    }
+    override fun getLayoutId() = R.layout.quiz_list_fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adapter = QuizListAdapter()
