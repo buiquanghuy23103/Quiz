@@ -48,13 +48,13 @@ class QuizListFragment : BaseFragment<QuizListViewModel, QuizListFragmentBinding
         this.view!!.findNavController().navigate(navDirections)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu!!, inflater!!)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.quiz_list_menu, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item!!.itemId){
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.menu_item_quiz_list_add -> startEditingNewQuiz()
         }
         return super.onOptionsItemSelected(item)

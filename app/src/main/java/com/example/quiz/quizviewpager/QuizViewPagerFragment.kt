@@ -41,7 +41,8 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
     }
 
     private fun setupAdapter(quizIdList: List<Int>) {
-        adapter = QuizViewPagerAdapter(childFragmentManager, quizIdList)
+        adapter = QuizViewPagerAdapter(this, quizIdList)
         view_pager.adapter = adapter
+        view_pager.setPageTransformer(ZoomOutPageTransformer())
     }
 }
