@@ -3,7 +3,8 @@
     <data>
         <variable name="answer" type="com.example.quiz.model.Answer"/>
     </data>
-    <Button
+
+    <TextView
             android:id="@+id/answer_button"
             android:text="@{answer.text}"
             android:orientation="vertical"
@@ -12,5 +13,5 @@
         android:padding="8dp"
         android:textAppearance="@style/TextAppearance.NormalText">
 
-    </Button>
+    </TextView>
 </layout>

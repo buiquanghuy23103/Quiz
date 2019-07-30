@@ -10,6 +10,7 @@ import com.example.quiz.model.Answer
 class AnswerViewItem private constructor(private val binding: AnswerViewItemBinding) :
     BaseListItem(binding)
 {
+    var isClicked = false
 
     companion object{
         fun from(inflater: LayoutInflater): AnswerViewItem {
@@ -19,10 +20,16 @@ class AnswerViewItem private constructor(private val binding: AnswerViewItemBind
     }
 
     override fun bind(data: BaseData) {
-        binding.answer = data as Answer
-        binding.answerButton.setOnClickListener {
-            val color = if (data.isTrue) Color.GREEN else Color.RED
-            it.setBackgroundColor(color)
+        with(binding) {
+            answer = data as Answer
+            answerButton.setOnClickListener {
+                isClicked = !isClicked
+                if (isClicked) {
+                    it.setBackgroundColor(Color.BLUE)
+                } else {
+                    it.setBackgroundColor(Color.TRANSPARENT)
+                }
+            }
         }
     }
 }
