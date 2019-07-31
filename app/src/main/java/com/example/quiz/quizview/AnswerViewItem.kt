@@ -2,6 +2,8 @@ package com.example.quiz.quizview
 
 import android.graphics.Color
 import android.view.LayoutInflater
+import androidx.core.content.ContextCompat
+import com.example.quiz.R
 import com.example.quiz.databinding.AnswerViewItemBinding
 import com.example.quiz.framework.BaseData
 import com.example.quiz.framework.BaseListItem
@@ -24,8 +26,9 @@ class AnswerViewItem private constructor(private val binding: AnswerViewItemBind
             answer = data as Answer
             answerButton.setOnClickListener {
                 isClicked = !isClicked
+                val colorAnswerClick = ContextCompat.getColor(it.context, R.color.colorAnswerClick)
                 if (isClicked) {
-                    it.setBackgroundColor(Color.BLUE)
+                    it.setBackgroundColor(colorAnswerClick)
                 } else {
                     it.setBackgroundColor(Color.TRANSPARENT)
                 }
