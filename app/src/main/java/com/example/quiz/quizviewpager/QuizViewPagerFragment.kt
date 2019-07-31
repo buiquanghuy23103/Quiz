@@ -3,7 +3,6 @@ package com.example.quiz.quizviewpager
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizViewPagerFragmentBinding
@@ -28,16 +27,6 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
     private fun updateUI(quizIdList: List<Int>) {
         setupAdapter(quizIdList)
         view_pager.currentItem = args.index
-        setupEditButton(quizIdList)
-    }
-
-    private fun setupEditButton(quizIdList: List<Int>) {
-        quiz_view_pager_fab.setOnClickListener {
-            val id = quizIdList[view_pager.currentItem]
-            val directions = QuizViewPagerFragmentDirections
-                .actionQuizAskPagerFragmentToQuizEditFragment(id)
-            this.findNavController().navigate(directions)
-        }
     }
 
     private fun setupAdapter(quizIdList: List<Int>) {
