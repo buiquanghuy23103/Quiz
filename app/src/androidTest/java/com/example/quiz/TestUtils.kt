@@ -1,6 +1,9 @@
 package com.example.quiz
 
+import com.example.quiz.data.local.SampleData
+import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
+import java.util.*
 
 val sampleQuizList = listOf(
     Quiz("Canberra is the capital of Australia.", 0),
@@ -12,3 +15,17 @@ val sampleQuizList = listOf(
 )
 
 val sampleQuiz = sampleQuizList[0]
+
+val sampleAnswerList = generateAnswerList()
+
+private fun generateAnswerList(): List<Answer> {
+    var list = ArrayList<Answer>()
+    SampleData.sampleQuizList.forEach {
+        for (i in 1..4) {
+            val answer = Answer(it.id, "Answer " + i, i % 2 == 0)
+            list.add(answer)
+        }
+    }
+
+    return list
+}

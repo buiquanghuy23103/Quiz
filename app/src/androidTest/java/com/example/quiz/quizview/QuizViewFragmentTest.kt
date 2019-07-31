@@ -28,7 +28,7 @@ class QuizViewFragmentTest {
             runOnUiThread {
                 val bundle = Bundle().apply { putInt("index", 2) }
                 findNavController(R.id.nav_host_fragment).navigate(
-                    R.id.quizAskPagerFragment,
+                    R.id.quizViewPagerFragment,
                     bundle
                 )
             }
