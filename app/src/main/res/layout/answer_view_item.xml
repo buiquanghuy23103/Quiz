@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
-        <variable name="answer" type="com.example.quiz.model.Answer"/>
-    </data>
-
     <TextView
             android:id="@+id/answer_button"
             android:text="@{answer.text}"
+        android:onClick="@{clickListener}"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -14,4 +11,15 @@
         android:textAppearance="@style/TextAppearance.NormalText">
 
     </TextView>
+
+    <data>
+
+        <variable
+            name="answer"
+            type="com.example.quiz.model.Answer" />
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
 </layout>

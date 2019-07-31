@@ -2,6 +2,7 @@ package com.example.quiz.quizview
 
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.quiz.R
 import com.example.quiz.databinding.AnswerViewItemBinding
@@ -24,15 +25,17 @@ class AnswerViewItem private constructor(private val binding: AnswerViewItemBind
     override fun bind(data: BaseData) {
         with(binding) {
             answer = data as Answer
-            answerButton.setOnClickListener {
-                isClicked = !isClicked
-                val colorAnswerClick = ContextCompat.getColor(it.context, R.color.colorAnswerClick)
-                if (isClicked) {
-                    it.setBackgroundColor(colorAnswerClick)
-                } else {
-                    it.setBackgroundColor(Color.TRANSPARENT)
-                }
-            }
+            clickListener = createOnClickListener()
+            executePendingBindings()
+        }
+    }
+
+    private fun createOnClickListener(): View.OnClickListener {
+        return View.OnClickListener {
+            isClicked = !isClicked
+            val colorAnswerClick = ContextCompat.getColor(it.context, R.color.colorAnswerClick)
+            if (isClicked) it.setBackgroundColor(colorAnswerClick)
+            else it.setBackgroundColor(Color.TRANSPARENT)
         }
     }
 }

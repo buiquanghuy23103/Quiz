@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 abstract class BaseListAdapter<T : BaseListItem> :
     ListAdapter<BaseData, BaseListItem>(ListDiffCallback()) {
 
-    lateinit var itemClickListener: BaseListItem.ClickListener
-
     abstract fun getViewHolder(inflater: LayoutInflater): T
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseListItem {
@@ -18,6 +16,5 @@ abstract class BaseListAdapter<T : BaseListItem> :
 
     override fun onBindViewHolder(holder: BaseListItem, position: Int) {
         holder.bind(getItem(position))
-        holder.clickListener = itemClickListener
     }
 }

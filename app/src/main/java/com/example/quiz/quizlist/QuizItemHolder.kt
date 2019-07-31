@@ -1,6 +1,8 @@
 package com.example.quiz.quizlist
 
 import android.view.LayoutInflater
+import android.view.View
+import androidx.navigation.findNavController
 import com.example.quiz.databinding.QuizItemBinding
 import com.example.quiz.framework.BaseData
 import com.example.quiz.framework.BaseListItem
@@ -17,10 +19,18 @@ class QuizItemHolder private constructor(private val binding: QuizItemBinding) :
     }
 
     override fun bind(data: BaseData) {
-        binding.quiz = data as Quiz
-        binding.root.setOnClickListener {
-            clickListener.onViewClick(adapterPosition)
+        with(binding) {
+            quiz = data as Quiz
+            clickListener = createOnClickListener()
+            executePendingBindings()
         }
-        binding.executePendingBindings()
+    }
+
+    private fun createOnClickListener(): View.OnClickListener {
+        return View.OnClickListener {
+            val navDirections = QuizListFragmentDirections
+                .actionQuizListFragmentToQuizAskPagerFragment(adapterPosition)
+            it.findNavController().navigate(navDirections)
+        }
     }
 }
