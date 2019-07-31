@@ -21,10 +21,6 @@ class QuizItemHolder private constructor(private val binding: QuizItemBinding) :
         binding.root.setOnClickListener {
             clickListener.onViewClick(adapterPosition)
         }
-
-        binding.quizItemDeleteButton.setOnClickListener {
-            clickListener.onDeleteButtonClick(data)
-        }
         binding.executePendingBindings()
     }
 }

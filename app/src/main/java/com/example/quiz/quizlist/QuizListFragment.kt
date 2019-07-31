@@ -9,7 +9,6 @@ import com.example.quiz.databinding.QuizListFragmentBinding
 import com.example.quiz.framework.BaseData
 import com.example.quiz.framework.BaseFragment
 import com.example.quiz.framework.BaseListItem
-import com.example.quiz.model.Quiz
 
 class QuizListFragment : BaseFragment<QuizListViewModel, QuizListFragmentBinding>() {
 
@@ -34,7 +33,7 @@ class QuizListFragment : BaseFragment<QuizListViewModel, QuizListFragmentBinding
             }
 
             override fun onDeleteButtonClick(data: BaseData) {
-                viewModel.deleteQuiz(data as Quiz)
+
             }
         }
     }
