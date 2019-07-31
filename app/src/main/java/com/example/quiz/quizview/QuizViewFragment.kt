@@ -33,18 +33,19 @@ class QuizViewFragment : BaseFragment<QuizViewViewModel, QuizViewFragmentBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupQuizView()
         setupAnswerView()
+
+    }
+
+    private fun setupQuizView() {
+        viewModel.quiz.observe(this, Observer { quiz ->
+            quiz?.let { binding.quiz = quiz }
+        })
     }
 
     private fun setupAnswerView() {
         answer_view_recycler_view.adapter = answerAdapter
         viewModel.answerList.observe(this, Observer { answerList ->
             answerAdapter.submitList(answerList)
-        })
-    }
-
-    private fun setupQuizView() {
-        viewModel.quiz.observe(this, Observer { quiz ->
-            quiz?.let { binding.quiz = quiz }
         })
     }
 }

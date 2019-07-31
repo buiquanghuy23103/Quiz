@@ -14,11 +14,19 @@ class QuizViewViewModel(quizId: Int) : BaseViewModel() {
     private val _answerList = MutableLiveData<List<Answer>>()
     val answerList: LiveData<List<Answer>>
         get() = _answerList
+    private lateinit var answerAssesment: List<Boolean>
 
     init {
         ioScope.launch {
             _quiz.postValue(quizDao.getById(quizId))
-            _answerList.postValue(answerDao.getAnswersByQuizId(quizId))
+
+            val answerList = answerDao.getAnswersByQuizId(quizId)
+            _answerList.postValue(answerList)
+            answerAssesment = answerList.map { answer -> answer.isTrue }
         }
+    }
+
+    fun onAnswerButtonClick() {
+
     }
 }

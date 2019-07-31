@@ -17,7 +17,7 @@ class CustomMatchers {
 
                 override fun matchesSafely(item: View?): Boolean {
                     val expectedColor = item?.context?.getColor(colorRes)
-                    val itemColor = (item?.background as ColorDrawable).color
+                    val itemColor = (item?.background as ColorDrawable?)?.color
 
                     return itemColor == expectedColor
                 }

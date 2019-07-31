@@ -5,7 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.quiz.data.local.dao.AnswerDao
 import com.example.quiz.data.local.dao.QuizDao
-import com.example.quiz.sampleAnswerList
+import com.example.quiz.sampleAnswersOfSampleQuiz
 import com.example.quiz.sampleQuiz
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
@@ -45,9 +45,8 @@ class AppDatabaseTest {
 
     @Test
     fun testSaveAndGetAnswer() {
-        val testAnswerList = sampleAnswerList.filter { answer -> answer.quizId == sampleQuiz.id }
-        answerDao.saveList(testAnswerList)
+        answerDao.saveList(sampleAnswersOfSampleQuiz)
         val answerList = answerDao.getAnswersByQuizId(sampleQuiz.id)
-        assertThat(answerList).isEqualTo(testAnswerList)
+        assertThat(answerList).isEqualTo(sampleAnswersOfSampleQuiz)
     }
 }

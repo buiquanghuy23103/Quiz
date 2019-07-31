@@ -17,7 +17,7 @@ object SampleData {
     val sampleAnswerList = generateAnswerList()
 
     private fun generateAnswerList(): List<Answer> {
-        var list = ArrayList<Answer>()
+        val list = ArrayList<Answer>()
         sampleQuizList.forEach {
             for (i in 1..4) {
                 val answer = Answer(it.id, "Answer " + i, i % 2 == 0)

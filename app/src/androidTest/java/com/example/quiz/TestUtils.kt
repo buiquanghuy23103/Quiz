@@ -1,6 +1,5 @@
 package com.example.quiz
 
-import com.example.quiz.data.local.SampleData
 import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
 import java.util.*
@@ -16,11 +15,13 @@ val sampleQuizList = listOf(
 
 val sampleQuiz = sampleQuizList[0]
 
+
 val sampleAnswerList = generateAnswerList()
+val sampleAnswersOfSampleQuiz = sampleAnswerList.filter { answer -> answer.quizId == sampleQuiz.id }
 
 private fun generateAnswerList(): List<Answer> {
-    var list = ArrayList<Answer>()
-    SampleData.sampleQuizList.forEach {
+    val list = ArrayList<Answer>()
+    sampleQuizList.forEach {
         for (i in 1..4) {
             val answer = Answer(it.id, "Answer " + i, i % 2 == 0)
             list.add(answer)
