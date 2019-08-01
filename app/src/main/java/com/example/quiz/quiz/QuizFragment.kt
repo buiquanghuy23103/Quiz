@@ -1,4 +1,4 @@
-package com.example.quiz.quizview
+package com.example.quiz.quiz
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -6,27 +6,27 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.quiz.R
-import com.example.quiz.databinding.QuizViewFragmentBinding
+import com.example.quiz.databinding.QuizFragmentBinding
 import com.example.quiz.framework.BaseFragment
-import kotlinx.android.synthetic.main.quiz_view_fragment.*
+import kotlinx.android.synthetic.main.quiz_fragment.*
 
-class QuizViewFragment : BaseFragment<QuizViewViewModel, QuizViewFragmentBinding>(),
-    AnswerViewItem.OnClickListener {
-    private val answerAdapter = AnswerViewAdapter()
+class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
+    AnswerListItem.OnClickListener {
+    private val answerAdapter = AnswerListAdapter()
 
     companion object{
         private const val ARG_QUIZ_ID = "index"
-        fun getInstance(quizId: Int): QuizViewFragment {
-            return QuizViewFragment().apply {
+        fun getInstance(quizId: Int): QuizFragment {
+            return QuizFragment().apply {
                 arguments = Bundle().apply { putInt(ARG_QUIZ_ID, quizId) }
             }
         }
     }
 
     override fun initViewModel() =
-        getViewModel { QuizViewViewModel(getQuizId()) }
+        getViewModel { QuizViewModel(getQuizId()) }
 
-    override fun getLayoutId() = R.layout.quiz_view_fragment
+    override fun getLayoutId() = R.layout.quiz_fragment
 
     private fun getQuizId(): Int {
         val arg = requireNotNull(arguments).takeIf { it.containsKey(ARG_QUIZ_ID) }

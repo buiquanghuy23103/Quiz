@@ -1,21 +1,21 @@
-package com.example.quiz.quizview
+package com.example.quiz.quiz
 
 import android.view.LayoutInflater
 import android.view.View
-import com.example.quiz.databinding.AnswerViewItemBinding
+import com.example.quiz.databinding.AnswerItemBinding
 import com.example.quiz.framework.BaseData
 import com.example.quiz.framework.BaseListItem
 import com.example.quiz.model.Answer
 
-class AnswerViewItem private constructor(private val binding: AnswerViewItemBinding) :
+class AnswerListItem private constructor(private val binding: AnswerItemBinding) :
     BaseListItem(binding)
 {
     lateinit var clickListener: OnClickListener
 
     companion object{
-        fun from(inflater: LayoutInflater): AnswerViewItem {
-            val binding = AnswerViewItemBinding.inflate(inflater)
-            return AnswerViewItem(binding)
+        fun from(inflater: LayoutInflater): AnswerListItem {
+            val binding = AnswerItemBinding.inflate(inflater)
+            return AnswerListItem(binding)
         }
     }
 

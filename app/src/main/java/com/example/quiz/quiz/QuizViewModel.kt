@@ -1,4 +1,4 @@
-package com.example.quiz.quizview
+package com.example.quiz.quiz
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
 import kotlinx.coroutines.launch
 
-class QuizViewViewModel(quizId: Int) : BaseViewModel() {
+class QuizViewModel(quizId: Int) : BaseViewModel() {
     private val _quiz = MutableLiveData<Quiz>()
     val quiz: LiveData<Quiz>
         get() = _quiz

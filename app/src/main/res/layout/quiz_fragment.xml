@@ -43,6 +43,6 @@
 
         <variable
             name="viewModel"
-            type="com.example.quiz.quizview.QuizViewViewModel" />
+            type="com.example.quiz.quiz.QuizViewModel" />
     </data>
 </layout>

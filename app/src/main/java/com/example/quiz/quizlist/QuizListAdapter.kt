@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import com.example.quiz.framework.BaseListAdapter
 
 class QuizListAdapter
-    : BaseListAdapter<QuizItemHolder>() {
+    : BaseListAdapter<QuizListItem>() {
     override fun getViewHolder(inflater: LayoutInflater) =
-        QuizItemHolder.from(inflater)
+        QuizListItem.from(inflater)
 }

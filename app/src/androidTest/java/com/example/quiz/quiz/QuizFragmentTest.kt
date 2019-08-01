@@ -1,4 +1,4 @@
-package com.example.quiz.quizview
+package com.example.quiz.quiz
 
 import android.content.res.Resources
 import android.os.Bundle
@@ -21,7 +21,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class QuizViewFragmentTest {
+class QuizFragmentTest {
     @Rule
     @JvmField
     val activityTestRule = ActivityTestRule(MainActivity::class.java)

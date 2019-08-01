@@ -8,13 +8,13 @@ import com.example.quiz.framework.BaseData
 import com.example.quiz.framework.BaseListItem
 import com.example.quiz.model.Quiz
 
-class QuizItemHolder private constructor(private val binding: QuizItemBinding) :
+class QuizListItem private constructor(private val binding: QuizItemBinding) :
     BaseListItem(binding) {
 
     companion object {
-        fun from(inflater: LayoutInflater): QuizItemHolder {
+        fun from(inflater: LayoutInflater): QuizListItem {
             val binding = QuizItemBinding.inflate(inflater)
-            return QuizItemHolder(binding)
+            return QuizListItem(binding)
         }
     }
 
