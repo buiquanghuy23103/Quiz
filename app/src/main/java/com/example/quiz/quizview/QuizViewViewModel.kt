@@ -27,9 +27,7 @@ class QuizViewViewModel(quizId: Int) : BaseViewModel() {
         }
     }
 
-    fun onAnswerButtonClick(position: Int) {
-        checkAnswerUtils.saveUserSelectionAtPosition(position)
-    }
+    fun onAnswerButtonClick(position: Int) = checkAnswerUtils.saveUserSelectionAtPosition(position)
 
     fun isCorrectAnswer(): Boolean = checkAnswerUtils.result()
 }
