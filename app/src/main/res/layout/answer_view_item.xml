@@ -3,7 +3,6 @@
     <TextView
             android:id="@+id/answer_button"
             android:text="@{answer.text}"
-        android:onClick="@{clickListener}"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -17,9 +16,5 @@
         <variable
             name="answer"
             type="com.example.quiz.model.Answer" />
-
-        <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener" />
     </data>
 </layout>

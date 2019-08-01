@@ -1,10 +1,7 @@
 package com.example.quiz.quizview
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
-import androidx.core.content.ContextCompat
-import com.example.quiz.R
 import com.example.quiz.databinding.AnswerViewItemBinding
 import com.example.quiz.framework.BaseData
 import com.example.quiz.framework.BaseListItem
@@ -13,7 +10,7 @@ import com.example.quiz.model.Answer
 class AnswerViewItem private constructor(private val binding: AnswerViewItemBinding) :
     BaseListItem(binding)
 {
-    var isClicked = false
+    lateinit var clickListener: OnClickListener
 
     companion object{
         fun from(inflater: LayoutInflater): AnswerViewItem {
@@ -25,17 +22,16 @@ class AnswerViewItem private constructor(private val binding: AnswerViewItemBind
     override fun bind(data: BaseData) {
         with(binding) {
             answer = data as Answer
-            clickListener = createOnClickListener()
+            binding.answerButton.setOnClickListener {
+                clickListener.onClick(it, adapterPosition)
+            }
             executePendingBindings()
         }
     }
 
-    private fun createOnClickListener(): View.OnClickListener {
-        return View.OnClickListener {
-            isClicked = !isClicked
-            val colorAnswerClick = ContextCompat.getColor(it.context, R.color.colorAnswerClick)
-            if (isClicked) it.setBackgroundColor(colorAnswerClick)
-            else it.setBackgroundColor(Color.TRANSPARENT)
-        }
+    interface OnClickListener {
+        fun onClick(view: View, position: Int)
     }
+
+
 }

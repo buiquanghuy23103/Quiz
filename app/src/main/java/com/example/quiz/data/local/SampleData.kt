@@ -19,7 +19,7 @@ object SampleData {
     private fun generateAnswerList(): List<Answer> {
         val list = ArrayList<Answer>()
         sampleQuizList.forEach {
-            for (i in 1..4) {
+            for (i in 0..3) {
                 val answer = Answer(it.id, "Answer " + i, i % 2 == 0)
                 list.add(answer)
             }

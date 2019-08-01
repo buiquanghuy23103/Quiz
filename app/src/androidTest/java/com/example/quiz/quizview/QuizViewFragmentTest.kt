@@ -71,6 +71,6 @@ class QuizViewFragmentTest {
         onView(allOf(withId(R.id.check_answer_button)))
             .perform(click())
         onView(allOf(withId(R.id.result_text_view)))
-            .check(matches(withText(resources.getString(R.string.trueAnswer))))
+            .check(matches(withText(resources.getString(R.string.correct_answer))))
     }
 }

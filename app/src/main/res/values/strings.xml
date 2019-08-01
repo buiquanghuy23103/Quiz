@@ -4,6 +4,6 @@
     <string name="question_title">Question text</string>
     <string name="answer_title">Answer</string>
 
-    <string name="trueAnswer">True</string>
-    <string name="falseAnswer">False</string>
+    <string name="correct_answer">True</string>
+    <string name="incorrect_answer">False</string>
 </resources>
