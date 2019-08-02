@@ -21,6 +21,7 @@ object DbScheme {
             const val QUIZ_ID = "quiz_id"
             const val TEXT = "text"
             const val IS_TRUE = "is_true"
+            const val IS_CHOSEN = "is_chosen"
         }
     }
 }

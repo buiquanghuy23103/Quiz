@@ -25,6 +25,9 @@ data class Answer(
     @ColumnInfo(name = AnswerTable.Cols.IS_TRUE)
     var isTrue: Boolean,
 
+    @ColumnInfo(name = AnswerTable.Cols.IS_CHOSEN)
+    var isChosen: Boolean = false,
+
     @PrimaryKey
     @ColumnInfo(name = AnswerTable.Cols.ID)
     override var id: Int = Random.nextInt()
