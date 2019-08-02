@@ -37,6 +37,9 @@ class QuizViewModel(quizId: Int) : BaseViewModel() {
                 isChosen = isChosen.not()
             } ?: throw Exception("Not found answer")
         } ?: throw Exception("List of answers is null")
+
         ioScope.launch { answerDao.save(newAnswer) }
     }
+
+    fun getAnswerSyncById(answerId: Int) = answerDao.getSyncById(answerId)
 }

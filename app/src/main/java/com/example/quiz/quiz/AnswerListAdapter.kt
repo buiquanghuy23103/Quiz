@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import com.example.quiz.framework.BaseListAdapter
 
 class AnswerListAdapter : BaseListAdapter<AnswerListItem>() {
-    lateinit var itemClickListener: AnswerListItem.OnClickListener
+    lateinit var itemClickListener: AnswerListItem.UIinterface
 
     override fun getViewHolder(inflater: LayoutInflater): AnswerListItem {
         return AnswerListItem.from(inflater).apply {

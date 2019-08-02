@@ -10,7 +10,7 @@ import com.example.quiz.model.Answer
 class AnswerListItem private constructor(private val binding: AnswerItemBinding) :
     BaseListItem(binding)
 {
-    lateinit var clickListener: OnClickListener
+    lateinit var clickListener: UIinterface
 
     companion object{
         fun from(inflater: LayoutInflater): AnswerListItem {
@@ -22,16 +22,17 @@ class AnswerListItem private constructor(private val binding: AnswerItemBinding)
     override fun bind(data: BaseData) {
         with(binding) {
             answer = data as Answer
-            binding.answerButton.setOnClickListener {
-
-                clickListener.onClick(it, data.id)
+            answerButton.let { view ->
+                clickListener.setBackgroundColor(view, data.id)
+                view.setOnClickListener { clickListener.onClick(data.id) }
             }
             executePendingBindings()
         }
     }
 
-    interface OnClickListener {
-        fun onClick(view: View, answerId: Int)
+    interface UIinterface {
+        fun onClick(answerId: Int)
+        fun setBackgroundColor(view: View, answerId: Int)
     }
 
 

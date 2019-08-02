@@ -11,7 +11,7 @@ import com.example.quiz.framework.BaseFragment
 import kotlinx.android.synthetic.main.quiz_fragment.*
 
 class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
-    AnswerListItem.OnClickListener {
+    AnswerListItem.UIinterface {
     private val answerAdapter = AnswerListAdapter()
 
     companion object{
@@ -61,9 +61,18 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
         }
     }
 
-    override fun onClick(view: View, answerId: Int) {
-        changeButtonColor(view)
+    override fun onClick(answerId: Int) {
         viewModel.toggleAnswerChosenById(answerId)
+    }
+
+    override fun setBackgroundColor(view: View, answerId: Int) {
+        viewModel.getAnswerSyncById(answerId).observe(this, Observer {
+            val chosenAnswerColor = ContextCompat.getColor(view.context, R.color.chosenAnswerColor)
+            val notChosenAnswerColor =
+                ContextCompat.getColor(view.context, android.R.color.transparent)
+            val backgroundColor = if (it.isChosen) chosenAnswerColor else notChosenAnswerColor
+            view.setBackgroundColor(backgroundColor)
+        })
     }
 
     private fun changeButtonColor(view: View) {
