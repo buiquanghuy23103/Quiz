@@ -61,9 +61,9 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
         }
     }
 
-    override fun onClick(view: View, position: Int) {
+    override fun onClick(view: View, answerId: Int) {
         changeButtonColor(view)
-        viewModel.onAnswerButtonClick(position)
+        viewModel.toggleAnswerChosenById(answerId)
     }
 
     private fun changeButtonColor(view: View) {

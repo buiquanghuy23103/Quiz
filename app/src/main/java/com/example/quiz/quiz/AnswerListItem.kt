@@ -24,14 +24,14 @@ class AnswerListItem private constructor(private val binding: AnswerItemBinding)
             answer = data as Answer
             binding.answerButton.setOnClickListener {
 
-                clickListener.onClick(it, adapterPosition)
+                clickListener.onClick(it, data.id)
             }
             executePendingBindings()
         }
     }
 
     interface OnClickListener {
-        fun onClick(view: View, position: Int)
+        fun onClick(view: View, answerId: Int)
     }
 
 
