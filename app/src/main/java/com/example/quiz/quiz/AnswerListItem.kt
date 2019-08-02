@@ -23,6 +23,7 @@ class AnswerListItem private constructor(private val binding: AnswerItemBinding)
         with(binding) {
             answer = data as Answer
             binding.answerButton.setOnClickListener {
+
                 clickListener.onClick(it, adapterPosition)
             }
             executePendingBindings()

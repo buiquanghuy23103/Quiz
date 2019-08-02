@@ -30,4 +30,13 @@ class QuizViewModel(quizId: Int) : BaseViewModel() {
     fun onAnswerButtonClick(position: Int) = checkAnswerUtils.saveUserSelectionAtPosition(position)
 
     fun isCorrectAnswer(): Boolean = checkAnswerUtils.result()
+
+    fun toggleAnswerChosenById(answerId: Int) {
+        val newAnswer = _answerList.value?.let { answerList ->
+            answerList.find { answer -> answer.id == answerId }?.apply {
+                isChosen = isChosen.not()
+            } ?: throw Exception("Not found answer")
+        } ?: throw Exception("List of answers is null")
+        ioScope.launch { answerDao.save(newAnswer) }
+    }
 }

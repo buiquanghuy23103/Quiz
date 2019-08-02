@@ -12,6 +12,9 @@ interface AnswerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveList(answerList: List<Answer>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun save(answer: Answer)
+
     @Query("SELECT * FROM " + AnswerTable.TABLE_NAME + " WHERE " + AnswerTable.Cols.QUIZ_ID + " = :quizId")
     fun getAnswersByQuizId(quizId: Int): List<Answer>
 }
