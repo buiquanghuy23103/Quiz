@@ -3,9 +3,7 @@ package com.example.quiz.data.local
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.quiz.data.local.dao.AnswerDao
 import com.example.quiz.data.local.dao.QuizDao
-import com.example.quiz.sampleAnswersOfSampleQuiz
 import com.example.quiz.sampleQuiz
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
@@ -15,10 +13,9 @@ import org.junit.runner.RunWith
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
-class AppDatabaseTest {
+class QuizDaoTest {
     private lateinit var appDatabase: AppDatabase
     private lateinit var quizDao: QuizDao
-    private lateinit var answerDao: AnswerDao
 
     @Before
     fun createDatabase() {
@@ -27,7 +24,6 @@ class AppDatabaseTest {
             .allowMainThreadQueries()
             .build()
         quizDao = appDatabase.quizDao
-        answerDao = appDatabase.answerDao
     }
 
     @After
@@ -38,15 +34,11 @@ class AppDatabaseTest {
 
     @Test
     fun testSaveAndGetQuiz() {
-        quizDao.save(sampleQuiz)
-        val quiz = quizDao.getById(sampleQuiz.id)
-        assertThat(quiz).isEqualTo(sampleQuiz)
+        val quizId = quizDao.save(sampleQuiz).toInt()
+        val quizFromDb = quizDao.getById(quizId)
+        assertThat(quizFromDb.id).isEqualTo(sampleQuiz.id)
+        assertThat(quizFromDb.text).isEqualTo(sampleQuiz.text)
     }
 
-    @Test
-    fun testSaveAndGetAnswer() {
-        answerDao.saveList(sampleAnswersOfSampleQuiz)
-        val answerList = answerDao.getAnswersByQuizId(sampleQuiz.id)
-        assertThat(answerList).isEqualTo(sampleAnswersOfSampleQuiz)
-    }
+
 }

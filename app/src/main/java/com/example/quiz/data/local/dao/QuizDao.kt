@@ -10,7 +10,7 @@ interface QuizDao {
     fun saveList(quizList: List<Quiz>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(quiz: Quiz)
+    fun save(quiz: Quiz): Long
 
     @Query("SELECT * FROM " + QuizTable.TABLE_NAME)
     fun getAll(): List<Quiz>
