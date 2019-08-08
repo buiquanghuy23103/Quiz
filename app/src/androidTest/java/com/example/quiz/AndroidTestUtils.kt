@@ -1,7 +1,14 @@
 package com.example.quiz
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.example.quiz.model.Answer
 import com.example.quiz.model.Quiz
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 
 val sampleQuizList = listOf(
     Quiz("Canberra is the capital of Australia.", 0),
@@ -13,8 +20,8 @@ val sampleQuizList = listOf(
 )
 
 val sampleQuiz = sampleQuizList[0]
-
 val sampleAnswersOfSampleQuiz = generateAnswerListForSampleQuiz()
+val sampleAnswer = Answer(sampleQuiz.id, "New answer", true)
 
 private fun generateAnswerListForSampleQuiz(): List<Answer> {
     return mutableListOf<Answer>().also {
@@ -23,4 +30,22 @@ private fun generateAnswerListForSampleQuiz(): List<Answer> {
             it.add(answer)
         }
     }
+}
+
+@Throws(InterruptedException::class)
+fun <T> LiveData<T>.getValueBlocking(): T? {
+    var value: T? = null
+    val latch = CountDownLatch(1)
+    val innerObserver = object : Observer<T> {
+        override fun onChanged(it: T) {
+            value = it
+            latch.countDown()
+            this@getValueBlocking.removeObserver(this)
+        }
+    }
+    CoroutineScope(Dispatchers.Main).launch {
+        observeForever(innerObserver)
+    }
+    latch.await(2, TimeUnit.SECONDS)
+    return value
 }

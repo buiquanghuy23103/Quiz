@@ -17,7 +17,7 @@ interface AnswerDao {
     fun save(answer: Answer): Long
 
     @Query("SELECT * FROM ${AnswerTable.TABLE_NAME} WHERE ${AnswerTable.Cols.ID} = :answerId")
-    fun getSyncById(answerId: Int): LiveData<Answer>
+    fun getLiveDataById(answerId: Int): LiveData<Answer>
 
     @Query("SELECT * FROM " + AnswerTable.TABLE_NAME + " WHERE " + AnswerTable.Cols.QUIZ_ID + " = :quizId")
     fun getAnswersByQuizId(quizId: Int): List<Answer>

@@ -41,5 +41,5 @@ class QuizViewModel(quizId: Int) : BaseViewModel() {
         ioScope.launch { answerDao.save(newAnswer) }
     }
 
-    fun getAnswerSyncById(answerId: Int) = answerDao.getSyncById(answerId)
+    fun getAnswerSyncById(answerId: Int) = answerDao.getLiveDataById(answerId)
 }

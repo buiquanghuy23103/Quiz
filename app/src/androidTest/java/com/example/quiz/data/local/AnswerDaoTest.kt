@@ -5,6 +5,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.quiz.data.local.dao.AnswerDao
 import com.example.quiz.data.local.dao.QuizDao
+import com.example.quiz.getValueBlocking
+import com.example.quiz.sampleAnswer
 import com.example.quiz.sampleAnswersOfSampleQuiz
 import com.example.quiz.sampleQuiz
 import com.google.common.truth.Truth.assertThat
@@ -52,6 +54,18 @@ class AnswerDaoTest {
             assertThat(answerListFromDb[i].isTrue).isEqualTo(currentAnswerFromSample?.isTrue)
             assertThat(answerListFromDb[i].isChosen).isEqualTo(currentAnswerFromSample?.isChosen)
         }
+    }
+
+    @Test
+    fun testGetAnswerAsLiveDataById() {
+        quizDao.save(sampleQuiz)
+        val answerId = answerDao.save(sampleAnswer).toInt()
+        val answerFromDbAsLiveData = answerDao.getLiveDataById(answerId)
+        val answerFromDb = answerFromDbAsLiveData.getValueBlocking()
+        assertThat(answerFromDb?.quizId).isEqualTo(sampleAnswer.id)
+        assertThat(answerFromDb?.text).isEqualTo(sampleAnswer.text)
+        assertThat(answerFromDb?.isTrue).isEqualTo(sampleAnswer.isTrue)
+        assertThat(answerFromDb?.isChosen).isEqualTo(sampleAnswer.isChosen)
     }
 
 }
