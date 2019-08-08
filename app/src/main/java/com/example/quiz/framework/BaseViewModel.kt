@@ -1,15 +1,13 @@
 package com.example.quiz.framework
 
 import androidx.lifecycle.ViewModel
-import com.example.quiz.MainApplication
-import com.example.quiz.data.local.AppDatabase
+import com.example.quiz.dagger.Injector
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 
 abstract class BaseViewModel : ViewModel(){
-    private val appContext = MainApplication.INSTANCE.applicationContext
-    private val database = AppDatabase.getInstance(appContext)
+    private val database = Injector.get().appDatabase()
     val quizDao = database.quizDao
     val answerDao = database.answerDao
 
