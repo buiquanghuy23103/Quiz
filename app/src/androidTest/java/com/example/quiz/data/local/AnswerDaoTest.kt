@@ -6,7 +6,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.example.quiz.data.local.dao.AnswerDao
 import com.example.quiz.data.local.dao.QuizDao
 import com.example.quiz.getValueBlocking
-import com.example.quiz.sampleAnswer
 import com.example.quiz.sampleAnswersOfSampleQuiz
 import com.example.quiz.sampleQuiz
 import com.google.common.truth.Truth.assertThat
@@ -21,6 +20,7 @@ class AnswerDaoTest {
     private lateinit var appDatabase: AppDatabase
     private lateinit var answerDao: AnswerDao
     private lateinit var quizDao: QuizDao
+    private var sampleQuizId: Int = 0
 
     @Before
     fun createDatabase() {
@@ -30,6 +30,8 @@ class AnswerDaoTest {
             .build()
         answerDao = appDatabase.answerDao
         quizDao = appDatabase.quizDao
+        sampleQuizId = quizDao.save(sampleQuiz).toInt()
+        answerDao.saveList(sampleAnswersOfSampleQuiz)
     }
 
     @After
@@ -40,9 +42,8 @@ class AnswerDaoTest {
 
     @Test
     fun testSaveAndGetAnswerList() {
-        val quizId = quizDao.save(sampleQuiz).toInt()
-        answerDao.saveList(sampleAnswersOfSampleQuiz)
-        val answerListFromDb = answerDao.getAnswersByQuizId(quizId)
+
+        val answerListFromDb = answerDao.getAnswersByQuizId(sampleQuizId)
         for (i in 0 until answerListFromDb.size - 1) {
             // The order of answers in database is not the same as that in sampleAnswersOfSampleQuiz
             val currentAnswerIdFromDb = answerListFromDb[i].id
@@ -58,11 +59,11 @@ class AnswerDaoTest {
 
     @Test
     fun testGetAnswerAsLiveDataById() {
-        quizDao.save(sampleQuiz)
-        val answerId = answerDao.save(sampleAnswer).toInt()
-        val answerFromDbAsLiveData = answerDao.getLiveDataById(answerId)
+        val sampleAnswer = sampleAnswersOfSampleQuiz[0]
+        val answerFromDbAsLiveData = answerDao.getLiveDataById(sampleAnswer.id)
         val answerFromDb = answerFromDbAsLiveData.getValueBlocking()
-        assertThat(answerFromDb?.quizId).isEqualTo(sampleAnswer.id)
+
+        assertThat(answerFromDb?.quizId).isEqualTo(sampleAnswer.quizId)
         assertThat(answerFromDb?.text).isEqualTo(sampleAnswer.text)
         assertThat(answerFromDb?.isTrue).isEqualTo(sampleAnswer.isTrue)
         assertThat(answerFromDb?.isChosen).isEqualTo(sampleAnswer.isChosen)
