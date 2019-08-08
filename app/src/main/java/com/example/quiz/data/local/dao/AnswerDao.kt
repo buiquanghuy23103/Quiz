@@ -11,10 +11,10 @@ import com.example.quiz.model.Answer
 @Dao
 interface AnswerDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveList(answerList: List<Answer>)
+    fun saveList(answerList: List<Answer>): List<Long>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(answer: Answer)
+    fun save(answer: Answer): Long
 
     @Query("SELECT * FROM ${AnswerTable.TABLE_NAME} WHERE ${AnswerTable.Cols.ID} = :answerId")
     fun getSyncById(answerId: Int): LiveData<Answer>

@@ -46,7 +46,8 @@ class QuizDaoTest {
         val quizIdList = quizDao.saveList(sampleQuizList)
         val quizListFromDb = quizDao.getAll()
         for (i in 0 until quizIdList.size - 1) {
-            assertThat(quizListFromDb[i].id).isEqualTo(quizIdList[i].toInt())
+            assertThat(quizListFromDb[i].id).isEqualTo(sampleQuizList[i].id)
+            assertThat(quizListFromDb[i].text).isEqualTo(sampleQuizList[i].text)
         }
     }
 }
