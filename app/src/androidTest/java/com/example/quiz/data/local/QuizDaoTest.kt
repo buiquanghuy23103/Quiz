@@ -4,6 +4,7 @@ import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.quiz.data.local.dao.QuizDao
+import com.example.quiz.getValueBlocking
 import com.example.quiz.sampleQuiz
 import com.example.quiz.sampleQuizList
 import com.google.common.truth.Truth.assertThat
@@ -44,9 +45,9 @@ class QuizDaoTest {
     @Test
     fun testSaveAndGetQuizList() {
         val quizIdList = quizDao.saveList(sampleQuizList)
-        val quizListFromDb = quizDao.getAll()
+        val quizListFromDb = quizDao.getAll().getValueBlocking()
         for (i in 0 until quizIdList.size - 1) {
-            assertThat(quizListFromDb[i].id).isEqualTo(sampleQuizList[i].id)
+            assertThat(quizListFromDb!![i].id).isEqualTo(sampleQuizList[i].id)
             assertThat(quizListFromDb[i].text).isEqualTo(sampleQuizList[i].text)
         }
     }

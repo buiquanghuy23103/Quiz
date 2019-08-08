@@ -1,5 +1,6 @@
 package com.example.quiz.data.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -16,7 +17,7 @@ interface QuizDao {
     fun save(quiz: Quiz): Long
 
     @Query("SELECT * FROM " + QuizTable.TABLE_NAME)
-    fun getAll(): List<Quiz>
+    fun getAll(): LiveData<List<Quiz>>
 
     @Query("SELECT " + QuizTable.Cols.ID + " FROM " + QuizTable.TABLE_NAME)
     fun getIdList(): List<Int>
