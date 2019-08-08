@@ -1,22 +1,28 @@
 package com.example.quiz.data.local
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.quiz.data.local.dao.AnswerDao
 import com.example.quiz.data.local.dao.QuizDao
-import com.example.quiz.getValueBlocking
 import com.example.quiz.sampleAnswersOfSampleQuiz
 import com.example.quiz.sampleQuiz
 import com.google.common.truth.Truth.assertThat
+import com.jraska.livedata.test
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
 class AnswerDaoTest {
+
+    @get:Rule
+    val testRule = InstantTaskExecutorRule()
+
     private lateinit var appDatabase: AppDatabase
     private lateinit var answerDao: AnswerDao
     private lateinit var quizDao: QuizDao
@@ -61,12 +67,10 @@ class AnswerDaoTest {
     fun testGetAnswerAsLiveDataById() {
         val sampleAnswer = sampleAnswersOfSampleQuiz[0]
         val answerFromDbAsLiveData = answerDao.getLiveDataById(sampleAnswer.id)
-        val answerFromDb = answerFromDbAsLiveData.getValueBlocking()
-
-        assertThat(answerFromDb?.quizId).isEqualTo(sampleAnswer.quizId)
-        assertThat(answerFromDb?.text).isEqualTo(sampleAnswer.text)
-        assertThat(answerFromDb?.isTrue).isEqualTo(sampleAnswer.isTrue)
-        assertThat(answerFromDb?.isChosen).isEqualTo(sampleAnswer.isChosen)
+        answerFromDbAsLiveData.test()
+            .awaitValue()
+            .assertHasValue()
+            .assertValue(sampleAnswer)
     }
 
 }
