@@ -5,6 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.quiz.data.local.dao.QuizDao
 import com.example.quiz.sampleQuiz
+import com.example.quiz.sampleQuizList
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before
@@ -40,5 +41,12 @@ class QuizDaoTest {
         assertThat(quizFromDb.text).isEqualTo(sampleQuiz.text)
     }
 
-
+    @Test
+    fun testSaveAndGetQuizList() {
+        val quizIdList = quizDao.saveList(sampleQuizList)
+        val quizListFromDb = quizDao.getAll()
+        for (i in 0 until quizIdList.size - 1) {
+            assertThat(quizListFromDb[i].id).isEqualTo(quizIdList[i].toInt())
+        }
+    }
 }

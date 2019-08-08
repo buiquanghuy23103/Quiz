@@ -1,13 +1,16 @@
 package com.example.quiz.data.local.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.example.quiz.data.local.DbScheme.QuizTable
 import com.example.quiz.model.Quiz
 
 @Dao
 interface QuizDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveList(quizList: List<Quiz>)
+    fun saveList(quizList: List<Quiz>): List<Long>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(quiz: Quiz): Long
@@ -20,7 +23,4 @@ interface QuizDao {
 
     @Query("SELECT * FROM " + QuizTable.TABLE_NAME + " WHERE " + QuizTable.Cols.ID + " = :id")
     fun getById(id: Int): Quiz
-
-    @Delete
-    fun delete(quiz: Quiz)
 }
