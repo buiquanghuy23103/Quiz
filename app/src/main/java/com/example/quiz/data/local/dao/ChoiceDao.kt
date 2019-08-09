@@ -6,19 +6,19 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.quiz.data.local.DbScheme.AnswerTable
-import com.example.quiz.model.Answer
+import com.example.quiz.model.Choice
 
 @Dao
-interface AnswerDao {
+interface ChoiceDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveList(answerList: List<Answer>): List<Long>
+    fun saveList(choiceList: List<Choice>): List<Long>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(answer: Answer): Long
+    fun save(choice: Choice): Long
 
     @Query("SELECT * FROM ${AnswerTable.TABLE_NAME} WHERE ${AnswerTable.Cols.ID} = :answerId")
-    fun getLiveDataById(answerId: Int): LiveData<Answer>
+    fun getLiveDataById(answerId: Int): LiveData<Choice>
 
     @Query("SELECT * FROM " + AnswerTable.TABLE_NAME + " WHERE " + AnswerTable.Cols.QUIZ_ID + " = :quizId")
-    fun getAnswersByQuizId(quizId: Int): List<Answer>
+    fun getAnswersByQuizId(quizId: Int): List<Choice>
 }

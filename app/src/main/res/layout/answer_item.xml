@@ -15,6 +15,6 @@
 
         <variable
             name="answer"
-            type="com.example.quiz.model.Answer" />
+            type="com.example.quiz.model.Choice" />
     </data>
 </layout>

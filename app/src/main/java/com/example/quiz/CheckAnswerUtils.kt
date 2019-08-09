@@ -1,13 +1,9 @@
 package com.example.quiz
 
-import com.example.quiz.model.Answer
+import com.example.quiz.model.Choice
 
-class CheckAnswerUtils(answerList: List<Answer>) {
-    private val answerAssessment: MutableList<Boolean>
-
-    init {
-        answerAssessment = answerList.map { answer -> answer.isTrue.not() } as MutableList<Boolean>
-    }
+class CheckAnswerUtils(choiceList: List<Choice>) {
+    private val answerAssessment = choiceList.map { answer -> answer.isTrue }.toMutableList()
 
     fun saveUserSelectionAtPosition(position: Int) {
         println("🎁 answerAssessment = $answerAssessment, position = $position")

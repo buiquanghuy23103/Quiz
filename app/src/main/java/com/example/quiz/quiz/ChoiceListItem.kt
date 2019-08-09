@@ -5,23 +5,23 @@ import android.view.View
 import com.example.quiz.databinding.AnswerItemBinding
 import com.example.quiz.framework.BaseData
 import com.example.quiz.framework.BaseListItem
-import com.example.quiz.model.Answer
+import com.example.quiz.model.Choice
 
-class AnswerListItem private constructor(private val binding: AnswerItemBinding) :
+class ChoiceListItem private constructor(private val binding: AnswerItemBinding) :
     BaseListItem(binding)
 {
     lateinit var clickListener: UIinterface
 
     companion object{
-        fun from(inflater: LayoutInflater): AnswerListItem {
+        fun from(inflater: LayoutInflater): ChoiceListItem {
             val binding = AnswerItemBinding.inflate(inflater)
-            return AnswerListItem(binding)
+            return ChoiceListItem(binding)
         }
     }
 
     override fun bind(data: BaseData) {
         with(binding) {
-            answer = data as Answer
+            answer = data as Choice
             answerButton.let { view ->
                 clickListener.setBackgroundColor(view, data.id)
                 view.setOnClickListener { clickListener.onClick(data.id) }

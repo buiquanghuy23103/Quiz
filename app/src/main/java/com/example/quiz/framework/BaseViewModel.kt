@@ -9,7 +9,7 @@ import kotlinx.coroutines.Job
 abstract class BaseViewModel : ViewModel(){
     private val database = Injector.get().appDatabase()
     val quizDao = database.quizDao
-    val answerDao = database.answerDao
+    val answerDao = database.choiceDao
 
     private val backgroundJob = Job()
     val ioScope = CoroutineScope(Dispatchers.IO + backgroundJob)

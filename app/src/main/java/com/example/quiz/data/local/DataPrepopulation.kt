@@ -22,7 +22,7 @@ class DataPrepopulation(private val appContext: Context) : RoomDatabase.Callback
     private suspend fun insertSampleData() {
         appDatabase.withTransaction {
             appDatabase.quizDao.saveList(SampleData.sampleQuizList)
-            appDatabase.answerDao.saveList(SampleData.sampleAnswerList)
+            appDatabase.choiceDao.saveList(SampleData.sampleAnswerList)
         }
     }
 }

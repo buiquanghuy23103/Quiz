@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.quiz.data.local.dao.AnswerDao
+import com.example.quiz.data.local.dao.ChoiceDao
 import com.example.quiz.data.local.dao.QuizDao
 import com.example.quiz.util.sampleAnswersOfSampleQuiz
 import com.example.quiz.util.sampleQuiz
@@ -18,13 +18,13 @@ import org.junit.runner.RunWith
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
-class AnswerDaoTest {
+class ChoiceDaoTest {
 
     @get:Rule
     val testRule = InstantTaskExecutorRule()
 
     private lateinit var appDatabase: AppDatabase
-    private lateinit var answerDao: AnswerDao
+    private lateinit var choiceDao: ChoiceDao
     private lateinit var quizDao: QuizDao
     private var sampleQuizId: Int = 0
 
@@ -34,10 +34,10 @@ class AnswerDaoTest {
         appDatabase = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java)
             .allowMainThreadQueries()
             .build()
-        answerDao = appDatabase.answerDao
+        choiceDao = appDatabase.choiceDao
         quizDao = appDatabase.quizDao
         sampleQuizId = quizDao.save(sampleQuiz).toInt()
-        answerDao.saveList(sampleAnswersOfSampleQuiz)
+        choiceDao.saveList(sampleAnswersOfSampleQuiz)
     }
 
     @After
@@ -49,7 +49,7 @@ class AnswerDaoTest {
     @Test
     fun testSaveAndGetAnswerList() {
 
-        val answerListFromDb = answerDao.getAnswersByQuizId(sampleQuizId)
+        val answerListFromDb = choiceDao.getAnswersByQuizId(sampleQuizId)
         for (i in 0 until answerListFromDb.size - 1) {
             // The order of answers in database is not the same as that in sampleAnswersOfSampleQuiz
             val currentAnswerIdFromDb = answerListFromDb[i].id
@@ -66,7 +66,7 @@ class AnswerDaoTest {
     @Test
     fun testGetAnswerAsLiveDataById() {
         val sampleAnswer = sampleAnswersOfSampleQuiz[0]
-        val answerFromDbAsLiveData = answerDao.getLiveDataById(sampleAnswer.id)
+        val answerFromDbAsLiveData = choiceDao.getLiveDataById(sampleAnswer.id)
         answerFromDbAsLiveData.test()
             .awaitValue()
             .assertHasValue()

@@ -1,6 +1,6 @@
 package com.example.quiz.data.local
 
-import com.example.quiz.model.Answer
+import com.example.quiz.model.Choice
 import com.example.quiz.model.Quiz
 import java.util.*
 
@@ -16,11 +16,11 @@ object SampleData {
 
     val sampleAnswerList = generateAnswerList()
 
-    private fun generateAnswerList(): List<Answer> {
-        val list = ArrayList<Answer>()
+    private fun generateAnswerList(): List<Choice> {
+        val list = ArrayList<Choice>()
         sampleQuizList.forEach {
             for (i in 0..3) {
-                val answer = Answer(it.id, "Answer " + i, i % 2 == 0)
+                val answer = Choice(it.id, "Answer " + i, i % 2 == 0)
                 list.add(answer)
             }
         }

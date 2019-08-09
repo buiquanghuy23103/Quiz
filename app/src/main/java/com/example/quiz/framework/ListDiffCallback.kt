@@ -1,7 +1,7 @@
 package com.example.quiz.framework
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.quiz.model.Answer
+import com.example.quiz.model.Choice
 
 class ListDiffCallback : DiffUtil.ItemCallback<BaseData>() {
 
@@ -10,7 +10,7 @@ class ListDiffCallback : DiffUtil.ItemCallback<BaseData>() {
     }
 
     override fun areContentsTheSame(oldItem: BaseData, newItem: BaseData): Boolean {
-        val checkIsTrue = if (oldItem is Answer && newItem is Answer)
+        val checkIsTrue = if (oldItem is Choice && newItem is Choice)
             oldItem.isTrue == newItem.isTrue
         else true
         val checkText = oldItem.text == newItem.text

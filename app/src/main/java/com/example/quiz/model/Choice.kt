@@ -15,7 +15,7 @@ import kotlin.random.Random
         )],
         indices = [Index(value = [AnswerTable.Cols.QUIZ_ID])]
     )
-data class Answer(
+data class Choice(
     @ColumnInfo(name = AnswerTable.Cols.QUIZ_ID)
     var quizId : Int,
 

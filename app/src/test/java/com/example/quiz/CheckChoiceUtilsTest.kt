@@ -4,7 +4,7 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class CheckAnswerUtilsTest {
+class CheckChoiceUtilsTest {
 
     private lateinit var checkAnswerUtils: CheckAnswerUtils
     private lateinit var indexOfCorrectAnswers: List<Int>

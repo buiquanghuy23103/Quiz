@@ -1,6 +1,5 @@
 package com.example.quiz.quiz
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -11,8 +10,8 @@ import com.example.quiz.framework.BaseFragment
 import kotlinx.android.synthetic.main.quiz_fragment.*
 
 class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
-    AnswerListItem.UIinterface {
-    private val answerAdapter = AnswerListAdapter()
+    ChoiceListItem.UIinterface {
+    private val answerAdapter = ChoiceListAdapter()
 
     companion object{
         private const val ARG_QUIZ_ID = "index"
@@ -47,7 +46,7 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
 
     private fun setupAnswerView() {
         answer_view_recycler_view.adapter = answerAdapter
-        viewModel.answerList.observe(this, Observer { answerList ->
+        viewModel.choiceList.observe(this, Observer { answerList ->
             answerAdapter.submitList(answerList)
         })
         answerAdapter.itemClickListener = this
@@ -62,7 +61,7 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
     }
 
     override fun onClick(answerId: Int) {
-        viewModel.toggleAnswerChosenById(answerId)
+        viewModel.toggleChoiceChosenById(answerId)
     }
 
     override fun setBackgroundColor(view: View, answerId: Int) {
@@ -73,17 +72,5 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
             val backgroundColor = if (it.isChosen) chosenAnswerColor else notChosenAnswerColor
             view.setBackgroundColor(backgroundColor)
         })
-    }
-
-    private fun changeButtonColor(view: View) {
-        val chosenAnswerColor = ContextCompat.getColor(view.context, R.color.chosenAnswerColor)
-        val notChosenAnswerColor = ContextCompat.getColor(view.context, android.R.color.transparent)
-        val currentColor = (view.background as ColorDrawable?)?.color
-
-        if (currentColor == chosenAnswerColor) {
-            view.setBackgroundColor(notChosenAnswerColor)
-            return
-        }
-        view.setBackgroundColor(chosenAnswerColor)
     }
 }

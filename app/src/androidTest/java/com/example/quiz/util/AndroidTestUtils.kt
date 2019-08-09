@@ -2,7 +2,7 @@ package com.example.quiz.util
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.example.quiz.model.Answer
+import com.example.quiz.model.Choice
 import com.example.quiz.model.Quiz
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,12 +21,12 @@ val sampleQuizList = listOf(
 
 val sampleQuiz = sampleQuizList[1]
 val sampleAnswersOfSampleQuiz = generateAnswerListForSampleQuiz()
-val sampleAnswer = Answer(sampleQuiz.id, "New answer", true)
+val sampleAnswer = Choice(sampleQuiz.id, "New answer", true)
 
-private fun generateAnswerListForSampleQuiz(): List<Answer> {
-    return mutableListOf<Answer>().also {
+private fun generateAnswerListForSampleQuiz(): List<Choice> {
+    return mutableListOf<Choice>().also {
         for (i in 0..3) {
-            val answer = Answer(sampleQuiz.id, "Answer " + i, i % 2 == 0)
+            val answer = Choice(sampleQuiz.id, "Answer " + i, i % 2 == 0)
             it.add(answer)
         }
     }
