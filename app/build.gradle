@@ -56,7 +56,11 @@ dependencies {
     androidTestImplementation 'androidx.arch.core:core-testing:2.1.0-beta01'
     testImplementation 'com.jraska.livedata:testing-ktx:1.1.0'
     androidTestImplementation 'com.jraska.livedata:testing-ktx:1.1.0'
-
+    //DaggerMock
+    testImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.5'
+    androidTestImplementation 'com.github.fabioCollini.daggermock:daggermock:0.8.5'
+    testImplementation 'com.github.fabioCollini.daggermock:daggermock-kotlin:0.8.5'
+    androidTestImplementation 'com.github.fabioCollini.daggermock:daggermock-kotlin:0.8.5'
 
     // ViewModel and LiveData
     def lifecycle_version = "2.1.0-beta01"
