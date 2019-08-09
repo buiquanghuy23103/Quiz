@@ -5,8 +5,8 @@ import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.quiz.data.local.dao.QuizDao
-import com.example.quiz.sampleQuiz
-import com.example.quiz.sampleQuizList
+import com.example.quiz.util.sampleQuiz
+import com.example.quiz.util.sampleQuizList
 import com.google.common.truth.Truth.assertThat
 import com.jraska.livedata.test
 import org.junit.After

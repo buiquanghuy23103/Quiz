@@ -9,7 +9,6 @@ object DbScheme {
         object Cols {
             const val ID = "id"
             const val QUESTION = "text"
-            const val ANSWER = "answer"
         }
     }
 

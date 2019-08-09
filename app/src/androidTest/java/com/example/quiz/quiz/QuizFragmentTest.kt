@@ -4,17 +4,18 @@ import android.content.res.Resources
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.example.quiz.MainActivity
 import com.example.quiz.R
-import com.example.quiz.sampleQuiz
-import com.example.quiz.sampleQuizList
-import org.hamcrest.CoreMatchers.allOf
+import com.example.quiz.quizlist.QuizListItem
+import com.example.quiz.util.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -31,7 +32,13 @@ class QuizFragmentTest {
     fun jumpToQuizViewPagerFragment() {
         activityTestRule.activity.apply {
             runOnUiThread {
-                val bundle = Bundle().apply { putInt("index", sampleQuizList.indexOf(sampleQuiz)) }
+                val bundle = Bundle().apply {
+                    putInt(
+                        "index", sampleQuizList.indexOf(
+                            sampleQuiz
+                        )
+                    )
+                }
                 findNavController(R.id.nav_host_fragment).navigate(
                     R.id.quizViewPagerFragment,
                     bundle
@@ -47,8 +54,78 @@ class QuizFragmentTest {
     }
 
     @Test
-    fun testAnswerListIsDisplayed() {
-        onView(allOf(withId(R.id.answer_view_recycler_view)))
+    fun testQuestionTextViewIsDisplayed() {
+        onView(withId(R.id.quest_text_view))
             .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun testQuestionTextViewDisplayCorrectText() {
+        onView(withId(R.id.quest_text_view))
+            .check(matches(withText(sampleQuiz.text)))
+    }
+
+    @Test
+    fun testAnswerListIsDisplayed() {
+        onView(withId(R.id.answer_view_recycler_view))
+            .check(matches(isDisplayed()))
+    }
+
+
+    @Test
+    fun testChangeBackgroundColorOnAnswerButtonClick() {
+        val chosenColorId = R.color.chosenAnswerColor
+        val notChosenColorId = android.R.color.transparent
+        checkBackgroundColor(notChosenColorId)
+
+        onView(withId(R.id.answer_view_recycler_view))
+            .perform(RecyclerViewActions.actionOnItemAtPosition<QuizListItem>(0, click()))
+
+        checkBackgroundColor(chosenColorId)
+    }
+
+    private fun checkBackgroundColor(colorRes: Int) {
+        onView(listMatcher().atPosition(0))
+            .check(matches(CustomMatchers.hasBackgroundColor(colorRes)))
+    }
+
+    private fun listMatcher() = RecyclerViewMatcher(R.id.answer_view_recycler_view)
+
+    @Test
+    fun testResultViewVisibility() {
+        onView(withId(R.id.result_text_view))
+            .check(doesNotExist())
+
+        onView(withId(R.id.check_answer_button))
+            .perform(click())
+
+        onView(withId(R.id.result_text_view))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun testResultViewText() {
+        val indexOfCorrectAnswers = sampleAnswersOfSampleQuiz.mapIndexed { index, answer ->
+            if (answer.isTrue) index else 0
+        }.filter { it != 0 }
+        onView(withId(R.id.answer_view_recycler_view))
+            .perform(
+                RecyclerViewActions.actionOnItemAtPosition<QuizListItem>(
+                    indexOfCorrectAnswers[0],
+                    click()
+                )
+            )
+            .perform(
+                RecyclerViewActions.actionOnItemAtPosition<QuizListItem>(
+                    indexOfCorrectAnswers[1],
+                    click()
+                )
+            )
+
+        onView(withId(R.id.check_answer_button))
+            .perform(click())
+
+        onView(withId(R.id.result_text_view))
+            .check(matches(withText(resources.getString(R.string.correct_answer))))
     }
 }

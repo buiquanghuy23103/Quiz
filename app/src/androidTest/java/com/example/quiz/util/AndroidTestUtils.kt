@@ -1,4 +1,4 @@
-package com.example.quiz
+package com.example.quiz.util
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -17,9 +17,9 @@ val sampleQuizList = listOf(
     Quiz("The source of the Nile River is in Egypt.", 3),
     Quiz("The Amazon River is the longest river in the Americas.", 4),
     Quiz("Lake Baikal is the world\'s oldest and deepest freshwater lake.", 5)
-)
+).sortedBy { quiz -> quiz.text }
 
-val sampleQuiz = sampleQuizList[0]
+val sampleQuiz = sampleQuizList[1]
 val sampleAnswersOfSampleQuiz = generateAnswerListForSampleQuiz()
 val sampleAnswer = Answer(sampleQuiz.id, "New answer", true)
 
