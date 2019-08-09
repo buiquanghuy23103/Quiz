@@ -6,10 +6,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class AppModule(private val appContext: Context) {
+class AppModule {
     @Provides
-    fun provideAppContext(): Context = appContext
-
-    @Provides
-    fun provideAppDatabase() = AppDatabase.getInstance(appContext)
+    fun provideAppDatabase(appContext: Context) = AppDatabase.getInstance(appContext)
 }

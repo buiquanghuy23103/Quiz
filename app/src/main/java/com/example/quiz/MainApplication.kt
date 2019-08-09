@@ -2,7 +2,6 @@ package com.example.quiz
 
 import android.app.Application
 import com.example.quiz.dagger.AppComponent
-import com.example.quiz.dagger.AppModule
 import com.example.quiz.dagger.DaggerAppComponent
 import timber.log.Timber
 
@@ -19,7 +18,7 @@ class MainApplication: Application() {
         Timber.plant(Timber.DebugTree())
         INSTANCE = this
         component = DaggerAppComponent.builder()
-            .appModule(AppModule(this))
+            .appContext(this)
             .build()
     }
 }
