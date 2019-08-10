@@ -1,7 +1,6 @@
 package com.example.quiz.categorylist
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -21,23 +20,14 @@ class CategoryListItem private constructor(private val binding: CategoryListItem
     fun bind(category: String) {
         with(binding) {
             this.category = category
-            executePendingBindings()
-        }
-    }
-
-    private fun createOnClickListener(): OnClickListener {
-        return object : OnClickListener {
-            override fun startQuizOfCategory(view: View, category: String) {
+            root.setOnClickListener {
                 val navDirections =
-                    CategoryListFragmentDirections.actionQuizListFragmentToQuizAskPagerFragment(
+                    CategoryListFragmentDirections.actionCategoryListFragmentToQuizViewPagerFragment(
                         category
                     )
-                view.findNavController().navigate(navDirections)
+                it.findNavController().navigate(navDirections)
             }
+            executePendingBindings()
         }
-    }
-
-    interface OnClickListener {
-        fun startQuizOfCategory(view: View, category: String)
     }
 }

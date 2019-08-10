@@ -9,7 +9,7 @@
         android:label="quiz_list_fragment"
         tools:layout="@layout/category_list_fragment">
         <action
-            android:id="@+id/action_quizListFragment_to_quizAskPagerFragment"
+            android:id="@+id/action_categoryListFragment_to_quizViewPagerFragment"
             app:destination="@id/quizViewPagerFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
