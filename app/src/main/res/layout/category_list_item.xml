@@ -9,8 +9,7 @@
 
         <TextView
             android:id="@+id/item_question"
-            android:onClick="@{clickListener}"
-            android:text="@{quiz.text}"
+            android:text="@{category}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -22,12 +21,8 @@
     <data>
 
         <variable
-            name="quiz"
-            type="com.example.quiz.model.Quiz" />
-
-        <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener" />
+            name="category"
+            type="String" />
     </data>
 
 

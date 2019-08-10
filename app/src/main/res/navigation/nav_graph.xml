@@ -2,9 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
-            app:startDestination="@id/quizListFragment">
-    <fragment android:id="@+id/quizListFragment" android:name="com.example.quiz.quizlist.QuizListFragment"
-              android:label="quiz_list_fragment" tools:layout="@layout/quiz_list_fragment">
+    app:startDestination="@id/categoryListFragment">
+    <fragment
+        android:id="@+id/categoryListFragment"
+        android:name="com.example.quiz.categorylist.CategoryListFragment"
+        android:label="quiz_list_fragment"
+        tools:layout="@layout/category_list_fragment">
         <action
             android:id="@+id/action_quizListFragment_to_quizAskPagerFragment"
             app:destination="@id/quizViewPagerFragment"
@@ -12,15 +15,16 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@+id/quizListFragment" />
+            app:popUpTo="@+id/categoryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/quizViewPagerFragment"
         android:name="com.example.quiz.quizviewpager.QuizViewPagerFragment"
-              android:label="QuizAskPagerFragment" tools:layout="@layout/quiz_view_pager_fragment">
+        android:label="QuizViewPagerFragment"
+        tools:layout="@layout/quiz_view_pager_fragment">
         <argument
-            android:name="quizId"
-            android:defaultValue="0"
-            app:argType="integer" />
+            android:name="category"
+            android:defaultValue="error"
+            app:argType="string" />
     </fragment>
 </navigation>

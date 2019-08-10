@@ -14,7 +14,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.example.quiz.MainActivity
 import com.example.quiz.R
-import com.example.quiz.quizlist.QuizListItem
+import com.example.quiz.categorylist.CategoryListItem
 import com.example.quiz.util.CustomMatchers
 import com.example.quiz.util.RecyclerViewMatcher
 import com.example.quiz.util.sampleAnswersOfSampleQuiz
@@ -81,7 +81,7 @@ class QuizFragmentTest {
         checkBackgroundColor(notChosenColorId)
 
         onView(withId(R.id.answer_view_recycler_view))
-            .perform(RecyclerViewActions.actionOnItemAtPosition<QuizListItem>(0, click()))
+            .perform(RecyclerViewActions.actionOnItemAtPosition<CategoryListItem>(0, click()))
 
         checkBackgroundColor(chosenColorId)
     }
@@ -112,13 +112,13 @@ class QuizFragmentTest {
         }.filter { it != 0 }
         onView(withId(R.id.answer_view_recycler_view))
             .perform(
-                RecyclerViewActions.actionOnItemAtPosition<QuizListItem>(
+                RecyclerViewActions.actionOnItemAtPosition<CategoryListItem>(
                     indexOfCorrectAnswers[0],
                     click()
                 )
             )
             .perform(
-                RecyclerViewActions.actionOnItemAtPosition<QuizListItem>(
+                RecyclerViewActions.actionOnItemAtPosition<CategoryListItem>(
                     indexOfCorrectAnswers[1],
                     click()
                 )

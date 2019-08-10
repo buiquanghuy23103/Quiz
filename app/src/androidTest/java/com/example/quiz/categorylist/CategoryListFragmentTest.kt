@@ -1,4 +1,4 @@
-package com.example.quiz.quizlist
+package com.example.quiz.categorylist
 
 import androidx.navigation.findNavController
 import androidx.test.espresso.Espresso.onView
@@ -15,7 +15,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class QuizListFragmentTest {
+class CategoryListFragmentTest {
     @Rule
     @JvmField
     val activityTestRule = ActivityTestRule(MainActivity::class.java)
@@ -24,14 +24,14 @@ class QuizListFragmentTest {
     fun jumpToQuizListFragment() {
         activityTestRule.activity.apply {
             runOnUiThread {
-                findNavController(R.id.nav_host_fragment).navigate(R.id.quizListFragment)
+                findNavController(R.id.nav_host_fragment).navigate(R.id.categoryListFragment)
             }
         }
     }
 
     @Test
     fun testQuizListIsDisplayed() {
-        onView(withId(R.id.recycler_view))
+        onView(withId(R.id.category_list))
             .check(matches(isDisplayed()))
     }
 }
