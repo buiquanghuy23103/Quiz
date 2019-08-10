@@ -8,7 +8,6 @@ import com.example.quiz.data.local.dao.ChoiceDao
 import com.example.quiz.data.local.dao.QuizDao
 import com.example.quiz.util.sampleAnswersOfSampleQuiz
 import com.example.quiz.util.sampleQuiz
-import com.google.common.truth.Truth.assertThat
 import com.jraska.livedata.test
 import org.junit.After
 import org.junit.Before
@@ -49,18 +48,11 @@ class ChoiceDaoTest {
     @Test
     fun testSaveAndGetAnswerList() {
 
-        val answerListFromDb = choiceDao.getChoiceByQuizId(sampleQuizId)
-        for (i in 0 until answerListFromDb.size - 1) {
-            // The order of answers in database is not the same as that in sampleAnswersOfSampleQuiz
-            val currentAnswerIdFromDb = answerListFromDb[i].id
-            val currentAnswerFromSample =
-                sampleAnswersOfSampleQuiz.find { answer -> answer.id == currentAnswerIdFromDb }
+        choiceDao.getChoiceByQuizId(sampleQuizId).test()
+            .awaitValue()
+            .assertHasValue()
+            .assertValue(sampleAnswersOfSampleQuiz)
 
-            assertThat(currentAnswerFromSample).isNotNull()
-            assertThat(answerListFromDb[i].quizId).isEqualTo(currentAnswerFromSample?.quizId)
-            assertThat(answerListFromDb[i].isTrue).isEqualTo(currentAnswerFromSample?.isTrue)
-            assertThat(answerListFromDb[i].isChosen).isEqualTo(currentAnswerFromSample?.isChosen)
-        }
     }
 
     @Test

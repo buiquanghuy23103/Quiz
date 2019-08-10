@@ -8,6 +8,7 @@ import com.example.quiz.R
 import com.example.quiz.databinding.QuizFragmentBinding
 import com.example.quiz.framework.BaseFragment
 import kotlinx.android.synthetic.main.quiz_fragment.*
+import timber.log.Timber
 
 class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
     ChoiceListItem.UIinterface {
@@ -23,13 +24,14 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
     }
 
     override fun initViewModel() =
-        getViewModel { QuizViewModel(getQuizId()) }
+        getViewModel { QuizViewModel(getQuizId().also { Timber.i("quizId = $it") }) }
 
     override fun getLayoutId() = R.layout.quiz_fragment
 
     private fun getQuizId(): Int {
-        val arg = requireNotNull(arguments).takeIf { it.containsKey(ARG_QUIZ_ID) }
-        return arg?.let { it.getInt(ARG_QUIZ_ID) } ?: 0
+        return arguments!!.takeIf { it.containsKey(ARG_QUIZ_ID) }
+            ?.getInt(ARG_QUIZ_ID)
+            ?: 0
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

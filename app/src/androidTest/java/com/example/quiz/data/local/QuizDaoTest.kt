@@ -7,7 +7,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.example.quiz.data.local.dao.QuizDao
 import com.example.quiz.util.sampleQuiz
 import com.example.quiz.util.sampleQuizList
-import com.google.common.truth.Truth.assertThat
 import com.jraska.livedata.test
 import org.junit.After
 import org.junit.Before
@@ -46,8 +45,11 @@ class QuizDaoTest {
     fun testSaveAndGetQuiz() {
         val quizId = sampleQuizIdList[0].toInt()
         val quizFromDb = quizDao.getById(quizId)
-        assertThat(quizFromDb.id).isEqualTo(sampleQuiz.id)
-        assertThat(quizFromDb.text).isEqualTo(sampleQuiz.text)
+
+        quizFromDb.test()
+            .awaitValue()
+            .assertHasValue()
+            .assertValue(sampleQuiz)
     }
 
     @Test
@@ -58,7 +60,5 @@ class QuizDaoTest {
         quizListFromDb.test()
             .assertHasValue()
             .assertValue(sampleQuizList)
-
-
     }
 }

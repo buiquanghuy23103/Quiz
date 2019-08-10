@@ -7,7 +7,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizViewPagerFragmentBinding
 import com.example.quiz.framework.BaseFragment
-import kotlinx.android.synthetic.main.quiz_view_pager_fragment.*
 
 class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPagerFragmentBinding>() {
     private val args: QuizViewPagerFragmentArgs by navArgs()
@@ -18,10 +17,16 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
     override fun getLayoutId() = R.layout.quiz_view_pager_fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.quizIdList.observe(this, Observer { quizIdList ->
-            view_pager.adapter = QuizViewPagerAdapter(this, quizIdList)
-            view_pager.setPageTransformer(ZoomOutPageTransformer())
-            view_pager.currentItem = quizIdList.indexOf(args.quizId)
-        })
+        with(binding.viewPager) {
+            viewModel.quizIdList.observe(this@QuizViewPagerFragment, Observer {
+                adapter = null
+                adapter = QuizViewPagerAdapter(this@QuizViewPagerFragment, it).apply {
+                    currentItem = 2
+                }
+
+            })
+
+            setPageTransformer(ZoomOutPageTransformer())
+        }
     }
 }

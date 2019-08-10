@@ -15,7 +15,10 @@ import androidx.test.rule.ActivityTestRule
 import com.example.quiz.MainActivity
 import com.example.quiz.R
 import com.example.quiz.quizlist.QuizListItem
-import com.example.quiz.util.*
+import com.example.quiz.util.CustomMatchers
+import com.example.quiz.util.RecyclerViewMatcher
+import com.example.quiz.util.sampleAnswersOfSampleQuiz
+import com.example.quiz.util.sampleQuiz
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -34,9 +37,8 @@ class QuizFragmentTest {
             runOnUiThread {
                 val bundle = Bundle().apply {
                     putInt(
-                        "index", sampleQuizList.indexOf(
-                            sampleQuiz
-                        )
+                        "quizId",
+                        sampleQuiz.id
                     )
                 }
                 findNavController(R.id.nav_host_fragment).navigate(

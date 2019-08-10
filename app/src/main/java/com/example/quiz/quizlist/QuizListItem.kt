@@ -7,9 +7,12 @@ import com.example.quiz.databinding.QuizItemBinding
 import com.example.quiz.framework.BaseData
 import com.example.quiz.framework.BaseListItem
 import com.example.quiz.model.Quiz
+import timber.log.Timber
 
 class QuizListItem private constructor(private val binding: QuizItemBinding) :
     BaseListItem(binding) {
+
+    private var quizId = 0
 
     companion object {
         fun from(inflater: LayoutInflater): QuizListItem {
@@ -21,6 +24,7 @@ class QuizListItem private constructor(private val binding: QuizItemBinding) :
     override fun bind(data: BaseData) {
         with(binding) {
             quiz = data as Quiz
+            quizId = data.id
             clickListener = createOnClickListener()
             executePendingBindings()
         }
@@ -29,7 +33,8 @@ class QuizListItem private constructor(private val binding: QuizItemBinding) :
     private fun createOnClickListener(): View.OnClickListener {
         return View.OnClickListener {
             val navDirections = QuizListFragmentDirections
-                .actionQuizListFragmentToQuizAskPagerFragment(adapterPosition)
+                .actionQuizListFragmentToQuizAskPagerFragment(quizId)
+            Timber.i("quizId = $quizId")
             it.findNavController().navigate(navDirections)
         }
     }
