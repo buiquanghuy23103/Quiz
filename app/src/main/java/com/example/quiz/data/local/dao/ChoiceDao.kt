@@ -19,6 +19,6 @@ interface ChoiceDao {
     @Query("SELECT * FROM ${AnswerTable.TABLE_NAME} WHERE ${AnswerTable.Cols.ID} = :answerId")
     fun getById(answerId: Int): LiveData<Choice>
 
-    @Query("SELECT * FROM " + AnswerTable.TABLE_NAME + " WHERE " + AnswerTable.Cols.QUIZ_ID + " = :quizId")
-    fun getChoiceByQuizId(quizId: Int): LiveData<List<Choice>>
+    @Query("SELECT * FROM ${AnswerTable.TABLE_NAME} WHERE ${AnswerTable.Cols.QUIZ_ID} = :quizId")
+    fun getChoicesByQuizId(quizId: Int): LiveData<List<Choice>>
 }

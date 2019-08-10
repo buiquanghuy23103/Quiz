@@ -6,7 +6,7 @@ import kotlinx.coroutines.launch
 
 class QuizViewModel(quizId: Int) : BaseViewModel() {
     val quiz = quizDao.getById(quizId)
-    val choiceList = choiceDao.getChoiceByQuizId(quizId)
+    val choiceList = choiceDao.getChoicesByQuizId(quizId)
     val assessment = Transformations.map(choiceList) {
         it.map { choice -> choice.isChosen == choice.isTrue }
             .all { it == true }
