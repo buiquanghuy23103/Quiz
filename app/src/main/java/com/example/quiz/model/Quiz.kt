@@ -12,6 +12,9 @@ data class Quiz(
     @ColumnInfo(name = QuizTable.Cols.QUESTION)
     override var text: String = "",
 
+    @ColumnInfo(name = QuizTable.Cols.CATEGORY)
+    var category: String = "Miscellaneous",
+
     @PrimaryKey
     @ColumnInfo(name = QuizTable.Cols.ID)
     override var id: Int = Random.nextInt()
