@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.quiz_fragment.*
 
 class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
     ChoiceListItem.UIinterface {
-    private val answerAdapter = ChoiceListAdapter()
+    private val choiceListAdapter = ChoiceListAdapter()
 
     companion object{
         private const val ARG_QUIZ_ID = "index"
@@ -34,8 +34,9 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupQuizView()
-        setupAnswerView()
-        setupCheckAnswerButton()
+        setupChoiceView()
+        setupCheckButton()
+        setupResultView()
     }
 
     private fun setupQuizView() {
@@ -44,20 +45,26 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
         })
     }
 
-    private fun setupAnswerView() {
-        answer_view_recycler_view.adapter = answerAdapter
-        viewModel.choiceList.observe(this, Observer { answerList ->
-            answerAdapter.submitList(answerList)
+    private fun setupChoiceView() {
+        answer_view_recycler_view.adapter = choiceListAdapter
+        viewModel.choiceList.observe(this, Observer { choiceList ->
+            choiceListAdapter.submitList(choiceList)
+            println("choiceList = $choiceList")
         })
-        answerAdapter.itemClickListener = this
+        choiceListAdapter.itemClickListener = this
     }
 
-    private fun setupCheckAnswerButton() {
+    private fun setupCheckButton() {
         check_answer_button.setOnClickListener {
-            result_text_view.text =
-                if (viewModel.isCorrectAnswer()) getString(R.string.correct_answer)
-                else getString(R.string.incorrect_answer)
+            result_text_view.visibility = View.VISIBLE
         }
+    }
+
+    private fun setupResultView() {
+        viewModel.assessment.observe(this, Observer { isCorrect ->
+            result_text_view.text = if (isCorrect) getString(R.string.correct_answer)
+            else getString(R.string.incorrect_answer)
+        })
     }
 
     override fun onClick(answerId: Int) {
@@ -65,7 +72,7 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
     }
 
     override fun setBackgroundColor(view: View, answerId: Int) {
-        viewModel.getAnswerSyncById(answerId).observe(this, Observer {
+        viewModel.getChoiceById(answerId).observe(this, Observer {
             val chosenAnswerColor = ContextCompat.getColor(view.context, R.color.chosenAnswerColor)
             val notChosenAnswerColor =
                 ContextCompat.getColor(view.context, android.R.color.transparent)

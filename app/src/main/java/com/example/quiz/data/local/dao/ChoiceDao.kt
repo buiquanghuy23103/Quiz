@@ -17,8 +17,8 @@ interface ChoiceDao {
     fun save(choice: Choice): Long
 
     @Query("SELECT * FROM ${AnswerTable.TABLE_NAME} WHERE ${AnswerTable.Cols.ID} = :answerId")
-    fun getLiveDataById(answerId: Int): LiveData<Choice>
+    fun getById(answerId: Int): LiveData<Choice>
 
     @Query("SELECT * FROM " + AnswerTable.TABLE_NAME + " WHERE " + AnswerTable.Cols.QUIZ_ID + " = :quizId")
-    fun getAnswersByQuizId(quizId: Int): List<Choice>
+    fun getChoiceByQuizId(quizId: Int): LiveData<List<Choice>>
 }

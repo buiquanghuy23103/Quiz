@@ -49,7 +49,7 @@ class ChoiceDaoTest {
     @Test
     fun testSaveAndGetAnswerList() {
 
-        val answerListFromDb = choiceDao.getAnswersByQuizId(sampleQuizId)
+        val answerListFromDb = choiceDao.getChoiceByQuizId(sampleQuizId)
         for (i in 0 until answerListFromDb.size - 1) {
             // The order of answers in database is not the same as that in sampleAnswersOfSampleQuiz
             val currentAnswerIdFromDb = answerListFromDb[i].id
@@ -66,7 +66,7 @@ class ChoiceDaoTest {
     @Test
     fun testGetAnswerAsLiveDataById() {
         val sampleAnswer = sampleAnswersOfSampleQuiz[0]
-        val answerFromDbAsLiveData = choiceDao.getLiveDataById(sampleAnswer.id)
+        val answerFromDbAsLiveData = choiceDao.getById(sampleAnswer.id)
         answerFromDbAsLiveData.test()
             .awaitValue()
             .assertHasValue()
