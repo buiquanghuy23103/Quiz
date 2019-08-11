@@ -2,8 +2,10 @@ package com.example.quiz.categorylist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.quiz.R
 import com.example.quiz.databinding.CategoryListItemBinding
 
 class CategoryListItem private constructor(private val binding: CategoryListItemBinding) :
@@ -12,7 +14,8 @@ class CategoryListItem private constructor(private val binding: CategoryListItem
     companion object {
         fun from(parent: ViewGroup): CategoryListItem {
             val inflater = LayoutInflater.from(parent.context)
-            val binding = CategoryListItemBinding.inflate(inflater)
+            val binding: CategoryListItemBinding =
+                DataBindingUtil.inflate(inflater, R.layout.category_list_item, parent, false)
             return CategoryListItem(binding)
         }
     }

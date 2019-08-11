@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_margin="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp">
 
         <TextView
             android:id="@+id/item_question"
             android:text="@{category}"
             android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:textAppearance="@style/TextAppearance.NormalText" />
 
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <data>
 

@@ -3,7 +3,6 @@ package com.example.quiz.model
 import androidx.room.*
 import com.example.quiz.data.local.DbScheme.AnswerTable
 import com.example.quiz.data.local.DbScheme.QuizTable
-import com.example.quiz.framework.BaseData
 import kotlin.random.Random
 
 @Entity(tableName = AnswerTable.TABLE_NAME,
@@ -20,7 +19,7 @@ data class Choice(
     var quizId : Int,
 
     @ColumnInfo(name = AnswerTable.Cols.TEXT)
-    override var text: String,
+    var text: String,
 
     @ColumnInfo(name = AnswerTable.Cols.IS_TRUE)
     var isTrue: Boolean,
@@ -30,5 +29,5 @@ data class Choice(
 
     @PrimaryKey
     @ColumnInfo(name = AnswerTable.Cols.ID)
-    override var id: Int = Random.nextInt()
-) : BaseData
+    var id: Int = Random.nextInt()
+)

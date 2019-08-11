@@ -2,29 +2,33 @@ package com.example.quiz.quiz
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.example.quiz.R
 import com.example.quiz.databinding.ChoiceListItemBinding
-import com.example.quiz.framework.BaseData
-import com.example.quiz.framework.BaseListItem
 import com.example.quiz.model.Choice
 
 class ChoiceListItem private constructor(private val binding: ChoiceListItemBinding) :
-    BaseListItem(binding)
+    RecyclerView.ViewHolder(binding.root)
 {
     lateinit var clickListener: UIinterface
 
     companion object{
-        fun from(inflater: LayoutInflater): ChoiceListItem {
-            val binding = ChoiceListItemBinding.inflate(inflater)
+        fun from(parent: ViewGroup): ChoiceListItem {
+            val inflater = LayoutInflater.from(parent.context)
+            val binding: ChoiceListItemBinding =
+                DataBindingUtil.inflate(inflater, R.layout.choice_list_item, parent, false)
             return ChoiceListItem(binding)
         }
     }
 
-    override fun bind(data: BaseData) {
+    fun bind(choice: Choice) {
         with(binding) {
-            answer = data as Choice
+            answer = choice
             answerButton.let { view ->
-                clickListener.setBackgroundColor(view, data.id)
-                view.setOnClickListener { clickListener.onClick(data.id) }
+                clickListener.setBackgroundColor(view, choice.id)
+                view.setOnClickListener { clickListener.onClick(choice.id) }
             }
             executePendingBindings()
         }
