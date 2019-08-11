@@ -12,7 +12,7 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
     private val args: QuizViewPagerFragmentArgs by navArgs()
 
     override fun initViewModel() =
-        getViewModel { QuizViewPagerViewModel() }
+        getViewModel { QuizViewPagerViewModel(args.category) }
 
     override fun getLayoutId() = R.layout.quiz_view_pager_fragment
 
@@ -20,10 +20,7 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
         with(binding.viewPager) {
             viewModel.quizIdList.observe(this@QuizViewPagerFragment, Observer {
                 adapter = null
-                adapter = QuizViewPagerAdapter(this@QuizViewPagerFragment, it).apply {
-                    currentItem = 2
-                }
-
+                adapter = QuizViewPagerAdapter(this@QuizViewPagerFragment, it)
             })
 
             setPageTransformer(ZoomOutPageTransformer())

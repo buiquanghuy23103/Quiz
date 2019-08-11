@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -17,6 +16,7 @@ import com.example.quiz.R
 import com.example.quiz.categorylist.CategoryListItem
 import com.example.quiz.model.Quiz
 import com.example.quiz.util.*
+import org.hamcrest.CoreMatchers.not
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -105,7 +105,7 @@ class QuizFragmentTest {
     @Test
     fun testResultViewVisibility() {
         onView(withId(R.id.result_text_view))
-            .check(doesNotExist())
+            .check(matches(not(isDisplayed())))
 
         onView(withId(R.id.check_answer_button))
             .perform(click())
@@ -119,7 +119,6 @@ class QuizFragmentTest {
         val indexOfCorrectAnswers = sampleAnswersOfSampleQuiz.mapIndexed { index, answer ->
             if (answer.isTrue) index else 0
         }.filter { it != 0 }.also { println(it) }
-
 
 
         indexOfCorrectAnswers.forEach {
