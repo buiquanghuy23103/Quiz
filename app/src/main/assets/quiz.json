@@ -1,0 +1,122 @@
+[
+  {
+    "text": "Which city is the capital of Australia?",
+    "category": "Geography",
+    "choices": [
+      {
+        "text": "Sydney",
+        "isTrue": false
+      },
+      {
+        "text": "Canberra",
+        "isTrue": true
+      },
+      {
+        "text": "Melbourne",
+        "isTrue": false
+      },
+      {
+        "text": "Darwin",
+        "isTrue": false
+      }
+    ]
+  },
+  {
+    "text": "What are the three primary colors of light?",
+    "category": "Physics",
+    "choices": [
+      {
+        "text": "Red",
+        "isTrue": true
+      },
+      {
+        "text": "Yellow",
+        "isTrue": false
+      },
+      {
+        "text": "Blue",
+        "isTrue": true
+      },
+      {
+        "text": "Green",
+        "isTrue": true
+      },
+      {
+        "text": "Orange",
+        "isTrue": false
+      },
+      {
+        "text": "Black",
+        "isTrue": false
+      },
+      {
+        "text": "Cyan",
+        "isTrue": false
+      },
+      {
+        "text": "Magenta",
+        "isTrue": false
+      }
+    ]
+  },
+  {
+    "text": "What are the three primary colors in terms of printing?",
+    "category": "Miscellaneous",
+    "choices": [
+      {
+        "text": "Red",
+        "isTrue": false
+      },
+      {
+        "text": "Yellow",
+        "isTrue": true
+      },
+      {
+        "text": "Blue",
+        "isTrue": false
+      },
+      {
+        "text": "Green",
+        "isTrue": false
+      },
+      {
+        "text": "Orange",
+        "isTrue": false
+      },
+      {
+        "text": "Black",
+        "isTrue": false
+      },
+      {
+        "text": "Cyan",
+        "isTrue": true
+      },
+      {
+        "text": "Magenta",
+        "isTrue": true
+      }
+    ]
+  },
+  {
+    "text": "If you put cyan shoes under red light, what is the color of the shoes?",
+    "category": "Physics",
+    "choices": [
+      {
+        "text": "Black",
+        "isTrue": true
+      },
+      {
+        "text": "Cyan",
+        "istrue": false
+      },
+      {
+        "text": "White",
+        "isTrue": false
+      },
+      {
+        "text": "Yellow",
+        "isTrue": false
+      }
+    ]
+  }
+]
