@@ -11,13 +11,12 @@ const val QUIZ_JSON = "quiz.json"
 const val CHOICE_JSON = "choice.json"
 
 class GsonUtil(private val appContext: Context) {
-    val gson = Gson()
 
     fun getQuizFromJson(): List<Quiz> {
         appContext.assets.open(QUIZ_JSON).use { inputStream ->
             JsonReader(inputStream.reader()).use { jsonReader ->
                 val quizType = object : TypeToken<List<Quiz>>() {}.type
-                return gson.fromJson(jsonReader, quizType)
+                return Gson().fromJson(jsonReader, quizType)
             }
         }
     }
@@ -26,7 +25,7 @@ class GsonUtil(private val appContext: Context) {
         appContext.assets.open(CHOICE_JSON).use { inputStream ->
             JsonReader(inputStream.reader()).use { jsonReader ->
                 val choiceType = object : TypeToken<List<Choice>>() {}.type
-                return gson.fromJson(jsonReader, choiceType)
+                return Gson().fromJson(jsonReader, choiceType)
             }
         }
     }
