@@ -1,0 +1,122 @@
+[
+  {
+    "quizId": 1,
+    "text": "Sydney",
+    "isTrue": false
+  },
+  {
+    "quizId": 1,
+    "text": "Canberra",
+    "isTrue": true
+  },
+  {
+    "quizId": 1,
+    "text": "Melbourne",
+    "isTrue": false
+  },
+  {
+    "quizId": 1,
+    "text": "Darwin",
+    "isTrue": false
+  },
+  {
+    "quizId": 2,
+    "text": "Red",
+    "isTrue": true
+  },
+  {
+    "quizId": 2,
+    "text": "Yellow",
+    "isTrue": false
+  },
+  {
+    "quizId": 2,
+    "text": "Blue",
+    "isTrue": true
+  },
+  {
+    "quizId": 2,
+    "text": "Green",
+    "isTrue": true
+  },
+  {
+    "quizId": 2,
+    "text": "Orange",
+    "isTrue": false
+  },
+  {
+    "quizId": 2,
+    "text": "Black",
+    "isTrue": false
+  },
+  {
+    "quizId": 2,
+    "text": "Cyan",
+    "isTrue": false
+  },
+  {
+    "quizId": 2,
+    "text": "Magenta",
+    "isTrue": false
+  },
+  {
+    "quizId": 3,
+    "text": "Black",
+    "isTrue": true
+  },
+  {
+    "quizId": 3,
+    "text": "Cyan",
+    "isTrue": false
+  },
+  {
+    "quizId": 3,
+    "text": "White",
+    "isTrue": false
+  },
+  {
+    "quizId": 3,
+    "text": "Yellow",
+    "isTrue": false
+  },
+  {
+    "quizId": 4,
+    "text": "Red",
+    "isTrue": false
+  },
+  {
+    "quizId": 4,
+    "text": "Yellow",
+    "isTrue": true
+  },
+  {
+    "quizId": 4,
+    "text": "Blue",
+    "isTrue": false
+  },
+  {
+    "quizId": 4,
+    "text": "Green",
+    "isTrue": false
+  },
+  {
+    "quizId": 4,
+    "text": "Orange",
+    "isTrue": false
+  },
+  {
+    "quizId": 4,
+    "text": "Black",
+    "isTrue": false
+  },
+  {
+    "quizId": 4,
+    "text": "Cyan",
+    "isTrue": true
+  },
+  {
+    "quizId": 4,
+    "text": "Magenta",
+    "isTrue": true
+  }
+]
