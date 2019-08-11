@@ -3,7 +3,9 @@ package com.example.quiz.data.local
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.example.quiz.GsonUtil
 import timber.log.Timber
+
 
 class SeedDataWorker(appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params) {
@@ -22,9 +24,13 @@ class SeedDataWorker(appContext: Context, params: WorkerParameters) :
 
     @Throws(Exception::class)
     private fun insertSampleDataToDatabase(): Result {
+        val gsonUtil = GsonUtil(applicationContext)
+        val sampleQuizList = gsonUtil.getQuizFromJson()
+        val sampleChoiceList = gsonUtil.getChoiceFromJson()
         val appDatabase = AppDatabase.getInstance(applicationContext)
-        appDatabase.quizDao.saveList(SampleData.sampleQuizList)
-        appDatabase.choiceDao.saveList(SampleData.sampleAnswerList)
+
+        appDatabase.quizDao.saveList(sampleQuizList)
+        appDatabase.choiceDao.saveList(sampleChoiceList)
         return Result.success()
     }
 }
