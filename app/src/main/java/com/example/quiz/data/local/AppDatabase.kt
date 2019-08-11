@@ -1,10 +1,12 @@
 package com.example.quiz.data.local
 
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.quiz.SingletonHolder
 import com.example.quiz.data.local.dao.ChoiceDao
 import com.example.quiz.data.local.dao.QuizDao
@@ -15,7 +17,6 @@ import com.example.quiz.model.Quiz
 abstract class AppDatabase: RoomDatabase() {
     abstract val quizDao: QuizDao
     abstract val choiceDao: ChoiceDao
-    var isSampleDataInserted = MutableLiveData<Boolean>()
 
     companion object: SingletonHolder<AppDatabase, Context>({
         Room.databaseBuilder(
@@ -23,7 +24,13 @@ abstract class AppDatabase: RoomDatabase() {
             AppDatabase::class.java,
             DbScheme.DATABASE_NAME
         )
-            .addCallback(DataPrepopulation(it))
+            .addCallback(object : RoomDatabase.Callback() {
+                override fun onCreate(db: SupportSQLiteDatabase) {
+                    super.onCreate(db)
+                    val request = OneTimeWorkRequestBuilder<SeedDataWorker>().build()
+                    WorkManager.getInstance().enqueue(request)
+                }
+            })
             .fallbackToDestructiveMigration()
             .build()
     })
