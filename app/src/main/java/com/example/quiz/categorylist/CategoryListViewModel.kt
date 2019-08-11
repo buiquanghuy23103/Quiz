@@ -8,5 +8,6 @@ class CategoryListViewModel : BaseViewModel() {
         it.groupBy { quiz -> quiz.category }
             .keys
             .toList()
+            .sorted()
     }
 }

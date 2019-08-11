@@ -15,10 +15,8 @@ import androidx.test.rule.ActivityTestRule
 import com.example.quiz.MainActivity
 import com.example.quiz.R
 import com.example.quiz.categorylist.CategoryListItem
-import com.example.quiz.util.CustomMatchers
-import com.example.quiz.util.RecyclerViewMatcher
-import com.example.quiz.util.sampleAnswersOfSampleQuiz
-import com.example.quiz.util.sampleQuiz
+import com.example.quiz.model.Quiz
+import com.example.quiz.util.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -30,15 +28,26 @@ class QuizFragmentTest {
     @JvmField
     val activityTestRule = ActivityTestRule(MainActivity::class.java)
     private lateinit var resources: Resources
+    private val sampleCategory: String
+    private val sampleQuizListOfSampleCategory: List<Quiz>
+
+    init {
+        val sampleCategoryMap = sampleQuizList.groupBy { quiz -> quiz.category }
+        sampleCategory = sampleCategoryMap.keys.toList().sorted().get(0)
+        sampleQuizListOfSampleCategory =
+            sampleCategoryMap[sampleCategory]?.let { it.sortedBy { quiz -> quiz.text } }
+                ?: sampleQuizList
+    }
+
 
     @Before
     fun jumpToQuizViewPagerFragment() {
         activityTestRule.activity.apply {
             runOnUiThread {
                 val bundle = Bundle().apply {
-                    putInt(
-                        "quizId",
-                        sampleQuiz.id
+                    putString(
+                        "category",
+                        sampleCategory
                     )
                 }
                 findNavController(R.id.nav_host_fragment).navigate(
@@ -109,20 +118,19 @@ class QuizFragmentTest {
     fun testResultViewText() {
         val indexOfCorrectAnswers = sampleAnswersOfSampleQuiz.mapIndexed { index, answer ->
             if (answer.isTrue) index else 0
-        }.filter { it != 0 }
-        onView(withId(R.id.answer_view_recycler_view))
-            .perform(
-                RecyclerViewActions.actionOnItemAtPosition<CategoryListItem>(
-                    indexOfCorrectAnswers[0],
-                    click()
+        }.filter { it != 0 }.also { println(it) }
+
+
+
+        indexOfCorrectAnswers.forEach {
+            onView(withId(R.id.answer_view_recycler_view))
+                .perform(
+                    RecyclerViewActions.actionOnItemAtPosition<CategoryListItem>(
+                        it,
+                        click()
+                    )
                 )
-            )
-            .perform(
-                RecyclerViewActions.actionOnItemAtPosition<CategoryListItem>(
-                    indexOfCorrectAnswers[1],
-                    click()
-                )
-            )
+        }
 
         onView(withId(R.id.check_answer_button))
             .perform(click())
