@@ -6,4 +6,5 @@
 
     <string name="correct_answer">True</string>
     <string name="incorrect_answer">False</string>
+    <string name="check">Check</string>
 </resources>

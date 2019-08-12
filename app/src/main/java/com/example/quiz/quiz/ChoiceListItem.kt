@@ -35,7 +35,7 @@ class ChoiceListItem private constructor(private val binding: ChoiceListItemBind
     }
 
     interface UIinterface {
-        fun onClick(answerId: Int)
+        fun onClick(choiceId: Int)
         fun setBackgroundColor(view: View, answerId: Int)
     }
 

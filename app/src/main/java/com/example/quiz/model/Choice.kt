@@ -24,9 +24,6 @@ data class Choice(
     @ColumnInfo(name = AnswerTable.Cols.IS_TRUE)
     var isTrue: Boolean,
 
-    @ColumnInfo(name = AnswerTable.Cols.IS_CHOSEN)
-    var isChosen: Boolean = false,
-
     @PrimaryKey
     @ColumnInfo(name = AnswerTable.Cols.ID)
     var id: Int = Random.nextInt()

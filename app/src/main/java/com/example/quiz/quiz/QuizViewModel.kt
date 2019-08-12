@@ -1,27 +1,16 @@
 package com.example.quiz.quiz
 
-import androidx.lifecycle.Transformations
 import com.example.quiz.framework.BaseViewModel
-import kotlinx.coroutines.launch
 
 class QuizViewModel(quizId: Int) : BaseViewModel() {
     val quiz = quizDao.getById(quizId)
     val choiceList = choiceDao.getChoicesByQuizId(quizId)
-    val assessment = Transformations.map(choiceList) {
-        it.map { choice -> choice.isChosen == choice.isTrue }
-            .all { it == true }
-    }
+    private val choiceAssessmentUtil = ChoiceAssessmentUtil(choiceList)
 
-    fun toggleChoiceChosenById(answerId: Int) {
-        val newChoiceList = choiceList.value
-            ?.let { answerList ->
-                answerList.find { answer -> answer.id == answerId }
-                    ?.apply { isChosen = isChosen.not() }
-                    ?: throw Exception("Choice not found")
-            } ?: throw Exception("List of choices is null")
+    val assessment = choiceAssessmentUtil.assessment
 
-        ioScope.launch { choiceDao.save(newChoiceList) }
-    }
+    fun toggleChoiceChosenById(choiceId: Int) =
+        choiceAssessmentUtil.toggleChoiceChosenById(choiceId)
 
-    fun getChoiceById(answerId: Int) = choiceDao.getById(answerId)
+    fun getChoseStateById(choiceId: Int) = choiceAssessmentUtil.getChosenStateById(choiceId)
 }

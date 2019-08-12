@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/answer_button"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:elevation="2dp"
-        android:gravity="center"
-        android:text="@{answer.text}"
-        android:textAppearance="@style/TextAppearance.NormalText"
-        tools:text="choice">
+        android:layout_margin="8dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp">
 
-    </TextView>
+        <TextView xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/answer_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@{answer.text}"
+            android:textAppearance="@style/TextAppearance.NormalText"
+            tools:text="choice">
+
+        </TextView>
+    </com.google.android.material.card.MaterialCardView>
 
     <data>
 

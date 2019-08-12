@@ -13,10 +13,7 @@ class ChoiceListAdapter : ListAdapter<Choice, ChoiceListItem>(diffCallback) {
             }
 
             override fun areContentsTheSame(oldItem: Choice, newItem: Choice): Boolean {
-                return listOf(
-                    oldItem.isTrue == newItem.isTrue,
-                    oldItem.isChosen == newItem.isChosen
-                ).all { it == true }
+                return oldItem == newItem
             }
         }
     }
