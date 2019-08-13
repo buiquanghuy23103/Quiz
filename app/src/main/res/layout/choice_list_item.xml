@@ -10,13 +10,13 @@
         app:cardElevation="2dp">
 
         <TextView xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/answer_button"
+            android:id="@+id/choice_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="2dp"
             android:gravity="center"
             android:padding="8dp"
-            android:text="@{answer.text}"
+            android:text="@{choice.text}"
             android:textAppearance="@style/TextAppearance.NormalText"
             tools:text="choice">
 
@@ -26,7 +26,7 @@
     <data>
 
         <variable
-            name="answer"
+            name="choice"
             type="com.example.quiz.model.Choice" />
     </data>
 </layout>

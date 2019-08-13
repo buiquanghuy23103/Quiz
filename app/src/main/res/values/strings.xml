@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">Quiz</string>
 
-    <string name="question_title">Question text</string>
-    <string name="answer_title">Answer</string>
-
-    <string name="correct_answer">True</string>
-    <string name="incorrect_answer">False</string>
-    <string name="check">Check</string>
+    <!--  QuizFragment  -->
+    <string name="correct_answer">Correct</string>
+    <string name="incorrect_answer">Incorrect</string>
+    <string name="result">Result: %1$s</string>
 </resources>

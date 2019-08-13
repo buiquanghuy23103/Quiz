@@ -37,7 +37,6 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupQuizView()
         setupChoiceView()
-        setupCheckButton()
         setupResultView()
     }
 
@@ -56,21 +55,15 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
         choiceListAdapter.itemClickListener = this
     }
 
-    private fun setupCheckButton() {
-        check_answer_button.setOnClickListener {
-            result_text_view.visibility = View.VISIBLE
-        }
-    }
-
     private fun setupResultView() {
         viewModel.assessment.observe(this, Observer { isCorrect ->
-            result_text_view.text = if (isCorrect) getString(R.string.correct_answer)
+            binding.resultText = if (isCorrect) getString(R.string.correct_answer)
             else getString(R.string.incorrect_answer)
         })
     }
 
-    override fun onClick(answerId: Int) {
-        viewModel.toggleChoiceChosenById(answerId)
+    override fun onClick(choiceId: Int) {
+        viewModel.toggleChoiceChosenById(choiceId)
     }
 
     override fun setBackgroundColor(view: View, choiceId: Int) {

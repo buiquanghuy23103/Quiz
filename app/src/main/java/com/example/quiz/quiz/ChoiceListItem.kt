@@ -25,8 +25,8 @@ class ChoiceListItem private constructor(private val binding: ChoiceListItemBind
 
     fun bind(choice: Choice) {
         with(binding) {
-            answer = choice
-            answerButton.let { view ->
+            this.choice = choice
+            choiceButton.let { view ->
                 clickListener.setBackgroundColor(view, choice.id)
                 view.setOnClickListener { clickListener.onClick(choice.id) }
             }
