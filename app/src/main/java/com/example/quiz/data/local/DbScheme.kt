@@ -9,7 +9,7 @@ object DbScheme {
         object Cols {
             const val ID = "id"
             const val TEXT = "text"
-            const val CATEGORY = "category"
+            const val CATEGORY_ID = "category_id"
         }
     }
 

@@ -22,6 +22,6 @@ interface QuizDao {
     @Query("SELECT * FROM ${QuizTable.TABLE_NAME} WHERE ${QuizTable.Cols.ID} = :id")
     fun getById(id: Int): LiveData<Quiz>
 
-    @Query("SELECT ${QuizTable.Cols.ID} FROM ${QuizTable.TABLE_NAME} WHERE ${QuizTable.Cols.CATEGORY} = :category")
+    @Query("SELECT ${QuizTable.Cols.ID} FROM ${QuizTable.TABLE_NAME} WHERE ${QuizTable.Cols.CATEGORY_ID} = :category")
     fun getQuizIdListByCategory(category: String): LiveData<List<Int>>
 }
