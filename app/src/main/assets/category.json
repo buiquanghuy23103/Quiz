@@ -2,16 +2,16 @@
   {
     "id": 0,
     "text": "Miscellaneous",
-    "image_url": ""
+    "imageUrl": ""
   },
   {
     "id": 1,
     "text": "Geography",
-    "image_url": ""
+    "imageUrl": ""
   },
   {
     "id": 2,
     "text": "Physics",
-    "image_url": ""
+    "imageUrl": ""
   }
 ]

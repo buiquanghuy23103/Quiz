@@ -1,146 +1,146 @@
 [
   {
     "id": 11,
-    "quiz_id": 1,
+    "quizId": 1,
     "text": "Sydney",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 12,
-    "quiz_id": 1,
+    "quizId": 1,
     "text": "Canberra",
-    "is_true": true
+    "isTrue": true
   },
   {
     "id": 13,
-    "quiz_id": 1,
+    "quizId": 1,
     "text": "Melbourne",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 14,
-    "quiz_id": 1,
+    "quizId": 1,
     "text": "Darwin",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 21,
-    "quiz_id": 2,
+    "quizId": 2,
     "text": "Red",
-    "is_true": true
+    "isTrue": true
   },
   {
     "id": 22,
-    "quiz_id": 2,
+    "quizId": 2,
     "text": "Yellow",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 23,
-    "quiz_id": 2,
+    "quizId": 2,
     "text": "Blue",
-    "is_true": true
+    "isTrue": true
   },
   {
     "id": 24,
-    "quiz_id": 2,
+    "quizId": 2,
     "text": "Green",
-    "is_true": true
+    "isTrue": true
   },
   {
     "id": 25,
-    "quiz_id": 2,
+    "quizId": 2,
     "text": "Orange",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 26,
-    "quiz_id": 2,
+    "quizId": 2,
     "text": "Black",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 27,
-    "quiz_id": 2,
+    "quizId": 2,
     "text": "Cyan",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 28,
-    "quiz_id": 2,
+    "quizId": 2,
     "text": "Magenta",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 31,
-    "quiz_id": 3,
+    "quizId": 3,
     "text": "Black",
-    "is_true": true
+    "isTrue": true
   },
   {
     "id": 32,
-    "quiz_id": 3,
+    "quizId": 3,
     "text": "Cyan",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 33,
-    "quiz_id": 3,
+    "quizId": 3,
     "text": "White",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 34,
-    "quiz_id": 3,
+    "quizId": 3,
     "text": "Yellow",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 41,
-    "quiz_id": 4,
+    "quizId": 4,
     "text": "Red",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 42,
-    "quiz_id": 4,
+    "quizId": 4,
     "text": "Yellow",
-    "is_true": true
+    "isTrue": true
   },
   {
     "id": 43,
-    "quiz_id": 4,
+    "quizId": 4,
     "text": "Blue",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 44,
-    "quiz_id": 4,
+    "quizId": 4,
     "text": "Green",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 45,
-    "quiz_id": 4,
+    "quizId": 4,
     "text": "Orange",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 46,
-    "quiz_id": 4,
+    "quizId": 4,
     "text": "Black",
-    "is_true": false
+    "isTrue": false
   },
   {
     "id": 47,
-    "quiz_id": 4,
+    "quizId": 4,
     "text": "Magenta",
-    "is_true": true
+    "isTrue": true
   },
   {
     "id": 48,
-    "quiz_id": 4,
+    "quizId": 4,
     "text": "Cyan",
-    "is_true": true
+    "isTrue": true
   }
 ]
