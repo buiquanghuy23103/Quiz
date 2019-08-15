@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.quiz.data.local.DbScheme.AnswerTable
 import com.example.quiz.model.Choice
 
 @Dao
@@ -16,9 +15,9 @@ interface ChoiceDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(choice: Choice): Long
 
-    @Query("SELECT * FROM ${AnswerTable.TABLE_NAME} WHERE ${AnswerTable.Cols.ID} = :answerId")
-    fun getById(answerId: Int): LiveData<Choice>
+    @Query("SELECT * FROM choices WHERE id = :id")
+    fun getById(id: Int): LiveData<Choice>
 
-    @Query("SELECT * FROM ${AnswerTable.TABLE_NAME} WHERE ${AnswerTable.Cols.QUIZ_ID} = :quizId")
+    @Query("SELECT * FROM choices WHERE quizId = :quizId")
     fun getChoicesByQuizId(quizId: Int): LiveData<List<Choice>>
 }

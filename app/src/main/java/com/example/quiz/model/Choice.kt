@@ -1,30 +1,26 @@
 package com.example.quiz.model
 
-import androidx.room.*
-import com.example.quiz.data.local.DbScheme.AnswerTable
-import com.example.quiz.data.local.DbScheme.QuizTable
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import kotlin.random.Random
 
-@Entity(tableName = AnswerTable.TABLE_NAME,
-        foreignKeys = [ForeignKey(
-            entity = Quiz::class,
-            parentColumns = [QuizTable.Cols.ID],
-            childColumns = [AnswerTable.Cols.QUIZ_ID],
-            onDelete = ForeignKey.CASCADE
-        )],
-        indices = [Index(value = [AnswerTable.Cols.QUIZ_ID])]
-    )
+@Entity(
+    tableName = "choices",
+    foreignKeys = [ForeignKey(
+        entity = Quiz::class,
+        parentColumns = ["id"],
+        childColumns = ["quizId"],
+        onDelete = ForeignKey.CASCADE
+    )],
+    indices = [Index(value = ["quizId"])]
+)
 data class Choice(
-    @ColumnInfo(name = AnswerTable.Cols.QUIZ_ID)
     var quizId : Int,
-
-    @ColumnInfo(name = AnswerTable.Cols.TEXT)
     var text: String,
-
-    @ColumnInfo(name = AnswerTable.Cols.IS_TRUE)
     var isTrue: Boolean,
 
     @PrimaryKey
-    @ColumnInfo(name = AnswerTable.Cols.ID)
     var id: Int = Random.nextInt()
 )

@@ -1,20 +1,25 @@
 package com.example.quiz.model
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.example.quiz.data.local.DbScheme.QuizTable
 import kotlin.random.Random
 
-@Entity(tableName = QuizTable.TABLE_NAME)
+@Entity(
+    tableName = "quizzes",
+    foreignKeys = [ForeignKey(
+        entity = Category::class,
+        parentColumns = ["id"],
+        childColumns = ["categoryId"],
+        onDelete = ForeignKey.CASCADE
+    )],
+    indices = [Index(value = ["categoryId"])]
+)
 data class Quiz(
-    @ColumnInfo(name = QuizTable.Cols.QUESTION)
     var text: String = "",
-
-    @ColumnInfo(name = QuizTable.Cols.CATEGORY)
-    var category: String = "Miscellaneous",
+    var categoryId: Int = 0,
 
     @PrimaryKey
-    @ColumnInfo(name = QuizTable.Cols.ID)
     var id: Int = Random.nextInt()
 )

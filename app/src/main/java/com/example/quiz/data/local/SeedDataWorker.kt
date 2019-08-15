@@ -25,10 +25,12 @@ class SeedDataWorker(appContext: Context, params: WorkerParameters) :
     @Throws(Exception::class)
     private fun insertSampleDataToDatabase(): Result {
         val gsonUtil = GsonUtil(applicationContext)
+        val sampleCategoryList = gsonUtil.getCategoryFromJson()
         val sampleQuizList = gsonUtil.getQuizFromJson()
         val sampleChoiceList = gsonUtil.getChoiceFromJson()
         val appDatabase = AppDatabase.getInstance(applicationContext)
 
+        appDatabase.categoryDao.saveList(sampleCategoryList)
         appDatabase.quizDao.saveList(sampleQuizList)
         appDatabase.choiceDao.saveList(sampleChoiceList)
         return Result.success()
