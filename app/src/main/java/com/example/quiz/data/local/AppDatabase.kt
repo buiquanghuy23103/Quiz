@@ -8,15 +8,22 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.quiz.SingletonHolder
+import com.example.quiz.data.local.dao.CategoryDao
 import com.example.quiz.data.local.dao.ChoiceDao
 import com.example.quiz.data.local.dao.QuizDao
+import com.example.quiz.model.Category
 import com.example.quiz.model.Choice
 import com.example.quiz.model.Quiz
 
-@Database(entities = [Quiz::class, Choice::class], version = 1, exportSchema = false)
+@Database(
+    entities = [Category::class, Quiz::class, Choice::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class AppDatabase: RoomDatabase() {
     abstract val quizDao: QuizDao
     abstract val choiceDao: ChoiceDao
+    abstract val categoryDao: CategoryDao
 
     companion object: SingletonHolder<AppDatabase, Context>({
         Room.databaseBuilder(
