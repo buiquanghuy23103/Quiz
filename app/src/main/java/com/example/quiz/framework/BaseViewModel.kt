@@ -10,6 +10,7 @@ abstract class BaseViewModel : ViewModel(){
     private val database = Injector.get().appDatabase()
     val quizDao = database.quizDao
     val choiceDao = database.choiceDao
+    val categoryDao = database.categoryDao
 
     private val backgroundJob = Job()
     val ioScope = CoroutineScope(Dispatchers.IO + backgroundJob)
