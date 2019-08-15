@@ -12,7 +12,7 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
     private val args: QuizViewPagerFragmentArgs by navArgs()
 
     override fun initViewModel() =
-        getViewModel { QuizViewPagerViewModel(args.category) }
+        getViewModel { QuizViewPagerViewModel(args.categoryId) }
 
     override fun getLayoutId() = R.layout.quiz_view_pager_fragment
 

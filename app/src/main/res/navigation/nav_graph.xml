@@ -23,8 +23,8 @@
         android:label="QuizViewPagerFragment"
         tools:layout="@layout/quiz_view_pager_fragment">
         <argument
-            android:name="category"
-            android:defaultValue="error"
-            app:argType="string" />
+            android:name="categoryId"
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
 </navigation>

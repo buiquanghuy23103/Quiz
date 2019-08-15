@@ -18,7 +18,7 @@ class ChoiceListAdapter : ListAdapter<Choice, ChoiceListItem>(diffCallback) {
         }
     }
 
-    lateinit var itemClickListener: ChoiceListItem.UIinterface
+    lateinit var itemClickListener: ChoiceListItem.Listener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ChoiceListItem.from(parent).apply {

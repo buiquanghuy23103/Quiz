@@ -11,7 +11,7 @@
 
         <TextView
             android:id="@+id/item_question"
-            android:text="@{category}"
+            android:text="@{category.text}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -23,7 +23,7 @@
 
         <variable
             name="category"
-            type="String" />
+            type="com.example.quiz.model.Category" />
     </data>
 
 

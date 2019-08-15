@@ -12,7 +12,7 @@ import com.example.quiz.model.Choice
 class ChoiceListItem private constructor(private val binding: ChoiceListItemBinding) :
     RecyclerView.ViewHolder(binding.root)
 {
-    lateinit var clickListener: UIinterface
+    lateinit var clickListener: Listener
 
     companion object{
         fun from(parent: ViewGroup): ChoiceListItem {
@@ -34,9 +34,9 @@ class ChoiceListItem private constructor(private val binding: ChoiceListItemBind
         }
     }
 
-    interface UIinterface {
+    interface Listener {
         fun onClick(choiceId: Int)
-        fun setBackgroundColor(view: View, answerId: Int)
+        fun setBackgroundColor(view: View, choiceId: Int)
     }
 
 

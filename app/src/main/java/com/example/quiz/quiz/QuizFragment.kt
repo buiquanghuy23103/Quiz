@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.quiz_fragment.*
 import timber.log.Timber
 
 class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
-    ChoiceListItem.UIinterface {
+    ChoiceListItem.Listener {
     private val choiceListAdapter = ChoiceListAdapter()
 
     companion object{

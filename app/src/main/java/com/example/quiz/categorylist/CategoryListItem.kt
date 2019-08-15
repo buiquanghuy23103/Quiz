@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quiz.R
 import com.example.quiz.databinding.CategoryListItemBinding
+import com.example.quiz.model.Category
 
 class CategoryListItem private constructor(private val binding: CategoryListItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -20,13 +21,13 @@ class CategoryListItem private constructor(private val binding: CategoryListItem
         }
     }
 
-    fun bind(category: String) {
+    fun bind(category: Category) {
         with(binding) {
             this.category = category
             root.setOnClickListener {
                 val navDirections =
                     CategoryListFragmentDirections.actionCategoryListFragmentToQuizViewPagerFragment(
-                        category
+                        category.id
                     )
                 it.findNavController().navigate(navDirections)
             }
