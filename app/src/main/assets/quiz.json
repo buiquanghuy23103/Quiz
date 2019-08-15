@@ -2,21 +2,21 @@
   {
     "id": 1,
     "text": "Which city is the capital of Australia?",
-    "category": "Geography"
+    "category_id": 1
   },
   {
     "id": 2,
     "text": "What are the three primary colors of light?",
-    "category": "Physics"
+    "category_id": 2
   },
   {
     "id": 4,
     "text": "What are the three primary colors in terms of printing?",
-    "category": "Miscellaneous"
+    "category_id": 0
   },
   {
     "id": 3,
     "text": "If you put cyan shoes under red light, what is the color of the shoes?",
-    "category": "Physics"
+    "category_id": 2
   }
 ]
