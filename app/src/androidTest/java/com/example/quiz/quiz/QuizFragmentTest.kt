@@ -32,7 +32,7 @@ class QuizFragmentTest {
     private val sampleQuizListOfSampleCategory: List<Quiz>
 
     init {
-        val sampleCategoryMap = sampleQuizList.groupBy { quiz -> quiz.category }
+        val sampleCategoryMap = sampleQuizList.groupBy { quiz -> quiz.categoryId }
         sampleCategory = sampleCategoryMap.keys.toList().sorted().get(0)
         sampleQuizListOfSampleCategory =
             sampleCategoryMap[sampleCategory]?.let { it.sortedBy { quiz -> quiz.text } }

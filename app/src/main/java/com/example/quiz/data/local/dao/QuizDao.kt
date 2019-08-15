@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.quiz.data.local.DbScheme.QuizTable
 import com.example.quiz.model.Quiz
 
 @Dao
@@ -16,12 +15,12 @@ interface QuizDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(quiz: Quiz): Long
 
-    @Query("SELECT * FROM ${QuizTable.TABLE_NAME} ORDER BY ${QuizTable.Cols.TEXT}")
+    @Query("SELECT * FROM quizzes ORDER BY text")
     fun getAll(): LiveData<List<Quiz>>
 
-    @Query("SELECT * FROM ${QuizTable.TABLE_NAME} WHERE ${QuizTable.Cols.ID} = :id")
+    @Query("SELECT * FROM quizzes WHERE id = :id")
     fun getById(id: Int): LiveData<Quiz>
 
-    @Query("SELECT ${QuizTable.Cols.ID} FROM ${QuizTable.TABLE_NAME} WHERE ${QuizTable.Cols.CATEGORY_ID} = :category")
-    fun getQuizIdListByCategory(category: String): LiveData<List<Int>>
+    @Query("SELECT id FROM quizzes WHERE categoryId = :categoryId")
+    fun getQuizIdListByCategory(categoryId: String): LiveData<List<Int>>
 }

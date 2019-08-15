@@ -29,7 +29,7 @@ abstract class AppDatabase: RoomDatabase() {
         Room.databaseBuilder(
             it,
             AppDatabase::class.java,
-            DbScheme.DATABASE_NAME
+            "quiz.db"
         )
             .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
