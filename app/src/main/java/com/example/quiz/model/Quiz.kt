@@ -8,7 +8,7 @@ import kotlin.random.Random
 
 @Entity(tableName = QuizTable.TABLE_NAME)
 data class Quiz(
-    @ColumnInfo(name = QuizTable.Cols.QUESTION)
+    @ColumnInfo(name = QuizTable.Cols.TEXT)
     var text: String = "",
 
     @ColumnInfo(name = QuizTable.Cols.CATEGORY)

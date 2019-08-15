@@ -16,7 +16,7 @@ interface QuizDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(quiz: Quiz): Long
 
-    @Query("SELECT * FROM ${QuizTable.TABLE_NAME} ORDER BY ${QuizTable.Cols.QUESTION}")
+    @Query("SELECT * FROM ${QuizTable.TABLE_NAME} ORDER BY ${QuizTable.Cols.TEXT}")
     fun getAll(): LiveData<List<Quiz>>
 
     @Query("SELECT * FROM ${QuizTable.TABLE_NAME} WHERE ${QuizTable.Cols.ID} = :id")

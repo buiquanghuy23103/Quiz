@@ -8,20 +8,29 @@ object DbScheme {
 
         object Cols {
             const val ID = "id"
-            const val QUESTION = "text"
+            const val TEXT = "text"
             const val CATEGORY = "category"
         }
     }
 
-    object AnswerTable {
-        const val TABLE_NAME = "answerTable"
+    object CategoryTable {
+        const val TABLE_NAME = "categoryTable"
+
+        object Cols {
+            const val ID = "id"
+            const val TEXT = "text"
+            const val IMAGE_URL = "image_url"
+        }
+    }
+
+    object ChoiceTable {
+        const val TABLE_NAME = "choiceTable"
 
         object Cols {
             const val ID = "id"
             const val QUIZ_ID = "quiz_id"
             const val TEXT = "text"
             const val IS_TRUE = "is_true"
-            const val IS_CHOSEN = "is_chosen"
         }
     }
 }
