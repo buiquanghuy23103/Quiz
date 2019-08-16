@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
-    app:startDestination="@id/categoryListFragment">
+    app:startDestination="@id/MessageFragment">
     <fragment
         android:id="@+id/categoryListFragment"
         android:name="com.example.quiz.categorylist.CategoryListFragment"
@@ -26,5 +26,13 @@
             android:name="categoryId"
             android:defaultValue="0"
             app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/MessageFragment"
+        android:name="com.example.quiz.message.MessageFragment"
+        android:label="MessageFragment"
+        tools:layout="@layout/message_list">
+
     </fragment>
 </navigation>

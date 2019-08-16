@@ -42,6 +42,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Test
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'androidx.test:core:1.2.0'
     testImplementation 'org.mockito:mockito-all:2.0.2-beta'
@@ -78,7 +79,8 @@ dependencies {
     // Room local
     def room_version = "2.1.0"
     implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+    kapt "androidx.room:room-compiler:$room_version"
+    // For Kotlin use kapt instead of annotationProcessor
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
     // optional - RxJava support for Room
@@ -114,3 +116,4 @@ dependencies {
     implementation "com.google.firebase:firebase-database:18.0.1"
 }
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
+

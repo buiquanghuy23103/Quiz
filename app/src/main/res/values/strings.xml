@@ -8,4 +8,7 @@
     <string name="correct_answer">Correct</string>
     <string name="incorrect_answer">Incorrect</string>
     <string name="result">Result: %1$s</string>
+
+    <!--  Message fragment  -->
+    <string name="send_button_label">Send</string>
 </resources>
