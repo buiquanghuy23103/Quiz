@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Quiz</string>
 
+    <!--  CategoryListFragment  -->
+    <string name="category_image">Picture of category</string>
+
     <!--  QuizFragment  -->
     <string name="correct_answer">Correct</string>
     <string name="incorrect_answer">Incorrect</string>

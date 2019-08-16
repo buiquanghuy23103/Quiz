@@ -4,6 +4,7 @@
           package="com.example.quiz">
 
     <dist:module dist:instant="true"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
             android:name=".MainApplication"
