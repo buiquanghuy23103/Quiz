@@ -12,14 +12,23 @@ import com.example.quiz.R
 import com.example.quiz.model.Message
 import kotlinx.android.synthetic.main.message_list.*
 
-class MessageFragment : Fragment() {
+class MessageFragment : Fragment(), FirebaseUtil.Listener {
 
     lateinit var firebaseUtil: FirebaseUtil
+    lateinit var listAdapter: MessageListAdapter
+    lateinit var messageList: MutableList<Message>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        firebaseUtil = FirebaseUtil()
+        setupFirebase()
+        listAdapter = MessageListAdapter()
     }
+
+    private fun setupFirebase() {
+        firebaseUtil = FirebaseUtil(this)
+        firebaseUtil.attachMessageEventListener()
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,12 +42,11 @@ class MessageFragment : Fragment() {
         setupMessageList()
         setupMessageEditText()
         setupSendButton()
-
     }
 
     private fun setupMessageList() {
-        val messageList = mutableListOf<Message>()
-        message_list.adapter = MessageListAdapter().apply { submitList(messageList) }
+        messageList = mutableListOf<Message>()
+        message_list.adapter = listAdapter.apply { submitList(messageList) }
     }
 
     private fun setupMessageEditText() {
@@ -54,11 +62,20 @@ class MessageFragment : Fragment() {
     }
 
     private fun setupSendButton() {
-        sendButton.isEnabled = true
         sendButton.setOnClickListener {
-            val newMessage = Message(text = messageEditText.text.toString())
-            firebaseUtil.sendMessage(newMessage)
+            sendMessageToFirebase()
             messageEditText.setText("")
         }
+    }
+
+    private fun sendMessageToFirebase() {
+        val newMessage = Message(text = messageEditText.text.toString())
+        firebaseUtil.sendMessage(newMessage)
+    }
+
+
+    override fun addMessageToList(newMessage: Message) {
+        messageList.add(newMessage)
+        listAdapter.submitList(messageList)
     }
 }
