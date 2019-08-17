@@ -1,7 +1,7 @@
 package com.example.quiz.model
 
 data class Message(
-    val userId: Int = 0,
+    val username: String = "ANONYMOUS",
     var text: String = "No text",
-    var photoUrl: String = "https://static.thenounproject.com/png/340719-200.png"
+    var photoUrl: String = ""
 )
