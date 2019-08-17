@@ -7,14 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.quiz.FirebaseUtil
 import com.example.quiz.R
+import com.example.quiz.firebase.FirebaseDatabaseUtil
 import com.example.quiz.model.Message
 import kotlinx.android.synthetic.main.message_list.*
 
-class MessageFragment : Fragment(), FirebaseUtil.Listener {
+class MessageFragment : Fragment(), FirebaseDatabaseUtil.Listener {
 
-    lateinit var firebaseUtil: FirebaseUtil
+    lateinit var firebaseDatabaseUtil: FirebaseDatabaseUtil
     lateinit var listAdapter: MessageListAdapter
     lateinit var messageList: MutableList<Message>
 
@@ -25,8 +25,8 @@ class MessageFragment : Fragment(), FirebaseUtil.Listener {
     }
 
     private fun setupFirebase() {
-        firebaseUtil = FirebaseUtil(this)
-        firebaseUtil.attachMessageEventListener()
+        firebaseDatabaseUtil = FirebaseDatabaseUtil(this)
+        firebaseDatabaseUtil.attachMessageEventListener()
     }
 
 
@@ -68,7 +68,7 @@ class MessageFragment : Fragment(), FirebaseUtil.Listener {
 
     private fun sendMessageToFirebase() {
         val newMessage = Message(text = messageEditText.text.toString())
-        firebaseUtil.sendMessage(newMessage)
+        firebaseDatabaseUtil.sendMessage(newMessage)
     }
 
 

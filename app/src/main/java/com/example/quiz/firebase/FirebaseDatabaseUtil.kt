@@ -1,4 +1,4 @@
-package com.example.quiz
+package com.example.quiz.firebase
 
 import com.example.quiz.model.Message
 import com.google.firebase.database.ChildEventListener
@@ -6,7 +6,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 
-class FirebaseUtil(private val listener: Listener) {
+class FirebaseDatabaseUtil(private val listener: Listener) {
 
     private val db = FirebaseDatabase.getInstance()
     private val dbReference = db.reference.child("messages")
