@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/horizontal_margin"
@@ -16,9 +16,11 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/overall_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/message_list"
             android:orientation="horizontal">
 
             <Button
@@ -34,7 +36,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:inputType="textCapSentences|textAutoCorrect" />
 
             <ImageButton
                 android:id="@+id/photoPickerButton"
@@ -44,26 +47,24 @@
 
         </LinearLayout>
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/message_list"
             android:name="com.example.quiz.message.MessageFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/overall_margin"
             app:layoutManager="LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:context=".message.MessageFragment"
+            tools:layout_editor_absoluteX="32dp"
+            tools:layout_editor_absoluteY="32dp"
             tools:listitem="@layout/message_list_item" />
 
-    </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
 

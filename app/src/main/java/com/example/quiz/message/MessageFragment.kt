@@ -3,23 +3,37 @@ package com.example.quiz.message
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.quiz.FirebaseUtil
 import com.example.quiz.R
-import com.example.quiz.databinding.MessageListBinding
-import com.example.quiz.framework.BaseFragment
 import com.example.quiz.model.Message
 import kotlinx.android.synthetic.main.message_list.*
 
-class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>() {
+class MessageFragment : Fragment() {
 
-    override fun getLayoutId() = R.layout.message_list
+    lateinit var firebaseUtil: FirebaseUtil
 
-    override fun initViewModel() = getViewModel { MessageViewModel() }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        firebaseUtil = FirebaseUtil()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.message_list, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupMessageList()
         setupMessageEditText()
         setupSendButton()
+
     }
 
     private fun setupMessageList() {
@@ -40,8 +54,10 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>() {
     }
 
     private fun setupSendButton() {
+        sendButton.isEnabled = true
         sendButton.setOnClickListener {
-
+            val newMessage = Message(text = messageEditText.text.toString())
+            firebaseUtil.sendMessage(newMessage)
             messageEditText.setText("")
         }
     }
