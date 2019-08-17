@@ -8,18 +8,20 @@
 
         <TextView
             android:id="@+id/message_text_view"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:text="@{message.text}"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            android:text="@{message.text}" />
 
         <TextView
             android:id="@+id/username"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@{message.username}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:textAppearance="?attr/textAppearanceListItem" />
+            android:textSize="10sp" />
     </LinearLayout>
 
     <data>
