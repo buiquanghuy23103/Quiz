@@ -3,50 +3,46 @@ package com.example.quiz.message
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.quiz.R
+import com.example.quiz.databinding.MessageListBinding
 import com.example.quiz.firebase.FirebaseDatabaseUtil
+import com.example.quiz.framework.BaseFragment
 import com.example.quiz.model.Message
 import kotlinx.android.synthetic.main.message_list.*
 
-class MessageFragment : Fragment(), FirebaseDatabaseUtil.Listener {
+class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
+    FirebaseDatabaseUtil.Listener {
 
-    lateinit var firebaseDatabaseUtil: FirebaseDatabaseUtil
-    lateinit var listAdapter: MessageListAdapter
-    lateinit var messageList: MutableList<Message>
+    override fun getLayoutId() = R.layout.message_list
+
+    override fun initViewModel() = getViewModel { MessageViewModel() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupFirebase()
-        listAdapter = MessageListAdapter()
+        setFirebaseListeners()
+        viewModel.onSignInAsUsername()
     }
 
-    private fun setupFirebase() {
-        firebaseDatabaseUtil = FirebaseDatabaseUtil(this)
-        firebaseDatabaseUtil.attachMessageEventListener()
-    }
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.message_list, container, false)
+    private fun setFirebaseListeners() {
+        viewModel.firebaseDatabaseUtil.listener = this
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupMessageList()
+        setupMessageListAdapter()
         setupMessageEditText()
-        setupSendButton()
+        onSendButtonClick()
     }
 
-    private fun setupMessageList() {
-        messageList = mutableListOf<Message>()
-        message_list.adapter = listAdapter.apply { submitList(messageList) }
+    private fun setupMessageListAdapter() {
+        with(MessageListAdapter()) {
+            message_list.adapter = this
+            viewModel.messageList.observe(this@MessageFragment, Observer { messageList ->
+                submitList(messageList)
+            })
+
+        }
     }
 
     private fun setupMessageEditText() {
@@ -59,21 +55,14 @@ class MessageFragment : Fragment(), FirebaseDatabaseUtil.Listener {
         })
     }
 
-    private fun setupSendButton() {
+    private fun onSendButtonClick() {
         sendButton.setOnClickListener {
-            sendMessageToFirebase()
+            viewModel.sendMessage(messageEditText.text.toString())
             messageEditText.setText("")
         }
     }
 
-    private fun sendMessageToFirebase() {
-        val newMessage = Message(text = messageEditText.text.toString())
-        firebaseDatabaseUtil.sendMessage(newMessage)
-    }
-
-
     override fun addMessageToList(newMessage: Message) {
-        messageList.add(newMessage)
-        listAdapter.submitList(messageList)
+        viewModel.sendMessageToList(newMessage)
     }
 }

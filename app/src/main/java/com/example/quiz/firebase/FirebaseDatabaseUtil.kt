@@ -6,8 +6,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 
-class FirebaseDatabaseUtil(private val listener: Listener) {
+class FirebaseDatabaseUtil {
 
+    lateinit var listener: Listener
     private val db = FirebaseDatabase.getInstance()
     private val dbReference = db.reference.child("messages")
 
