@@ -34,8 +34,8 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
     }
 
     private fun setFirebaseListeners() {
-        viewModel.firebaseDatabaseUtil.listener = this
-        viewModel.firebaseAuthUtil.listener = this
+        viewModel.setFirebaseDatabaseUtilListener(this)
+        viewModel.setFirebaseAuthUtilListener(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

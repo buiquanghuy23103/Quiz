@@ -12,8 +12,16 @@ class MessageViewModel : BaseViewModel() {
     private var username = ANONYMOUS
     private val defaultMessageList = mutableListOf<Message>()
     val messageList = MutableLiveData(defaultMessageList)
-    val firebaseDatabaseUtil = FirebaseDatabaseUtil()
-    val firebaseAuthUtil = FirebaseAuthUtil()
+    private val firebaseDatabaseUtil = FirebaseDatabaseUtil()
+    private val firebaseAuthUtil = FirebaseAuthUtil()
+
+    fun setFirebaseDatabaseUtilListener(listener: FirebaseDatabaseUtil.Listener) {
+        firebaseDatabaseUtil.listener = listener
+    }
+
+    fun setFirebaseAuthUtilListener(listener: FirebaseAuthUtil.Listener) {
+        firebaseAuthUtil.listener = listener
+    }
 
     fun initFirebase() {
         initMessageEvent()
