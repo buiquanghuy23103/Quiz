@@ -114,6 +114,7 @@ dependencies {
     // Firebase
     implementation 'com.google.firebase:firebase-auth:18.1.0'
     implementation "com.google.firebase:firebase-database:18.0.1"
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
 }
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
 
