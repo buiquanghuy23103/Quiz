@@ -1,14 +1,15 @@
 package com.example.quiz.message
 
+import android.app.Application
 import android.content.Intent
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.quiz.firebase.ANONYMOUS
 import com.example.quiz.firebase.FirebaseAuthUtil
 import com.example.quiz.firebase.FirebaseDatabaseUtil
-import com.example.quiz.framework.BaseViewModel
 import com.example.quiz.model.Message
 
-class MessageViewModel : BaseViewModel() {
+class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
     private var username = ANONYMOUS
     private val defaultMessageList = mutableListOf<Message>()
     val messageList = MutableLiveData(defaultMessageList)
@@ -70,5 +71,9 @@ class MessageViewModel : BaseViewModel() {
         val currentMessageList = messageList.value ?: defaultMessageList
         currentMessageList.add(message)
         messageList.value = currentMessageList
+    }
+
+    fun signOut() {
+        firebaseAuthUtil.signOut(app)
     }
 }

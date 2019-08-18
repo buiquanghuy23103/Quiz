@@ -24,7 +24,10 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
 
     override fun getLayoutId() = R.layout.message_list
 
-    override fun initViewModel() = getViewModel { MessageViewModel() }
+    override fun initViewModel() = getViewModel {
+        val app = requireNotNull(this.activity).application
+        MessageViewModel(app)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +94,7 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
     }
 
     private fun onSignOutOptionSelected(): Boolean {
+        viewModel.signOut()
         return true
     }
 }

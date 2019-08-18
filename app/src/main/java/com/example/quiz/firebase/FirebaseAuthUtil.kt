@@ -1,5 +1,6 @@
 package com.example.quiz.firebase
 
+import android.content.Context
 import android.content.Intent
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
@@ -10,6 +11,11 @@ class FirebaseAuthUtil {
     lateinit var listener: Listener
     private val firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
+
+    fun signOut(context: Context) {
+        AuthUI.getInstance().signOut(context)
+    }
+
 
     fun setupAuthStateListener(onSignIn: (String) -> Unit, onSignOut: (Intent) -> Unit) {
         authStateListener = FirebaseAuth.AuthStateListener { currentAuth ->
