@@ -8,9 +8,10 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 
-abstract class BaseFragment<T : BaseViewModel, B : ViewDataBinding> : Fragment() {
+abstract class BaseFragment<T : ViewModel, B : ViewDataBinding> : Fragment() {
     lateinit var binding: B
     @LayoutRes
     abstract fun getLayoutId(): Int
@@ -19,7 +20,7 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewDataBinding> : Fragment()
         initViewModel()
     }
 
-    inline fun <reified T : BaseViewModel> Fragment.getViewModel(noinline creator: (() -> T)? = null): T {
+    inline fun <reified T : ViewModel> Fragment.getViewModel(noinline creator: (() -> T)? = null): T {
         return if (creator == null)
             ViewModelProviders.of(this).get(T::class.java)
         else
@@ -32,7 +33,6 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewDataBinding> : Fragment()
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-        setHasOptionsMenu(true)
         return binding.root
     }
 }
