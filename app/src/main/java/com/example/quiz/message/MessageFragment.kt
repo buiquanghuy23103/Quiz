@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
 import com.example.quiz.R
@@ -25,6 +28,7 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         setFirebaseListeners()
         viewModel.initFirebase()
     }
@@ -73,5 +77,20 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
 
     override fun startAuthUI(authIntent: Intent) {
         startActivityForResult(authIntent, RC_SIGN_IN)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.message, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.sign_out_menu_item -> onSignOutOptionSelected()
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun onSignOutOptionSelected(): Boolean {
+        return true
     }
 }

@@ -50,9 +50,8 @@ class MessageViewModel : BaseViewModel() {
     }
 
     fun sendMessage(message: String) {
-        Message(text = message, username = this.username).let { message ->
-            sendMessageToFirebase(message)
-        }
+        val newMessage = Message(text = message, username = this.username)
+        sendMessageToFirebase(newMessage)
     }
 
     private fun sendMessageToFirebase(message: Message) {
