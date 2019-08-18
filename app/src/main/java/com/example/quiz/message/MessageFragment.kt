@@ -1,5 +1,6 @@
 package com.example.quiz.message
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,13 +8,16 @@ import android.view.View
 import androidx.lifecycle.Observer
 import com.example.quiz.R
 import com.example.quiz.databinding.MessageListBinding
+import com.example.quiz.firebase.FirebaseAuthUtil
 import com.example.quiz.firebase.FirebaseDatabaseUtil
 import com.example.quiz.framework.BaseFragment
 import com.example.quiz.model.Message
 import kotlinx.android.synthetic.main.message_list.*
 
+const val RC_SIGN_IN = 1
+
 class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
-    FirebaseDatabaseUtil.Listener {
+    FirebaseDatabaseUtil.Listener, FirebaseAuthUtil.Listener {
 
     override fun getLayoutId() = R.layout.message_list
 
@@ -22,11 +26,12 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setFirebaseListeners()
-        viewModel.onSignInAsUsername()
+        viewModel.initFirebase()
     }
 
     private fun setFirebaseListeners() {
         viewModel.firebaseDatabaseUtil.listener = this
+        viewModel.firebaseAuthUtil.listener = this
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,5 +69,9 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
 
     override fun addMessageToList(newMessage: Message) {
         viewModel.sendMessageToList(newMessage)
+    }
+
+    override fun startAuthUI(authIntent: Intent) {
+        startActivityForResult(authIntent, RC_SIGN_IN)
     }
 }

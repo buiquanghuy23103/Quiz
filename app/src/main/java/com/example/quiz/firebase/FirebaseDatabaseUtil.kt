@@ -21,7 +21,6 @@ class FirebaseDatabaseUtil {
         dbReference.push().setValue(message)
     }
 
-
     fun attachMessageEventListener() {
         createMessageEventListener()
         dbReference.addChildEventListener(childEventListener)
@@ -41,7 +40,9 @@ class FirebaseDatabaseUtil {
         }
     }
 
-
+    fun detachMessageEventListener() {
+        dbReference.removeEventListener(childEventListener)
+    }
     interface Listener {
         fun addMessageToList(newMessage: Message)
     }
