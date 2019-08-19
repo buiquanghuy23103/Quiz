@@ -18,6 +18,7 @@ import com.example.quiz.model.Message
 import kotlinx.android.synthetic.main.message_list.*
 
 const val RC_SIGN_IN = 1
+const val RC_PHOTO_PICKER = 2
 
 class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
     FirebaseDatabaseUtil.Listener, FirebaseAuthUtil.Listener {
@@ -45,6 +46,7 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
         setupMessageListAdapter()
         setupMessageEditText()
         onSendButtonClick()
+        setupPhotoPicker()
     }
 
     private fun setupMessageListAdapter() {
@@ -71,6 +73,18 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
         sendButton.setOnClickListener {
             viewModel.sendMessage(messageEditText.text.toString())
             messageEditText.setText("")
+        }
+    }
+
+    private fun setupPhotoPicker() {
+        photoPickerButton.setOnClickListener {
+            with(Intent()) {
+                action = Intent.ACTION_GET_CONTENT
+                type = "image/jpeg"
+                putExtra(Intent.EXTRA_LOCAL_ONLY, true)
+                val intent = Intent.createChooser(this, "Choose a picture to upload")
+                startActivityForResult(intent, RC_PHOTO_PICKER)
+            }
         }
     }
 
