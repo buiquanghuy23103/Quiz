@@ -6,7 +6,10 @@ import androidx.work.WorkerParameters
 import com.example.quiz.GsonUtil
 import timber.log.Timber
 
-
+// The implementation of this class is based on Android Sunflower
+// https://github.com/googlesamples/android-sunflower
+// Thanks Sunflower team for a great work! Keep going!
+// PS: Excuse me for not say thanks in public and not knowing the name of the team
 class SeedDataWorker(appContext: Context, params: WorkerParameters) :
     CoroutineWorker(appContext, params) {
     override suspend fun doWork(): Result {
