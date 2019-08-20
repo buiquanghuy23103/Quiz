@@ -22,6 +22,7 @@ class MessageListItem private constructor(private val binding: MessageListItemBi
     fun bind(message: Message) {
         with(binding) {
             this.message = message
+            isPhotoAvailable = message.photoUrl != null
             executePendingBindings()
         }
     }

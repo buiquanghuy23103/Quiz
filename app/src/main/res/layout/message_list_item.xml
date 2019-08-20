@@ -1,27 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/message_text_view"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="@{message.text}" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
+            app:imageFromUrl="@{message.photoUrl}"
+            app:isVisible="@{isPhotoAvailable}" />
 
-        <TextView
-            android:id="@+id/username"
-            android:layout_margin="@dimen/text_margin"
-            android:text="@{message.username}"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="10sp" />
+            android:orientation="vertical"
+            app:isVisible="@{!isPhotoAvailable}">
+
+            <TextView
+                android:id="@+id/message_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:text="@{message.text}"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:text="@{message.username}"
+                android:textSize="10sp" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <data>
@@ -29,5 +46,9 @@
         <variable
             name="message"
             type="com.example.quiz.model.Message" />
+
+        <variable
+            name="isPhotoAvailable"
+            type="Boolean" />
     </data>
 </layout>
