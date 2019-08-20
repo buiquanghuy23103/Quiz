@@ -12,7 +12,7 @@ class FirebaseDatabaseUtil {
     private val db = FirebaseDatabase.getInstance()
     private val dbReference = db.reference.child("messages")
 
-    private val defaultMessage = Message()
+    private val defaultMessage = Message(text = "default message")
 
     private lateinit var childEventListener: ChildEventListener
 

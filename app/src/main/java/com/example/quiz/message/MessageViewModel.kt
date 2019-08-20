@@ -2,12 +2,15 @@ package com.example.quiz.message
 
 import android.app.Application
 import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.quiz.firebase.ANONYMOUS
 import com.example.quiz.firebase.FirebaseAuthUtil
 import com.example.quiz.firebase.FirebaseDatabaseUtil
+import com.example.quiz.firebase.FirebaseStorageUtil
 import com.example.quiz.model.Message
+import timber.log.Timber
 
 class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
     private var username = ANONYMOUS
@@ -15,6 +18,7 @@ class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
     val messageList = MutableLiveData(defaultMessageList)
     private val firebaseDatabaseUtil = FirebaseDatabaseUtil()
     private val firebaseAuthUtil = FirebaseAuthUtil()
+    private val firebaseStorageUtil = FirebaseStorageUtil()
 
     fun setFirebaseDatabaseUtilListener(listener: FirebaseDatabaseUtil.Listener) {
         firebaseDatabaseUtil.listener = listener
@@ -75,5 +79,13 @@ class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
 
     fun signOut() {
         firebaseAuthUtil.signOut(app)
+    }
+
+    fun uploadImage(selectedPhotoUri: Uri) {
+        firebaseStorageUtil.uploadSelectedPhoto(selectedPhotoUri) { photoUrl ->
+            val newMessage =
+                Message(username, null, photoUrl).also { Timber.i("photoUrl = $photoUrl") }
+            firebaseDatabaseUtil.sendMessage(newMessage)
+        }
     }
 }

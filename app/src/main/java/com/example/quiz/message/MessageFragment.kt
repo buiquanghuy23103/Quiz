@@ -1,5 +1,6 @@
 package com.example.quiz.message
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -16,6 +17,7 @@ import com.example.quiz.firebase.FirebaseDatabaseUtil
 import com.example.quiz.framework.BaseFragment
 import com.example.quiz.model.Message
 import kotlinx.android.synthetic.main.message_list.*
+import timber.log.Timber
 
 const val RC_SIGN_IN = 1
 const val RC_PHOTO_PICKER = 2
@@ -110,5 +112,18 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
     private fun onSignOutOptionSelected(): Boolean {
         viewModel.signOut()
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val isValidData = requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK
+                && data != null && data.data != null
+        if (isValidData) {
+            val selectedPhotoUri = data?.data?.also { Timber.i("photoUri = $it") }
+                ?: throw Exception("Photo URI not found")
+            val selectedPhotoFilename =
+                selectedPhotoUri.lastPathSegment.also { Timber.i("selectedPhotoFilename = $it") }
+                    ?: throw Exception("Error retrieving photo's filename")
+            viewModel.uploadImage(selectedPhotoUri)
+        }
     }
 }
