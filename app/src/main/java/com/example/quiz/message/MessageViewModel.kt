@@ -1,11 +1,9 @@
 package com.example.quiz.message
 
 import android.app.Application
-import android.content.Intent
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.quiz.firebase.ANONYMOUS
 import com.example.quiz.firebase.FirebaseAuthUtil
 import com.example.quiz.firebase.FirebaseDatabaseUtil
 import com.example.quiz.firebase.FirebaseStorageUtil
@@ -13,9 +11,15 @@ import com.example.quiz.model.Message
 import timber.log.Timber
 
 class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
-    private var username = ANONYMOUS
     private val defaultMessageList = listOf<Message>()
+    private val username: String
+        get() = FirebaseAuthUtil.readUsername()
     val messageList = MutableLiveData(defaultMessageList)
+
+    init {
+        FirebaseAuthUtil.setupAuthStateListener()
+        FirebaseDatabaseUtil.attachMessageEventListener()
+    }
 
     fun setFirebaseDatabaseUtilListener(listener: FirebaseDatabaseUtil.Listener) {
         FirebaseDatabaseUtil.listener = listener
@@ -25,45 +29,9 @@ class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
         FirebaseAuthUtil.listener = listener
     }
 
-    fun initFirebase() {
-        initMessageEvent()
-        initAuthState()
-    }
-
-    private fun initMessageEvent() {
-        FirebaseDatabaseUtil.attachMessageEventListener()
-    }
-
-    private fun initAuthState() {
-        FirebaseAuthUtil.setupAuthStateListener(
-            { username -> onSignIn(username) },
-            { authIntent -> onSignOut(authIntent) }
-        )
-    }
-
-    private fun onSignIn(username: String) {
-        this.username = username
-        FirebaseDatabaseUtil.attachMessageEventListener()
-    }
-
-    private fun onSignOut(authIntent: Intent) {
-        FirebaseDatabaseUtil.detachMessageEventListener()
-        eraseMessageList()
-        username = ANONYMOUS
-        FirebaseAuthUtil.listener.startAuthUI(authIntent)
-    }
-
-    private fun eraseMessageList() {
-        messageList.value = defaultMessageList
-    }
-
     fun sendMessage(message: String) {
-        val newMessage = Message(text = message, username = this.username)
-        sendMessageToFirebase(newMessage)
-    }
-
-    private fun sendMessageToFirebase(message: Message) {
-        FirebaseDatabaseUtil.sendMessage(message)
+        val newMessage = Message(text = message, username = username)
+        FirebaseDatabaseUtil.sendMessage(newMessage)
     }
 
     fun updateMessageList(newMessageList: List<Message>) {
@@ -80,5 +48,10 @@ class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
                 Message(username, null, photoUrl).also { Timber.i("photoUrl = $photoUrl") }
             FirebaseDatabaseUtil.sendMessage(newMessage)
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        FirebaseDatabaseUtil.detachMessageEventListener()
     }
 }

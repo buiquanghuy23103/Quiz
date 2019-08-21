@@ -36,7 +36,6 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         setFirebaseListeners()
-        viewModel.initFirebase()
     }
 
     private fun setFirebaseListeners() {

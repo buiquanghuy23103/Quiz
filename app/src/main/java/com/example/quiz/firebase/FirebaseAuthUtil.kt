@@ -9,22 +9,32 @@ const val ANONYMOUS = "anonymous"
 
 object FirebaseAuthUtil {
     lateinit var listener: Listener
+    private var username = ANONYMOUS
     private val firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
+
+    fun readUsername() = username
 
     fun signOut(context: Context) {
         AuthUI.getInstance().signOut(context)
     }
 
-
-    fun setupAuthStateListener(onSignIn: (String) -> Unit, onSignOut: (Intent) -> Unit) {
+    fun setupAuthStateListener() {
         authStateListener = FirebaseAuth.AuthStateListener { currentAuth ->
-            currentAuth.currentUser?.let {
-                val username = it.displayName ?: ANONYMOUS
-                onSignIn(username)
-            } ?: onSignOut(getAuthIntent())
+            val user = currentAuth.currentUser
+            if (user == null) {
+                onSignOut()
+            } else {
+                user.displayName?.let { this.username = it }
+                    ?: throw Exception("Username is null")
+            }
         }
         firebaseAuth.addAuthStateListener(authStateListener)
+    }
+
+    private fun onSignOut() {
+        username = ANONYMOUS
+        listener.startAuthUI(getAuthIntent())
     }
 
     private fun getAuthIntent(): Intent {
