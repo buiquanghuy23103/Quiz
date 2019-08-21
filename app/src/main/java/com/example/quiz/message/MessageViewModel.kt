@@ -14,7 +14,7 @@ import timber.log.Timber
 
 class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
     private var username = ANONYMOUS
-    private val defaultMessageList = mutableListOf<Message>()
+    private val defaultMessageList = listOf<Message>()
     val messageList = MutableLiveData(defaultMessageList)
 
     fun setFirebaseDatabaseUtilListener(listener: FirebaseDatabaseUtil.Listener) {
@@ -54,9 +54,7 @@ class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
     }
 
     private fun eraseMessageList() {
-        val currentMessageList = messageList.value ?: defaultMessageList
-        currentMessageList.clear()
-        messageList.value = currentMessageList
+        messageList.value = defaultMessageList
     }
 
     fun sendMessage(message: String) {
@@ -68,10 +66,8 @@ class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
         FirebaseDatabaseUtil.sendMessage(message)
     }
 
-    fun sendMessageToList(message: Message) {
-        val currentMessageList = messageList.value ?: defaultMessageList
-        currentMessageList.add(message)
-        messageList.value = currentMessageList
+    fun updateMessageList(newMessageList: List<Message>) {
+        messageList.value = newMessageList
     }
 
     fun signOut() {

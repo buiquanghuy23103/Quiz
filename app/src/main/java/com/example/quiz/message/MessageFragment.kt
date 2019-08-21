@@ -90,8 +90,8 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
         }
     }
 
-    override fun addMessageToList(newMessage: Message) {
-        viewModel.sendMessageToList(newMessage)
+    override fun replaceWithNewMessageList(messageList: List<Message>) {
+        viewModel.updateMessageList(messageList)
     }
 
     override fun startAuthUI(authIntent: Intent) {
@@ -120,9 +120,6 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
         if (isValidData) {
             val selectedPhotoUri = data?.data?.also { Timber.i("photoUri = $it") }
                 ?: throw Exception("Photo URI not found")
-            val selectedPhotoFilename =
-                selectedPhotoUri.lastPathSegment.also { Timber.i("selectedPhotoFilename = $it") }
-                    ?: throw Exception("Error retrieving photo's filename")
             viewModel.uploadImage(selectedPhotoUri)
         }
     }

@@ -1,10 +1,11 @@
 package com.example.quiz.firebase
 
 import com.example.quiz.model.Message
-import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import timber.log.Timber
 
 object FirebaseDatabaseUtil {
 
@@ -14,36 +15,35 @@ object FirebaseDatabaseUtil {
 
     private val defaultMessage = Message(text = "default message")
 
-    private lateinit var childEventListener: ChildEventListener
+    private val valueEventListener by lazy { initValueEventListener() }
 
+    private fun initValueEventListener(): ValueEventListener {
+        return object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                Timber.e("Error downloading messages from database: ${p0.toException()}")
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val messageList = p0.children.map { dataSnapshot ->
+                    dataSnapshot.getValue(Message::class.java) ?: defaultMessage
+                }
+                listener.replaceWithNewMessageList(messageList)
+            }
+        }
+    }
 
     fun sendMessage(message: Message) {
         dbReference.push().setValue(message)
     }
 
     fun attachMessageEventListener() {
-        createMessageEventListener()
-        dbReference.addChildEventListener(childEventListener)
-    }
-
-    private fun createMessageEventListener() {
-        childEventListener = object : ChildEventListener {
-            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                val newMessage = p0.getValue(Message::class.java) ?: defaultMessage
-                listener.addMessageToList(newMessage)
-            }
-
-            override fun onCancelled(p0: DatabaseError) {}
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {}
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {}
-            override fun onChildRemoved(p0: DataSnapshot) {}
-        }
+        dbReference.addValueEventListener(valueEventListener)
     }
 
     fun detachMessageEventListener() {
-        dbReference.removeEventListener(childEventListener)
+        dbReference.removeEventListener(valueEventListener)
     }
     interface Listener {
-        fun addMessageToList(newMessage: Message)
+        fun replaceWithNewMessageList(messageList: List<Message>)
     }
 }
