@@ -4,34 +4,17 @@ import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.quiz.firebase.FirebaseAuthUtil
-import com.example.quiz.firebase.FirebaseDatabaseUtil
-import com.example.quiz.firebase.FirebaseStorageUtil
+import com.example.quiz.firebase.FirebaseUtil
 import com.example.quiz.model.Message
-import timber.log.Timber
 
-class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
+class MessageViewModel(private val app: Application, listener: FirebaseUtil.Listener) :
+    AndroidViewModel(app) {
     private val defaultMessageList = listOf<Message>()
-    private val username: String
-        get() = FirebaseAuthUtil.readUsername()
+    private val firebaseUtil = FirebaseUtil(listener)
     val messageList = MutableLiveData(defaultMessageList)
 
-    init {
-        FirebaseAuthUtil.setupAuthStateListener()
-        FirebaseDatabaseUtil.attachMessageEventListener()
-    }
-
-    fun setFirebaseDatabaseUtilListener(listener: FirebaseDatabaseUtil.Listener) {
-        FirebaseDatabaseUtil.listener = listener
-    }
-
-    fun setFirebaseAuthUtilListener(listener: FirebaseAuthUtil.Listener) {
-        FirebaseAuthUtil.listener = listener
-    }
-
-    fun sendMessage(message: String) {
-        val newMessage = Message(text = message, username = username)
-        FirebaseDatabaseUtil.sendMessage(newMessage)
+    fun sendMessage(text: String) {
+        firebaseUtil.uploadMessage(text)
     }
 
     fun updateMessageList(newMessageList: List<Message>) {
@@ -39,19 +22,15 @@ class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
     }
 
     fun signOut() {
-        FirebaseAuthUtil.signOut(app)
+        firebaseUtil.signOut(app)
     }
 
     fun uploadImage(selectedPhotoUri: Uri) {
-        FirebaseStorageUtil.uploadSelectedPhoto(selectedPhotoUri) { photoUrl ->
-            val newMessage =
-                Message(username, null, photoUrl).also { Timber.i("photoUrl = $photoUrl") }
-            FirebaseDatabaseUtil.sendMessage(newMessage)
-        }
+        firebaseUtil.uploadSelectedPhoto(selectedPhotoUri)
     }
 
     override fun onCleared() {
         super.onCleared()
-        FirebaseDatabaseUtil.detachMessageEventListener()
+        firebaseUtil.cleanUp()
     }
 }

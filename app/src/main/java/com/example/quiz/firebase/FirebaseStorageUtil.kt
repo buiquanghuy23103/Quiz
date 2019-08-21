@@ -8,17 +8,17 @@ object FirebaseStorageUtil {
     private val firebaseStorage = FirebaseStorage.getInstance()
     private val storageReference = firebaseStorage.reference.child("chat_photos")
 
-    fun uploadSelectedPhoto(selectedPhotoUri: Uri, uploadMessageWithPhotoUrl: (String) -> Unit) {
+    fun uploadSelectedPhoto(selectedPhotoUri: Uri, uploadPhotoUrl: (String) -> Unit) {
         val selectedPhotoFilename = selectedPhotoUri.lastPathSegment
             ?: throw Exception("Error retrieving photo filename from URI")
         val photoRefFirebase = storageReference.child(selectedPhotoFilename)
+        val uploadPhotoTask = photoRefFirebase.putFile(selectedPhotoUri)
 
-        photoRefFirebase.putFile(selectedPhotoUri)
+        uploadPhotoTask
             .addOnSuccessListener {
-                Timber.i("$selectedPhotoFilename is uploaded")
                 photoRefFirebase.downloadUrl.addOnSuccessListener { uri ->
                     val photoUrl = uri.toString()
-                    uploadMessageWithPhotoUrl(photoUrl)
+                    uploadPhotoUrl(photoUrl)
                 }
             }
             .addOnFailureListener {

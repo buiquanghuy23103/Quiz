@@ -50,7 +50,7 @@ object FirebaseAuthUtil {
             .build()
     }
 
-    interface Listener {
+    interface Listener : FirebaseUtil.Listener {
         fun startAuthUI(authIntent: Intent)
     }
 }

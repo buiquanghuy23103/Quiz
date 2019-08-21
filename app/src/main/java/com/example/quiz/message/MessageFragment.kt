@@ -29,18 +29,12 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
 
     override fun initViewModel() = getViewModel {
         val app = requireNotNull(this.activity).application
-        MessageViewModel(app)
+        MessageViewModel(app, this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        setFirebaseListeners()
-    }
-
-    private fun setFirebaseListeners() {
-        viewModel.setFirebaseDatabaseUtilListener(this)
-        viewModel.setFirebaseAuthUtilListener(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -89,7 +83,7 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
         }
     }
 
-    override fun replaceWithNewMessageList(messageList: List<Message>) {
+    override fun updateMessageList(messageList: List<Message>) {
         viewModel.updateMessageList(messageList)
     }
 

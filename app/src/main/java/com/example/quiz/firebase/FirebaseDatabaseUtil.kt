@@ -27,7 +27,7 @@ object FirebaseDatabaseUtil {
                 val messageList = p0.children.map { dataSnapshot ->
                     dataSnapshot.getValue(Message::class.java) ?: defaultMessage
                 }
-                listener.replaceWithNewMessageList(messageList)
+                listener.updateMessageList(messageList)
             }
         }
     }
@@ -43,7 +43,8 @@ object FirebaseDatabaseUtil {
     fun detachMessageEventListener() {
         dbReference.removeEventListener(valueEventListener)
     }
-    interface Listener {
-        fun replaceWithNewMessageList(messageList: List<Message>)
+
+    interface Listener : FirebaseUtil.Listener {
+        fun updateMessageList(messageList: List<Message>)
     }
 }
