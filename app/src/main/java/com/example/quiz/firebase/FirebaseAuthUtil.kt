@@ -7,7 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 const val ANONYMOUS = "anonymous"
 
-class FirebaseAuthUtil {
+object FirebaseAuthUtil {
     lateinit var listener: Listener
     private val firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener

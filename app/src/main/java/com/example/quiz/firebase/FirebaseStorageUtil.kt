@@ -4,7 +4,7 @@ import android.net.Uri
 import com.google.firebase.storage.FirebaseStorage
 import timber.log.Timber
 
-class FirebaseStorageUtil {
+object FirebaseStorageUtil {
     private val firebaseStorage = FirebaseStorage.getInstance()
     private val storageReference = firebaseStorage.reference.child("chat_photos")
 

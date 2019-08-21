@@ -6,7 +6,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 
-class FirebaseDatabaseUtil {
+object FirebaseDatabaseUtil {
 
     lateinit var listener: Listener
     private val db = FirebaseDatabase.getInstance()

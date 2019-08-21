@@ -16,16 +16,13 @@ class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
     private var username = ANONYMOUS
     private val defaultMessageList = mutableListOf<Message>()
     val messageList = MutableLiveData(defaultMessageList)
-    private val firebaseDatabaseUtil = FirebaseDatabaseUtil()
-    private val firebaseAuthUtil = FirebaseAuthUtil()
-    private val firebaseStorageUtil = FirebaseStorageUtil()
 
     fun setFirebaseDatabaseUtilListener(listener: FirebaseDatabaseUtil.Listener) {
-        firebaseDatabaseUtil.listener = listener
+        FirebaseDatabaseUtil.listener = listener
     }
 
     fun setFirebaseAuthUtilListener(listener: FirebaseAuthUtil.Listener) {
-        firebaseAuthUtil.listener = listener
+        FirebaseAuthUtil.listener = listener
     }
 
     fun initFirebase() {
@@ -34,11 +31,11 @@ class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
     }
 
     private fun initMessageEvent() {
-        firebaseDatabaseUtil.attachMessageEventListener()
+        FirebaseDatabaseUtil.attachMessageEventListener()
     }
 
     private fun initAuthState() {
-        firebaseAuthUtil.setupAuthStateListener(
+        FirebaseAuthUtil.setupAuthStateListener(
             { username -> onSignIn(username) },
             { authIntent -> onSignOut(authIntent) }
         )
@@ -46,14 +43,14 @@ class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
 
     private fun onSignIn(username: String) {
         this.username = username
-        firebaseDatabaseUtil.attachMessageEventListener()
+        FirebaseDatabaseUtil.attachMessageEventListener()
     }
 
     private fun onSignOut(authIntent: Intent) {
-        firebaseDatabaseUtil.detachMessageEventListener()
+        FirebaseDatabaseUtil.detachMessageEventListener()
         eraseMessageList()
         username = ANONYMOUS
-        firebaseAuthUtil.listener.startAuthUI(authIntent)
+        FirebaseAuthUtil.listener.startAuthUI(authIntent)
     }
 
     private fun eraseMessageList() {
@@ -68,7 +65,7 @@ class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
     }
 
     private fun sendMessageToFirebase(message: Message) {
-        firebaseDatabaseUtil.sendMessage(message)
+        FirebaseDatabaseUtil.sendMessage(message)
     }
 
     fun sendMessageToList(message: Message) {
@@ -78,14 +75,14 @@ class MessageViewModel(private val app: Application) : AndroidViewModel(app) {
     }
 
     fun signOut() {
-        firebaseAuthUtil.signOut(app)
+        FirebaseAuthUtil.signOut(app)
     }
 
     fun uploadImage(selectedPhotoUri: Uri) {
-        firebaseStorageUtil.uploadSelectedPhoto(selectedPhotoUri) { photoUrl ->
+        FirebaseStorageUtil.uploadSelectedPhoto(selectedPhotoUri) { photoUrl ->
             val newMessage =
                 Message(username, null, photoUrl).also { Timber.i("photoUrl = $photoUrl") }
-            firebaseDatabaseUtil.sendMessage(newMessage)
+            FirebaseDatabaseUtil.sendMessage(newMessage)
         }
     }
 }
