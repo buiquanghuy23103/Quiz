@@ -1,4 +1,4 @@
-package com.example.quiz.message
+package com.example.quiz.explanation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

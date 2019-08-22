@@ -1,4 +1,4 @@
-package com.example.quiz.message
+package com.example.quiz.explanation
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -11,25 +11,25 @@ import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
 import com.example.quiz.R
-import com.example.quiz.databinding.MessageListBinding
+import com.example.quiz.databinding.ExplanationFragmentBinding
 import com.example.quiz.firebase.FirebaseAuthUtil
 import com.example.quiz.firebase.FirebaseDatabaseUtil
 import com.example.quiz.framework.BaseFragment
 import com.example.quiz.model.Message
-import kotlinx.android.synthetic.main.message_list.*
+import kotlinx.android.synthetic.main.explanation_fragment.*
 import timber.log.Timber
 
 const val RC_SIGN_IN = 1
 const val RC_PHOTO_PICKER = 2
 
-class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
+class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragmentBinding>(),
     FirebaseDatabaseUtil.Listener, FirebaseAuthUtil.Listener {
 
-    override fun getLayoutId() = R.layout.message_list
+    override fun getLayoutId() = R.layout.explanation_fragment
 
     override fun initViewModel() = getViewModel {
         val app = requireNotNull(this.activity).application
-        MessageViewModel(app, this)
+        ExplanationViewModel(app, this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +47,7 @@ class MessageFragment : BaseFragment<MessageViewModel, MessageListBinding>(),
     private fun setupMessageListAdapter() {
         with(MessageListAdapter()) {
             message_list.adapter = this
-            viewModel.messageList.observe(this@MessageFragment, Observer { messageList ->
+            viewModel.messageList.observe(this@ExplanationFragment, Observer { messageList ->
                 submitList(messageList)
             })
 

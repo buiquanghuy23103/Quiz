@@ -58,7 +58,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:context=".message.MessageFragment"
+            tools:context=".explanation.ExplanationFragment"
             tools:layout_editor_absoluteX="32dp"
             tools:layout_editor_absoluteY="32dp"
             tools:listitem="@layout/message_list_item" />

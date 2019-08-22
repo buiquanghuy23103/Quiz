@@ -1,4 +1,4 @@
-package com.example.quiz.message
+package com.example.quiz.explanation
 
 import android.app.Application
 import android.net.Uri
@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.quiz.firebase.FirebaseUtil
 import com.example.quiz.model.Message
 
-class MessageViewModel(private val app: Application, listener: FirebaseUtil.Listener) :
+class ExplanationViewModel(private val app: Application, listener: FirebaseUtil.Listener) :
     AndroidViewModel(app) {
     private val defaultMessageList = listOf<Message>()
     private val firebaseUtil = FirebaseUtil(listener)
