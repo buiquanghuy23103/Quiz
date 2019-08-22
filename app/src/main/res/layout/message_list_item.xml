@@ -9,8 +9,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="200dp"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
             android:scaleType="fitCenter"
             app:imageFromUrl="@{message.photoUrl}"
             app:isVisible="@{isPhotoAvailable}" />
