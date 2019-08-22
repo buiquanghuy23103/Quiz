@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizFragmentBinding
 import com.example.quiz.framework.BaseFragment
+import com.example.quiz.quizviewpager.QuizViewPagerFragmentDirections
 import kotlinx.android.synthetic.main.quiz_fragment.*
 import timber.log.Timber
 
@@ -38,6 +40,7 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
         setupQuizView()
         setupChoiceView()
         setupResultView()
+        setupExplanationButton()
     }
 
     private fun setupQuizView() {
@@ -61,6 +64,16 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
             else getString(R.string.incorrect_answer)
             binding.isCorrect = isCorrect
         })
+    }
+
+    private fun setupExplanationButton() {
+        explanation_button.setOnClickListener {
+            val direction =
+                QuizViewPagerFragmentDirections.actionQuizViewPagerFragmentToExplanationFragment(
+                    getQuizId()
+                )
+            it.findNavController().navigate(direction)
+        }
     }
 
     override fun onClick(choiceId: Int) {

@@ -26,6 +26,9 @@
             android:name="categoryId"
             android:defaultValue="0"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_quizViewPagerFragment_to_ExplanationFragment"
+            app:destination="@id/ExplanationFragment" />
     </fragment>
 
     <fragment
@@ -34,5 +37,9 @@
         android:label="ExplanationFragment"
         tools:layout="@layout/explanation_fragment">
 
+        <argument
+            android:name="quizId"
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
 </navigation>
