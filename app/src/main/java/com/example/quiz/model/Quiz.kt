@@ -19,6 +19,7 @@ import kotlin.random.Random
 data class Quiz(
     var text: String = "",
     var categoryId: Int = 0,
+    var explanation: String? = null,
 
     @PrimaryKey
     var id: Int = Random.nextInt()
