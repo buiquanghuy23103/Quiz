@@ -10,6 +10,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
 import com.example.quiz.databinding.ExplanationFragmentBinding
 import com.example.quiz.firebase.FirebaseAuthUtil
@@ -25,11 +26,13 @@ const val RC_PHOTO_PICKER = 2
 class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragmentBinding>(),
     FirebaseDatabaseUtil.Listener, FirebaseAuthUtil.Listener {
 
+    private val args by navArgs<ExplanationFragmentArgs>()
+
     override fun getLayoutId() = R.layout.explanation_fragment
 
     override fun initViewModel() = getViewModel {
         val app = requireNotNull(this.activity).application
-        ExplanationViewModel(app, this)
+        ExplanationViewModel(app, this, args.quizId)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
