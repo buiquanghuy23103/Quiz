@@ -32,6 +32,13 @@
             style="@style/TextAppearance.Title"
             android:gravity="center"
             android:text="@{@string/result(resultText)}" />
+
+        <Button
+            android:id="@+id/explanation_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/explanation_button_label"
+            app:isVisible="@{isCorrect}" />
     </LinearLayout>
 
     <data>
@@ -43,5 +50,9 @@
         <variable
             name="resultText"
             type="String" />
+
+        <variable
+            name="isCorrect"
+            type="Boolean" />
     </data>
 </layout>

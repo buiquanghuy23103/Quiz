@@ -59,6 +59,7 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
         viewModel.assessment.observe(this, Observer { isCorrect ->
             binding.resultText = if (isCorrect) getString(R.string.correct_answer)
             else getString(R.string.incorrect_answer)
+            binding.isCorrect = isCorrect
         })
     }
 
