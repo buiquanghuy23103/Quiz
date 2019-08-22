@@ -41,10 +41,17 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupExplanationText()
         setupMessageListAdapter()
         setupMessageEditText()
         onSendButtonClick()
         setupPhotoPicker()
+    }
+
+    private fun setupExplanationText() {
+        viewModel.quiz.observe(this, Observer {
+            binding.quiz = it
+        })
     }
 
     private fun setupMessageListAdapter() {
