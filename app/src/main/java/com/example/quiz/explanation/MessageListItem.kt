@@ -10,12 +10,15 @@ import com.example.quiz.model.Message
 
 class MessageListItem private constructor(private val binding: MessageListItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
+
+    private lateinit var listener: Listener
+
     companion object {
-        fun from(parent: ViewGroup): MessageListItem {
+        fun fromViewGroupWithListener(parent: ViewGroup, listener: Listener): MessageListItem {
             val inflater = LayoutInflater.from(parent.context)
             val binding: MessageListItemBinding =
                 DataBindingUtil.inflate(inflater, R.layout.message_list_item, parent, false)
-            return MessageListItem(binding)
+            return MessageListItem(binding).apply { this.listener = listener }
         }
     }
 
@@ -23,7 +26,12 @@ class MessageListItem private constructor(private val binding: MessageListItemBi
         with(binding) {
             this.message = message
             isPhotoAvailable = message.photoUrl != null
+            imageView.setOnClickListener { listener.startPhotoDialog(message.photoUrl ?: "") }
             executePendingBindings()
         }
+    }
+
+    interface Listener {
+        fun startPhotoDialog(photoUrl: String)
     }
 }

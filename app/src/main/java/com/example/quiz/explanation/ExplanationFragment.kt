@@ -22,9 +22,10 @@ import timber.log.Timber
 
 const val RC_SIGN_IN = 1
 const val RC_PHOTO_PICKER = 2
+const val DIALOG_KEY = "dialog_key"
 
 class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragmentBinding>(),
-    FirebaseDatabaseUtil.Listener, FirebaseAuthUtil.Listener {
+    FirebaseDatabaseUtil.Listener, FirebaseAuthUtil.Listener, MessageListItem.Listener {
 
     private val args by navArgs<ExplanationFragmentArgs>()
 
@@ -55,7 +56,7 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
     }
 
     private fun setupMessageListAdapter() {
-        with(MessageListAdapter()) {
+        with(MessageListAdapter(this)) {
             message_list.adapter = this
             viewModel.messageList.observe(this@ExplanationFragment, Observer { messageList ->
                 submitList(messageList)
@@ -125,5 +126,10 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
                 ?: throw Exception("Photo URI not found")
             viewModel.uploadImage(selectedPhotoUri)
         }
+    }
+
+    override fun startPhotoDialog(photoUrl: String) {
+        val dialog = PhotoDialogFragment.getInstance(photoUrl)
+        dialog.show(requireNotNull(fragmentManager), DIALOG_KEY)
     }
 }

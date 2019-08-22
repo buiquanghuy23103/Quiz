@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.quiz.model.Message
 
-class MessageListAdapter : ListAdapter<Message, MessageListItem>(diffCallback) {
+class MessageListAdapter(private val listener: MessageListItem.Listener) :
+    ListAdapter<Message, MessageListItem>(diffCallback) {
+
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<Message>() {
             override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
@@ -19,7 +21,7 @@ class MessageListAdapter : ListAdapter<Message, MessageListItem>(diffCallback) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        MessageListItem.from(parent)
+        MessageListItem.fromViewGroupWithListener(parent, listener)
 
     override fun onBindViewHolder(holder: MessageListItem, position: Int) {
         holder.bind(getItem(position))

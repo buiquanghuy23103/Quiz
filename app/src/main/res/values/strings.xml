@@ -10,6 +10,10 @@
     <string name="result">Result: %1$s</string>
     <string name="explanation_button_label">Explanation</string>
 
+    <!--  PhotoDialogFragment  -->
+    <string name="photo_dialog_title">Bigger Photo</string>
+    <string name="cancel">Cancel</string>
+
     <!--  Message fragment  -->
     <string name="send_button_label">Send</string>
     <string name="message_edit_text_hint">Type a message</string>
