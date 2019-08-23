@@ -82,7 +82,7 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
 
     override fun setBackgroundColor(view: View, choiceId: Int) {
         viewModel.getChoseStateById(choiceId).observe(this, Observer {
-            val chosenAnswerColor = ContextCompat.getColor(view.context, R.color.chosenAnswerColor)
+            val chosenAnswerColor = ContextCompat.getColor(view.context, R.color.accent)
             val notChosenAnswerColor =
                 ContextCompat.getColor(view.context, android.R.color.transparent)
             val backgroundColor = if (it) chosenAnswerColor else notChosenAnswerColor
