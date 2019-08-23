@@ -22,7 +22,8 @@
             android:id="@+id/answer_view_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
             tools:listitem="@layout/choice_list_item" />
 
         <TextView
