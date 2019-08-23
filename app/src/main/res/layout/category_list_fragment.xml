@@ -12,7 +12,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/category_list"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
             android:layout_height="match_parent"
             android:padding="4dp"
             android:scrollbars="vertical"
