@@ -120,6 +120,10 @@ dependencies {
     // Material component
     implementation 'com.google.android.material:material:1.0.0'
 
+    // RxJava, RxKotlin
+    implementation "io.reactivex.rxjava2:rxjava:2.2.4"
+    implementation "io.reactivex.rxjava2:rxkotlin:2.3.0"
+
 }
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
 

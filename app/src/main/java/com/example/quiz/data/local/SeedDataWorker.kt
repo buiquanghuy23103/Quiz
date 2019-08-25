@@ -18,7 +18,7 @@ class SeedDataWorker(appContext: Context, params: WorkerParameters) :
 
     private fun generateData(): Result {
         try {
-            return insertSampleDataToDatabase()
+            return Result.success()
         } catch (ex: Exception) {
             Timber.e("Error seeding database: $ex")
             return Result.failure()
