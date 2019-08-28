@@ -10,9 +10,9 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-class FirebaseFetch<T : Any>(private val classType: Class<T>) {
+object FirebaseFetch {
 
-    fun downloadData(dao: BaseDao<T>): Completable {
+    fun <T> downloadData(dao: BaseDao<T>, classType: Class<T>): Completable {
         val downloadedData = Observable.create<List<T>> { emitter ->
             val db = FirebaseDatabase.getInstance()
             val dbRef = db.reference.child(classType.simpleName)

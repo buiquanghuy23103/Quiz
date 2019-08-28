@@ -11,7 +11,6 @@ import timber.log.Timber
 
 class CategoryListViewModel : BaseViewModel() {
 
-    private val firebaseFetch = FirebaseFetch(Category::class.java)
     private val disposables = CompositeDisposable()
     val categoryList = categoryDao.getAll()
 
@@ -22,7 +21,7 @@ class CategoryListViewModel : BaseViewModel() {
     }
 
     fun downloadCategoryList() {
-        firebaseFetch.downloadData(categoryDao)
+        FirebaseFetch.downloadData(categoryDao, Category::class.java)
             .subscribe {
                 Timber.i("data is saved in local db")
             }.addTo(disposables)
