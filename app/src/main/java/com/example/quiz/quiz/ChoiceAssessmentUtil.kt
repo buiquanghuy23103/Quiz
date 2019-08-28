@@ -7,7 +7,7 @@ import com.example.quiz.model.Choice
 
 class ChoiceAssessmentUtil(choiceList: LiveData<List<Choice>>) {
     private val choiceAssessmentList = Transformations.map(choiceList) {
-        it.map { choice -> ChoiceAssessment(choice.id, choice.isTrue, false) }
+        it.map { choice -> ChoiceAssessment(choice.id, choice.correct, false) }
     } as MutableLiveData
 
     val assessment = Transformations.map(choiceAssessmentList) {

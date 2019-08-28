@@ -17,9 +17,9 @@ import kotlin.random.Random
     indices = [Index(value = ["quizId"])]
 )
 data class Choice(
-    var quizId : Int,
-    var text: String,
-    var isTrue: Boolean,
+    var quizId: Int = 0,
+    var text: String = "Default text",
+    var correct: Boolean = false,
 
     @PrimaryKey
     var id: Int = Random.nextInt()

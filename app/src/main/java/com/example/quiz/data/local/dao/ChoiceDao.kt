@@ -7,6 +7,10 @@ import com.example.quiz.model.Choice
 
 @Dao
 interface ChoiceDao : BaseDao<Choice> {
+
+    @Query("SELECT * FROM choices")
+    fun getAll(): LiveData<List<Choice>>
+
     @Query("SELECT * FROM choices WHERE id = :id")
     fun getById(id: Int): LiveData<Choice>
 
