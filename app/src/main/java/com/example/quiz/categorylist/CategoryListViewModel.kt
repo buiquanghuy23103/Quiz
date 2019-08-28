@@ -8,12 +8,13 @@ import com.example.quiz.model.Category
 import com.example.quiz.model.Choice
 import com.example.quiz.model.Quiz
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
-import timber.log.Timber
 
 class CategoryListViewModel : BaseViewModel() {
 
     private val disposables = CompositeDisposable()
+    private val categoryFetch = FirebaseFetch(categoryDao, Category::class.java)
+    private val quizFetch = FirebaseFetch(quizDao, Quiz::class.java)
+    private val choiceFetch = FirebaseFetch(choiceDao, Choice::class.java)
     val categoryList = categoryDao.getAll()
     val quizList = quizDao.getAll()
     val choiceList = choiceDao.getAll()
@@ -37,28 +38,22 @@ class CategoryListViewModel : BaseViewModel() {
     }
 
     fun downloadCategoryList() {
-        FirebaseFetch.downloadData(categoryDao, Category::class.java)
-            .subscribe {
-                Timber.i("data is saved in local db")
-            }.addTo(disposables)
+        categoryFetch.downloadData()
     }
 
     fun downloadQuizList() {
-        FirebaseFetch.downloadData(quizDao, Quiz::class.java)
-            .subscribe {
-                Timber.i("data is saved in local db")
-            }.addTo(disposables)
+        quizFetch.downloadData()
     }
 
     fun downloadChoiceList() {
-        FirebaseFetch.downloadData(choiceDao, Choice::class.java)
-            .subscribe {
-                Timber.i("data is saved in local db")
-            }.addTo(disposables)
+        choiceFetch.downloadData()
     }
 
     override fun onCleared() {
         super.onCleared()
         disposables.dispose()
+        categoryFetch.cleanUp()
+        quizFetch.cleanUp()
+        choiceFetch.cleanUp()
     }
 }
