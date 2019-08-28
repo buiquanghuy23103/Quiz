@@ -1,5 +1,7 @@
 package com.example.quiz.categorylist
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.example.quiz.data.remote.FirebaseFetch
 import com.example.quiz.framework.BaseViewModel
 import com.example.quiz.model.Category
@@ -13,11 +15,13 @@ class CategoryListViewModel : BaseViewModel() {
     private val disposables = CompositeDisposable()
     val categoryList = categoryDao.getAll()
 
-    init {
-        loadCategoryList()
+    fun isCategoryListNull(): LiveData<Boolean> {
+        return Transformations.map(categoryList) {
+            it.isNullOrEmpty()
+        }
     }
 
-    private fun loadCategoryList() {
+    fun downloadCategoryList() {
         firebaseFetch.downloadData(categoryDao)
             .subscribe {
                 Timber.i("data is saved in local db")
