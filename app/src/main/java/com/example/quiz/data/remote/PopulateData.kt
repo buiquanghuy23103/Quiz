@@ -17,7 +17,7 @@ object PopulateData {
     private val choiceFetch = FirebaseFetch(db.choiceDao, Choice::class.java, Choice())
 
 
-    fun otherDownload() {
+    fun downloadAllData() {
         categoryFetch.downloadData()
             .concatWith(quizFetch.downloadData())
             .concatWith(choiceFetch.downloadData())

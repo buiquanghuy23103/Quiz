@@ -4,9 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import com.example.quiz.data.local.dao.CategoryDao
 import com.example.quiz.data.local.dao.ChoiceDao
 import com.example.quiz.data.local.dao.QuizDao
@@ -35,13 +32,6 @@ abstract class AppDatabase: RoomDatabase() {
             AppDatabase::class.java,
             "quiz.db"
         )
-            .addCallback(object : RoomDatabase.Callback() {
-                override fun onCreate(db: SupportSQLiteDatabase) {
-                    super.onCreate(db)
-                    val request = OneTimeWorkRequestBuilder<SeedDataWorker>().build()
-                    WorkManager.getInstance().enqueue(request)
-                }
-            })
             .fallbackToDestructiveMigration()
             .build()
     })

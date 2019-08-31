@@ -1,6 +1,5 @@
 package com.example.quiz.data.remote
 
-import com.example.quiz.alert
 import com.example.quiz.data.local.dao.BaseDao
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
@@ -14,16 +13,7 @@ class FirebaseFetch<T>(
     private val defaultObject: T
 ) {
     fun downloadData(): Completable {
-        return fetchData()
-            .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
-            .doOnNext { alert("data = $it") }
-            .doOnComplete { alert("${classType.simpleName} completes") }
-            .flatMapCompletable {
-                alert("data is saved")
-                dao.saveList(it)
-            }
-            .andThen(Completable.complete())
+        return fetchData().saveToLocalDatabase()
     }
 
     private fun fetchData(): Observable<List<T>> {
@@ -42,6 +32,15 @@ class FirebaseFetch<T>(
         return this.documents.map { document ->
             document.toObject(classType) ?: defaultObject
         }
+    }
+
+    private fun Observable<List<T>>.saveToLocalDatabase(): Completable {
+        return this.subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
+            .flatMapCompletable {
+                dao.saveList(it)
+            }
+            .andThen(Completable.complete())
     }
 
 }
