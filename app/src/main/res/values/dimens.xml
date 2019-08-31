@@ -4,11 +4,15 @@
     <dimen name="horizontal_margin">16dp</dimen>
     <dimen name="vertical_margin">16dp</dimen>
     <dimen name="overall_margin">16dp</dimen>
-    <dimen name="category_image_height">200dp</dimen>
+    <dimen name="category_item_height">200dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
     <dimen name="card_side_margin">12dp</dimen>
     <dimen name="card_bottom_margin">26dp</dimen>
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="card_corner_radius">12dp</dimen>
+
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_extra_small">4dp</dimen>
 </resources>
