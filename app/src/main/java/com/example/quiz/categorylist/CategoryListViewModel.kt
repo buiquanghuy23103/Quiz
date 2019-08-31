@@ -16,7 +16,7 @@ class CategoryListViewModel : BaseViewModel() {
     }
 
     fun downloadAll() {
-        PopulateData.downloadAllFromFirebase()
+        PopulateData.otherDownload()
     }
 
     override fun onCleared() {
