@@ -1,4 +1,4 @@
-package com.example.quiz.quiz
+package com.example.quiz
 
 import android.view.View
 import android.widget.ImageView
