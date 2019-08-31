@@ -1,13 +1,10 @@
 package com.example.quiz.data.local
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.quiz.data.local.dao.CategoryDao
 import com.example.quiz.data.local.dao.ChoiceDao
 import com.example.quiz.data.local.dao.QuizDao
-import com.example.quiz.framework.SingletonHolder
 import com.example.quiz.model.Category
 import com.example.quiz.model.Choice
 import com.example.quiz.model.Quiz
@@ -25,14 +22,4 @@ abstract class AppDatabase: RoomDatabase() {
     abstract val quizDao: QuizDao
     abstract val choiceDao: ChoiceDao
     abstract val categoryDao: CategoryDao
-
-    companion object: SingletonHolder<AppDatabase, Context>({
-        Room.databaseBuilder(
-            it,
-            AppDatabase::class.java,
-            "quiz.db"
-        )
-            .fallbackToDestructiveMigration()
-            .build()
-    })
 }
