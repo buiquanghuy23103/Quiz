@@ -16,11 +16,12 @@ class CategoryListFragment : BaseFragment<CategoryListViewModel, CategoryListFra
     override fun getLayoutId() = R.layout.category_list_fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.downloadAll()
-
         with(category_list) {
             adapter = CategoryListAdapter().apply {
                 viewModel.categoryList.observe(this@CategoryListFragment, Observer {
+                    if (it.isNullOrEmpty()) {
+                        viewModel.downloadAll()
+                    }
                     submitList(it)
                 })
             }
