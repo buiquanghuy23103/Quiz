@@ -43,7 +43,7 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupExplanationText()
-        setupMessageListAdapter()
+        setupMessageList()
         setupMessageEditText()
         onSendButtonClick()
         setupPhotoPicker()
@@ -53,6 +53,11 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
         viewModel.quiz.observe(this, Observer {
             binding.quiz = it
         })
+    }
+
+    private fun setupMessageList() {
+        message_list.isNestedScrollingEnabled = false
+        setupMessageListAdapter()
     }
 
     private fun setupMessageListAdapter() {

@@ -4,13 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/horizontal_margin"
-        android:paddingTop="@dimen/vertical_margin"
-        android:paddingRight="@dimen/horizontal_margin"
-        android:paddingBottom="@dimen/vertical_margin">
+        android:layout_height="match_parent">
+        <!--Self-study source: https://codelabs.developers.google.com/codelabs/mdc-android-kotlin/index.html?index=..%2F..gdd17#2 -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/message_list"
+            android:layout_margin="@dimen/margin_normal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/explanation_text_view"
+            tools:listitem="@layout/message_list_item" />
 
         <TextView
             android:id="@+id/explanation_text_view"
@@ -58,24 +68,31 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/message_list"
-            android:name="com.example.quiz.message.MessageFragment"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/overall_margin"
-            app:layoutManager="LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/explanation_text_view"
-            tools:context=".explanation.ExplanationFragment"
-            tools:layout_editor_absoluteX="32dp"
-            tools:layout_editor_absoluteY="32dp"
-            tools:listitem="@layout/message_list_item" />
+            android:layout_height="@dimen/app_bar_height">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                style="@style/Widget.Design.CollapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="snap|exitUntilCollapsed">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--  Our app bar will collapse from app_bar_height to tool_bar_height  -->
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/tool_bar_height"
+                    app:layout_collapseMode="pin" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <data>
 
