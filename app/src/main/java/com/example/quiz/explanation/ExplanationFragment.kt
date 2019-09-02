@@ -9,6 +9,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
@@ -42,11 +43,16 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupToolbar()
         setupExplanationText()
         setupMessageList()
         setupMessageEditText()
         onSendButtonClick()
         setupPhotoPicker()
+    }
+
+    private fun setupToolbar() {
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
 
     private fun setupExplanationText() {
@@ -109,6 +115,7 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.message, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
