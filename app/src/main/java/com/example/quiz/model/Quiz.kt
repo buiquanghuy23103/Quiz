@@ -20,6 +20,7 @@ data class Quiz(
     var text: String = "",
     var categoryId: Int = 0,
     var explanation: String? = null,
+    var imageUrl: String = "https://www.vegetables.co.nz/assets/Uploads/vegetables.jpg",
 
     @PrimaryKey
     var id: Int = Random.nextInt()
