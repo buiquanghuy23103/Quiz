@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quiz.R
+import com.example.quiz.alert
 import com.example.quiz.databinding.ChatHolderBinding
 import com.example.quiz.model.Chat
 
@@ -24,6 +25,7 @@ class ChatHolder private constructor(private val binding: ChatHolderBinding) :
     fun bind(chat: Chat) {
         with(binding) {
             this.chat = chat
+            alert("current chat = $chat")
             executePendingBindings()
         }
     }

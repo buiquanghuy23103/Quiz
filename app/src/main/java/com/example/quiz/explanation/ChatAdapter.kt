@@ -6,15 +6,18 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 
-class ChatAdapter : FirestoreRecyclerAdapter<Chat, ChatHolder>(options) {
+class ChatAdapter : FirestoreRecyclerAdapter<Chat, ChatHolder>(buildFirestoreOptions()) {
     companion object {
-        private val query = FirebaseFirestore.getInstance()
-            .collection(Chat::class.java.simpleName)
-            .orderBy("timestamp")
 
-        val options = FirestoreRecyclerOptions.Builder<Chat>()
-            .setQuery(query, Chat::class.java)
-            .build()
+        private fun buildFirestoreOptions(): FirestoreRecyclerOptions<Chat> {
+            val db = FirebaseFirestore.getInstance()
+            val collectionRef = db.collection("Chat")
+            val query = collectionRef.limit(10)
+
+            return FirestoreRecyclerOptions.Builder<Chat>()
+                .setQuery(query, Chat::class.java)
+                .build()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ChatHolder.from(parent)

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,32 +10,19 @@
             type="com.example.quiz.model.Chat" />
     </data>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation">
 
-        <ImageView
-            android:id="@+id/user_image"
-            android:layout_width="64dp"
-            android:layout_height="64dp" />
-
-        <com.google.android.material.card.MaterialCardView
+        <TextView
+            android:id="@+id/chat_message"
+            android:text="@{chat.message}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/card_corner_radius"
-            app:cardElevation="@dimen/card_elevation"
-            android:layout_gravity="center_vertical">
-
-            <TextView
-                android:id="@+id/chat_message"
-                android:text="@{chat.message}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="210dp" />
+            tools:text="Some sample text here" />
 
 
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

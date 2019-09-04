@@ -29,6 +29,7 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
     FirebaseDatabaseUtil.Listener, FirebaseAuthUtil.Listener, MessageListItem.Listener {
 
     private val args by navArgs<ExplanationFragmentArgs>()
+    private val chatAdapter = ChatAdapter()
 
     override fun getLayoutId() = R.layout.explanation_fragment
 
@@ -67,13 +68,7 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
     }
 
     private fun setupMessageListAdapter() {
-        with(MessageListAdapter(this)) {
-            message_list.adapter = this
-            viewModel.messageList.observe(this@ExplanationFragment, Observer { messageList ->
-                submitList(messageList)
-            })
-
-        }
+        message_list.adapter = chatAdapter
     }
 
     private fun setupMessageEditText() {
@@ -143,5 +138,15 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
     override fun startPhotoDialog(photoUrl: String) {
         val dialog = PhotoDialogFragment.getInstance(photoUrl)
         dialog.show(requireNotNull(fragmentManager), DIALOG_KEY)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        chatAdapter.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        chatAdapter.stopListening()
     }
 }
