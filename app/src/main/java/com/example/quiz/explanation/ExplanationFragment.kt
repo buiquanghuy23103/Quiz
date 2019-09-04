@@ -26,7 +26,7 @@ const val RC_PHOTO_PICKER = 2
 const val DIALOG_KEY = "dialog_key"
 
 class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragmentBinding>(),
-    FirebaseDatabaseUtil.Listener, FirebaseAuthUtil.Listener, MessageListItem.Listener {
+    FirebaseDatabaseUtil.Listener, FirebaseAuthUtil.Listener {
 
     private val args by navArgs<ExplanationFragmentArgs>()
     private val chatAdapter = ChatAdapter()
@@ -133,11 +133,6 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
                 ?: throw Exception("Photo URI not found")
             viewModel.uploadImage(selectedPhotoUri)
         }
-    }
-
-    override fun startPhotoDialog(photoUrl: String) {
-        val dialog = PhotoDialogFragment.getInstance(photoUrl)
-        dialog.show(requireNotNull(fragmentManager), DIALOG_KEY)
     }
 
     override fun onStart() {
