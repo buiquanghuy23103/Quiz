@@ -6,8 +6,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 
-class ChatAdapter(private val listener: MessageListItem.Listener) :
-    FirestoreRecyclerAdapter<Chat, MessageListItem>(options) {
+class ChatAdapter : FirestoreRecyclerAdapter<Chat, ChatHolder>(options) {
     companion object {
         private val query = FirebaseFirestore.getInstance()
             .collection(Chat::class.java.simpleName)
@@ -18,9 +17,6 @@ class ChatAdapter(private val listener: MessageListItem.Listener) :
             .build()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        MessageListItem.fromViewGroupWithListener(parent, listener)
-
-    override fun onBindViewHolder(p0: MessageListItem, p1: Int, p2: Chat) =
-        p0.bind(p2)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ChatHolder.from(parent)
+    override fun onBindViewHolder(p0: ChatHolder, p1: Int, p2: Chat) = p0.bind(p2)
 }
