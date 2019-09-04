@@ -117,6 +117,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:5.1.0'
     implementation 'com.google.firebase:firebase-storage:19.0.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:21.0.0'
+    implementation 'com.firebaseui:firebase-ui-firestore:5.1.0'
 
     // Material component
     implementation 'com.google.android.material:material:1.0.0'
