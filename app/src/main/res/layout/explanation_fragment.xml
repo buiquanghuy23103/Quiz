@@ -9,47 +9,15 @@
         android:layout_height="match_parent">
         <!--Self-study source: https://codelabs.developers.google.com/codelabs/mdc-android-kotlin/index.html?index=..%2F..gdd17#2 -->
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/overall_margin"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/sendButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:enabled="false"
-                android:text="@string/send_button_label" />
-
-            <EditText
-                android:id="@+id/messageEditText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:inputType="textCapSentences|textAutoCorrect" />
-
-            <ImageButton
-                android:id="@+id/photoPickerButton"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:background="@android:drawable/ic_menu_gallery" />
-
-        </LinearLayout>
 
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="fill_vertical"
-            android:clipToPadding="false"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -64,21 +32,51 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/overall_margin"
+                    android:orientation="horizontal"
+                    app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior">
+
+                    <Button
+                        android:id="@+id/sendButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:enabled="false"
+                        android:text="@string/send_button_label" />
+
+                    <EditText
+                        android:id="@+id/messageEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:inputType="textCapSentences|textAutoCorrect" />
+
+                    <ImageButton
+                        android:id="@+id/photoPickerButton"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="@android:drawable/ic_menu_gallery" />
+
+                </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/message_list"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_normal"
                     app:layoutManager="LinearLayoutManager"
-                    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
                     app:layout_constraintBottom_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/explanation_text_view"
                     tools:listitem="@layout/message_list_item" />
 
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
