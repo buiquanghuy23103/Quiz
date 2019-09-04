@@ -5,7 +5,7 @@ import android.net.Uri
 import com.example.quiz.model.Message
 
 class FirebaseUtil(private val listener: Listener) {
-    private val username: String
+    val username: String
         get() = FirebaseAuthUtil.readUsername()
 
     init {

@@ -7,8 +7,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.quiz.dagger.Injector
 import com.example.quiz.firebase.FirebaseUtil
+import com.example.quiz.model.Chat
 import com.example.quiz.model.Message
 import com.example.quiz.model.Quiz
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ExplanationViewModel(
     private val app: Application,
@@ -23,7 +25,10 @@ class ExplanationViewModel(
     val messageList = MutableLiveData(defaultMessageList)
 
     fun sendMessage(text: String) {
-        firebaseUtil.uploadMessage(text)
+        val newMessage = Chat(firebaseUtil.username, text)
+        val db = FirebaseFirestore.getInstance()
+        val collectionRef = db.collection("Chat")
+        collectionRef.add(newMessage)
     }
 
     fun updateMessageList(newMessageList: List<Message>) {
