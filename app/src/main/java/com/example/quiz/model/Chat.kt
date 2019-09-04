@@ -7,5 +7,5 @@ data class Chat(
     val name: String = "unknown",
     val message: String = "default message",
     val uid: String = "a123",
-    @ServerTimestamp val timeStamp: Date = Date.getDefaultInstance()
+    @ServerTimestamp val timestamp: Date = Date.getDefaultInstance()
 )

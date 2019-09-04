@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quiz.R
 import com.example.quiz.databinding.MessageListItemBinding
+import com.example.quiz.model.Chat
 import com.example.quiz.model.Message
 
 class MessageListItem private constructor(private val binding: MessageListItemBinding) :
@@ -27,6 +28,13 @@ class MessageListItem private constructor(private val binding: MessageListItemBi
             this.message = message
             isPhotoAvailable = message.photoUrl != null
             imageView.setOnClickListener { listener.startPhotoDialog(message.photoUrl ?: "") }
+            executePendingBindings()
+        }
+    }
+
+    fun bind(message: Chat) {
+        with(binding) {
+
             executePendingBindings()
         }
     }
