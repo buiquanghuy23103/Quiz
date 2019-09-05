@@ -9,11 +9,14 @@ data class UserProfile(
     var photoUrl: String = ""
 ) {
     companion object {
-        fun from(user: FirebaseUser) = UserProfile(
-            uid = user.uid,
-            name = user.displayName ?: "anonymous",
-            email = user.email ?: "huythdnbkltv@gmail.com",
-            photoUrl = user.photoUrl.toString()
-        )
+        fun from(user: FirebaseUser?): UserProfile =
+            user?.let {
+                UserProfile(
+                    uid = user.uid,
+                    name = user.displayName ?: "anonymous",
+                    email = user.email ?: "huythdnbkltv@gmail.com",
+                    photoUrl = user.photoUrl.toString()
+                )
+            } ?: UserProfile()
     }
 }

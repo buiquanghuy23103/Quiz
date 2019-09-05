@@ -2,6 +2,7 @@ package com.example.quiz.firebase
 
 import android.content.Context
 import android.content.Intent
+import com.example.quiz.model.UserProfile
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 
@@ -9,6 +10,7 @@ const val ANONYMOUS = "anonymous"
 
 object FirebaseAuthUtil {
     lateinit var listener: Listener
+    lateinit var userProfile: UserProfile
     private var username = ANONYMOUS
     private val firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
@@ -21,11 +23,12 @@ object FirebaseAuthUtil {
 
     fun setupAuthStateListener() {
         authStateListener = FirebaseAuth.AuthStateListener { currentAuth ->
-            val user = currentAuth.currentUser
-            if (user == null) {
+            val firebaseUser = currentAuth.currentUser
+            userProfile = UserProfile.from(firebaseUser)
+            if (firebaseUser == null) {
                 onSignOut()
             } else {
-                user.displayName?.let { this.username = it }
+                firebaseUser.displayName?.let { this.username = it }
                     ?: throw Exception("Username is null")
             }
         }
