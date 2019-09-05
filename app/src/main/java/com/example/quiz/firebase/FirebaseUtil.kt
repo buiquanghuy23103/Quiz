@@ -3,10 +3,12 @@ package com.example.quiz.firebase
 import android.content.Context
 import android.net.Uri
 import com.example.quiz.model.Message
+import com.example.quiz.model.UserProfile
 
 class FirebaseUtil(private val listener: Listener) {
-    val username: String
-        get() = FirebaseAuthUtil.readUsername()
+    val currentUserProfile: UserProfile
+        get() = FirebaseAuthUtil.userProfile
+    val username = currentUserProfile.name
 
     init {
         initFirebaseAuth()

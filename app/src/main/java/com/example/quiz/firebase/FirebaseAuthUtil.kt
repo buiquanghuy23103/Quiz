@@ -11,7 +11,7 @@ const val ANONYMOUS = "anonymous"
 
 object FirebaseAuthUtil {
     lateinit var listener: Listener
-    lateinit var userProfile: UserProfile
+    var userProfile = UserProfile()
     private var username = ANONYMOUS
     private val firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener

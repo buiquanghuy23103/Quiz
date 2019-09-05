@@ -25,7 +25,7 @@ class ExplanationViewModel(
     val messageList = MutableLiveData(defaultMessageList)
 
     fun sendMessage(text: String) {
-        val newMessage = Chat(firebaseUtil.username, text)
+        val newMessage = Chat(firebaseUtil.currentUserProfile.uid, text)
         val db = FirebaseFirestore.getInstance()
         val collectionRef = db.collection("Chat")
         collectionRef.add(newMessage)
