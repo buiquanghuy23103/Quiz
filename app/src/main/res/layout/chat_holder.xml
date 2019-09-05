@@ -14,38 +14,49 @@
             type="com.example.quiz.model.UserProfile" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/card_corner_radius"
-        app:cardElevation="@dimen/card_elevation"
+        android:orientation="vertical"
         android:layout_margin="@dimen/margin_normal">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/user_name"
+            android:text="@{userProfile.name}"
+            android:textAppearance="@style/TextAppearance.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            tools:text="Username"
+            android:padding="@dimen/card_padding"
+            android:layout_margin="0dp" />
 
-            <TextView
-                android:id="@+id/user_name"
-                android:text="@{userProfile.name}"
-                android:textStyle="bold"
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
+            android:layout_margin="0dp">
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Username"
-                android:padding="@dimen/card_padding" />
-
-            <TextView
-                android:id="@+id/chat_message"
-                android:text="@{chat.message}"
-                android:padding="@dimen/card_padding"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Some sample text here"
-                android:background="@color/colorAccent" />
+                android:orientation="horizontal">
 
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/chat_message"
+                    android:text="@{chat.message}"
+                    android:padding="@dimen/card_padding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Some sample text here"
+                    android:background="@color/colorAccent" />
 
-    </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
 </layout>
