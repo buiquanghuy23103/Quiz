@@ -74,6 +74,7 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
         message_list.adapter = chatAdapter.apply {
             viewModel.getAllUsersObservable().subscribe {
                 allUsers = it
+                notifyDataSetChanged()
             }.addTo(compositeDisposable)
         }
     }
