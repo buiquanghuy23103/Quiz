@@ -9,17 +9,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 
-const val ANONYMOUS = "anonymous"
-
 object FirebaseAuthUtil {
     lateinit var listener: Listener
     var userProfile = UserProfile()
-    private var username = ANONYMOUS
     private val firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
     private val compositeDisposable = CompositeDisposable()
-
-    fun readUsername() = username
 
     fun signOut(context: Context) {
         AuthUI.getInstance().signOut(context)
@@ -32,21 +27,25 @@ object FirebaseAuthUtil {
             if (firebaseUser == null) {
                 onSignOut()
             } else {
-                firebaseUser.displayName?.let { this.username = it }
-                    ?: throw Exception("Username is null")
-
-                UserProfile.getAllUsers().subscribe {
-                    val isNewUser = it.firstOrNull() == null
-                    if (isNewUser) {
-                        val db = FirebaseFirestore.getInstance()
-                        val userRef = db.collection("UserProfile")
-                        userRef.add(userProfile)
-                    }
-                }.addTo(compositeDisposable)
+                uploadNewUser()
 
             }
         }
         firebaseAuth.addAuthStateListener(authStateListener)
+    }
+
+    private fun uploadNewUser() {
+        UserProfile.getAllUsers().subscribe { firebaseUserList ->
+            val findCurrentUser = firebaseUserList.firstOrNull {
+                it.uid == userProfile.uid
+            }
+            val isNewUser = findCurrentUser == null
+            if (isNewUser) {
+                val db = FirebaseFirestore.getInstance()
+                val userRef = db.collection("UserProfile")
+                userRef.add(userProfile)
+            }
+        }.addTo(compositeDisposable)
     }
 
     fun cleanUp() {
@@ -55,7 +54,7 @@ object FirebaseAuthUtil {
     }
 
     private fun onSignOut() {
-        username = ANONYMOUS
+        userProfile = UserProfile()
         listener.startAuthUI(getAuthIntent())
     }
 

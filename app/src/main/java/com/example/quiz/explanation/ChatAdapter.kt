@@ -1,7 +1,6 @@
 package com.example.quiz.explanation
 
 import android.view.ViewGroup
-import com.example.quiz.alert
 import com.example.quiz.model.Chat
 import com.example.quiz.model.UserProfile
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
@@ -26,7 +25,6 @@ class ChatAdapter : FirestoreRecyclerAdapter<Chat, ChatHolder>(buildFirestoreOpt
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ChatHolder.from(parent)
     override fun onBindViewHolder(holder: ChatHolder, p1: Int, chat: Chat) {
         val userProfile = allUsers.find { it.uid == chat.userUid } ?: UserProfile()
-        alert("current user profile = $userProfile")
         holder.bind(chat, userProfile)
     }
 }

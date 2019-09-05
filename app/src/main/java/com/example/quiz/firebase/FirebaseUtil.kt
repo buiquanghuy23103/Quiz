@@ -25,11 +25,6 @@ class FirebaseUtil(private val listener: Listener) {
         FirebaseDatabaseUtil.attachMessageEventListener()
     }
 
-    fun uploadMessage(text: String) {
-        val newMessage = Message(text = text, username = username)
-        FirebaseDatabaseUtil.sendMessage(newMessage)
-    }
-
     fun signOut(context: Context) {
         FirebaseAuthUtil.signOut(context)
     }

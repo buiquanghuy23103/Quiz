@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
-import com.example.quiz.alert
 import com.example.quiz.databinding.ExplanationFragmentBinding
 import com.example.quiz.firebase.FirebaseAuthUtil
 import com.example.quiz.firebase.FirebaseDatabaseUtil
@@ -75,7 +74,6 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
         message_list.adapter = chatAdapter.apply {
             viewModel.getAllUsersObservable().subscribe {
                 allUsers = it
-                alert("allusers = $it")
             }.addTo(compositeDisposable)
         }
     }
