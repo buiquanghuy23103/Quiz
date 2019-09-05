@@ -42,6 +42,10 @@ object FirebaseAuthUtil {
         firebaseAuth.addAuthStateListener(authStateListener)
     }
 
+    fun cleanUp() {
+        firebaseAuth.removeAuthStateListener(authStateListener)
+    }
+
     private fun onSignOut() {
         username = ANONYMOUS
         listener.startAuthUI(getAuthIntent())

@@ -44,6 +44,7 @@ class FirebaseUtil(private val listener: Listener) {
 
     fun cleanUp() {
         FirebaseDatabaseUtil.detachMessageEventListener()
+        FirebaseAuthUtil.cleanUp()
     }
 
     interface Listener
