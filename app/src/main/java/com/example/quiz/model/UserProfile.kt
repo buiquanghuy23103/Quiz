@@ -4,6 +4,9 @@ import com.example.quiz.alert
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 data class UserProfile(
     var uid: String = "a123",
@@ -22,20 +25,31 @@ data class UserProfile(
                 )
             } ?: UserProfile()
 
-        fun getAllUsers(): List<UserProfile> {
-            var userProfiles = listOf<UserProfile>()
-            val db = FirebaseFirestore.getInstance()
-            val userRef = db.collection("UserProfile")
+        fun getAllUsers(): Observable<List<UserProfile>> {
+            val observable = Observable.create<List<UserProfile>> { emitter ->
+                val db = FirebaseFirestore.getInstance()
+                val userRef = db.collection("UserProfile")
 
-            userRef.get()
-                .addOnSuccessListener {
-                    userProfiles = it.toUserProfile()
-                }
-                .addOnCanceledListener {
-                    alert("Cannot download user profiles")
-                }
+                userRef.get()
+                    .addOnSuccessListener { querySnapshot ->
+                        with(querySnapshot.toUserProfile()) {
+                            if (!this.isNullOrEmpty()) {
+                                emitter.onNext(this)
+                                emitter.onComplete()
+                            }
+                        }
+                    }
+                    .addOnCanceledListener {
+                        alert("Cannot download user profiles")
+                        emitter.onNext(listOf())
+                    }
 
-            return userProfiles
+            }
+
+            return observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .share()
         }
 
         private fun QuerySnapshot.toUserProfile(): List<UserProfile> {

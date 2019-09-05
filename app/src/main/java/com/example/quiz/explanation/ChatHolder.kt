@@ -8,6 +8,7 @@ import com.example.quiz.R
 import com.example.quiz.alert
 import com.example.quiz.databinding.ChatHolderBinding
 import com.example.quiz.model.Chat
+import com.example.quiz.model.UserProfile
 
 class ChatHolder private constructor(private val binding: ChatHolderBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -22,9 +23,10 @@ class ChatHolder private constructor(private val binding: ChatHolderBinding) :
         }
     }
 
-    fun bind(chat: Chat) {
+    fun bind(chat: Chat, userProfile: UserProfile) {
         with(binding) {
             this.chat = chat
+            this.userProfile = userProfile
             alert("current chat = $chat")
             executePendingBindings()
         }

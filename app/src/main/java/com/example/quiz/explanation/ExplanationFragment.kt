@@ -13,11 +13,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
+import com.example.quiz.alert
 import com.example.quiz.databinding.ExplanationFragmentBinding
 import com.example.quiz.firebase.FirebaseAuthUtil
 import com.example.quiz.firebase.FirebaseDatabaseUtil
 import com.example.quiz.framework.BaseFragment
 import com.example.quiz.model.Message
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.explanation_fragment.*
 import timber.log.Timber
 
@@ -30,6 +33,7 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
 
     private val args by navArgs<ExplanationFragmentArgs>()
     private val chatAdapter = ChatAdapter()
+    private val compositeDisposable = CompositeDisposable()
 
     override fun getLayoutId() = R.layout.explanation_fragment
 
@@ -68,7 +72,12 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
     }
 
     private fun setupMessageListAdapter() {
-        message_list.adapter = chatAdapter
+        message_list.adapter = chatAdapter.apply {
+            viewModel.getAllUsersObservable().subscribe {
+                allUsers = it
+                alert("allusers = $it")
+            }.addTo(compositeDisposable)
+        }
     }
 
     private fun setupMessageEditText() {
@@ -143,5 +152,6 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
     override fun onStop() {
         super.onStop()
         chatAdapter.stopListening()
+        compositeDisposable.dispose()
     }
 }

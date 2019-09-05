@@ -6,6 +6,8 @@ import com.example.quiz.model.UserProfile
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 
 const val ANONYMOUS = "anonymous"
 
@@ -15,6 +17,7 @@ object FirebaseAuthUtil {
     private var username = ANONYMOUS
     private val firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
+    private val compositeDisposable = CompositeDisposable()
 
     fun readUsername() = username
 
@@ -31,12 +34,16 @@ object FirebaseAuthUtil {
             } else {
                 firebaseUser.displayName?.let { this.username = it }
                     ?: throw Exception("Username is null")
-                val isNewUser = UserProfile.getAllUsers().firstOrNull() == null
-                if (isNewUser) {
-                    val db = FirebaseFirestore.getInstance()
-                    val userRef = db.collection("UserProfile")
-                    userRef.add(userProfile)
-                }
+
+                UserProfile.getAllUsers().subscribe {
+                    val isNewUser = it.firstOrNull() == null
+                    if (isNewUser) {
+                        val db = FirebaseFirestore.getInstance()
+                        val userRef = db.collection("UserProfile")
+                        userRef.add(userProfile)
+                    }
+                }.addTo(compositeDisposable)
+
             }
         }
         firebaseAuth.addAuthStateListener(authStateListener)
@@ -44,6 +51,7 @@ object FirebaseAuthUtil {
 
     fun cleanUp() {
         firebaseAuth.removeAuthStateListener(authStateListener)
+        compositeDisposable.dispose()
     }
 
     private fun onSignOut() {

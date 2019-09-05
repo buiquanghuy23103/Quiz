@@ -10,6 +10,7 @@ import com.example.quiz.firebase.FirebaseUtil
 import com.example.quiz.model.Chat
 import com.example.quiz.model.Message
 import com.example.quiz.model.Quiz
+import com.example.quiz.model.UserProfile
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ExplanationViewModel(
@@ -20,7 +21,6 @@ class ExplanationViewModel(
     AndroidViewModel(app) {
     private val defaultMessageList = listOf<Message>()
     private val firebaseUtil = FirebaseUtil(listener)
-
     val quiz by lazy { getQuizById() }
     val messageList = MutableLiveData(defaultMessageList)
 
@@ -42,6 +42,8 @@ class ExplanationViewModel(
     fun uploadImage(selectedPhotoUri: Uri) {
         firebaseUtil.uploadSelectedPhoto(selectedPhotoUri)
     }
+
+    fun getAllUsersObservable() = UserProfile.getAllUsers()
 
     private fun getQuizById(): LiveData<Quiz> {
         val injector = Injector.get()

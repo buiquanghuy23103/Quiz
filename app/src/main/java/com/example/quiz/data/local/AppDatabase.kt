@@ -12,7 +12,7 @@ import com.example.quiz.model.Quiz
 // The implementation of this class is based on Android Sunflower
 // https://github.com/googlesamples/android-sunflower
 // Thanks Sunflower team for a great work! Keep going!
-// PS: Excuse me for not say thanks in public and not knowing the name of the team
+// PS: Excuse me for not say thanks in public and not knowing the userUid of the team
 @Database(
     entities = [Category::class, Quiz::class, Choice::class],
     version = 1,
