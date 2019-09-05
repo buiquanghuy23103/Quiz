@@ -27,7 +27,8 @@ class ChatHolder private constructor(private val binding: ChatHolderBinding) :
         with(binding) {
             this.chat = chat
             this.userProfile = userProfile
-            alert("current chat = $chat")
+            isPhotoMessage = !chat.photoUrl.isNullOrEmpty()
+            alert("chat = $chat, userProfile = $userProfile")
             executePendingBindings()
         }
     }

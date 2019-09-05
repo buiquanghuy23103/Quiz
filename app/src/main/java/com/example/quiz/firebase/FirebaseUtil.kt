@@ -2,19 +2,14 @@ package com.example.quiz.firebase
 
 import android.content.Context
 import android.net.Uri
-import com.example.quiz.dagger.Injector
 import com.example.quiz.model.Chat
-import com.example.quiz.model.Message
-import com.example.quiz.model.UserProfile
+import timber.log.Timber
 
 class FirebaseUtil(private val listener: Listener) {
-    val currentUserProfile: UserProfile
-        get() = FirebaseAuthUtil.userProfile
-    private val username = currentUserProfile.name
+    private val currentUserProfile = FirebaseAuthUtil.userProfile
 
     init {
         initFirebaseAuth()
-        initFirebaseDatabase()
     }
 
     private fun initFirebaseAuth() {
@@ -22,16 +17,9 @@ class FirebaseUtil(private val listener: Listener) {
         FirebaseAuthUtil.setupAuthStateListener()
     }
 
-    private fun initFirebaseDatabase() {
-        FirebaseDatabaseUtil.listener = listener as FirebaseDatabaseUtil.Listener
-        FirebaseDatabaseUtil.attachMessageEventListener()
-    }
-
     fun sendMessage(text: String) {
         val newMessage = Chat(currentUserProfile.uid, text)
-        val db = Injector.get().firestore()
-        val collectionRef = db.collection("Chat")
-        collectionRef.add(newMessage)
+        FirestoreUtil.sendMessage(newMessage)
     }
 
     fun signOut(context: Context) {
@@ -44,12 +32,12 @@ class FirebaseUtil(private val listener: Listener) {
     }
 
     private fun uploadPhotoUrl(photoUrl: String) {
-        val newMessage = Message(username, null, photoUrl)
-        FirebaseDatabaseUtil.sendMessage(newMessage)
+        Timber.i("userProfile uid = ${currentUserProfile.uid}")
+        val newMessage = Chat(currentUserProfile.uid, "", photoUrl)
+        FirestoreUtil.sendMessage(newMessage)
     }
 
     fun cleanUp() {
-        FirebaseDatabaseUtil.detachMessageEventListener()
         FirebaseAuthUtil.cleanUp()
     }
 
