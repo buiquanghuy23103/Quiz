@@ -56,11 +56,13 @@
 
                     <EditText
                         android:id="@+id/messageEditText"
+                        android:background="@drawable/round_edit_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:inputType="textCapSentences|textAutoCorrect" />
+                        android:inputType="textCapSentences|textAutoCorrect"
+                        android:padding="@dimen/card_padding" />
 
                     <ImageButton
                         android:id="@+id/photoPickerButton"
