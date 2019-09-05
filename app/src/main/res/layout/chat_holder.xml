@@ -23,7 +23,8 @@
             android:padding="@dimen/card_padding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Some sample text here" />
+            tools:text="Some sample text here"
+            android:background="@color/colorAccent" />
 
 
     </com.google.android.material.card.MaterialCardView>
