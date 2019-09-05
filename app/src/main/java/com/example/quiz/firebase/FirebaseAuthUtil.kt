@@ -5,6 +5,7 @@ import android.content.Intent
 import com.example.quiz.model.UserProfile
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 const val ANONYMOUS = "anonymous"
 
@@ -30,6 +31,12 @@ object FirebaseAuthUtil {
             } else {
                 firebaseUser.displayName?.let { this.username = it }
                     ?: throw Exception("Username is null")
+                val isNewUser = UserProfile.getAllUsers().firstOrNull() == null
+                if (isNewUser) {
+                    val db = FirebaseFirestore.getInstance()
+                    val userRef = db.collection("UserProfile")
+                    userRef.add(userProfile)
+                }
             }
         }
         firebaseAuth.addAuthStateListener(authStateListener)
