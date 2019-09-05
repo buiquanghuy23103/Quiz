@@ -2,10 +2,10 @@ package com.example.quiz.firebase
 
 import android.content.Context
 import android.content.Intent
+import com.example.quiz.dagger.Injector
 import com.example.quiz.model.UserProfile
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 
@@ -41,7 +41,7 @@ object FirebaseAuthUtil {
             }
             val isNewUser = findCurrentUser == null
             if (isNewUser) {
-                val db = FirebaseFirestore.getInstance()
+                val db = Injector.get().firestore()
                 val userRef = db.collection("UserProfile")
                 userRef.add(userProfile)
             }

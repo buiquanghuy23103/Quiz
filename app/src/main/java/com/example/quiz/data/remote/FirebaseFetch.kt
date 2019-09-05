@@ -1,7 +1,7 @@
 package com.example.quiz.data.remote
 
+import com.example.quiz.dagger.Injector
 import com.example.quiz.data.local.dao.BaseDao
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -18,7 +18,7 @@ class FirebaseFetch<T>(
 
     private fun fetchData(): Observable<List<T>> {
         return Observable.create { emitter ->
-            val db = FirebaseFirestore.getInstance()
+            val db = Injector.get().firestore()
             db.collection(classType.simpleName)
                 .get()
                 .addOnSuccessListener {

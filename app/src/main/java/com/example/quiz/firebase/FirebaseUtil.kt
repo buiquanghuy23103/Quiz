@@ -2,13 +2,15 @@ package com.example.quiz.firebase
 
 import android.content.Context
 import android.net.Uri
+import com.example.quiz.dagger.Injector
+import com.example.quiz.model.Chat
 import com.example.quiz.model.Message
 import com.example.quiz.model.UserProfile
 
 class FirebaseUtil(private val listener: Listener) {
     val currentUserProfile: UserProfile
         get() = FirebaseAuthUtil.userProfile
-    val username = currentUserProfile.name
+    private val username = currentUserProfile.name
 
     init {
         initFirebaseAuth()
@@ -23,6 +25,13 @@ class FirebaseUtil(private val listener: Listener) {
     private fun initFirebaseDatabase() {
         FirebaseDatabaseUtil.listener = listener as FirebaseDatabaseUtil.Listener
         FirebaseDatabaseUtil.attachMessageEventListener()
+    }
+
+    fun sendMessage(text: String) {
+        val newMessage = Chat(currentUserProfile.uid, text)
+        val db = Injector.get().firestore()
+        val collectionRef = db.collection("Chat")
+        collectionRef.add(newMessage)
     }
 
     fun signOut(context: Context) {
