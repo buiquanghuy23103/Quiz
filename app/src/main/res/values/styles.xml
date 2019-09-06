@@ -17,6 +17,11 @@
 
     <style name="TextAppearance.Quiz.Normal" parent="TextAppearance.MaterialComponents.Body1" />
 
+    <style name="TextAppearance.Quiz.ListItem" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/primary_dark</item>
+    </style>
+
     <style name="TextAppearance.Quiz.Caption" parent="TextAppearance.MaterialComponents.Caption" />
 
     <style name="TextAppearance.Quiz.Toolbar.Title" parent="TextAppearance.MaterialComponents.Headline5">
