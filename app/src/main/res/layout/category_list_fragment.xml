@@ -10,6 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/category_tool_bar"
+                style="@style/Widget.AppCompat.Toolbar"
+                app:title="@string/category_toolbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tool_bar_height"
+
+                />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/category_list"
             android:clipToPadding="false"

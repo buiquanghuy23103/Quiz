@@ -2,6 +2,7 @@
     <string name="app_name">Quiz</string>
 
     <!--  CategoryListFragment  -->
+    <string name="category_toolbar_title">Category</string>
     <string name="category_image">Picture of category</string>
 
     <!--  QuizFragment  -->
