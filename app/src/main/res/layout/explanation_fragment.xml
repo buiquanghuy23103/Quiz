@@ -27,7 +27,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/overall_margin"
-                    android:fontFamily="@font/roboto"
                     android:text="@{quiz.explanation}"
                     app:layout_constraintBottom_toTopOf="@+id/message_list"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -61,7 +60,7 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:background="@android:drawable/ic_menu_gallery"
-                        android:backgroundTint="@color/colorAccent" />
+                        android:backgroundTint="?attr/colorAccent" />
 
                     <EditText
                         android:id="@+id/messageEditText"
