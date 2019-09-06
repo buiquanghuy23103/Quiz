@@ -22,4 +22,9 @@
         <item name="android:textSize">9sp</item>
     </style>
 
+    <style name="TextAppearance.Toolbar.Title" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textAlignment">center</item>
+        <item name="android:color">@android:color/white</item>
+    </style>
+
 </resources>
