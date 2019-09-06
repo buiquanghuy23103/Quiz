@@ -12,6 +12,10 @@
         <variable
             name="userProfile"
             type="com.example.quiz.model.UserProfile" />
+
+        <variable
+            name="isPhotoMessage"
+            type="Boolean" />
     </data>
 
 
@@ -54,6 +58,7 @@
 
                 <TextView
                     android:id="@+id/chat_message"
+                    isVisible="@{!isPhotoMessage}"
                     android:textColor="@android:color/white"
                     android:text="@{chat.message}"
                     android:padding="@dimen/card_padding"
@@ -63,6 +68,14 @@
                     android:background="@color/colorAccent" />
 
             </com.google.android.material.card.MaterialCardView>
+
+            <ImageView
+                android:id="@+id/photo_message"
+                isVisible="@{isPhotoMessage}"
+                imageFromUrl="@{chat.photoUrl}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="300dp" />
 
         </LinearLayout>
 

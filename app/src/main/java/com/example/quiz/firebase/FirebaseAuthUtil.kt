@@ -28,7 +28,6 @@ object FirebaseAuthUtil {
                 onSignOut()
             } else {
                 uploadNewUser()
-
             }
         }
         firebaseAuth.addAuthStateListener(authStateListener)

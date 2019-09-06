@@ -15,9 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
 import com.example.quiz.databinding.ExplanationFragmentBinding
 import com.example.quiz.firebase.FirebaseAuthUtil
-import com.example.quiz.firebase.FirebaseDatabaseUtil
 import com.example.quiz.framework.BaseFragment
-import com.example.quiz.model.Message
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.explanation_fragment.*
@@ -27,8 +25,9 @@ const val RC_SIGN_IN = 1
 const val RC_PHOTO_PICKER = 2
 const val DIALOG_KEY = "dialog_key"
 
-class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragmentBinding>(),
-    FirebaseDatabaseUtil.Listener, FirebaseAuthUtil.Listener {
+class ExplanationFragment :
+    BaseFragment<ExplanationViewModel, ExplanationFragmentBinding>(),
+    FirebaseAuthUtil.Listener {
 
     private val args by navArgs<ExplanationFragmentArgs>()
     private val chatAdapter = ChatAdapter()
@@ -106,10 +105,6 @@ class ExplanationFragment : BaseFragment<ExplanationViewModel, ExplanationFragme
                 startActivityForResult(intent, RC_PHOTO_PICKER)
             }
         }
-    }
-
-    override fun updateMessageList(messageList: List<Message>) {
-        viewModel.updateMessageList(messageList)
     }
 
     override fun startAuthUI(authIntent: Intent) {
