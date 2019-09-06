@@ -10,7 +10,9 @@
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 
-    <style name="TextAppearance.Quiz.Button" parent="TextAppearance.MaterialComponents.Button" />
+    <style name="TextAppearance.Quiz.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
     <style name="TextAppearance.Quiz.Normal" parent="TextAppearance.MaterialComponents.Body1" />
 
