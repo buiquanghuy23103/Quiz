@@ -38,7 +38,7 @@
                 android:layout_marginBottom="@dimen/margin_normal"
                 android:gravity="center_horizontal"
                 android:text="@{category.text}"
-                android:textAppearance="@style/TextAppearance.NormalText"
+                android:textAppearance="@style/TextAppearance.Quiz.Normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

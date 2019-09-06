@@ -23,6 +23,7 @@
 
                 <TextView
                     android:id="@+id/explanation_text_view"
+                    style="@style/TextAppearance.Quiz.Normal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/overall_margin"

@@ -23,6 +23,7 @@
 
             <TextView
                 android:id="@+id/message_text_view"
+                style="@style/TextAppearance.Quiz.Normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
@@ -32,11 +33,11 @@
 
             <TextView
                 android:id="@+id/username"
+                android:text="@{message.username}"
+                style="@style/TextAppearance.Quiz.Caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:text="@{message.username}"
-                android:textSize="10sp" />
+                android:layout_margin="@dimen/text_margin" />
 
         </LinearLayout>
     </LinearLayout>

@@ -10,19 +10,13 @@
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
-    <style name="TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="android:textSize">24sp</item>
-    </style>
+    <style name="TextAppearance.Quiz.Button" parent="TextAppearance.MaterialComponents.Button" />
 
-    <style name="TextAppearance.NormalText" parent="TextAppearance.Title">
-        <item name="android:textSize">18sp</item>
-    </style>
+    <style name="TextAppearance.Quiz.Normal" parent="TextAppearance.MaterialComponents.Body1" />
 
-    <style name="TextAppearance.Caption" parent="TextAppearance.MaterialComponents.Caption">
-        <item name="android:textSize">9sp</item>
-    </style>
+    <style name="TextAppearance.Quiz.Caption" parent="TextAppearance.MaterialComponents.Caption" />
 
-    <style name="TextAppearance.Toolbar.Title" parent="TextAppearance.MaterialComponents.Headline5">
+    <style name="TextAppearance.Quiz.Toolbar.Title" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textAlignment">center</item>
         <item name="android:color">@android:color/white</item>
     </style>

@@ -17,7 +17,7 @@
             android:gravity="center"
             android:padding="8dp"
             android:text="@{choice.text}"
-            android:textAppearance="@style/TextAppearance.NormalText"
+            android:textAppearance="@style/TextAppearance.Quiz.Normal"
             tools:text="choice">
 
         </TextView>

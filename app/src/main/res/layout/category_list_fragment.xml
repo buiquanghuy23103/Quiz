@@ -35,7 +35,7 @@
                 <TextView
                     android:text="@string/category_toolbar_title"
                     android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.Toolbar.Title"
+                    android:textAppearance="@style/TextAppearance.Quiz.Toolbar.Title"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/tool_bar_height" />
 
