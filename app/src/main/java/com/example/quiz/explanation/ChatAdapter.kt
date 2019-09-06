@@ -14,7 +14,7 @@ class ChatAdapter : FirestoreRecyclerAdapter<Chat, ChatHolder>(buildFirestoreOpt
         private fun buildFirestoreOptions(): FirestoreRecyclerOptions<Chat> {
             val db = FirebaseFirestore.getInstance()
             val collectionRef = db.collection("Chat")
-            val query = collectionRef.limit(10)
+            val query = collectionRef.orderBy("timestamp")
 
             return FirestoreRecyclerOptions.Builder<Chat>()
                 .setQuery(query, Chat::class.java)
