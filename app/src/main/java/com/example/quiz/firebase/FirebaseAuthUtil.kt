@@ -2,16 +2,16 @@ package com.example.quiz.firebase
 
 import android.content.Context
 import android.content.Intent
-import com.example.quiz.dagger.Injector
 import com.example.quiz.model.UserProfile
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
+import io.reactivex.subjects.BehaviorSubject
 
 object FirebaseAuthUtil {
     lateinit var listener: Listener
-    var userProfile = UserProfile()
+    var userProfileSubject = BehaviorSubject.createDefault(UserProfile())
     private val firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
     private val compositeDisposable = CompositeDisposable()
@@ -23,7 +23,7 @@ object FirebaseAuthUtil {
     fun setupAuthStateListener() {
         authStateListener = FirebaseAuth.AuthStateListener { currentAuth ->
             val firebaseUser = currentAuth.currentUser
-            userProfile = UserProfile.from(firebaseUser)
+            updateCurrentUserProfile(firebaseUser)
             if (firebaseUser == null) {
                 onSignOut()
             } else {
@@ -33,18 +33,13 @@ object FirebaseAuthUtil {
         firebaseAuth.addAuthStateListener(authStateListener)
     }
 
+    private fun updateCurrentUserProfile(firebaseUser: FirebaseUser?) {
+        val userProfile = UserProfile.from(firebaseUser)
+        userProfileSubject.onNext(userProfile)
+    }
+
     private fun uploadNewUser() {
-        UserProfile.getAllUsers().subscribe { firebaseUserList ->
-            val findCurrentUser = firebaseUserList.firstOrNull {
-                it.uid == userProfile.uid
-            }
-            val isNewUser = findCurrentUser == null
-            if (isNewUser) {
-                val db = Injector.get().firestore()
-                val userRef = db.collection("UserProfile")
-                userRef.add(userProfile)
-            }
-        }.addTo(compositeDisposable)
+
     }
 
     fun cleanUp() {
@@ -53,7 +48,7 @@ object FirebaseAuthUtil {
     }
 
     private fun onSignOut() {
-        userProfile = UserProfile()
+        userProfileSubject.onNext(UserProfile())
         listener.startAuthUI(getAuthIntent())
     }
 

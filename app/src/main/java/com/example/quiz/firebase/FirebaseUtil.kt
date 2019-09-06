@@ -3,10 +3,14 @@ package com.example.quiz.firebase
 import android.content.Context
 import android.net.Uri
 import com.example.quiz.model.Chat
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import timber.log.Timber
 
 class FirebaseUtil(private val listener: Listener) {
-    private val currentUserProfile = FirebaseAuthUtil.userProfile
+    private val currentUserProfile = FirebaseAuthUtil.userProfileSubject
+        .filter { it.uid != "a123" }
+    private val compositeDisposable = CompositeDisposable()
 
     init {
         initFirebaseAuth()
@@ -18,8 +22,10 @@ class FirebaseUtil(private val listener: Listener) {
     }
 
     fun sendMessage(text: String) {
-        val newMessage = Chat(currentUserProfile.uid, text)
-        FirestoreUtil.sendMessage(newMessage)
+        currentUserProfile.subscribe { userProfile ->
+            val newMessage = Chat(userProfile.uid, text)
+            FirestoreUtil.sendMessage(newMessage)
+        }.addTo(compositeDisposable)
     }
 
     fun signOut(context: Context) {
@@ -32,9 +38,11 @@ class FirebaseUtil(private val listener: Listener) {
     }
 
     private fun uploadPhotoUrl(photoUrl: String) {
-        Timber.i("userProfile uid = ${currentUserProfile.uid}")
-        val newMessage = Chat(currentUserProfile.uid, "", photoUrl)
-        FirestoreUtil.sendMessage(newMessage)
+        currentUserProfile.subscribe { userProfile ->
+            Timber.i("userProfile uid = ${userProfile.uid}")
+            val newMessage = Chat(userProfile.uid, "", photoUrl)
+            FirestoreUtil.sendMessage(newMessage)
+        }.addTo(compositeDisposable)
     }
 
     fun cleanUp() {
