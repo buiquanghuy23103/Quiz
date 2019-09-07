@@ -12,5 +12,5 @@ class QuizViewModel(quizId: Int) : BaseViewModel() {
     fun toggleChoiceChosenById(choiceId: Int) =
         choiceAssessmentUtil.toggleChoiceChosenById(choiceId)
 
-    fun getChoseStateById(choiceId: Int) = choiceAssessmentUtil.getChosenStateById(choiceId)
+    fun getChosenStateById(choiceId: Int) = choiceAssessmentUtil.getChosenStateById(choiceId)
 }

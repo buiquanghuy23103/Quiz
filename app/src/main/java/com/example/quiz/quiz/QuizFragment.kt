@@ -81,11 +81,11 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
     }
 
     override fun setBackgroundColor(view: View, choiceId: Int) {
-        viewModel.getChoseStateById(choiceId).observe(this, Observer {
-            val chosenAnswerColor = ContextCompat.getColor(view.context, R.color.accent)
-            val notChosenAnswerColor =
+        viewModel.getChosenStateById(choiceId).observe(this, Observer { isChosen ->
+            val chosenColor = ContextCompat.getColor(view.context, R.color.accent)
+            val notChosenColor =
                 ContextCompat.getColor(view.context, R.color.card_color)
-            val backgroundColor = if (it) chosenAnswerColor else notChosenAnswerColor
+            val backgroundColor = if (isChosen) chosenColor else notChosenColor
             view.setBackgroundColor(backgroundColor)
         })
     }
