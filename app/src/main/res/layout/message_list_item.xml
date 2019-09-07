@@ -22,22 +22,30 @@
             app:isVisible="@{!isPhotoAvailable}">
 
             <TextView
-                android:id="@+id/message_text_view"
-                style="@style/TextAppearance.Quiz.Normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:text="@{message.text}"
-                android:textColor="@android:color/black"
-                android:textSize="20sp" />
-
-            <TextView
                 android:id="@+id/username"
                 android:text="@{message.username}"
                 style="@style/TextAppearance.Quiz.Caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.CardView">
+
+                <TextView
+                    android:id="@+id/message_text_view"
+                    style="@style/TextAppearance.Quiz.Normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin"
+                    android:text="@{message.text}"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
 
         </LinearLayout>
     </LinearLayout>

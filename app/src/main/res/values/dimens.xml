@@ -7,10 +7,10 @@
     <dimen name="category_item_height">100dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
-    <dimen name="card_side_margin">12dp</dimen>
+    <dimen name="card_side_margin">16dp</dimen>
     <dimen name="card_bottom_margin">26dp</dimen>
-    <dimen name="card_elevation">2dp</dimen>
-    <dimen name="card_corner_radius">12dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="card_corner_radius">16dp</dimen>
     <dimen name="card_padding">4dp</dimen>
 
     <dimen name="margin_normal">16dp</dimen>
