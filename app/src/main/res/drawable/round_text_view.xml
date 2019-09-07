@@ -3,4 +3,9 @@
     android:shape="rectangle">
     <solid android:color="@android:color/white" />
     <corners android:radius="@dimen/card_padding" />
+    <padding
+        android:top="@dimen/card_padding"
+        android:bottom="@dimen/card_padding"
+        android:left="@dimen/card_padding"
+        android:right="@dimen/card_padding" />
 </shape>
