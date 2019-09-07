@@ -84,7 +84,7 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
         viewModel.getChoseStateById(choiceId).observe(this, Observer {
             val chosenAnswerColor = ContextCompat.getColor(view.context, R.color.accent)
             val notChosenAnswerColor =
-                ContextCompat.getColor(view.context, android.R.color.transparent)
+                ContextCompat.getColor(view.context, R.color.card_color)
             val backgroundColor = if (it) chosenAnswerColor else notChosenAnswerColor
             view.setBackgroundColor(backgroundColor)
         })
