@@ -53,8 +53,7 @@
             android:paddingEnd="@dimen/card_side_margin"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            tools:listitem="@layout/category_list_item"
-            android:background="@color/primary_dark" />
+            tools:listitem="@layout/category_list_item" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
