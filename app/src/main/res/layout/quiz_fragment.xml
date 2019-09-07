@@ -30,17 +30,26 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/answer_view_recycler_view" />
 
-        <TextView
-            android:id="@+id/quest_text_view"
-            android:background="@drawable/round_text_view"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/quest_card_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{quiz.text}"
-            tools:text="Question text"
-            android:textAppearance="@style/TextAppearance.Quiz.Normal"
+            style="@style/AppTheme.CardView"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/quest_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/card_padding"
+                android:text="@{quiz.text}"
+                tools:text="Question text"
+                android:textAppearance="@style/TextAppearance.Quiz.Normal" />
+
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/answer_view_recycler_view"
@@ -49,7 +58,7 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/quest_text_view"
+            app:layout_constraintTop_toBottomOf="@id/quest_card_view"
             app:spanCount="@integer/grid_columns"
             tools:listitem="@layout/choice_list_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
