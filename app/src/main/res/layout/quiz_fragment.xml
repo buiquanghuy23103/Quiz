@@ -3,63 +3,57 @@
         xmlns:tools="http://schemas.android.com/tools"
 >
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        style="@style/AppTheme.CardView">
+        android:padding="@dimen/card_padding">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <Button
+            android:id="@+id/explanation_button"
+            app:isVisible="@{isCorrect}"
+            style="@style/TextAppearance.Quiz.Button"
+            android:text="@string/explanation_button_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/result_text_view" />
+
+        <TextView
+            android:id="@+id/result_text_view"
+            style="@style/TextAppearance.Quiz.Normal"
+            android:gravity="center"
+            android:text="@{@string/result(resultText)}"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/card_padding">
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/answer_view_recycler_view" />
 
-            <Button
-                android:id="@+id/explanation_button"
-                app:isVisible="@{isCorrect}"
-                style="@style/TextAppearance.Quiz.Button"
-                android:text="@string/explanation_button_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/result_text_view" />
+        <TextView
+            android:id="@+id/quest_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{quiz.text}"
+            tools:text="Question text"
+            android:textAppearance="@style/TextAppearance.Quiz.Normal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/result_text_view"
-                style="@style/TextAppearance.Quiz.Normal"
-                android:gravity="center"
-                android:text="@{@string/result(resultText)}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/answer_view_recycler_view" />
-
-            <TextView
-                android:id="@+id/quest_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{quiz.text}"
-                tools:text="Question text"
-                android:textAppearance="@style/TextAppearance.Quiz.Normal"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/answer_view_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/quest_text_view"
-                app:spanCount="@integer/grid_columns"
-                tools:listitem="@layout/choice_list_item" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/answer_view_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/quest_text_view"
+            app:spanCount="@integer/grid_columns"
+            tools:listitem="@layout/choice_list_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </com.google.android.material.card.MaterialCardView>
     <data>
 
         <variable
