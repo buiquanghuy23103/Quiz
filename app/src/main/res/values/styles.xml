@@ -5,7 +5,6 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="android:colorBackground">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
@@ -19,6 +18,28 @@
         <item name="android:layout_marginStart">@dimen/card_side_margin</item>
         <item name="android:layout_marginEnd">@dimen/card_side_margin</item>
         <item name="android:layout_marginBottom">@dimen/card_bottom_margin</item>
+    </style>
+
+    <style name="AppTheme.CoordinatorLayout" parent="Widget.Support.CoordinatorLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarLayout" parent="Widget.Design.AppBarLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/app_bar_height</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="AppTheme.ToolbarLayout" parent="Widget.Design.CollapsingToolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AppTheme.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="titleTextAppearance">@style/TextAppearance.Quiz.Toolbar.Title</item>
     </style>
 
     <style name="TextAppearance.Quiz.Button" parent="TextAppearance.MaterialComponents.Button">

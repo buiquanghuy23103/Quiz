@@ -11,7 +11,7 @@
     <dimen name="card_bottom_margin">26dp</dimen>
     <dimen name="card_elevation">8dp</dimen>
     <dimen name="card_corner_radius">16dp</dimen>
-    <dimen name="card_padding">4dp</dimen>
+    <dimen name="card_padding">8dp</dimen>
 
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_small">8dp</dimen>
