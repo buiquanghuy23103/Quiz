@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <com.google.android.material.card.MaterialCardView
+        style="@style/AppTheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="2dp">
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginBottom="@dimen/margin_normal">
 
         <TextView xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/choice_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="2dp"
-            android:gravity="center"
-            android:padding="8dp"
+            android:padding="@dimen/card_padding"
+            android:textAlignment="center"
             android:text="@{choice.text}"
             android:textAppearance="@style/TextAppearance.Quiz.Normal"
-            tools:text="choice">
+            tools:text="choice" />
 
-        </TextView>
     </com.google.android.material.card.MaterialCardView>
 
     <data>

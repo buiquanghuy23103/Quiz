@@ -120,7 +120,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-firestore:5.1.0'
 
     // Material component
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0-alpha09'
 
     // RxJava, RxKotlin
     implementation "io.reactivex.rxjava2:rxjava:2.2.12"
