@@ -8,26 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:580455795975:android:639cd9773435deb7",
+        "mobilesdk_app_id": "1:580455795975:android:ff507e182c4f9dc3e9c9a2",
         "android_client_info": {
-          "package_name": "com.example.quiz"
+          "package_name": "com.huy.finniz"
         }
       },
       "oauth_client": [
         {
-          "client_id": "580455795975-4agrjlnhgjd0hcq5m2ihauuau7h4ce4i.apps.googleusercontent.com",
+          "client_id": "580455795975-5116ag6vvaga2i6i28j89r811386rabq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.quiz",
-            "certificate_hash": "c55f5e5bd8fdf537b38f8d5a09ff8b2a7e7ce1bf"
-          }
-        },
-        {
-          "client_id": "580455795975-1qi2epvjegp1q990tvu1fb6ui258u20e.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.quiz",
-            "certificate_hash": "cfd4070511636b8dd244b60cd15b051032a16712"
+            "package_name": "com.huy.finniz",
+            "certificate_hash": "1d2fa14ad4723d5b16ffd8bdaf93b106aff18b57"
           }
         },
         {
