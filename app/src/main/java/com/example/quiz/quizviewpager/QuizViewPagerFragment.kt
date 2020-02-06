@@ -25,5 +25,6 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
 
             setPageTransformer(ZoomOutPageTransformer())
         }
+
     }
 }
