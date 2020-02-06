@@ -50,6 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    isVisible="@{firstOptionIsClicked}"
                     android:text="@{@string/result(resultText)}"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -72,6 +73,10 @@
 
         <variable
             name="isCorrect"
+            type="Boolean" />
+
+        <variable
+            name="firstOptionIsClicked"
             type="Boolean" />
     </data>
 </layout>

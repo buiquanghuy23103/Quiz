@@ -3,6 +3,7 @@ package com.example.quiz.quiz
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.quiz.R
@@ -13,8 +14,10 @@ import kotlinx.android.synthetic.main.quiz_fragment.*
 import timber.log.Timber
 
 class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
-    ChoiceListItem.Listener {
+    ChoiceListItem.Listener
+{
     private val choiceListAdapter = ChoiceListAdapter()
+    private var firstOptionIsClicked = MutableLiveData<Boolean>(false)
 
     companion object{
         private const val ARG_QUIZ_ID = "index"
@@ -59,6 +62,9 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
     }
 
     private fun setupResultView() {
+        firstOptionIsClicked.observe(viewLifecycleOwner, Observer {
+            binding.firstOptionIsClicked = it
+        })
         viewModel.assessment.observe(this, Observer { isCorrect ->
             binding.resultText = if (isCorrect) getString(R.string.correct_answer)
             else getString(R.string.incorrect_answer)
@@ -76,8 +82,9 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
         }
     }
 
-    override fun onClick(choiceId: Int) {
+    override fun onOptionButtonClick(choiceId: Int) {
         viewModel.toggleChoiceChosenById(choiceId)
+        firstOptionIsClicked.value = true
     }
 
     override fun setOptionButtonColor(view: View, choiceId: Int) {
