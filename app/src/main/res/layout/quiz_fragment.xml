@@ -13,10 +13,28 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/margin_normal">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_normal">
+
+                <TextView
+                    android:id="@+id/quest_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_small"
+                    android:text="@{quiz.text}"
+                    android:textAppearance="@style/TextAppearance.Quiz.Normal"
+                    tools:text="Question text" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/answer_view_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="@integer/grid_columns"
+                    tools:listitem="@layout/choice_list_item" />
 
                 <Button
                     android:id="@+id/explanation_button"
@@ -24,10 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/explanation_button_label"
-                    app:isVisible="@{isCorrect}"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/result_text_view" />
+                    app:isVisible="@{isCorrect}" />
 
                 <TextView
                     android:id="@+id/result_text_view"
@@ -40,39 +55,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/answer_view_recycler_view" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/quest_card_view"
-                    style="@style/AppTheme.CardView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_normal"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <TextView
-                        android:id="@+id/quest_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/card_padding"
-                        android:text="@{quiz.text}"
-                        android:textAppearance="@style/TextAppearance.Quiz.Normal"
-                        tools:text="Question text" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/answer_view_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/quest_card_view"
-                    app:spanCount="@integer/grid_columns"
-                    tools:listitem="@layout/choice_list_item" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
