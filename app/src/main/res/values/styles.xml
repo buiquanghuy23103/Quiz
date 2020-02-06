@@ -37,6 +37,10 @@
 
     <style name="AppTheme.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="titleTextAppearance">@style/TextAppearance.Quiz.Toolbar.Title</item>
+        <item name="android:titleTextAppearance">@style/TextAppearance.Quiz.Toolbar.Title</item>
+        <item name="android:gravity">center</item>
+        <item name="android:titleTextColor">@color/primary_dark</item>
+
     </style>
 
     <style name="TextAppearance.Quiz.Button" parent="TextAppearance.MaterialComponents.Button">
@@ -54,7 +58,8 @@
 
     <style name="TextAppearance.Quiz.Toolbar.Title" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textAlignment">center</item>
-        <item name="android:color">@android:color/white</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>
