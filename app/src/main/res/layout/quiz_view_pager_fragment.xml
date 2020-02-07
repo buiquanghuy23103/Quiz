@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="category"
+            type="com.example.quiz.model.Category" />
     </data>
 
     <LinearLayout
@@ -12,7 +15,8 @@
 
         <include
             android:id="@+id/quiz_toolbar"
-            layout="@layout/quiz_toolbar"/>
+            layout="@layout/quiz_toolbar"
+            bind:category="@{category}"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
