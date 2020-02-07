@@ -11,6 +11,7 @@
     <string name="incorrect_answer">Incorrect</string>
     <string name="result">%1$s</string>
     <string name="explanation_button_label">Explanation</string>
+    <string name="check_result_button_label">Check result</string>
 
     <!--  PhotoDialogFragment  -->
     <string name="photo_dialog_title">Bigger Photo</string>

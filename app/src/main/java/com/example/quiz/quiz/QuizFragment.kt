@@ -3,6 +3,7 @@ package com.example.quiz.quiz
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.IdRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -42,7 +43,7 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupQuizView()
-        setupChoiceView()
+        setupCheckResultButton()
         setupResultView()
         setupExplanationButton()
     }
@@ -50,8 +51,35 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
     private fun setupQuizView() {
         viewModel.quiz.observe(this, Observer { quiz ->
             quiz?.let { binding.quiz = quiz }
+            setupOptionView(quiz.answer)
         })
     }
+
+    private fun setupOptionView(answer: String) {
+        optionView.setOnCheckedChangeListener{_, checkedId ->
+            val userSelection = getUserSelection(checkedId)
+            evaluateUserSelection(userSelection, answer)
+        }
+    }
+
+    private fun getUserSelection(@IdRes checkedOption: Int) : String {
+        return when(checkedOption) {
+            R.id.optionA -> "A"
+            R.id.optionB -> "B"
+            R.id.optionC -> "C"
+            R.id.optionD -> "D"
+            else -> ""
+        }
+    }
+
+    private fun evaluateUserSelection(userSelection: String, answer: String) {
+        if (userSelection == answer) {
+            viewModel.markAsCorrectAnswer()
+        } else {
+            viewModel.markAsIncorrectAnswer()
+        }
+    }
+
 
     private fun setupChoiceView() {
         answer_view_recycler_view.adapter = choiceListAdapter
@@ -62,19 +90,28 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
         choiceListAdapter.itemClickListener = this
     }
 
+    private fun setupCheckResultButton() {
+        check_result_button.setOnClickListener {
+            result_text_view.visibility = View.VISIBLE
+        }
+    }
+
     private fun setupResultView() {
         firstOptionIsClicked.observe(viewLifecycleOwner, Observer {
             binding.firstOptionIsClicked = it
         })
-        viewModel.assessment.observe(this, Observer { isCorrect ->
-            if (isCorrect) {
-                binding.resultText = getString(R.string.correct_answer)
-                binding.resultTextView.setTextColor(Color.GREEN)
-            } else {
-                binding.resultText = getString(R.string.incorrect_answer)
-                binding.resultTextView.setTextColor(Color.RED)
-            }
+        viewModel.result.observe(this, Observer { isCorrect ->
+
             binding.isCorrect = isCorrect
+
+            if (isCorrect) {
+                result_text_view.text = getString(R.string.correct_answer)
+                result_text_view.setTextColor(Color.GREEN)
+            } else {
+                result_text_view.text = getString(R.string.incorrect_answer)
+                result_text_view.setTextColor(Color.RED)
+            }
+
         })
     }
 

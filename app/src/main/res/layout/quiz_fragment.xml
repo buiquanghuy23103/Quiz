@@ -29,29 +29,34 @@
                     tools:text="Question text" />
 
                 <RadioGroup
+                    android:id="@+id/optionView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <RadioButton
+                        android:id="@+id/optionA"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="Canberra is the capital of Australia"
                         android:text="@{quiz.optionA}"/>
 
                     <RadioButton
+                        android:id="@+id/optionB"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="Canberra is the capital of Australia"
                         android:text="@{quiz.optionB}"/>
 
                     <RadioButton
+                        android:id="@+id/optionC"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="Canberra is the capital of Australia"
                         android:text="@{quiz.optionC}"/>
 
                     <RadioButton
+                        android:id="@+id/optionD"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="Canberra is the capital of Australia"
@@ -59,6 +64,14 @@
 
 
                 </RadioGroup>
+
+                <Button
+                    android:id="@+id/check_result_button"
+                    style="@style/TextAppearance.Quiz.Button"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/check_result_button_label" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/answer_view_recycler_view"
@@ -74,6 +87,7 @@
                     style="@style/TextAppearance.Quiz.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="@string/explanation_button_label"
                     app:isVisible="@{isCorrect}" />
 
@@ -84,7 +98,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     isVisible="@{firstOptionIsClicked}"
-                    android:text="@{@string/result(resultText)}"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/answer_view_recycler_view" />
@@ -99,10 +112,6 @@
         <variable
             name="quiz"
             type="com.example.quiz.model.Quiz" />
-
-        <variable
-            name="resultText"
-            type="String" />
 
         <variable
             name="isCorrect"
