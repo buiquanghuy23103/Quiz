@@ -25,6 +25,7 @@ data class Quiz(
     var optionB: String = "Canberra is the capital of Australia",
     var optionC: String = "Canberra is the capital of Australia",
     var optionD: String = "Canberra is the capital of Australia",
+    var answer: String = "A",
 
     @PrimaryKey
     var id: Int = Random.nextInt()
