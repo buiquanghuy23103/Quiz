@@ -1,6 +1,7 @@
 package com.example.quiz.quizviewpager
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -14,6 +15,9 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
 
     private val args: QuizViewPagerFragmentArgs by navArgs()
 
+    private val countDownInitial: Long = 20000
+    private val countDownInterval: Long = 1000
+    private lateinit var countDownTimer: CountDownTimer
 
     override fun initViewModel() =
         getViewModel { QuizViewPagerViewModel(args.categoryId) }
@@ -22,7 +26,7 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupBinding()
-        viewModel.startTimer()
+        startTimer()
         setupToolbar()
         setupQuizView()
     }
@@ -31,9 +35,22 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
         viewModel.category.observe(viewLifecycleOwner, Observer {
             binding.category = it
         })
-        viewModel.timeLeft.observe(viewLifecycleOwner, Observer {
-            binding.quizToolbar.timeLeft = it
-        })
+    }
+
+    private fun startTimer() {
+
+        countDownTimer = object: CountDownTimer(countDownInitial, countDownInterval) {
+            override fun onFinish() {
+
+            }
+
+            override fun onTick(millisUntilFinnished: Long) {
+                binding.quizToolbar.timeLeft = millisUntilFinnished / 1000
+                val progress = 100 - (millisUntilFinnished * 100 / countDownInitial).toInt()
+                quiz_timer_progress_bar.progress = progress
+            }
+        }.start()
+
     }
 
     private fun setupToolbar() {
