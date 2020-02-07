@@ -11,7 +11,9 @@ import kotlinx.android.synthetic.main.quiz_toolbar.view.*
 import kotlinx.android.synthetic.main.quiz_view_pager_fragment.*
 
 class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPagerFragmentBinding>() {
+
     private val args: QuizViewPagerFragmentArgs by navArgs()
+
 
     override fun initViewModel() =
         getViewModel { QuizViewPagerViewModel(args.categoryId) }
@@ -20,6 +22,7 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupBinding()
+        viewModel.startTimer()
         setupToolbar()
         setupQuizView()
     }
@@ -27,6 +30,9 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
     private fun setupBinding() {
         viewModel.category.observe(viewLifecycleOwner, Observer {
             binding.category = it
+        })
+        viewModel.timeLeft.observe(viewLifecycleOwner, Observer {
+            binding.quizToolbar.timeLeft = it
         })
     }
 

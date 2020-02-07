@@ -4,9 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="category"
             type="com.example.quiz.model.Category" />
+        <variable
+            name="timeLeft"
+            type="Long" />
     </data>
 
     <Toolbar
@@ -18,14 +22,30 @@
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light">
 
-        <TextView
-            android:id="@+id/quiz_toolbar_title"
-            style="@style/TextAppearance.Quiz.Toolbar.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@{category.text}"
-            tools:text="Geography" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/quiz_toolbar_title"
+                style="@style/TextAppearance.Quiz.Toolbar.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{category.text}"
+                tools:text="Geography" />
+
+            <TextClock
+                android:id="@+id/quiz_timer_view"
+                style="@style/TextAppearance.Quiz.Toolbar.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:text="@{Long.toString(timeLeft)}"
+                tools:text="20" />
+
+        </FrameLayout>
 
     </Toolbar>
 </layout>
