@@ -21,17 +21,50 @@
 
                 <TextView
                     android:id="@+id/quest_text_view"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_small"
                     android:text="@{quiz.text}"
+                    android:gravity="center"
                     android:textAppearance="@style/TextAppearance.Quiz.Normal"
                     tools:text="Question text" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Canberra is the capital of Australia"
+                        android:text="@{quiz.optionA}"/>
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Canberra is the capital of Australia"
+                        android:text="@{quiz.optionB}"/>
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Canberra is the capital of Australia"
+                        android:text="@{quiz.optionC}"/>
+
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Canberra is the capital of Australia"
+                        android:text="@{quiz.optionD}"/>
+
+
+                </RadioGroup>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/answer_view_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:spanCount="@integer/grid_columns"
                     tools:listitem="@layout/choice_list_item" />
@@ -46,7 +79,7 @@
 
                 <TextView
                     android:id="@+id/result_text_view"
-                    style="@style/TextAppearance.Quiz.Normal"
+                    style="@style/TextAppearance.Quiz.Toolbar.Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"

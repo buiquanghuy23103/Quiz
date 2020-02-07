@@ -1,5 +1,6 @@
 package com.example.quiz.quiz
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -66,8 +67,13 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
             binding.firstOptionIsClicked = it
         })
         viewModel.assessment.observe(this, Observer { isCorrect ->
-            binding.resultText = if (isCorrect) getString(R.string.correct_answer)
-            else getString(R.string.incorrect_answer)
+            if (isCorrect) {
+                binding.resultText = getString(R.string.correct_answer)
+                binding.resultTextView.setTextColor(Color.GREEN)
+            } else {
+                binding.resultText = getString(R.string.incorrect_answer)
+                binding.resultTextView.setTextColor(Color.RED)
+            }
             binding.isCorrect = isCorrect
         })
     }

@@ -9,7 +9,7 @@
     <!--  QuizFragment  -->
     <string name="correct_answer">Correct</string>
     <string name="incorrect_answer">Incorrect</string>
-    <string name="result">Result: %1$s</string>
+    <string name="result">%1$s</string>
     <string name="explanation_button_label">Explanation</string>
 
     <!--  PhotoDialogFragment  -->
