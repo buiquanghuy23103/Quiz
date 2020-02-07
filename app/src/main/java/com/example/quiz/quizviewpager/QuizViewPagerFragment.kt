@@ -2,11 +2,14 @@ package com.example.quiz.quizviewpager
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizViewPagerFragmentBinding
 import com.example.quiz.framework.BaseFragment
+import kotlinx.android.synthetic.main.quiz_toolbar.view.*
+import kotlinx.android.synthetic.main.quiz_view_pager_fragment.*
 
 class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPagerFragmentBinding>() {
     private val args: QuizViewPagerFragmentArgs by navArgs()
@@ -17,6 +20,19 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
     override fun getLayoutId() = R.layout.quiz_view_pager_fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupToolbar(view)
+        setupQuizView()
+    }
+
+    private fun setupToolbar(view: View) {
+        requireActivity().setActionBar(quiz_toolbar.quiz_toolbar_content)
+        val toolbarTitleView = view.findViewById<TextView>(R.id.quiz_toolbar_title)
+        viewModel.category.observe(viewLifecycleOwner, Observer {category ->
+            toolbarTitleView.text = category.text
+        })
+    }
+
+    private fun setupQuizView() {
         with(binding.viewPager) {
             viewModel.quizIdList.observe(this@QuizViewPagerFragment, Observer {
                 adapter = null
@@ -25,6 +41,5 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
 
             setPageTransformer(ZoomOutPageTransformer())
         }
-
     }
 }

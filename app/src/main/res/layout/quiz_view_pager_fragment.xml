@@ -10,12 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:text="Question 1/20"
-            android:gravity="center"
-            android:textAppearance="@style/TextAppearance.Quiz.Toolbar.Title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <include
+            android:id="@+id/quiz_toolbar"
+            layout="@layout/quiz_toolbar"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/quiz_toolbar_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/primary"
+    android:elevation="@dimen/card_elevation"
+    android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light">
+
+    <TextView
+        android:id="@+id/quiz_toolbar_title"
+        style="@style/TextAppearance.Quiz.Toolbar.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:text="Geography" />
+
+</Toolbar>

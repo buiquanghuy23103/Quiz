@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
@@ -15,10 +14,8 @@ import com.example.quiz.quizviewpager.QuizViewPagerFragmentDirections
 import kotlinx.android.synthetic.main.quiz_fragment.*
 import timber.log.Timber
 
-class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
-    ChoiceListItem.Listener
+class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
 {
-    private val choiceListAdapter = ChoiceListAdapter()
     private var firstOptionIsClicked = MutableLiveData<Boolean>(false)
 
     companion object{
@@ -80,16 +77,6 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
         }
     }
 
-
-    private fun setupChoiceView() {
-        answer_view_recycler_view.adapter = choiceListAdapter
-        viewModel.choiceList.observe(this, Observer { choiceList ->
-            choiceListAdapter.submitList(choiceList)
-            println("choiceList = $choiceList")
-        })
-        choiceListAdapter.itemClickListener = this
-    }
-
     private fun setupCheckResultButton() {
         check_result_button.setOnClickListener {
             result_text_view.visibility = View.VISIBLE
@@ -125,18 +112,4 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>(),
         }
     }
 
-    override fun onOptionButtonClick(choiceId: Int) {
-        viewModel.toggleChoiceChosenById(choiceId)
-        firstOptionIsClicked.value = true
-    }
-
-    override fun setOptionButtonColor(view: View, choiceId: Int) {
-        viewModel.getChosenStateById(choiceId).observe(this, Observer { isChosen ->
-            val chosenColor = ContextCompat.getColor(view.context, R.color.accent)
-            val notChosenColor =
-                ContextCompat.getColor(view.context, R.color.primary)
-            val backgroundColor = if (isChosen) chosenColor else notChosenColor
-            view.setBackgroundColor(backgroundColor)
-        })
-    }
 }

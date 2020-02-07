@@ -56,13 +56,13 @@
 
     <style name="TextAppearance.Quiz.Caption" parent="TextAppearance.MaterialComponents.Caption" />
 
-    <style name="TextAppearance.Quiz.Title" parent="TextAppearance.MaterialComponents.Headline4">
-
+    <style name="TextAppearance.Quiz.Title" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="TextAppearance.Quiz.Toolbar.Title" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>
     </style>
 

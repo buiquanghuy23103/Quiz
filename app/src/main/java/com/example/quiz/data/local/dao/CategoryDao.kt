@@ -14,4 +14,7 @@ interface CategoryDao : BaseDao<Category> {
 
     @Query("SELECT * FROM categories")
     fun getAllAsObservable(): Observable<List<Category>>
+
+    @Query("SELECT * FROM categories WHERE id = :categoryId")
+    fun getById(categoryId: Int): LiveData<Category>
 }
