@@ -24,4 +24,9 @@
 
     <!--  Login layout  -->
     <string name="email_button_label">Sign in with email</string>
+
+    <!--  Bottom navigation menu title  -->
+    <string name="bottom_nav_menu_home">Home</string>
+    <string name="bottom_nav_menu_profile">Profile</string>
+
 </resources>
