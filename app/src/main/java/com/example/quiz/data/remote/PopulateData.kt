@@ -22,8 +22,8 @@ object PopulateData {
             .concatWith(quizFetch.downloadData())
             .concatWith(choiceFetch.downloadData())
             .subscribeBy(
-                onComplete = { Timber.i("zz All complete") },
-                onError = { Timber.e(it.localizedMessage) }
+                onComplete = { Timber.i("All data downloaded") },
+                onError = { Timber.e(it) }
             )
             .addTo(compositeDisposable)
     }
