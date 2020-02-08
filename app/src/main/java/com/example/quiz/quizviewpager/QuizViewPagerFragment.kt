@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.example.quiz.R
+import com.example.quiz.countDownInitial
 import com.example.quiz.databinding.QuizViewPagerFragmentBinding
 import com.example.quiz.framework.BaseFragment
 import kotlinx.android.synthetic.main.quiz_toolbar.view.*
@@ -37,7 +38,7 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
     private fun setupTimer() {
         viewModel.timeLeft.observe(viewLifecycleOwner, Observer { timeLeft ->
             binding.quizToolbar.timeLeft = timeLeft / 1000
-            val progress = 100 - (timeLeft / 10 / viewModel.countDownInitial).toInt()
+            val progress = 100 - (timeLeft / 10 / countDownInitial).toInt()
             quiz_timer_progress_bar.progress = progress
         })
     }
