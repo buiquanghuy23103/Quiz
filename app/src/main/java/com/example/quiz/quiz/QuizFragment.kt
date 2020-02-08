@@ -6,11 +6,9 @@ import android.view.View
 import androidx.annotation.IdRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizFragmentBinding
 import com.example.quiz.framework.BaseFragment
-import com.example.quiz.quizviewpager.QuizViewPagerFragmentDirections
 import kotlinx.android.synthetic.main.quiz_fragment.*
 import timber.log.Timber
 
@@ -42,7 +40,6 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
         setupQuizView()
         setupCheckResultButton()
         setupResultView()
-        setupExplanationButton()
     }
 
     private fun setupQuizView() {
@@ -100,16 +97,6 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
             }
 
         })
-    }
-
-    private fun setupExplanationButton() {
-        explanation_button.setOnClickListener {
-            val direction =
-                QuizViewPagerFragmentDirections.actionQuizViewPagerFragmentToExplanationFragment(
-                    getQuizId()
-                )
-            it.findNavController().navigate(direction)
-        }
     }
 
 }
