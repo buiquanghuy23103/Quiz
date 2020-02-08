@@ -18,15 +18,9 @@ class SplashScreenActivity : AppCompatActivity() {
             .withTargetActivity(MainActivity::class.java)
             .withSplashTimeOut(splashTimeout)
             .withBackgroundResource(R.color.colorPrimaryDark)
-            .withHeaderText("Header")
-            .withFooterText("Footer")
-            .withBeforeLogoText("Before logo text")
-            .withAfterLogoText("After logo text ")
+            .withAfterLogoText(getString(R.string.app_name))
             .withLogo(R.mipmap.ic_launcher_round)
 
-        splashScreenConf.headerTextView.setTextColor(Color.WHITE)
-        splashScreenConf.footerTextView.setTextColor(Color.WHITE)
-        splashScreenConf.beforeLogoTextView.setTextColor(Color.WHITE)
         splashScreenConf.afterLogoTextView.setTextColor(Color.WHITE)
 
         val splashScreen = splashScreenConf.create()
