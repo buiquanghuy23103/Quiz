@@ -29,9 +29,6 @@ class CategoryListFragment : BaseFragment<CategoryListViewModel, CategoryListFra
         with(category_list) {
             adapter = CategoryListAdapter().apply {
                 viewModel.categoryList.observe(this@CategoryListFragment, Observer {
-                    if (it.isNullOrEmpty()) {
-                        viewModel.downloadAll()
-                    }
                     submitList(it)
                 })
             }
