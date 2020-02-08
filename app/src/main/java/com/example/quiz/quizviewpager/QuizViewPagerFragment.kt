@@ -46,7 +46,8 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
                 with(binding.viewPager) {
                     val pageCount = adapter?.itemCount ?: 0
                     val currentPageIndex = currentItem
-                    currentItem = (currentPageIndex + 1).rem(pageCount)
+                    val nextPageIndex = (currentPageIndex + 1).rem(pageCount)
+                    setCurrentItem(nextPageIndex, true)
                 }
             }
         })
