@@ -40,7 +40,7 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
         viewModel.timeLeft.observe(viewLifecycleOwner, Observer { timeLeft ->
             if (timeLeft != countDownFinnishSignal) {
                 binding.quizToolbar.timeLeft = timeLeft / 1000
-                val progress = 100 - (timeLeft / 10 / countDownInitial).toInt()
+                val progress = 100 - (timeLeft * 100 / countDownInitial).toInt()
                 quiz_timer_progress_bar.progress = progress
             } else {
                 with(binding.viewPager) {
