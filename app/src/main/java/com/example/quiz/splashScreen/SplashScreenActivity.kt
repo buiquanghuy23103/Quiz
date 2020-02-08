@@ -3,6 +3,7 @@ package com.example.quiz.splashScreen
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.MainActivity
 import com.example.quiz.R
 import com.example.quiz.splashTimeout
@@ -25,6 +26,11 @@ class SplashScreenActivity : AppCompatActivity() {
 
         val splashScreen = splashScreenConf.create()
         setContentView(splashScreen)
+
+        val viewModel = ViewModelProviders.of(this)
+            .get(SplashScreenViewModel::class.java)
+
+        viewModel.downloadAll()
 
     }
 }
