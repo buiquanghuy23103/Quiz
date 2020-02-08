@@ -24,4 +24,5 @@
 
     <!--  Login layout  -->
     <string name="email_button_label">Sign in with email</string>
+
 </resources>
