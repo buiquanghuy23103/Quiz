@@ -44,10 +44,9 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
                 quiz_timer_progress_bar.progress = progress
             } else {
                 with(binding.viewPager) {
-                    val pageCount = adapter?.itemCount ?: 0
-                    val currentPageIndex = currentItem
-                    val nextPageIndex = (currentPageIndex + 1).rem(pageCount)
-                    setCurrentItem(nextPageIndex, true)
+                    beginFakeDrag()
+                    fakeDragBy(-1f)
+                    endFakeDrag()
                 }
             }
         })
@@ -76,6 +75,7 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
 
             this.registerOnPageChangeCallback(pageChangeCallback)
 
+            this.scrollBarFadeDuration
             setPageTransformer(ZoomOutPageTransformer())
         }
     }

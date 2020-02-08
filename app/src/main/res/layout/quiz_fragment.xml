@@ -11,7 +11,7 @@
             style="@style/AppTheme.CardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/margin_normal">
+            android:layout_margin="@dimen/margin_small">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -25,13 +25,14 @@
                     android:layout_height="wrap_content"
                     android:text="@{quiz.text}"
                     android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.Quiz.Normal"
+                    android:textAppearance="@style/TextAppearance.Quiz.Title"
                     tools:text="Question text" />
 
                 <RadioGroup
                     android:id="@+id/optionView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_normal"
                     android:orientation="vertical">
 
                     <RadioButton
