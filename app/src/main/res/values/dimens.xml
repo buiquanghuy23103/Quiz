@@ -13,6 +13,7 @@
     <dimen name="card_corner_radius">16dp</dimen>
     <dimen name="card_padding">8dp</dimen>
 
+    <dimen name="margin_medium">32dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_extra_small">4dp</dimen>

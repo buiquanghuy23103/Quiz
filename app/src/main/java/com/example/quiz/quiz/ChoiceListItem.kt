@@ -27,16 +27,16 @@ class ChoiceListItem private constructor(private val binding: ChoiceListItemBind
         with(binding) {
             this.choice = choice
             choiceButton.let { view ->
-                clickListener.setBackgroundColor(view, choice.id)
-                view.setOnClickListener { clickListener.onClick(choice.id) }
+                clickListener.setOptionButtonColor(view, choice.id)
+                view.setOnClickListener { clickListener.onOptionButtonClick(choice.id) }
             }
             executePendingBindings()
         }
     }
 
     interface Listener {
-        fun onClick(choiceId: Int)
-        fun setBackgroundColor(view: View, choiceId: Int)
+        fun onOptionButtonClick(choiceId: Int)
+        fun setOptionButtonColor(view: View, choiceId: Int)
     }
 
 

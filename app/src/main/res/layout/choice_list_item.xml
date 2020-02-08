@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" >
 
-    <com.google.android.material.card.MaterialCardView
-        style="@style/AppTheme.CardView"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:layout_marginBottom="@dimen/margin_normal">
+        android:layout_margin="@dimen/margin_normal">
 
-        <TextView xmlns:tools="http://schemas.android.com/tools"
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/choice_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,7 +17,7 @@
             android:textAppearance="@style/TextAppearance.Quiz.Normal"
             tools:text="choice" />
 
-    </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
 
     <data>
 
