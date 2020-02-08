@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quiz</string>
+    <string name="app_name">Finniz</string>
 
     <!--  CategoryListFragment  -->
     <string name="category_toolbar_title">Categories</string>
