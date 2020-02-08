@@ -1,6 +1,7 @@
 package com.example.quiz
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -14,5 +15,13 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
         bottom_navigation.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.quizViewPagerFragment) {
+                bottom_navigation.visibility = View.GONE
+            } else {
+                bottom_navigation.visibility = View.VISIBLE
+            }
+        }
     }
 }
