@@ -21,4 +21,7 @@
     <string name="send_button_label">Send</string>
     <string name="message_edit_text_hint">Type a message</string>
     <string name="sign_out_menu_label">Sign out</string>
+
+    <!--  Login layout  -->
+    <string name="email_button_label">Sign in with email</string>
 </resources>

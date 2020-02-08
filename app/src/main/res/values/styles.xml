@@ -43,6 +43,12 @@
 
     </style>
 
+    <style name="AppTheme.IconButton" parent="Widget.MaterialComponents.Button.Icon">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body2</item>
+    </style>
+
     <style name="TextAppearance.Quiz.Button" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:textColor">@android:color/white</item>
     </style>
