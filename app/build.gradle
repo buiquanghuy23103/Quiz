@@ -111,6 +111,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
+    // Circle image view (for avatar)
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
     // Firebase
     implementation 'com.google.firebase:firebase-auth:19.0.0'
     implementation "com.google.firebase:firebase-database:19.0.0"
