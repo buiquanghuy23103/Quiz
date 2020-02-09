@@ -1,6 +1,7 @@
 package com.example.quiz
 
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -14,6 +15,17 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
     if (!imageUrl.isNullOrEmpty()) {
         Glide.with(view.context)
             .load(imageUrl)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(view)
+    }
+}
+
+@BindingAdapter("imageFromUri")
+fun bindImageFromUri(view: ImageView, uri: Uri?) {
+
+    if (uri != null) {
+        Glide.with(view.context)
+            .load(uri)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(view)
     }

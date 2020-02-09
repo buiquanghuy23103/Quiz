@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="user"
+            type="com.google.firebase.auth.FirebaseUser" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/userDetailContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_profile_image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            imageFromUri="@{user.photoUrl}"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/user_name"
+            tools:text="John William"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user.displayName}"
+            android:textAppearance="@style/TextAppearance.Quiz.Normal"
+            android:textColor="@color/design_default_color_on_primary" />
+
+    </LinearLayout>
+</layout>

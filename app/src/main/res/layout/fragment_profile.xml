@@ -1,13 +1,34 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.quiz.profile.ProfileFragment">
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <data>
+        <variable
+            name="user"
+            type="com.google.firebase.auth.FirebaseUser" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
-        android:text="Profile fragment" />
+        android:background="?attr/colorPrimaryDark"
+        tools:context="com.example.quiz.profile.ProfileFragment">
 
-</FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_normal"
+            tools:background="?attr/colorPrimary"
+            style="@style/AppTheme.CardView">
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_normal"
+                layout="@layout/user_detail"
+                bind:user="@{user}"/>
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>
