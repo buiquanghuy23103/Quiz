@@ -1,22 +1,17 @@
 package com.example.quiz.profile
 
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.quiz.R
+import com.example.quiz.databinding.FragmentProfileBinding
+import com.example.quiz.framework.BaseFragment
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
+    override fun getLayoutId() = R.layout.fragment_profile
+
+    override fun initViewModel()
+            = getViewModel{ ProfileViewModel() }
+
 
 
 }
