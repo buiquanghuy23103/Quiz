@@ -1,0 +1,12 @@
+package com.example.quiz.model
+
+import androidx.room.Entity
+
+@Entity(
+    primaryKeys = ["userId", "categoryId"]
+)
+data class Score(
+    var userId: String,
+    var categoryId: Int,
+    var score: Int = 0
+)
