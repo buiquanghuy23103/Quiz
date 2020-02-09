@@ -11,20 +11,24 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorPrimaryDark"
         tools:context="com.example.quiz.profile.ProfileFragment">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_margin="@dimen/margin_normal"
+            tools:background="?attr/colorPrimary"
+            style="@style/AppTheme.CardView">
 
             <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_normal"
                 layout="@layout/user_detail"
                 bind:user="@{user}"/>
 
-        </LinearLayout>
+        </FrameLayout>
 
     </androidx.core.widget.NestedScrollView>
 </layout>
