@@ -9,4 +9,4 @@ data class Score(
     var userId: String = "",
     var categoryId: Int = -1,
     var score: Int = 0
-)
+): BaseModel()

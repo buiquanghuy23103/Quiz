@@ -11,4 +11,4 @@ data class Category(
 
     @PrimaryKey
     var id: Int = Random.nextInt()
-)
+): BaseModel()

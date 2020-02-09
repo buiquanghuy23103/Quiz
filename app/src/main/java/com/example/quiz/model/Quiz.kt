@@ -29,4 +29,4 @@ data class Quiz(
 
     @PrimaryKey
     var id: Int = Random.nextInt()
-)
+): BaseModel()

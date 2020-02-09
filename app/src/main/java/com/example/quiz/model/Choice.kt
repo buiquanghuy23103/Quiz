@@ -23,4 +23,4 @@ data class Choice(
 
     @PrimaryKey
     var id: Int = Random.nextInt()
-)
+): BaseModel()
