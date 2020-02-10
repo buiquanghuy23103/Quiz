@@ -116,9 +116,7 @@ dependencies {
 
     // Firebase
     implementation 'com.google.firebase:firebase-auth:19.0.0'
-    implementation "com.google.firebase:firebase-database:19.0.0"
     implementation 'com.firebaseui:firebase-ui-auth:5.1.0'
-    implementation 'com.google.firebase:firebase-storage:19.0.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:21.0.0'
     implementation 'com.firebaseui:firebase-ui-firestore:5.1.0'
 

@@ -12,8 +12,8 @@ interface QuizDao : BaseDao<Quiz> {
     fun getAll(): LiveData<List<Quiz>>
 
     @Query("SELECT * FROM quizzes WHERE id = :id")
-    fun getById(id: Int): LiveData<Quiz>
+    fun getById(id: String): LiveData<Quiz>
 
     @Query("SELECT id FROM quizzes WHERE categoryId = :categoryId")
-    fun getQuizIdListByCategory(categoryId: Int): LiveData<List<Int>>
+    fun getQuizIdListByCategory(categoryId: String): LiveData<List<String>>
 }

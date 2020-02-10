@@ -7,41 +7,8 @@
         android:id="@+id/categoryListFragment"
         android:name="com.example.quiz.categorylist.CategoryListFragment"
         android:label="quiz_list_fragment"
-        tools:layout="@layout/category_list_fragment">
-        <action
-            android:id="@+id/action_categoryListFragment_to_quizViewPagerFragment"
-            app:destination="@id/quizViewPagerFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/categoryListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/quizViewPagerFragment"
-        android:name="com.example.quiz.quizviewpager.QuizViewPagerFragment"
-        android:label="QuizViewPagerFragment"
-        tools:layout="@layout/quiz_view_pager_fragment">
-        <argument
-            android:name="categoryId"
-            android:defaultValue="0"
-            app:argType="integer" />
-        <action
-            android:id="@+id/action_quizViewPagerFragment_to_ExplanationFragment"
-            app:destination="@id/ExplanationFragment" />
-    </fragment>
+        tools:layout="@layout/category_list_fragment"/>
 
-    <fragment
-        android:id="@+id/ExplanationFragment"
-        android:name="com.example.quiz.explanation.ExplanationFragment"
-        android:label="ExplanationFragment"
-        tools:layout="@layout/explanation_fragment">
-
-        <argument
-            android:name="quizId"
-            android:defaultValue="0"
-            app:argType="integer" />
-    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.quiz.profile.ProfileFragment"

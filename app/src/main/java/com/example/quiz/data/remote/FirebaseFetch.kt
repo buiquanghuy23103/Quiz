@@ -1,17 +1,18 @@
 package com.example.quiz.data.remote
 
-import com.example.quiz.dagger.Injector
 import com.example.quiz.data.local.dao.BaseDao
+import com.example.quiz.model.BaseModel
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-class FirebaseFetch<T>(
+class FirebaseFetch<T: BaseModel>(
     private val dao: BaseDao<T>,
     private val classType: Class<T>,
-    private val defaultObject: T
+    private val firestore: FirebaseFirestore
 ) {
     fun downloadData(): Completable {
         return fetchData()
@@ -20,10 +21,8 @@ class FirebaseFetch<T>(
 
     private fun fetchData(): Single<List<T>> {
         return Single.create<List<T>> { emitter ->
-            val db = Injector.get().firestore()
 
-
-            db.collection(classType.simpleName)
+            firestore.collection(classType.simpleName)
                 .addSnapshotListener{ value, error ->
 
                     if (error != null) {
@@ -39,10 +38,16 @@ class FirebaseFetch<T>(
     }
 
     private fun QuerySnapshot.toData(): List<T> {
+
         Timber.i(this.documents.toString())
+
         return this.documents.map { document ->
-            document.toObject(classType) ?: defaultObject
-        }
+
+            val newData = document?.toObject(classType)
+            newData?.withId(document.id)
+            return@map newData
+
+        }.filterNotNull()
     }
 
     private fun saveToLocalDatabase(data: List<T>): Completable {

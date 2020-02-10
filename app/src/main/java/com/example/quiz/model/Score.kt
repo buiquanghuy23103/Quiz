@@ -6,16 +6,16 @@ import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties
 
 @IgnoreExtraProperties
-@Entity(tableName = "categories")
-data class Category(
-    var text: String = "",
-    var imageUrl: String = "",
+@Entity
+data class Score(
+    var userId: String = "",
+    var categoryId: String = "",
+    var score: Int = 0,
 
     @Exclude @set:Exclude @get:Exclude
     @PrimaryKey
     var id: String = ""
 ): BaseModel {
-
     override fun withId(id: String) {
         this.id = id
     }

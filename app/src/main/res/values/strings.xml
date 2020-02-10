@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Finniz</string>
 
+    <!--  Intent extra keys  -->
+    <string name="intent_categoryId">categoryId</string>
+
     <!--  CategoryListFragment  -->
     <string name="category_toolbar_title">Categories</string>
     <string name="category_image">Picture of category</string>

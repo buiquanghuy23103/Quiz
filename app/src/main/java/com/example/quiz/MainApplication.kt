@@ -17,8 +17,6 @@ class MainApplication: Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         INSTANCE = this
-        component = DaggerAppComponent.builder()
-            .appContext(this)
-            .build()
+        component = DaggerAppComponent.factory().create(this)
     }
 }

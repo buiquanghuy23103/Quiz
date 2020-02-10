@@ -2,29 +2,23 @@ package com.example.quiz.quiz
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.quiz.framework.BaseViewModel
+import androidx.lifecycle.ViewModel
+import com.example.quiz.data.local.dao.QuizDao
+import javax.inject.Inject
 
-class QuizViewModel(quizId: Int) : BaseViewModel() {
+class QuizViewModel @Inject constructor(
+    private val quizDao: QuizDao
+): ViewModel() {
 
-    val quiz = quizDao.getById(quizId)
-    val choiceList = choiceDao.getChoicesByQuizId(quizId)
-    private val choiceAssessmentUtil = ChoiceAssessmentUtil(choiceList)
+    lateinit var quizId: String
+
+    fun withId(quizId: String) {
+        this.quizId = quizId
+    }
+
+    fun quiz() = quizDao.getById(quizId)
 
     private val _result = MutableLiveData<Boolean>(false)
     val result: LiveData<Boolean> = _result
 
-    fun markAsCorrectAnswer() {
-        _result.value = true
-    }
-
-    fun markAsIncorrectAnswer() {
-        _result.value = false
-    }
-
-    val assessment = choiceAssessmentUtil.assessment
-
-    fun toggleChoiceChosenById(choiceId: Int) =
-        choiceAssessmentUtil.toggleChoiceChosenById(choiceId)
-
-    fun getChosenStateById(choiceId: Int) = choiceAssessmentUtil.getChosenStateById(choiceId)
 }

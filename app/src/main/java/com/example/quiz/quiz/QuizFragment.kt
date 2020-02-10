@@ -4,56 +4,71 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizFragmentBinding
 import com.example.quiz.framework.BaseFragment
+import com.example.quiz.getAppInjector
+import com.example.quiz.quizList.QuizListViewModel
 import kotlinx.android.synthetic.main.quiz_fragment.*
-import timber.log.Timber
+import javax.inject.Inject
 
 class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
 {
-    private var firstOptionIsClicked = MutableLiveData<Boolean>(false)
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private lateinit var quizListViewModel: QuizListViewModel
 
     companion object{
         private const val ARG_QUIZ_ID = "index"
-        fun getInstance(quizId: Int): QuizFragment {
+        fun getInstance(quizId: String): QuizFragment {
             return QuizFragment().apply {
-                arguments = Bundle().apply { putInt(ARG_QUIZ_ID, quizId) }
+                arguments = Bundle().apply { putString(ARG_QUIZ_ID, quizId) }
             }
         }
     }
 
-    override fun initViewModel() =
-        getViewModel { QuizViewModel(getQuizId().also { Timber.i("quizId = $it") }) }
+    override fun initViewModel() : QuizViewModel {
+        getAppInjector().inject(this)
+        val viewModel = ViewModelProviders.of(this, viewModelFactory)[QuizViewModel::class.java]
+        viewModel.withId(getQuizId())
+        return viewModel
+    }
 
     override fun getLayoutId() = R.layout.quiz_fragment
 
-    private fun getQuizId(): Int {
+    private fun getQuizId(): String {
         return arguments!!.takeIf { it.containsKey(ARG_QUIZ_ID) }
-            ?.getInt(ARG_QUIZ_ID)
-            ?: 0
+            ?.getString(ARG_QUIZ_ID)
+            ?: ""
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        quizListViewModel = ViewModelProviders.of(activity!!)[QuizListViewModel::class.java]
         setupQuizView()
         setupCheckResultButton()
         setupResultView()
     }
 
     private fun setupQuizView() {
-        viewModel.quiz.observe(this, Observer { quiz ->
+        viewModel.quiz().observe(this, Observer { quiz ->
             quiz?.let { binding.quiz = quiz }
             setupOptionView(quiz.answer)
         })
     }
 
     private fun setupOptionView(answer: String) {
+
         optionView.setOnCheckedChangeListener{_, checkedId ->
             val userSelection = getUserSelection(checkedId)
             evaluateUserSelection(userSelection, answer)
+            quizListViewModel.moveToNextQuestion()
         }
+
     }
 
     private fun getUserSelection(@IdRes checkedOption: Int) : String {
@@ -68,9 +83,9 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
 
     private fun evaluateUserSelection(userSelection: String, answer: String) {
         if (userSelection == answer) {
-            viewModel.markAsCorrectAnswer()
+            quizListViewModel.markAsCorrectAnswer()
         } else {
-            viewModel.markAsIncorrectAnswer()
+            quizListViewModel.markAsIncorrectAnswer()
         }
     }
 
@@ -81,9 +96,6 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
     }
 
     private fun setupResultView() {
-        firstOptionIsClicked.observe(viewLifecycleOwner, Observer {
-            binding.firstOptionIsClicked = it
-        })
         viewModel.result.observe(this, Observer { isCorrect ->
 
             binding.isCorrect = isCorrect

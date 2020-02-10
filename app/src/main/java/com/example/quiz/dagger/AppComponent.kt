@@ -1,29 +1,33 @@
 package com.example.quiz.dagger
 
 import android.content.Context
-import com.example.quiz.data.local.AppDatabase
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.quiz.categorylist.CategoryListFragment
+import com.example.quiz.profile.ProfileFragment
+import com.example.quiz.quiz.QuizFragment
+import com.example.quiz.quizList.QuizListActivity
+import com.example.quiz.splashScreen.SplashScreenActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
 @Component(
     modules = [
-        AppModule::class,
-        FirebaseModule::class
+        DatabaseModule::class,
+        FirebaseModule::class,
+        ViewModelModule::class
     ]
 )
 @Singleton
 interface AppComponent {
-    fun appContext(): Context
-    fun appDatabase(): AppDatabase
-    fun firestore(): FirebaseFirestore
 
-    @Component.Builder
-    interface Builder {
-        @BindsInstance
-        fun appContext(appContext: Context): Builder
+    fun inject(activity: SplashScreenActivity)
+    fun inject(fragment: CategoryListFragment)
+    fun inject(activity: QuizListActivity)
+    fun inject(fragment: QuizFragment)
+    fun inject(fragment: ProfileFragment)
 
-        fun build(): AppComponent
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance appContext: Context): AppComponent
     }
 }
