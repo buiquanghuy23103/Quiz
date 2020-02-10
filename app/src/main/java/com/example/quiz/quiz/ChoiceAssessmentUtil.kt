@@ -15,7 +15,7 @@ class ChoiceAssessmentUtil(choiceList: LiveData<List<Choice>>) {
             .all { comparison -> comparison == true }
     }
 
-    fun toggleChoiceChosenById(choiceId: Int) {
+    fun toggleChoiceChosenById(choiceId: String) {
         val newMapChoiceId2ChosenState = choiceAssessmentList.value!!
             .let {
                 val selectedChoice = getChoiceFromListById(it, choiceId)
@@ -27,16 +27,16 @@ class ChoiceAssessmentUtil(choiceList: LiveData<List<Choice>>) {
         choiceAssessmentList.value = newMapChoiceId2ChosenState
     }
 
-    private fun getChoiceFromListById(list: List<ChoiceAssessment>, choiceId: Int) =
+    private fun getChoiceFromListById(list: List<ChoiceAssessment>, choiceId: String) =
         list.find { choiceAssessment -> choiceAssessment.choiceId == choiceId }
             ?: throw Exception("No choice matches the given choiceId")
 
-    fun getChosenStateById(choiceId: Int) = Transformations.map(choiceAssessmentList) {
+    fun getChosenStateById(choiceId: String) = Transformations.map(choiceAssessmentList) {
         getChoiceFromListById(it, choiceId).isChosen
     }
 
     data class ChoiceAssessment(
-        val choiceId: Int,
+        val choiceId: String,
         val isTrue: Boolean,
         var isChosen: Boolean
     )

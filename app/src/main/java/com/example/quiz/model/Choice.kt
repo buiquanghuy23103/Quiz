@@ -4,8 +4,10 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import kotlin.random.Random
+import com.google.firebase.firestore.Exclude
+import com.google.firebase.firestore.IgnoreExtraProperties
 
+@IgnoreExtraProperties
 @Entity(
     tableName = "choices",
     foreignKeys = [ForeignKey(
@@ -21,6 +23,11 @@ data class Choice(
     var text: String = "Default text",
     var correct: Boolean = false,
 
+    @Exclude
     @PrimaryKey
-    var id: Int = Random.nextInt()
-): BaseModel()
+    var id: String = ""
+): BaseModel{
+    override fun withId(id: String) {
+        this.id = id
+    }
+}

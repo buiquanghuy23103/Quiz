@@ -26,7 +26,7 @@ class CategoryListItem private constructor(private val binding: CategoryListItem
             this.category = category
             root.setOnClickListener {
                 val navDirections =
-                    CategoryListFragmentDirections.actionCategoryListFragmentToQuizViewPagerFragment(
+                    CategoryListFragmentDirections.toQuizViewPagerFragment(
                         category.id
                     )
                 it.findNavController().navigate(navDirections)

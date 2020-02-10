@@ -8,7 +8,7 @@ import com.example.quiz.countDownInitial
 import com.example.quiz.countDownInterval
 import com.example.quiz.framework.BaseViewModel
 
-class QuizViewPagerViewModel(categoryId: Int) : BaseViewModel() {
+class QuizViewPagerViewModel(categoryId: String) : BaseViewModel() {
     val quizIdList = quizDao.getQuizIdListByCategory(categoryId)
     val category = categoryDao.getById(categoryId)
 

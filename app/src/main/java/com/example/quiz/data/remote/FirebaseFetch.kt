@@ -11,8 +11,7 @@ import timber.log.Timber
 
 class FirebaseFetch<T: BaseModel>(
     private val dao: BaseDao<T>,
-    private val classType: Class<T>,
-    private val defaultObject: T
+    private val classType: Class<T>
 ) {
     fun downloadData(): Completable {
         return fetchData()
@@ -40,10 +39,16 @@ class FirebaseFetch<T: BaseModel>(
     }
 
     private fun QuerySnapshot.toData(): List<T> {
+
         Timber.i(this.documents.toString())
+
         return this.documents.map { document ->
-            document.toObject(classType)?.withId(document.id) ?: defaultObject
-        }
+
+            val newData = document?.toObject(classType)
+            newData?.withId(document.id)
+            return@map newData
+
+        }.filterNotNull()
     }
 
     private fun saveToLocalDatabase(data: List<T>): Completable {

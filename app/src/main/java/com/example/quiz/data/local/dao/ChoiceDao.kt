@@ -15,5 +15,5 @@ interface ChoiceDao : BaseDao<Choice> {
     fun getById(id: Int): LiveData<Choice>
 
     @Query("SELECT * FROM choices WHERE quizId = :quizId")
-    fun getChoicesByQuizId(quizId: Int): LiveData<List<Choice>>
+    fun getChoicesByQuizId(quizId: String): LiveData<List<Choice>>
 }

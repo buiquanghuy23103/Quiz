@@ -35,8 +35,8 @@ class ChoiceListItem private constructor(private val binding: ChoiceListItemBind
     }
 
     interface Listener {
-        fun onOptionButtonClick(choiceId: Int)
-        fun setOptionButtonColor(view: View, choiceId: Int)
+        fun onOptionButtonClick(choiceId: String)
+        fun setOptionButtonColor(view: View, choiceId: String)
     }
 
 

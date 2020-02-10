@@ -18,9 +18,9 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
 
     companion object{
         private const val ARG_QUIZ_ID = "index"
-        fun getInstance(quizId: Int): QuizFragment {
+        fun getInstance(quizId: String): QuizFragment {
             return QuizFragment().apply {
-                arguments = Bundle().apply { putInt(ARG_QUIZ_ID, quizId) }
+                arguments = Bundle().apply { putString(ARG_QUIZ_ID, quizId) }
             }
         }
     }
@@ -30,10 +30,10 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
 
     override fun getLayoutId() = R.layout.quiz_fragment
 
-    private fun getQuizId(): Int {
+    private fun getQuizId(): String {
         return arguments!!.takeIf { it.containsKey(ARG_QUIZ_ID) }
-            ?.getInt(ARG_QUIZ_ID)
-            ?: 0
+            ?.getString(ARG_QUIZ_ID)
+            ?: ""
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

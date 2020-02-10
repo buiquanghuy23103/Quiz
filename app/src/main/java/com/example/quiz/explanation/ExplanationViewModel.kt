@@ -14,7 +14,7 @@ import com.example.quiz.model.UserProfile
 class ExplanationViewModel(
     private val app: Application,
     listener: FirebaseUtil.Listener,
-    private val quizId: Int
+    private val quizId: String
 ) :
     AndroidViewModel(app) {
     private val defaultMessageList = listOf<Message>()
