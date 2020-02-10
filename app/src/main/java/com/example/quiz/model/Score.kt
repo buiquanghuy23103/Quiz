@@ -12,7 +12,7 @@ data class Score(
     var categoryId: String = "",
     var score: Int = 0,
 
-    @Exclude
+    @Exclude @set:Exclude @get:Exclude
     @PrimaryKey
     var id: String = ""
 ): BaseModel {

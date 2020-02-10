@@ -29,7 +29,7 @@ data class Quiz(
     var optionD: String = "Canberra is the capital of Australia",
     var answer: String = "A",
 
-    @Exclude
+    @Exclude @set:Exclude @get:Exclude
     @PrimaryKey
     var id: String = ""
 ): BaseModel {

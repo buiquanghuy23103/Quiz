@@ -13,5 +13,5 @@ interface BaseDao<T> {
     fun saveList(objectList: List<T>): Completable// return list of objects' id for testing
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(obj: T): Long // return object's id for testing
+    fun save(obj: T): Completable // return object's id for testing
 }

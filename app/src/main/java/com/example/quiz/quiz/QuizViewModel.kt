@@ -21,11 +21,4 @@ class QuizViewModel @Inject constructor(
     private val _result = MutableLiveData<Boolean>(false)
     val result: LiveData<Boolean> = _result
 
-    fun markAsCorrectAnswer() {
-        _result.value = true
-    }
-
-    fun markAsIncorrectAnswer() {
-        _result.value = false
-    }
 }

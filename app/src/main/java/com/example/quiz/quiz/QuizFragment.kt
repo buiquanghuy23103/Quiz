@@ -20,6 +20,8 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    private lateinit var quizListViewModel: QuizListViewModel
+
     companion object{
         private const val ARG_QUIZ_ID = "index"
         fun getInstance(quizId: String): QuizFragment {
@@ -46,6 +48,7 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        quizListViewModel = ViewModelProviders.of(activity!!)[QuizListViewModel::class.java]
         setupQuizView()
         setupCheckResultButton()
         setupResultView()
@@ -59,8 +62,6 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
     }
 
     private fun setupOptionView(answer: String) {
-
-        val quizListViewModel = ViewModelProviders.of(activity!!)[QuizListViewModel::class.java]
 
         optionView.setOnCheckedChangeListener{_, checkedId ->
             val userSelection = getUserSelection(checkedId)
@@ -82,9 +83,9 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
 
     private fun evaluateUserSelection(userSelection: String, answer: String) {
         if (userSelection == answer) {
-            viewModel.markAsCorrectAnswer()
+            quizListViewModel.markAsCorrectAnswer()
         } else {
-            viewModel.markAsIncorrectAnswer()
+            quizListViewModel.markAsIncorrectAnswer()
         }
     }
 

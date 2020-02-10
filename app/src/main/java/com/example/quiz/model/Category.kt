@@ -11,7 +11,7 @@ data class Category(
     var text: String = "",
     var imageUrl: String = "",
 
-    @Exclude
+    @Exclude @set:Exclude @get:Exclude
     @PrimaryKey
     var id: String = ""
 ): BaseModel {
