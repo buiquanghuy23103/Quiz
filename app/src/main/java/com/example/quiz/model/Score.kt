@@ -9,7 +9,7 @@ import com.google.firebase.firestore.IgnoreExtraProperties
 @Entity
 data class Score(
     var userId: String = "",
-    var categoryId: Int = -1,
+    var categoryId: String = "",
     var score: Int = 0,
 
     @Exclude
