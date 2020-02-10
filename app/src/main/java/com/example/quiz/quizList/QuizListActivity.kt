@@ -7,11 +7,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
 import com.example.quiz.R
-import com.example.quiz.countDownFinnishSignal
 import com.example.quiz.countDownInitial
 import com.example.quiz.dagger.ViewModelFactory
 import com.example.quiz.databinding.ActivityQuizListBinding
 import com.example.quiz.getAppInjector
+import com.example.quiz.questionFinishSignal
 import kotlinx.android.synthetic.main.activity_quiz_list.*
 import kotlinx.android.synthetic.main.quiz_toolbar.view.*
 import javax.inject.Inject
@@ -56,7 +56,7 @@ class QuizListActivity : AppCompatActivity() {
 
     private fun setupTimer() {
         viewModel.timeLeft.observe(this, Observer { timeLeft ->
-            if (timeLeft != countDownFinnishSignal) {
+            if (timeLeft != questionFinishSignal) {
                 binding.quizToolbar.timeLeft = timeLeft / 1000
                 val progress = 100 - (timeLeft * 100 / countDownInitial).toInt()
                 quiz_timer_progress_bar.progress = progress

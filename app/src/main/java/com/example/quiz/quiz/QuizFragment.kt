@@ -11,6 +11,7 @@ import com.example.quiz.R
 import com.example.quiz.databinding.QuizFragmentBinding
 import com.example.quiz.framework.BaseFragment
 import com.example.quiz.getAppInjector
+import com.example.quiz.quizList.QuizListViewModel
 import kotlinx.android.synthetic.main.quiz_fragment.*
 import javax.inject.Inject
 
@@ -43,7 +44,8 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
             ?: ""
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         setupQuizView()
         setupCheckResultButton()
         setupResultView()
@@ -57,10 +59,15 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
     }
 
     private fun setupOptionView(answer: String) {
+
+        val quizListViewModel = ViewModelProviders.of(activity!!)[QuizListViewModel::class.java]
+
         optionView.setOnCheckedChangeListener{_, checkedId ->
             val userSelection = getUserSelection(checkedId)
             evaluateUserSelection(userSelection, answer)
+            quizListViewModel.moveToNextQuestion()
         }
+
     }
 
     private fun getUserSelection(@IdRes checkedOption: Int) : String {

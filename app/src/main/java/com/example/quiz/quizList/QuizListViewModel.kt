@@ -4,11 +4,15 @@ import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.quiz.countDownFinnishSignal
 import com.example.quiz.countDownInitial
 import com.example.quiz.countDownInterval
 import com.example.quiz.data.local.dao.CategoryDao
 import com.example.quiz.data.local.dao.QuizDao
+import com.example.quiz.questionFinishSignal
+import io.reactivex.Completable
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class QuizListViewModel @Inject constructor(
@@ -17,7 +21,7 @@ class QuizListViewModel @Inject constructor(
 ) : ViewModel() {
 
     private lateinit var categoryId: String
-
+    private val compositeDisposable = CompositeDisposable()
 
     private val _timeLeft = MutableLiveData<Long>()
     val timeLeft: LiveData<Long> = _timeLeft
@@ -27,7 +31,7 @@ class QuizListViewModel @Inject constructor(
         }
 
         override fun onFinish() {
-            _timeLeft.value = countDownFinnishSignal
+            _timeLeft.value = questionFinishSignal
         }
     }
 
@@ -41,6 +45,22 @@ class QuizListViewModel @Inject constructor(
     fun resetTimer() {
         countDownTimer.cancel()
         countDownTimer.start()
+    }
+
+    fun moveToNextQuestion() {
+        Completable.fromAction {
+            Thread.sleep(1000)
+            _timeLeft.postValue(questionFinishSignal)
+        }
+            .subscribeOn(Schedulers.io())
+            .subscribe()
+            .addTo(compositeDisposable)
+
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
     }
 
 }
