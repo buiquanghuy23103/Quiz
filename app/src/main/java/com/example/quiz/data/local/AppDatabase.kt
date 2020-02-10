@@ -9,8 +9,6 @@ import com.example.quiz.model.Category
 import com.example.quiz.model.Quiz
 import com.example.quiz.model.Score
 
-// The implementation of this class is based on Android Sunflower
-// https://github.com/googlesamples/android-sunflower
 @Database(
     entities = [Category::class, Quiz::class, Score::class],
     version = 1,
