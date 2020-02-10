@@ -3,22 +3,37 @@ package com.example.quiz.quizviewpager
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.example.quiz.R
 import com.example.quiz.countDownFinnishSignal
 import com.example.quiz.countDownInitial
+import com.example.quiz.dagger.ViewModelFactory
 import com.example.quiz.databinding.QuizViewPagerFragmentBinding
 import com.example.quiz.framework.BaseFragment
+import com.example.quiz.getAppInjector
 import kotlinx.android.synthetic.main.quiz_toolbar.view.*
 import kotlinx.android.synthetic.main.quiz_view_pager_fragment.*
+import javax.inject.Inject
 
 class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPagerFragmentBinding>() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private val args: QuizViewPagerFragmentArgs by navArgs()
 
-    override fun initViewModel() =
-        getViewModel { QuizViewPagerViewModel(args.categoryId) }
+    override fun initViewModel(): QuizViewPagerViewModel {
+        getAppInjector().inject(this)
+
+        val viewModel = ViewModelProviders
+            .of(this, viewModelFactory)[QuizViewPagerViewModel::class.java]
+
+        viewModel.withCategoryId(args.categoryId)
+
+        return viewModel
+    }
 
     override fun getLayoutId() = R.layout.quiz_view_pager_fragment
 
@@ -31,7 +46,7 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
     }
 
     private fun setupBinding() {
-        viewModel.category.observe(viewLifecycleOwner, Observer {
+        viewModel.category().observe(viewLifecycleOwner, Observer {
             binding.category = it
         })
     }
@@ -68,14 +83,13 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
 
             isUserInputEnabled = false
 
-            viewModel.quizIdList.observe(this@QuizViewPagerFragment, Observer {
+            viewModel.quizIdList().observe(this@QuizViewPagerFragment, Observer {
                 adapter = null
                 adapter = QuizViewPagerAdapter(this@QuizViewPagerFragment, it)
             })
 
             this.registerOnPageChangeCallback(pageChangeCallback)
 
-            this.scrollBarFadeDuration
             setPageTransformer(ZoomOutPageTransformer())
         }
     }

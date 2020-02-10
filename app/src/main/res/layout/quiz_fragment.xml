@@ -98,7 +98,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    isVisible="@{firstOptionIsClicked}"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/answer_view_recycler_view" />
@@ -118,8 +117,5 @@
             name="isCorrect"
             type="Boolean" />
 
-        <variable
-            name="firstOptionIsClicked"
-            type="Boolean" />
     </data>
 </layout>

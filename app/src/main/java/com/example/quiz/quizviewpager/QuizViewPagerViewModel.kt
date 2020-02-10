@@ -3,14 +3,21 @@ package com.example.quiz.quizviewpager
 import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.quiz.countDownFinnishSignal
 import com.example.quiz.countDownInitial
 import com.example.quiz.countDownInterval
-import com.example.quiz.framework.BaseViewModel
+import com.example.quiz.data.local.dao.CategoryDao
+import com.example.quiz.data.local.dao.QuizDao
+import javax.inject.Inject
 
-class QuizViewPagerViewModel(categoryId: String) : BaseViewModel() {
-    val quizIdList = quizDao.getQuizIdListByCategory(categoryId)
-    val category = categoryDao.getById(categoryId)
+class QuizViewPagerViewModel @Inject constructor(
+    private val quizDao: QuizDao,
+    private val categoryDao: CategoryDao
+) : ViewModel() {
+
+    private lateinit var categoryId: String
+
 
     private val _timeLeft = MutableLiveData<Long>()
     val timeLeft: LiveData<Long> = _timeLeft
@@ -22,6 +29,13 @@ class QuizViewPagerViewModel(categoryId: String) : BaseViewModel() {
         override fun onFinish() {
             _timeLeft.value = countDownFinnishSignal
         }
+    }
+
+    fun quizIdList() = quizDao.getQuizIdListByCategory(categoryId)
+    fun category() = categoryDao.getById(categoryId)
+
+    fun withCategoryId(categoryId: String) {
+        this.categoryId = categoryId
     }
 
     fun resetTimer() {

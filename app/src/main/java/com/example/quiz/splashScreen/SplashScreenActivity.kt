@@ -4,16 +4,22 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.MainActivity
 import com.example.quiz.R
+import com.example.quiz.getAppInjector
 import com.firebase.ui.auth.AuthMethodPickerLayout
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import timber.log.Timber
+import javax.inject.Inject
 
 class SplashScreenActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val RC_SIGN_IN = 111
 
@@ -21,8 +27,9 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        val viewModel = ViewModelProviders.of(this)
-            .get(SplashScreenViewModel::class.java)
+        getAppInjector().inject(this)
+        val viewModel = ViewModelProviders
+            .of(this, viewModelFactory)[SplashScreenViewModel::class.java]
 
         viewModel.downloadAll()
 

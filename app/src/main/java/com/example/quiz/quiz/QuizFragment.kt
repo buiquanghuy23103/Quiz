@@ -4,17 +4,20 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizFragmentBinding
 import com.example.quiz.framework.BaseFragment
+import com.example.quiz.getAppInjector
 import kotlinx.android.synthetic.main.quiz_fragment.*
-import timber.log.Timber
+import javax.inject.Inject
 
 class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
 {
-    private var firstOptionIsClicked = MutableLiveData<Boolean>(false)
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     companion object{
         private const val ARG_QUIZ_ID = "index"
@@ -25,8 +28,12 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
         }
     }
 
-    override fun initViewModel() =
-        getViewModel { QuizViewModel(getQuizId().also { Timber.i("quizId = $it") }) }
+    override fun initViewModel() : QuizViewModel {
+        getAppInjector().inject(this)
+        val viewModel = ViewModelProviders.of(this, viewModelFactory)[QuizViewModel::class.java]
+        viewModel.withId(getQuizId())
+        return viewModel
+    }
 
     override fun getLayoutId() = R.layout.quiz_fragment
 
@@ -43,7 +50,7 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
     }
 
     private fun setupQuizView() {
-        viewModel.quiz.observe(this, Observer { quiz ->
+        viewModel.quiz().observe(this, Observer { quiz ->
             quiz?.let { binding.quiz = quiz }
             setupOptionView(quiz.answer)
         })
@@ -81,9 +88,6 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
     }
 
     private fun setupResultView() {
-        firstOptionIsClicked.observe(viewLifecycleOwner, Observer {
-            binding.firstOptionIsClicked = it
-        })
         viewModel.result.observe(this, Observer { isCorrect ->
 
             binding.isCorrect = isCorrect

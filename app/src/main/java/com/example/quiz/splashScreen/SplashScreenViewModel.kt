@@ -1,10 +1,13 @@
 package com.example.quiz.splashScreen
 
 import androidx.lifecycle.ViewModel
-import com.example.quiz.data.remote.PopulateData
+import com.example.quiz.data.remote.DataDownloader
 import com.google.firebase.auth.FirebaseAuth
+import javax.inject.Inject
 
-class SplashScreenViewModel : ViewModel() {
+class SplashScreenViewModel @Inject constructor(
+    private val dataDownloader: DataDownloader
+) : ViewModel() {
 
     fun isLoggedIn(): Boolean {
         val auth = FirebaseAuth.getInstance()
@@ -13,12 +16,12 @@ class SplashScreenViewModel : ViewModel() {
     }
 
     fun downloadAll() {
-        PopulateData.downloadAllData()
+        dataDownloader.downloadAllData()
     }
 
     override fun onCleared() {
         super.onCleared()
-        PopulateData.cleanUp()
+        dataDownloader.cleanUp()
     }
 
 }

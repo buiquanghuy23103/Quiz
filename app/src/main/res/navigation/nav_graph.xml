@@ -26,22 +26,8 @@
             android:name="categoryId"
             app:argType="string"
             android:defaultValue="noId" />
-        <action
-            android:id="@+id/action_quizViewPagerFragment_to_ExplanationFragment"
-            app:destination="@id/ExplanationFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/ExplanationFragment"
-        android:name="com.example.quiz.explanation.ExplanationFragment"
-        android:label="ExplanationFragment"
-        tools:layout="@layout/explanation_fragment">
-
-        <argument
-            android:name="quizId"
-            android:defaultValue="noId"
-            app:argType="string" />
-    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.quiz.profile.ProfileFragment"

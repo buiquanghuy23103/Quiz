@@ -1,13 +1,15 @@
 package com.example.quiz.profile
 
 import androidx.lifecycle.MutableLiveData
-import com.example.quiz.framework.BaseViewModel
+import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import javax.inject.Inject
 
-class ProfileViewModel: BaseViewModel() {
+class ProfileViewModel @Inject constructor(
+    firebaseAuth: FirebaseAuth
+): ViewModel() {
 
-    private val auth = FirebaseAuth.getInstance()
-    val userDetails = MutableLiveData<FirebaseUser>(auth.currentUser)
+    val userDetails = MutableLiveData<FirebaseUser>(firebaseAuth.currentUser)
 
 }
