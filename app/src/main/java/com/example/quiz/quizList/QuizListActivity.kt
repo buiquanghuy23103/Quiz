@@ -1,43 +1,32 @@
-package com.example.quiz.quizviewpager
+package com.example.quiz.quizList
 
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.example.quiz.R
 import com.example.quiz.countDownFinnishSignal
 import com.example.quiz.countDownInitial
 import com.example.quiz.dagger.ViewModelFactory
-import com.example.quiz.databinding.QuizViewPagerFragmentBinding
-import com.example.quiz.framework.BaseFragment
+import com.example.quiz.databinding.ActivityQuizListBinding
 import com.example.quiz.getAppInjector
+import kotlinx.android.synthetic.main.activity_quiz_list.*
 import kotlinx.android.synthetic.main.quiz_toolbar.view.*
-import kotlinx.android.synthetic.main.quiz_view_pager_fragment.*
 import javax.inject.Inject
 
-class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPagerFragmentBinding>() {
+class QuizListActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private val args: QuizViewPagerFragmentArgs by navArgs()
+    private lateinit var viewModel: QuizListViewModel
+    private lateinit var binding: ActivityQuizListBinding
 
-    override fun initViewModel(): QuizViewPagerViewModel {
-        getAppInjector().inject(this)
-
-        val viewModel = ViewModelProviders
-            .of(this, viewModelFactory)[QuizViewPagerViewModel::class.java]
-
-        viewModel.withCategoryId(args.categoryId)
-
-        return viewModel
-    }
-
-    override fun getLayoutId() = R.layout.quiz_view_pager_fragment
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initializeViewModel()
         setupBinding()
         setupToolbar()
         setupQuizView()
@@ -45,14 +34,28 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
         viewModel.resetTimer()
     }
 
+    private fun initializeViewModel() {
+        getAppInjector().inject(this)
+
+        viewModel = ViewModelProviders
+            .of(this, viewModelFactory)[QuizListViewModel::class.java]
+
+        viewModel.withCategoryId(getCategoryId())
+    }
+
+    private fun getCategoryId(): String {
+        return intent.getStringExtra(getString(R.string.intent_categoryId))
+    }
+
     private fun setupBinding() {
-        viewModel.category().observe(viewLifecycleOwner, Observer {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_quiz_list)
+        viewModel.category().observe(this, Observer {
             binding.category = it
         })
     }
 
     private fun setupTimer() {
-        viewModel.timeLeft.observe(viewLifecycleOwner, Observer { timeLeft ->
+        viewModel.timeLeft.observe(this, Observer { timeLeft ->
             if (timeLeft != countDownFinnishSignal) {
                 binding.quizToolbar.timeLeft = timeLeft / 1000
                 val progress = 100 - (timeLeft * 100 / countDownInitial).toInt()
@@ -68,7 +71,7 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
     }
 
     private fun setupToolbar() {
-        requireActivity().setActionBar(quiz_toolbar.quiz_toolbar_content)
+        setActionBar(quiz_toolbar.quiz_toolbar_content)
     }
 
     private val pageChangeCallback = object: ViewPager2.OnPageChangeCallback(){
@@ -83,9 +86,9 @@ class QuizViewPagerFragment : BaseFragment<QuizViewPagerViewModel, QuizViewPager
 
             isUserInputEnabled = false
 
-            viewModel.quizIdList().observe(this@QuizViewPagerFragment, Observer {
+            viewModel.quizIdList().observe(this@QuizListActivity, Observer {
                 adapter = null
-                adapter = QuizViewPagerAdapter(this@QuizViewPagerFragment, it)
+                adapter = QuizViewPagerAdapter(this@QuizListActivity, it)
             })
 
             this.registerOnPageChangeCallback(pageChangeCallback)

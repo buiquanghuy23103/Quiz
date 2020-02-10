@@ -1,5 +1,6 @@
 package com.example.quiz.categorylist
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,10 +11,14 @@ import com.example.quiz.R
 import com.example.quiz.databinding.CategoryListFragmentBinding
 import com.example.quiz.framework.BaseFragment
 import com.example.quiz.getAppInjector
+import com.example.quiz.quizList.QuizListActivity
 import kotlinx.android.synthetic.main.category_list_fragment.*
 import javax.inject.Inject
 
-class CategoryListFragment : BaseFragment<CategoryListViewModel, CategoryListFragmentBinding>() {
+class CategoryListFragment
+    : BaseFragment<CategoryListViewModel, CategoryListFragmentBinding>(),
+        CategoryListItem.OnClickListener
+{
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -35,12 +40,16 @@ class CategoryListFragment : BaseFragment<CategoryListViewModel, CategoryListFra
     }
 
     private fun setupCategoryList() {
-        with(category_list) {
-            adapter = CategoryListAdapter().apply {
-                viewModel.categoryList.observe(this@CategoryListFragment, Observer {
-                    submitList(it)
-                })
-            }
+        category_list.adapter = CategoryListAdapter(this).apply {
+            viewModel.categoryList.observe(this@CategoryListFragment, Observer {
+                submitList(it)
+            })
         }
+    }
+
+    override fun onCategoryItemClick(categoryId: String) {
+        val intent = Intent(activity, QuizListActivity::class.java)
+            .putExtra(getString(R.string.intent_categoryId), categoryId)
+        startActivity(intent)
     }
 }

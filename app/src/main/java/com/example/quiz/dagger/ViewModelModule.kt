@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.quiz.categorylist.CategoryListViewModel
 import com.example.quiz.profile.ProfileViewModel
 import com.example.quiz.quiz.QuizViewModel
-import com.example.quiz.quizviewpager.QuizViewPagerViewModel
+import com.example.quiz.quizList.QuizListViewModel
 import com.example.quiz.splashScreen.SplashScreenViewModel
 import dagger.Binds
 import dagger.Module
@@ -30,8 +30,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(QuizViewPagerViewModel::class)
-    internal abstract fun quizViewPagerViewModel(viewModel: QuizViewPagerViewModel): ViewModel
+    @ViewModelKey(QuizListViewModel::class)
+    internal abstract fun quizViewPagerViewModel(viewModel: QuizListViewModel): ViewModel
 
     @Binds
     @IntoMap

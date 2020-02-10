@@ -1,4 +1,4 @@
-package com.example.quiz.quizviewpager
+package com.example.quiz.quizList
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2

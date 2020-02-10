@@ -1,4 +1,4 @@
-package com.example.quiz.quizviewpager
+package com.example.quiz.quizList
 
 import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
@@ -11,7 +11,7 @@ import com.example.quiz.data.local.dao.CategoryDao
 import com.example.quiz.data.local.dao.QuizDao
 import javax.inject.Inject
 
-class QuizViewPagerViewModel @Inject constructor(
+class QuizListViewModel @Inject constructor(
     private val quizDao: QuizDao,
     private val categoryDao: CategoryDao
 ) : ViewModel() {

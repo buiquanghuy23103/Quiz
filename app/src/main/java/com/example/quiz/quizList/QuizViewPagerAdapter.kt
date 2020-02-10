@@ -1,12 +1,13 @@
-package com.example.quiz.quizviewpager
+package com.example.quiz.quizList
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.quiz.quiz.QuizFragment
 import timber.log.Timber
 
-class QuizViewPagerAdapter(fm: Fragment, private val quizIdList: List<String>) :
-    FragmentStateAdapter(fm) {
+class QuizViewPagerAdapter(activity: FragmentActivity, private val quizIdList: List<String>) :
+    FragmentStateAdapter(activity) {
 
     override fun getItemCount() = quizIdList.size
 
