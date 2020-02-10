@@ -58,77 +58,51 @@ class QuizListViewModel @Inject constructor(
         countDownTimer.start()
     }
 
-    fun moveToNextQuestion() {
-        Completable.fromAction {
-            Thread.sleep(1000)
-            _timeLeft.postValue(questionFinishSignal)
-        }
-            .subscribeOn(Schedulers.io())
+    fun moveToNextQuestion(quizId: String, correctAnswer: String, userAnswer: String) {
+        markQuestionAsFinished()
+            .mergeWith(saveAnswer(quizId, correctAnswer, userAnswer))
             .subscribe()
             .addTo(compositeDisposable)
 
     }
 
-
-    fun markAsCorrectAnswer() {
-
-        scoreDao.find(getCurrentUserId(), categoryId)
+    private fun markQuestionAsFinished(): Completable {
+        return Completable.fromAction {
+            Thread.sleep(1000)
+            _timeLeft.postValue(questionFinishSignal)
+        }
             .subscribeOn(Schedulers.io())
-            .subscribeBy (
-
-                onSuccess = {score ->
-                    incrementScore(score.id)
-                        .subscribe()
-                        .addTo(compositeDisposable)
-                },
-
-                onError = {
-                    addNewScoreToFirestore()
-                        .flatMapCompletable(this::storeNewScoreLocal)
-                        .subscribe()
-                        .addTo(compositeDisposable)
-                }
-            )
-            .addTo(compositeDisposable)
-
     }
 
     private fun getCurrentUserId() = firebaseAuth.currentUser!!.uid
 
-    private fun addNewScoreToFirestore() = Single.create<Score> { emitter ->
-        val newScore = Score(getCurrentUserId(), categoryId)
+    private fun saveAnswer(
+        quizId: String,
+        correctAnswer: String,
+        userAnswer: String
+    ) = Completable.create {emitter ->
+
+        val newScore = Score(
+            categoryId = this.categoryId,
+            quizId = quizId,
+            userAnswer = userAnswer,
+            userId = getCurrentUserId(),
+            rightAnswer = correctAnswer,
+            isCorrect = (userAnswer == correctAnswer)
+        )
+
         firestore.collection(Score::class.java.simpleName)
             .add(newScore)
-            .addOnSuccessListener { docRef ->
-                Timber.i("Added new score on Firebase cloud, score.id=${docRef.id}")
-                newScore.withId(docRef.id)
-                emitter.onSuccess(newScore)
-            }
-            .addOnFailureListener{ error ->
-                Timber.e("Cannot add new score on Firebase cloud")
-                emitter.onError(error)
-            }
-    }.subscribeOn(Schedulers.io())
-
-    private fun storeNewScoreLocal(score: Score) = scoreDao.save(score)
-        .subscribeOn(Schedulers.io())
-
-    private fun incrementScore(scoreId: String) = Completable.create { emitter ->
-        firestore.collection(Score::class.java.simpleName)
-            .document(scoreId)
-            .update("score", FieldValue.increment(1))
             .addOnSuccessListener {
-                Timber.i("Incremented score on Firebase cloud, score.id=$scoreId")
+                Timber.i("Saved user answer")
                 emitter.onComplete()
             }
-            .addOnFailureListener{ error ->
-                Timber.e("Cannot increment score on Firebase cloud, score.id=$scoreId")
+            .addOnFailureListener{error ->
+                Timber.e("Cannot save answer: $error")
                 emitter.onError(error)
             }
     }.subscribeOn(Schedulers.io())
 
-    fun markAsIncorrectAnswer() {
-    }
 
     override fun onCleared() {
         super.onCleared()

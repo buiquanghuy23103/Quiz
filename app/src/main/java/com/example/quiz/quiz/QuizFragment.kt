@@ -65,8 +65,7 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
 
         optionView.setOnCheckedChangeListener{_, checkedId ->
             val userSelection = getUserSelection(checkedId)
-            evaluateUserSelection(userSelection, answer)
-            quizListViewModel.moveToNextQuestion()
+            quizListViewModel.moveToNextQuestion(getQuizId(), answer, userSelection)
         }
 
     }
@@ -78,14 +77,6 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
             R.id.optionC -> "C"
             R.id.optionD -> "D"
             else -> ""
-        }
-    }
-
-    private fun evaluateUserSelection(userSelection: String, answer: String) {
-        if (userSelection == answer) {
-            quizListViewModel.markAsCorrectAnswer()
-        } else {
-            quizListViewModel.markAsIncorrectAnswer()
         }
     }
 

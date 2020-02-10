@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "580455795975-bu8p5271l5km3f242c7cfvh5qs6cmo3j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.huy.finniz",
+            "certificate_hash": "c55f5e5bd8fdf537b38f8d5a09ff8b2a7e7ce1bf"
+          }
+        },
+        {
           "client_id": "580455795975-5116ag6vvaga2i6i28j89r811386rabq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
