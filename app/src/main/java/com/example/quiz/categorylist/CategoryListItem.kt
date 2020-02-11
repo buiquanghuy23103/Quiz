@@ -27,14 +27,14 @@ class CategoryListItem private constructor(
         with(binding) {
             this.category = category
             root.setOnClickListener {
-                onClickListener.onCategoryItemClick(category.id)
+                onClickListener.onCategoryItemClick(category)
             }
             executePendingBindings()
         }
     }
 
     interface OnClickListener {
-        fun onCategoryItemClick(categoryId: String)
+        fun onCategoryItemClick(category: Category)
     }
 
 }

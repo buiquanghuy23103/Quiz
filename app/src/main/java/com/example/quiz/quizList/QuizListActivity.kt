@@ -41,10 +41,15 @@ class QuizListActivity : AppCompatActivity() {
             .of(this, viewModelFactory)[QuizListViewModel::class.java]
 
         viewModel.withCategoryId(getCategoryId())
+        viewModel.withCategoryName(getCategoryName())
     }
 
     private fun getCategoryId(): String {
         return intent.getStringExtra(getString(R.string.intent_categoryId))
+    }
+
+    private fun getCategoryName(): String {
+        return intent.getStringExtra(getString(R.string.intent_categoryName))
     }
 
     private fun setupBinding() {

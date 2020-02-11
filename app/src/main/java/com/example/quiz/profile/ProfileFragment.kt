@@ -26,9 +26,23 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.userDetails.observe(viewLifecycleOwner, Observer {
-            binding.user = it
+        setupUserProfile()
+        setupAchievementRecyclerView()
+
+    }
+
+    private fun setupUserProfile() {
+        binding.user = viewModel.userDetails
+    }
+
+    private fun setupAchievementRecyclerView() {
+        val adapter = AchievementListAdapter(viewModel.userDetails?.uid)
+        binding.achievements.adapter = adapter
+
+        viewModel.achievements.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
         })
+
     }
 
 }

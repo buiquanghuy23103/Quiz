@@ -11,6 +11,7 @@ import com.example.quiz.R
 import com.example.quiz.databinding.CategoryListFragmentBinding
 import com.example.quiz.framework.BaseFragment
 import com.example.quiz.getAppInjector
+import com.example.quiz.model.Category
 import com.example.quiz.quizList.QuizListActivity
 import kotlinx.android.synthetic.main.category_list_fragment.*
 import javax.inject.Inject
@@ -47,9 +48,12 @@ class CategoryListFragment
         }
     }
 
-    override fun onCategoryItemClick(categoryId: String) {
+    override fun onCategoryItemClick(category: Category) {
+
         val intent = Intent(activity, QuizListActivity::class.java)
-            .putExtra(getString(R.string.intent_categoryId), categoryId)
+            .putExtra(getString(R.string.intent_categoryId), category.id)
+            .putExtra(getString(R.string.intent_categoryName), category.text)
+
         startActivity(intent)
     }
 }

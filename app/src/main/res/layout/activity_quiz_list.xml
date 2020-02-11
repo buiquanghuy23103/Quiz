@@ -19,7 +19,7 @@
             layout="@layout/quiz_toolbar"
             bind:category="@{category}"/>
 
-        <ProgressBar
+        <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/quiz_timer_progress_bar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:max="100"
