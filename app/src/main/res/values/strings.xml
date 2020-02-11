@@ -35,7 +35,6 @@
 
     <!--  Profile fragment  -->
     <string name="achievements">Achievements</string>
-    <string name="achievement_warning">You have not attempted any quiz...</string>
 
 
 </resources>
