@@ -6,12 +6,12 @@
     <fragment
         android:id="@+id/categoryListFragment"
         android:name="com.example.quiz.categorylist.CategoryListFragment"
-        android:label="quiz_list_fragment"
+        android:label="Categories"
         tools:layout="@layout/category_list_fragment"/>
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.quiz.profile.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

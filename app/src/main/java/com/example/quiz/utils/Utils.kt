@@ -1,5 +1,6 @@
-package com.example.quiz
+package com.example.quiz.utils
 
+import com.example.quiz.MainApplication
 import timber.log.Timber
 
 fun alert(message: String) = Timber.i("zz (Thread ${Thread.currentThread().name}) $message")

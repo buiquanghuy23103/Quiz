@@ -22,9 +22,7 @@
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_normal">16dp</dimen>
 
-    <dimen name="app_bar_height">300dp</dimen>
-    <dimen name="tool_bar_height">56dp
-    </dimen> <!-- 56dp on smaller devices like phones, 64dp on larger devices like tablets   -->
+    <dimen name="app_bar_height">56dp</dimen>
 
     <dimen name="edit_text_corner_radius">8dp</dimen>
 
