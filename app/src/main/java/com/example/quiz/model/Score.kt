@@ -16,6 +16,7 @@ data class Score(
     var rightAnswer: String = "",
     var userAnswer: String = "",
     var isCorrect: Boolean = false,
+    var categoryName: String = "",
 
     @ServerTimestamp
     var createdAt: Date = Date(),

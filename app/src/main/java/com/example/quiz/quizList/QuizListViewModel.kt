@@ -30,6 +30,7 @@ class QuizListViewModel @Inject constructor(
 ) : ViewModel() {
 
     private lateinit var categoryId: String
+    private lateinit var categoryName: String
     private val compositeDisposable = CompositeDisposable()
 
     private val _timeLeft = MutableLiveData<Long>()
@@ -60,6 +61,10 @@ class QuizListViewModel @Inject constructor(
 
     fun withCategoryId(categoryId: String) {
         this.categoryId = categoryId
+    }
+
+    fun withCategoryName(categoryName: String) {
+        this.categoryName = categoryName
     }
 
     fun resetTimer() {
@@ -97,7 +102,8 @@ class QuizListViewModel @Inject constructor(
             userAnswer = userAnswer,
             userId = getCurrentUserId(),
             rightAnswer = correctAnswer,
-            isCorrect = (userAnswer == correctAnswer)
+            isCorrect = (userAnswer == correctAnswer),
+            categoryName = categoryName
         )
 
         firestore.collection(Score::class.java.simpleName)
