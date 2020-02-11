@@ -4,6 +4,7 @@ import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.quiz.combineAndCompute
 import com.example.quiz.countDownInitial
 import com.example.quiz.countDownInterval
 import com.example.quiz.data.local.dao.CategoryDao
@@ -12,13 +13,10 @@ import com.example.quiz.data.local.dao.ScoreDao
 import com.example.quiz.model.Score
 import com.example.quiz.questionFinishSignal
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import io.reactivex.Completable
-import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
@@ -46,7 +44,18 @@ class QuizListViewModel @Inject constructor(
         }
     }
 
-    fun quizIdList() = quizDao.getQuizIdListByCategory(categoryId)
+    fun quizIdList(): LiveData<List<String>> {
+        val allQuizIdsLiveData = quizDao.getQuizIdListByCategory(categoryId)
+        val allAnsweredQuizIdsLiveData = scoreDao.getAlreadyAnsweredQuizIds(categoryId)
+
+        return allQuizIdsLiveData.combineAndCompute(allAnsweredQuizIdsLiveData)
+        { allQuizIds, allAnsweredQuizIds ->
+            allQuizIds.minus(allAnsweredQuizIds)
+        }
+
+    }
+
+
     fun category() = categoryDao.getById(categoryId)
 
     fun withCategoryId(categoryId: String) {
