@@ -42,10 +42,12 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
-        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:background="@color/colorPrimaryDark"
+        app:itemIconTint="@drawable/bottom_nav_icon_foreground_color"
+        app:itemTextColor="@drawable/bottom_nav_icon_foreground_color"
         app:layout_behavior="com.example.quiz.utils.BottomNavigationBehavior"
         app:menu="@menu/bottom_navigation_menu" />
 

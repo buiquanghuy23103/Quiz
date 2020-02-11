@@ -8,7 +8,8 @@
 
     <FrameLayout
         android:id="@+id/category_collapsing_toolbar"
-        style="@style/AppTheme.CoordinatorLayout">
+        style="@style/AppTheme.CoordinatorLayout"
+        android:background="?attr/colorPrimaryDark">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/category_list"
