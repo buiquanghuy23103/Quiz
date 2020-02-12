@@ -13,7 +13,6 @@ import com.example.quiz.utils.countDownInitial
 import com.example.quiz.utils.getAppInjector
 import com.example.quiz.utils.questionFinishSignal
 import kotlinx.android.synthetic.main.activity_quiz_list.*
-import kotlinx.android.synthetic.main.quiz_toolbar.view.*
 import javax.inject.Inject
 
 class QuizListActivity : AppCompatActivity() {
@@ -28,7 +27,6 @@ class QuizListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initializeViewModel()
         setupBinding()
-        setupToolbar()
         setupQuizView()
         setupTimer()
         viewModel.resetTimer()
@@ -75,9 +73,6 @@ class QuizListActivity : AppCompatActivity() {
         })
     }
 
-    private fun setupToolbar() {
-        setActionBar(quiz_toolbar.quiz_toolbar_content)
-    }
 
     private val pageChangeCallback = object: ViewPager2.OnPageChangeCallback(){
         override fun onPageScrollStateChanged(state: Int) {

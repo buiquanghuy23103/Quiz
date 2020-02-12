@@ -7,6 +7,10 @@
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 
+    <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
     <style name="AppTheme.CardView" parent="Widget.MaterialComponents.CardView">
         <item name="cardCornerRadius">@dimen/card_corner_radius</item>
         <item name="cardElevation">@dimen/card_elevation</item>

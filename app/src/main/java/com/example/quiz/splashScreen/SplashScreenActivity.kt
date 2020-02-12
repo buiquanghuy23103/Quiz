@@ -25,7 +25,6 @@ class SplashScreenActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
 
         getAppInjector().inject(this)
         val viewModel = ViewModelProviders
@@ -52,11 +51,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
-                    .setIsSmartLockEnabled(false)
-                    .setAlwaysShowSignInMethodScreen(true)
-                    .setLogo(R.mipmap.ic_launcher_round)
                     .setAuthMethodPickerLayout(authMethodPickerLayout)
-                    .setTheme(R.style.AppTheme)
                     .build(),
                 RC_SIGN_IN)
 

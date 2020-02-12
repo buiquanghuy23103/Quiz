@@ -23,8 +23,9 @@ android {
         applicationId "com.huy.finniz"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        multiDexEnabled true
+        versionCode 2
+        versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -116,9 +117,8 @@ dependencies {
     // Gson
     implementation "com.google.code.gson:gson:2.8.5"
 
-    // Glide
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     // Circle image view (for avatar)
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -127,7 +127,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.0.0'
     implementation 'com.firebaseui:firebase-ui-auth:5.1.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:21.0.0'
-    implementation 'com.firebaseui:firebase-ui-firestore:5.1.0'
+//    implementation 'com.firebaseui:firebase-ui-firestore:5.1.0'
 
     // Material component
     implementation 'com.google.android.material:material:1.1.0-alpha09'
@@ -137,8 +137,8 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 
-    // Splash scree
-    implementation 'gr.pantrif:easy-android-splash-screen:0.0.1'
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
 
 }
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
