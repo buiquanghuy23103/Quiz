@@ -64,7 +64,7 @@
 
     <style name="TextAppearance.Quiz.Toolbar.Title" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:textStyle">bold</item>
     </style>
 

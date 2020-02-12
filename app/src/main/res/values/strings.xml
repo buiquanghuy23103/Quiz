@@ -6,7 +6,7 @@
     <string name="intent_categoryName">categoryName</string>
 
     <!--  CategoryListFragment  -->
-    <string name="category_toolbar_title">Categories</string>
+    <string name="category_title">Categories</string>
     <string name="category_image">Picture of category</string>
     <string name="app_bar_image">https://airfactsjournal.com/files/2019/08/question-mark-2110767_960_720.jpg</string>
 
