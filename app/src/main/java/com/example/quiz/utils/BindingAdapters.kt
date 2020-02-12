@@ -1,21 +1,21 @@
 package com.example.quiz.utils
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
+import com.squareup.picasso.Picasso
+import com.squareup.picasso.Target
+import timber.log.Timber
 
 @BindingAdapter("imageFromUrl")
 fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
     if (!imageUrl.isNullOrEmpty()) {
-        Glide.with(view.context)
+        Picasso.get()
             .load(imageUrl)
-            .transition(DrawableTransitionOptions.withCrossFade())
             .into(view)
     }
 }
@@ -24,9 +24,8 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
 fun bindImageFromUri(view: ImageView, uri: Uri?) {
 
     if (uri != null) {
-        Glide.with(view.context)
+        Picasso.get()
             .load(uri)
-            .transition(DrawableTransitionOptions.withCrossFade())
             .into(view)
     }
 }
@@ -35,20 +34,23 @@ fun bindImageFromUri(view: ImageView, uri: Uri?) {
 fun bindBackgroundImageUrl(view: View, imageUrl: String?) {
     if (!imageUrl.isNullOrEmpty()) {
 
-        val viewTarget = object: CustomTarget<Drawable>() {
-            override fun onLoadCleared(placeholder: Drawable?) {
-
+        val viewTarget = object: Target {
+            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
             }
 
-            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-                view.background = resource
+            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
+                Timber.e("Cannot load background image")
+            }
+
+            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+                val bitmap = BitmapDrawable(view.resources, bitmap)
+                view.background = bitmap
             }
         }
 
-        Glide.with(view.context)
+        Picasso.get()
             .load(imageUrl)
             .centerInside()
-            .transition(DrawableTransitionOptions.withCrossFade())
             .into(viewTarget)
     }
 }

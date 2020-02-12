@@ -1,11 +1,11 @@
 package com.example.quiz
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import com.example.quiz.dagger.AppComponent
 import com.example.quiz.dagger.DaggerAppComponent
 import timber.log.Timber
 
-class MainApplication: Application() {
+class MainApplication: MultiDexApplication() {
     lateinit var component: AppComponent
     companion object{
         private var INSTANCE: MainApplication? = null
