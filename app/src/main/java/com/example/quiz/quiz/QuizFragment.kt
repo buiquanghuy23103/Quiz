@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizFragmentBinding
 import com.example.quiz.framework.BaseFragment
-import com.example.quiz.getAppInjector
 import com.example.quiz.quizList.QuizListViewModel
+import com.example.quiz.utils.getAppInjector
 import kotlinx.android.synthetic.main.quiz_fragment.*
 import javax.inject.Inject
 

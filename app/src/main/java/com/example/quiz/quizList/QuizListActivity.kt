@@ -7,11 +7,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
 import com.example.quiz.R
-import com.example.quiz.countDownInitial
 import com.example.quiz.dagger.ViewModelFactory
 import com.example.quiz.databinding.ActivityQuizListBinding
-import com.example.quiz.getAppInjector
-import com.example.quiz.questionFinishSignal
+import com.example.quiz.utils.countDownInitial
+import com.example.quiz.utils.getAppInjector
+import com.example.quiz.utils.questionFinishSignal
 import kotlinx.android.synthetic.main.activity_quiz_list.*
 import kotlinx.android.synthetic.main.quiz_toolbar.view.*
 import javax.inject.Inject

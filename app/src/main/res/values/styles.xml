@@ -3,15 +3,11 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 
     <style name="AppTheme.CardView" parent="Widget.MaterialComponents.CardView">
-        <item name="cardBackgroundColor">@android:color/white</item>
         <item name="cardCornerRadius">@dimen/card_corner_radius</item>
         <item name="cardElevation">@dimen/card_elevation</item>
         <item name="cardPreventCornerOverlap">false</item>
@@ -39,7 +35,7 @@
         <item name="titleTextAppearance">@style/TextAppearance.Quiz.Toolbar.Title</item>
         <item name="android:titleTextAppearance">@style/TextAppearance.Quiz.Toolbar.Title</item>
         <item name="android:gravity">center</item>
-        <item name="android:titleTextColor">@color/primary_dark</item>
+        <item name="android:titleTextColor">?attr/colorPrimaryDark</item>
 
     </style>
 
@@ -57,7 +53,7 @@
 
     <style name="TextAppearance.Quiz.ListItem" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/primary_dark</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 
     <style name="TextAppearance.Quiz.Caption" parent="TextAppearance.MaterialComponents.Caption" />
@@ -68,7 +64,7 @@
 
     <style name="TextAppearance.Quiz.Toolbar.Title" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:textStyle">bold</item>
     </style>
 

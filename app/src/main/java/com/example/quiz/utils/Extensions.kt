@@ -1,4 +1,4 @@
-package com.example.quiz
+package com.example.quiz.utils
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData

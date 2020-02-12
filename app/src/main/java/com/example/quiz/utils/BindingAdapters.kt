@@ -1,4 +1,4 @@
-package com.example.quiz
+package com.example.quiz.utils
 
 import android.graphics.drawable.Drawable
 import android.net.Uri

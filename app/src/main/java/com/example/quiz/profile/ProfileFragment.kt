@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.R
 import com.example.quiz.databinding.FragmentProfileBinding
 import com.example.quiz.framework.BaseFragment
-import com.example.quiz.getAppInjector
+import com.example.quiz.utils.getAppInjector
 import javax.inject.Inject
 
 class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>() {
