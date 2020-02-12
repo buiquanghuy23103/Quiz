@@ -9,7 +9,7 @@
     <FrameLayout
         android:id="@+id/category_collapsing_toolbar"
         style="@style/AppTheme.CoordinatorLayout"
-        android:background="?attr/colorPrimaryDark">
+        android:background="?attr/colorPrimary">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/category_list"
