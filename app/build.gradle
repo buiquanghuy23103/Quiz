@@ -9,6 +9,14 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: "kotlin-kapt"
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Volumes/MacintoshHD2/huybui/Desktop/finniz_app_key_store')
+            storePassword 'Finniz.0201'
+            keyAlias = 'finniz'
+            keyPassword 'Finniz.0201'
+        }
+    }
     compileSdkVersion 28
     buildToolsVersion "29.0.0"
     defaultConfig {
@@ -23,6 +31,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     dataBinding {

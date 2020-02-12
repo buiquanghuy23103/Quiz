@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "580455795975-qhii0bdmbok62qokui1schf9buhjt11b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.huy.finniz",
+            "certificate_hash": "80850bf439a22affb5875244b09e9aee83f851bd"
+          }
+        },
+        {
+          "client_id": "580455795975-g9804poiv3ft01sb90nqqc6on9nadk48.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.huy.finniz",
+            "certificate_hash": "046e731a7268a9877a3ee123b308130013ee16cb"
+          }
+        },
+        {
           "client_id": "580455795975-bu8p5271l5km3f242c7cfvh5qs6cmo3j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
