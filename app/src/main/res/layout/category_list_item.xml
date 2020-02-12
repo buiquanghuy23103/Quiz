@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="?attr/colorPrimary"
         style="@style/AppTheme.CardView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
