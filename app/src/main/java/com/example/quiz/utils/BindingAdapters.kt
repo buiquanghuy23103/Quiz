@@ -50,7 +50,6 @@ fun bindBackgroundImageUrl(view: View, imageUrl: String?) {
 
         Picasso.get()
             .load(imageUrl)
-            .centerInside()
             .into(viewTarget)
     }
 }

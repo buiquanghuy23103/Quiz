@@ -2,16 +2,24 @@ package com.example.quiz.quiz
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.view.LayoutInflater
 import android.view.View
+import androidx.annotation.ColorRes
 import androidx.annotation.IdRes
+import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.quiz.R
 import com.example.quiz.databinding.QuizFragmentBinding
+import com.example.quiz.databinding.ResultDialogBinding
 import com.example.quiz.framework.BaseFragment
 import com.example.quiz.quizList.QuizListViewModel
 import com.example.quiz.utils.getAppInjector
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.quiz_fragment.*
 import javax.inject.Inject
 
@@ -65,6 +73,7 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
 
         optionView.setOnCheckedChangeListener{_, checkedId ->
             val userSelection = getUserSelection(checkedId)
+            showResultDialog(answer == userSelection)
             quizListViewModel.moveToNextQuestion(getQuizId(), answer, userSelection)
         }
 
@@ -78,6 +87,40 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
             R.id.optionD -> "D"
             else -> ""
         }
+    }
+
+    private fun showResultDialog(isCorrect: Boolean) {
+        if (isCorrect) {
+            showInstantDialog(R.string.correct_answer, R.color.correct_answer)
+        } else {
+            showInstantDialog(R.string.incorrect_answer, R.color.incorrect_answer)
+        }
+    }
+
+    private fun showInstantDialog(@StringRes stringRes: Int, @ColorRes colorRes: Int) {
+        val dialogBuilder = MaterialAlertDialogBuilder(requireContext())
+
+        val inflater = LayoutInflater.from(requireContext())
+        val dialogBinding: ResultDialogBinding
+                = DataBindingUtil.inflate(inflater, R.layout.result_dialog, null, false)
+        dialogBuilder.setView(dialogBinding.root)
+
+        dialogBinding.resultText.setText(stringRes)
+        val textColor = ContextCompat.getColor(requireContext(), colorRes)
+        dialogBinding.resultText.setTextColor(textColor)
+
+        val dialog = dialogBuilder.create()
+        dialog.window.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val timer = object: CountDownTimer(1000, 500) {
+            override fun onTick(p0: Long) {}
+            override fun onFinish() {
+                dialog.dismiss()
+            }
+        }
+
+        dialog.show()
+        timer.start()
     }
 
     private fun setupCheckResultButton() {
