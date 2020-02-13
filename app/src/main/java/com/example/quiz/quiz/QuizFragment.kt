@@ -1,10 +1,8 @@
 package com.example.quiz.quiz
 
-import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
-import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
@@ -58,8 +56,6 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
         super.onActivityCreated(savedInstanceState)
         quizListViewModel = ViewModelProviders.of(activity!!)[QuizListViewModel::class.java]
         setupQuizView()
-        setupCheckResultButton()
-        setupResultView()
     }
 
     private fun setupQuizView() {
@@ -123,26 +119,5 @@ class QuizFragment : BaseFragment<QuizViewModel, QuizFragmentBinding>()
         timer.start()
     }
 
-    private fun setupCheckResultButton() {
-        check_result_button.setOnClickListener {
-            result_text_view.visibility = View.VISIBLE
-        }
-    }
-
-    private fun setupResultView() {
-        viewModel.result.observe(this, Observer { isCorrect ->
-
-            binding.isCorrect = isCorrect
-
-            if (isCorrect) {
-                result_text_view.text = getString(R.string.correct_answer)
-                result_text_view.setTextColor(Color.GREEN)
-            } else {
-                result_text_view.text = getString(R.string.incorrect_answer)
-                result_text_view.setTextColor(Color.RED)
-            }
-
-        })
-    }
 
 }
