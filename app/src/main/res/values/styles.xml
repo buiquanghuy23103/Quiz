@@ -3,6 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">#364f6b</item>
+        <item name="colorPrimaryDark">#2f445c</item>
+        <item name="colorPrimaryVariant">#43dde6</item>
+        <item name="colorSecondary">#fc5185</item>
         <item name="fontFamily">@font/roboto</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
