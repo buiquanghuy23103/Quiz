@@ -62,7 +62,8 @@ class AchievementListAdapter(private val userId: String?)
                 val currentUserScore = achievement.scores.filter { it.userId == userId }
                 val totalScores = currentUserScore.size
                 binding.numberOfAnsweredQuiz.text = "$totalScores / $totalQuizzes"
-                binding.achievementProgressBar.progress = (totalScores / totalQuizzes) * 100
+                val progress = (totalScores * 100 / totalQuizzes)
+                binding.achievementProgressBar.progress = progress
             }
 
         }
