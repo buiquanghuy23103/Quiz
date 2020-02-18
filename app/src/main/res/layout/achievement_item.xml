@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_normal"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:max="100"
             tools:progress="50"/>
 
     </LinearLayout>
