@@ -1,9 +1,23 @@
-# Quiz
-## What is Quiz?
+# Finniz
 
-Quiz is a free trivia game developed for Android phones. This application not only exercises your wit on a variety of topics but also provides a small chat room on each topic.
+![](finniz_feature_photo.png)
 
-## How to use the application
-* Once you dowload the app, select any of the quiz categories. This takes you to the first question of that category. Each question requires you to choose one or more than one options for correct answer. You can change the question by swiping left or right.
+## What is Finniz?
 
-* If your answer is correct, you have the right to view the explanation for that questions and chat with others about it.
+Finniz is a free trivia game developed for Android phones. This application not only exercises your wit on a variety of topics about Finland.
+
+## App’s Feature:
+* User friendly interface
+* User can see quiz progress. 
+* The game is set in different categories in order for user to play based on choice. 
+
+#### Google Playstore Link:
+You can download it [here](https://play.google.com/store/apps/details?id=com.huy.finniz&hl=en)
+
+## Technology Stack
+* Kotlin
+* Android Architecture Components
+* Asynchronous programming: RxJava
+* Dependency injection: Dagger2
+* Cloud backend: Firestore
+* Architecture patter: MVVM
