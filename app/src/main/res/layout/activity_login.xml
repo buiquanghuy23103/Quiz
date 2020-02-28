@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/body_of_water_surrounded_by_trees_1319823"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/dark_blue_pink_gradient">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/emailSignInButton"
