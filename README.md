@@ -4,7 +4,9 @@
 
 ## What is Finniz?
 
-Finniz is a free trivia game developed for Android phones. This application not only exercises your wit on a variety of topics about Finland.
+Finniz is a free trivia game that exercises your wit on a variety of topics about Finland.
+
+The application was completely written in Kotlin, using Dagger for dependency injection, RxJava for asynchronous programming, and Firebase as the backend server.
 
 ## App’s Feature:
 * User friendly interface
